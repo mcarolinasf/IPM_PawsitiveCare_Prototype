@@ -6,7 +6,8 @@ import { globalStyles } from '../../styles/globalStyles'
 export const Diary = () => {
   return ( 
     <SafeAreaView style={globalStyles.container}>
-         <Text>Diary</Text>
+         <Text style={globalStyles.titleText}> Diary </Text>
+            <Text style={globalStyles.text}> Content of diary page </Text>
     </SafeAreaView>
   )
 }

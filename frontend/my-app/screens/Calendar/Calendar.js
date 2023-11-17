@@ -6,7 +6,8 @@ import { globalStyles } from '../../styles/globalStyles'
 export const Calendar = () => {
   return (
     <SafeAreaView style={globalStyles.container}>
-         <Text>Calendar</Text>
+        <Text style={globalStyles.titleText}> Calendar </Text>
+        <Text style={globalStyles.text}> Content of calendar page </Text>
     </SafeAreaView>
   )
 }

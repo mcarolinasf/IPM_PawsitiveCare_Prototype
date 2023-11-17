@@ -13,6 +13,7 @@ export const globalStyles = StyleSheet.create({
         //fontFamily: 'poppins',
         fontSize: 30,
         color: colors.text,
+        fontWeight: "bold",
     },
 
     subtitleText: {

@@ -7,7 +7,8 @@ import { globalStyles } from '../../styles/globalStyles'
 export const Training = () => {
   return (
     <SafeAreaView style={globalStyles.container}>
-         <Text>Training</Text>
+         <Text style={globalStyles.titleText}> Training </Text>
+            <Text style={globalStyles.text}> Content of training page </Text>
     </SafeAreaView>
   )
 }
