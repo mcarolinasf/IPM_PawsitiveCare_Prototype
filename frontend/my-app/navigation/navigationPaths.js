@@ -7,5 +7,6 @@ export default {
     training: "Training",
     diary: "Diary",
     pet: "Pet",
+    profile: "Profile",
 }
 

@@ -14,7 +14,7 @@ export const Pet = ({ navigation, route }) => {
     return (
         <SafeAreaView style={globalStyles.container}>
             <ScrollView>
-                <Header title={pet.name} />
+                <Header title={pet.name} navigation={navigation}/>
                 <View >
                     <Image
                         style={PetStyles.image}
