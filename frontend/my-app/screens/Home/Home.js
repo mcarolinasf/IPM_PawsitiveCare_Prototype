@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, SafeAreaView, ScrollView, FlatList } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView, Image } from 'react-native'
 import Card from '../../components/Card/Card'
 import Divider from '../../components/Divider'
 import TodoItem from '../../components/TodoItem/TodoItem'
@@ -17,8 +17,7 @@ export const Home = () => {
   ]);
 
   const cardPressHandeler = (key) => {
-    //redirect to pet page
-    console.log(key)
+    //redirect to pet page    console.log(key)
   }
 
   //Maybe pass only animal key
@@ -29,15 +28,26 @@ export const Home = () => {
   ])
 
   const todoPressHandeler = (key) => {
-    //redirect to pet page
-    console.log(key)
+    setToDos((prevTodos) => (
+      prevTodos.filter(todo => todo.key != key)
+    ));
   }
 
+  //Maybe turn header into a component
 
   return (
     <SafeAreaView style={globalStyles.container}>
       <ScrollView>
-        <Text style={globalStyles.titleText}> Home </Text>
+        <View style={HomeStyles.header}>
+          <Text style={globalStyles.titleText}> Home </Text>
+          <Image
+            style={HomeStyles.image}
+            source={{
+              uri: 'https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745'
+            }} />
+        </View>
+
+
         <ScrollView horizontal={true}>
           {animal.map(item => (
             <Card key={item.key} item={item} pressHandeler={cardPressHandeler} />

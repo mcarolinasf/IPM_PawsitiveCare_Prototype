@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native'
+import React from 'react'
+import { View, Text, TouchableOpacity, Image } from 'react-native'
 import { globalStyles } from '../../styles/globalStyles'
 import { TodoItemStyles } from './TodoItemStyles'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -17,9 +17,11 @@ export default function TodoItem({ item, pressHandeler }) {
     const backgroundColor = typeToColorMap[item.type];
 
     return (
-        <TouchableOpacity onPress={() => pressHandeler(item.key)}>
-            <View style={TodoItemStyles.container}{...globalStyles.shadow}>
+        <TouchableOpacity
+            onPress={() => pressHandeler(item.key)} style={globalStyles.shadow} >
+            <View style={TodoItemStyles.container}>
                 <View style={{ flexDirection: 'row' }}>
+
                     <MaterialCommunityIcons name="checkbox-blank-outline" size={24} color={colors.secondary} />
                     <View>
                         <Text style={TodoItemStyles.text}>{item.text}</Text>
@@ -31,7 +33,7 @@ export default function TodoItem({ item, pressHandeler }) {
                 <View style={TodoItemStyles.trailing}>
                     <Text style={globalStyles.secondaryText} >{item.time}</Text>
                     <Image
-                        style={TodoItemStyles.image}
+                        style={TodoItemStyles.image}{...globalStyles.shadow}
                         source={{ uri: item.animal.photoUrl }}
                     />
 

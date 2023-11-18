@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { StyleSheet } from "react-native";
 import colors from '../../styles/colors';
 
@@ -24,13 +24,13 @@ export const TodoItemStyles = StyleSheet.create({
     tags: {
         backgroundColor: '#DF909B',
         borderRadius: 3,
-        marginHorizontal: 10
+        marginHorizontal: 10,
+        width: 60
     },
 
     tagType: {
         color: colors.white,
         fontSize: 12,
-        paddingHorizontal: 10,
         textAlign: 'center'
     },
 
@@ -39,14 +39,13 @@ export const TodoItemStyles = StyleSheet.create({
         justifyContent: 'center',
         textAlignVertical: 'center'
 
-
-
     },
     image: {
         height: 35,
         width: 35,
         borderRadius: 20,
-        marginHorizontal: 10
+        marginRight: 2,
+        marginLeft: 10
 
     }
 
