@@ -22,13 +22,6 @@ export const Pet = ({ navigation, route }) => {
         { key: 2, text: 'Lay Down Exercise', type: 'Training', time: '10:30', animal: { key: 2, name: 'Whiskers', age: 7, photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpnhjZPqOwRcDXdFn5gEY49CVEb7QIiat4UA&usqp=CAU' } }
     ])
 
-    const getPets = () => {
-        const petIds = user.petIds;
-
-        //For each petId retrieve information and then set the list of pet objects with setPets
-
-    }
-
     const todoPressHandeler = (key) => {
         setToDos((prevTodos) => (
             prevTodos.filter(todo => todo.key != key)

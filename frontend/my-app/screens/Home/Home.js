@@ -35,6 +35,18 @@ export const Home = ({ navigation }) => {
 
   ])
 
+  useEffect(() => {
+    getPets()
+  }, [])
+  
+
+  const getPets = () => {
+      const petIds = user.petIds;
+
+      //For each petId retrieve information and then set the list of pet objects with setPets
+
+  }
+
   const todoPressHandler = (key) => {
     setToDos((prevTodos) => (
       prevTodos.filter(todo => todo.key != key)
