@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { View, Text, SafeAreaView, ScrollView, Image, Button } from 'react-native'
 import Card from '../../components/Card/Card'
 import Divider from '../../components/Divider'
@@ -17,6 +17,7 @@ import { petsData } from '../../data/petsData'
 export const Home = ({ navigation }) => {
 
   const [animal, setAnimal] = useState(Object.values(petsData));
+  const { user } = useContext(UserSessionContext);
 
   const cardPressHandler = (item) => {
     navigation.navigate(navigationScreens.pet, { pet: item });
