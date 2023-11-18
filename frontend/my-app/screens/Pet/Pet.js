@@ -4,4 +4,15 @@ import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'r
 
 export const Pet = () => {
 
+    <SafeAreaView style={globalStyles.container}>
+        <ScrollView>
+
+
+        </ScrollView>
+
+
+
+
+    </SafeAreaView>
+
 }

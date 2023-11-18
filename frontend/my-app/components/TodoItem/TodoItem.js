@@ -21,7 +21,6 @@ export default function TodoItem({ item, pressHandeler }) {
             onPress={() => pressHandeler(item.key)} style={globalStyles.shadow} >
             <View style={TodoItemStyles.container}>
                 <View style={{ flexDirection: 'row' }}>
-
                     <MaterialCommunityIcons name="checkbox-blank-outline" size={24} color={colors.secondary} />
                     <View>
                         <Text style={TodoItemStyles.text}>{item.text}</Text>

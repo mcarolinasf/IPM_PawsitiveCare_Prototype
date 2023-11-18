@@ -9,6 +9,7 @@ import { Home } from "../screens/Home/Home"
 import { Calendar } from '../screens/Calendar/Calendar';
 import { Training } from '../screens/Training/Training';
 import { Diary } from '../screens/Diary/Diary';
+import { Pet } from '../screens/Pet/Pet'
 import { NavigationStyle } from './NavigationStyles';
 import { globalStyles } from '../styles/globalStyles';
 
@@ -17,6 +18,7 @@ const homeName = "Home";
 const calendarName = "Calendar";
 const trainingName = "Training";
 const diaryName = "Diary";
+const petName = 'Pet';
 
 
 

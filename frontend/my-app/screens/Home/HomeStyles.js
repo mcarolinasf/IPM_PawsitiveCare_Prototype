@@ -16,6 +16,17 @@ export const HomeStyles = StyleSheet.create({
     width: 35,
     position: "absolute",
     right: 10,
+    borderRadius: 20
+  },
+  button: {
+    //position: 'absolute'
+    backgroundColor: colors.white,
+    borderRadius: 5,
+    top: 60,
+    height: 33,
+    right: 0,
+    marginHorizontal: 10
+
   }
 
 
