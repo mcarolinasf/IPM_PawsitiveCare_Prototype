@@ -32,6 +32,11 @@ export const globalStyles = StyleSheet.create({
         color: colors.text,
 
     },
+    secondaryText: {
+        color: colors.secondary,
+        textAlignVertical: 'center'
+
+    },
 
     paragraph: {
         marginVertical: 8,
