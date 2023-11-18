@@ -10,20 +10,18 @@ import {
 import colors from "../../styles/colors.js";
 import { RegisterStyles } from "./RegisterStyles.js";
 import { globalStyles } from "../../styles/globalStyles.js";
-import { useNavigation } from "@react-navigation/native";
+import navigationPaths from "../../navigation/navigationPaths.js";
 import TextInputDefault from "../../components/TextInputDefault/TextInputDefault.js";
 
-export const Register = () => {
-  const navigation = useNavigation(); // Get the navigation object
-
+export const Register = ({ navigation }) => {
   onPressRegister = () => {
     // Navigate to the Home screen
-    navigation.navigate("Home");
+    navigation.navigate(navigationPaths.home);
   };
 
   onPressLogin = () => {
     // Navigate to the Login screen
-    navigation.navigate("Login");
+    navigation.navigate(navigationPaths.login);
   };
 
   return (
