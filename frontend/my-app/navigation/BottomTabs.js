@@ -27,14 +27,14 @@ export const BottomTabs = () => {
 
     if (routeName === navigationScreens.pet) {
       return (
-        <View style={{...NavigationStyle.pawIcon, ...globalStyles.shadow}}>
+        <View style={{ ...NavigationStyle.pawIcon, ...globalStyles.shadow }}>
           <MaterialCommunityIcons name="paw" size={35} color={colors.white} />
         </View>
       );
     }
 
     let iconName;
-  
+
     switch (routeName) {
       case navigationScreens.home:
         iconName = 'home';
@@ -56,7 +56,7 @@ export const BottomTabs = () => {
         iconColor = focused ? colors.primary : colors.grey;
         break;
     }
-    
+
     return <MaterialCommunityIcons name={iconName} size={size} color={focused ? colors.primary : colors.grey} />;
   };
 

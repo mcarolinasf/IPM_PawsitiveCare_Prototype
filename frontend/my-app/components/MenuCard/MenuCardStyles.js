@@ -5,6 +5,12 @@ import colors from '../../styles/colors';
 
 export const MenuCardStyles = StyleSheet.create({
 
+
+    title: {
+        fontSize: 15,
+        fontWeight: '500'
+    },
+
     container: {
         marginVertical: 25,
         justifyContent: "space-evenly",
@@ -12,7 +18,8 @@ export const MenuCardStyles = StyleSheet.create({
         backgroundColor: colors.white,
         height: 100,
         width: 90,
-        borderRadius: 20
+        borderRadius: 20,
+        marginHorizontal: 5
     },
     circle: {
         borderRadius: 100,
