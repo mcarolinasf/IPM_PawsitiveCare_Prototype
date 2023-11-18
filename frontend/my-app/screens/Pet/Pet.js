@@ -29,13 +29,15 @@ export const Pet = ({ navigation, route }) => {
         <SafeAreaView style={globalStyles.container}>
             <ScrollView>
                 <Header title={pet.name} />
+
                 <View >
                     <Image
-                        style={PetStyles.image}
+                        style={PetStyles.image}{...globalStyles.shadow}
                         source={{
                             uri: pet.photoUrl
                         }}
                     />
+
                 </View>
                 <ScrollView horizontal={true}>
                     <MenuCard iconName={'paw'} title={'Vet Ap.'} navigation={navigation} navigateTo={navigationPaths.vetAppointments} />

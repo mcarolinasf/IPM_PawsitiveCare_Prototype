@@ -17,7 +17,7 @@ export default function MenuCard({ iconName, title, navigateTo, navigation }) {
 
     return (
         <TouchableOpacity onPress={() => pressHandeler()}>
-            <View style={MenuCardStyles.container}>
+            <View style={MenuCardStyles.container}{...globalStyles.shadow}>
                 <View style={MenuCardStyles.circle}>
                     <FontAwesome5 name={iconName} size={23} color={colors.primary} />
                 </View>
