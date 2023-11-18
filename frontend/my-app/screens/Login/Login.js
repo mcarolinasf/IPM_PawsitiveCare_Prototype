@@ -10,19 +10,18 @@ import {
 import colors from "../../styles/colors.js";
 import { LoginStyles } from "./LoginStyles.js";
 import { globalStyles } from "../../styles/globalStyles.js";
-import { useNavigation } from "@react-navigation/native";
+import navigationPaths from "../../navigation/navigationPaths.js";
+import TextInputDefault from "../../components/TextInputDefault/TextInputDefault.js";
 
-export const Login = () => {
-  const navigation = useNavigation(); // Get the navigation object
-
+export const Login = ({ navigation }) => {
   onPressLogin = () => {
-    // Navigate to the Login screen
-    navigation.navigate("Home");
+    // Navigate to the Home screen
+    navigation.navigate(navigationPaths.home);
   };
 
   onPressRegister = () => {
     // Navigate to the Register screen
-    navigation.navigate("Register");
+    navigation.navigate(navigationPaths.register);
   };
 
   return (
@@ -32,10 +31,8 @@ export const Login = () => {
         <View style={LoginStyles.container}>
           <Text style={LoginStyles.welcome}>Welcome</Text>
           <View style={LoginStyles.inputsView}>
-            <Text style={LoginStyles.inputsLabel}>Email</Text>
-            <TextInput style={LoginStyles.textInputs} />
-            <Text style={LoginStyles.inputsLabel}>Password</Text>
-            <TextInput secureTextEntry={true} style={LoginStyles.textInputs} />
+            <TextInputDefault label={"Email"} isSecure={false} />
+            <TextInputDefault label={"Password"} isSecure={true} />
             <View style={{ flexDirection: "row" }}>
               {/* TODO: add checkbox */}
               <Text>I agree with terms & conditions</Text>

@@ -10,19 +10,18 @@ import {
 import colors from "../../styles/colors.js";
 import { RegisterStyles } from "./RegisterStyles.js";
 import { globalStyles } from "../../styles/globalStyles.js";
-import { useNavigation } from "@react-navigation/native";
+import navigationPaths from "../../navigation/navigationPaths.js";
+import TextInputDefault from "../../components/TextInputDefault/TextInputDefault.js";
 
-export const Register = () => {
-  const navigation = useNavigation(); // Get the navigation object
-
+export const Register = ({ navigation }) => {
   onPressRegister = () => {
     // Navigate to the Home screen
-    navigation.navigate("Home");
+    navigation.navigate(navigationPaths.home);
   };
 
   onPressLogin = () => {
     // Navigate to the Login screen
-    navigation.navigate("Login");
+    navigation.navigate(navigationPaths.login);
   };
 
   return (
@@ -31,15 +30,9 @@ export const Register = () => {
         <View style={RegisterStyles.container}>
           <Text style={RegisterStyles.register}>Register</Text>
           <View style={RegisterStyles.inputsView}>
-            <Text style={RegisterStyles.inputsLabel}>Name</Text>
-            <TextInput style={RegisterStyles.textInputs} />
-            <Text style={RegisterStyles.inputsLabel}>Email</Text>
-            <TextInput style={RegisterStyles.textInputs} />
-            <Text style={RegisterStyles.inputsLabel}>Password</Text>
-            <TextInput
-              secureTextEntry={true}
-              style={RegisterStyles.textInputs}
-            />
+            <TextInputDefault label={"Name"} isSecure={false} />
+            <TextInputDefault label={"Email"} isSecure={false} />
+            <TextInputDefault label={"Password"} isSecure={true} />
             <View style={{ flexDirection: "row" }}>
               {/* TODO: add checkbox */}
               <Text>I agree with terms & conditions</Text>
