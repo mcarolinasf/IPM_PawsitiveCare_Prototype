@@ -71,7 +71,6 @@ export const BottomTabs = () => {
           return getTabBarIcon(route.name, focused, size);
         },
       })}>
-      {/* <TabScreen name={navigationScreens.home} Screen={Home} tabIcon={} /> */}
       <Tab.Screen name={navigationScreens.home} component={Home} />
       <Tab.Screen name={navigationScreens.calendar} component={Calendar} />
       <Tab.Screen name={navigationScreens.pet} component={Pet} initialParams={{ petId: 0 }} />
