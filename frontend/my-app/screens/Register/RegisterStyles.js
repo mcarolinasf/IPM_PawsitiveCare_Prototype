@@ -24,22 +24,6 @@ export const RegisterStyles = StyleSheet.create({
     marginBottom: 75,
   },
 
-  inputsLabel: {
-    fontSize: 18,
-    fontWeight: "400",
-    paddingBottom: 3,
-  },
-
-  textInputs: {
-    fontSize: 16,
-    color: colors.secondary,
-    borderRadius: 12,
-    backgroundColor: "#FBFBFB",
-    height: 54,
-    paddingHorizontal: 10,
-    marginBottom: 15,
-  },
-
   button: {
     justifyContent: "center",
     borderRadius: 28,
