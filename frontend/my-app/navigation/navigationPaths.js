@@ -1,4 +1,5 @@
 export default {
+    initial: "Initial",
     login: "Login",
     register: "Register",
     home: "Home",

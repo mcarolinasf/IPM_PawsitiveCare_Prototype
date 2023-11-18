@@ -7,22 +7,23 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { InitialPageStyles } from "./InitialPageStyles.js";
-import { globalStyles } from "../../styles/globalStyles.js";
+import { globalStyles } from "../../../styles/globalStyles.js";
 import logo from "../../assets/logo.png";
-import colors from "../../styles/colors.js";
+import colors from "../../../styles/colors.js";
 import { useNavigation } from "@react-navigation/native";
+import navigationPaths from "../../../navigation/navigationPaths.js";
 
-export const InitialPage = () => {
+export const InitialPage = ({navigation}) => {
   const navigation = useNavigation(); // Get the navigation object
 
   onPressSignIn = () => {
     // Navigate to the Login screen
-    navigation.navigate("Login");
+    navigation.navigate(navigationPaths.login);
   };
 
   onPressSignUp = () => {
     // Navigate to the Register screen
-    navigation.navigate("Register");
+    navigation.navigate(navigationPaths.register);
   };
 
   return (

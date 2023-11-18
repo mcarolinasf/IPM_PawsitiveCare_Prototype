@@ -9,7 +9,8 @@ import { useState, useEffect, useContext } from 'react';
 import UserSessionContext from '../services/UserSessionContext';
 
 // Screens
-import { Home } from "../screens/Home/Home"
+import { Home } from "../screens/Home/Home";
+import { InitialPage } from "../screens/auth/InitialPage/InitialPage";
 import { Login } from '../screens/Login/Login';
 import { Register } from '../screens/Register/Register';
 
@@ -22,11 +23,12 @@ export const Navigation = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={user ? Home : Login} screenOptions={{animationEnabled: false, headerShown: false}}>
+      <Stack.Navigator initialRouteName={user ? Home : InitialPage} screenOptions={{animationEnabled: false, headerShown: false}}>
            <Stack.Screen name={"BottomBar"}>
               {() => <BottomTabs />}
             </Stack.Screen>
             <Stack.Screen name={navigationScreens.pet} component={Pet} />
+            <Stack.Screen name={navigationScreens.initial} component={InitialPage} />
             <Stack.Screen name={navigationScreens.login} component={Login} />
             <Stack.Screen name={navigationScreens.register} component={Register} />
    
