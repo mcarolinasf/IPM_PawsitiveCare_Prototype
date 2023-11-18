@@ -8,8 +8,8 @@ export default function Card({ item, pressHandeler }) {
 
     // Todo: onPress function to pet page
     return (
-        <TouchableOpacity onPress={() => pressHandeler(item.key)}>
-            <View key={item.key} style={CardStyles.card}{...globalStyles.shadow}>
+        <TouchableOpacity onPress={() => pressHandeler(item.key)} style={globalStyles.shadow}>
+            <View key={item.key} style={CardStyles.card}>
                 <Image
                     style={CardStyles.image}
                     source={{

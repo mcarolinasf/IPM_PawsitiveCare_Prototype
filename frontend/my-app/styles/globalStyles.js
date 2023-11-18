@@ -32,6 +32,11 @@ export const globalStyles = StyleSheet.create({
         color: colors.text,
 
     },
+    secondaryText: {
+        color: colors.secondary,
+        textAlignVertical: 'center'
+
+    },
 
     paragraph: {
         marginVertical: 8,
@@ -53,7 +58,7 @@ export const globalStyles = StyleSheet.create({
             width: 0,
         },
         shadowOpacity: 0.25,
-        elevation: 2
+        elevation: 4
     },
 
     divider: {
