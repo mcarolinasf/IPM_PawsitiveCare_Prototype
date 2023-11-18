@@ -5,12 +5,13 @@ import Divider from '../../components/Divider'
 import TodoItem from '../../components/TodoItem/TodoItem'
 import { globalStyles } from '../../styles/globalStyles'
 import { HomeStyles } from './HomeStyles'
+import navigationScreens from '../../navigation/navigationPaths'
 import { AntDesign } from '@expo/vector-icons';
 import colors from '../../styles/colors'
 import Header from '../../components/Header.js'
 
 
-export const Home = () => {
+export const Home = ({ navigation }) => {
 
 
   const [animal, setAnimal] = useState([
@@ -21,8 +22,8 @@ export const Home = () => {
   ]);
 
   const cardPressHandeler = (key) => {
-    //redirect to pet page  
-    console.log(key)
+    //redirect to pet page    console.log(key)
+    navigation.navigate(navigationScreens.pet, { petId: key });
   }
 
   // If possible pass only key to todos

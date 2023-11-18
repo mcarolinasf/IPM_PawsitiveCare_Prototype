@@ -1,7 +1,10 @@
 
 import * as React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import { NavigationStyle } from './NavigationStyles';
+import { globalStyles } from '../styles/globalStyles';
 
 
 // Screens
@@ -9,88 +12,35 @@ import { Home } from "../screens/Home/Home"
 import { Calendar } from '../screens/Calendar/Calendar';
 import { Training } from '../screens/Training/Training';
 import { Diary } from '../screens/Diary/Diary';
-import { Pet } from '../screens/Pet/Pet'
-import { NavigationStyle } from './NavigationStyles';
-import { globalStyles } from '../styles/globalStyles';
+import { Login } from '../screens/Login/Login';
+import { Register } from '../screens/Register/Register';
 
-// Screen names
-const homeName = "Home";
-const calendarName = "Calendar";
-const trainingName = "Training";
-const diaryName = "Diary";
-const petName = 'Pet';
+import navigationScreens from './navigationPaths';
+import { BottomTabs } from './BottomTabs';
+import { Pet } from '../screens/Pet/Pet';
 
 
 
+const Stack = createNativeStackNavigator();
 
-
-function TabGroup({ name, Screen, tabIcon }) {
-
-  const Tab = createBottomTabNavigator()
-
-  /*   const TabScreen = (name, Screen, tabIcon) => {
-      return (
-        <Tab.Screen name={name}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <View style={NavigationStyle.tab}>
-                  <Image source={tabIcon}
-                          resizeMode={'contain'}
-                          alt={{name} + "icon"}
-                          style={NavigationStyle.icon}/>
-                  <Text style={NavigationStyle.text}> {name} </Text>
-                </View>),
-              }}
-            >
-          <Screen/>
-        </Tab.Screen>
-      )
-    }
- */
-
-  return (
-    <Tab.Navigator
-      initialRouteName={homeName}
-      screenOptions={{
-        /* TODO: Change later */
-        headerShown: false,
-        tabBarShowLabel: true,
-        tabBarStyle: [NavigationStyle.container],
-        animationEnabled: true
-      }}
-
-    /* screenOptions={({route}) => ({
-      tabBarIcon: ({focused, color, size}) => {
-        let iconName;
-        let rn = route.name;
-
-        switch (rn) {
-          case homeName:
-            iconName = focused ? "home" : "home-outline";
-          case calendarName:
-            iconName = focused ? "calendar" : "calendar-outline";
-          case trainingName:
-            iconName = focused ? "training" : "training-outline";
-          case diaryName:
-            iconName = focused ? "diary" : "diary-outline";
-          default:
-           break;
-        }
-      }
-    })} */
-    >
-      <Tab.Screen name={homeName} component={Home} />
-      <Tab.Screen name={calendarName} component={Calendar} />
-      <Tab.Screen name={trainingName} component={Training} />
-      <Tab.Screen name={diaryName} component={Diary} />
-    </Tab.Navigator>
-  )
-}
 
 export const Navigation = () => {
+  const user = true;
   return (
     <NavigationContainer>
-      <TabGroup />
+      <Stack.Navigator initialRouteName={user ? Home : Login} screenOptions={{ animationEnabled: false, headerShown: false }}>
+        <Stack.Screen name={navigationScreens.login} component={Login} />
+        <Stack.Screen name={navigationScreens.register} component={Register} />
+        <Stack.Screen name={navigationScreens.home}>
+          {() => (
+            <BottomTabs />
+          )}
+        </Stack.Screen>
+        <Stack.Screen name={navigationScreens.pet} component={Pet} />
+        {/* <Stack.Screen name={navigationScreens.calendarName} component={Calendar}/>
+        <Stack.Screen name={navigationScreens.trainingName} component={Training}/>
+        <Stack.Screen name={navigationScreens.diaryName} component={Diary}/> */}
+      </Stack.Navigator>
     </NavigationContainer>
-  )
+  );
 }
