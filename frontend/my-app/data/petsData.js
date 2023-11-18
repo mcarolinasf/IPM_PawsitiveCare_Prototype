@@ -1,18 +1,16 @@
-export const petsData = [
+export const petsData = {
     /* Gadelha will update :) */
-    {
-      id: 1,
+    0:{
       name: 'Fluffy',
       breed: 'Golden Retriever',
       age: 3,
     },
-    {
-      id: 2,
+    1:{
       name: 'Whiskers',
       breed: 'Maine Coon',
       age: 5,
     },
     // Add more pet objects as needed
-  ];
+  };
   
   
