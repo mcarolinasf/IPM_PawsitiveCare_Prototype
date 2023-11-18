@@ -23,7 +23,7 @@ export const globalStyles = StyleSheet.create({
         //fontFamily: 'poppins',
         fontSize: 20,
         color: colors.text,
-        fontWeight: "bold"
+        fontWeight: "semibold",
     },
 
     text: {

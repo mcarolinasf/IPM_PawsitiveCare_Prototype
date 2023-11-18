@@ -5,9 +5,10 @@ import Divider from '../../components/Divider'
 import TodoItem from '../../components/TodoItem/TodoItem'
 import { globalStyles } from '../../styles/globalStyles'
 import { HomeStyles } from './HomeStyles'
+import navigationScreens from '../../navigation/navigationPaths'
 
 
-export const Home = () => {
+export const Home = ({navigation}) => {
 
 
   const [animal, setAnimal] = useState([
@@ -18,6 +19,7 @@ export const Home = () => {
 
   const cardPressHandeler = (key) => {
     //redirect to pet page    console.log(key)
+    navigation.navigate(navigationScreens.pet, {petId: key});
   }
 
   //Maybe pass only animal key
