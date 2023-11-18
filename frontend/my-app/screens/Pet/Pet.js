@@ -1,28 +1,34 @@
 import React, { useState } from 'react'
-import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image, Button } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native'
+import { globalStyles } from '../../styles/globalStyles'
+import { PetStyles } from './PetStyles'
+import MenuCard from '../../components/MenuCard/MenuCard.js';
+import Header from '../../components/Header.js';
+import { FontAwesome5 } from '@expo/vector-icons';
+import colors from '../../styles/colors';
 
 
-export const Pet = ({navigation, route}) => {
-    const { petId } = route.params;
+export const Pet = ({ navigation, route }) => {
+    const { pet } = route.params;
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={globalStyles.container}>
             <ScrollView>
-                <Text> Pet page </Text>
-                <Text> {petId} </Text>
+                <Header title={pet.name} />
+                <View >
+                    <Image
+                        style={PetStyles.image}
+                        source={{
+                            uri: pet.photoUrl
+                        }}
+                    />
+                </View>
+                <ScrollView horizontal={true}>
+                    <MenuCard />
+                </ScrollView>
+
             </ScrollView>
-        </SafeAreaView>
-    )
-
-    <SafeAreaView style={globalStyles.container}>
-        <ScrollView>
-
-
-        </ScrollView>
-
-
-
-
-    </SafeAreaView>
+        </SafeAreaView >
+    );
 
 }

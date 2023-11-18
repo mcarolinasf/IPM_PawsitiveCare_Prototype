@@ -21,9 +21,8 @@ export const Home = ({ navigation }) => {
     /*  { key: 3, name: 'Whiskers', age: 7, photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpnhjZPqOwRcDXdFn5gEY49CVEb7QIiat4UA&usqp=CAU' } */
   ]);
 
-  const cardPressHandeler = (key) => {
-    //redirect to pet page    console.log(key)
-    navigation.navigate(navigationScreens.pet, { petId: key });
+  const cardPressHandeler = (item) => {
+    navigation.navigate(navigationScreens.pet, { pet: item });
   }
 
   // If possible pass only key to todos
