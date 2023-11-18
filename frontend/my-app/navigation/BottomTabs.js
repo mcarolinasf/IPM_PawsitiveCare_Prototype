@@ -15,6 +15,7 @@ import { Diary } from '../screens/Diary/Diary';
 import navigationScreens from './navigationPaths';
 import colors from '../styles/colors';
 import { Pet } from '../screens/Pet/Pet';
+import { globalStyles } from '../styles/globalStyles';
 
 const Tab = createBottomTabNavigator();
 
@@ -25,7 +26,7 @@ export const BottomTabs = () => {
 
     if (routeName === navigationScreens.pet) {
       return (
-        <View style={NavigationStyle.pawIcon}>
+        <View style={{...NavigationStyle.pawIcon, ...globalStyles.shadow}}>
           <MaterialCommunityIcons name="paw" size={35} color={colors.white} />
         </View>
       );
