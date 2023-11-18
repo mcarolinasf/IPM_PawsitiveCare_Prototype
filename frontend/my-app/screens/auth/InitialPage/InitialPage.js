@@ -8,14 +8,12 @@ import {
 } from "react-native";
 import { InitialPageStyles } from "./InitialPageStyles.js";
 import { globalStyles } from "../../../styles/globalStyles.js";
-import logo from "../../assets/logo.png";
+import logo from "../../../assets/logo.png";
 import colors from "../../../styles/colors.js";
 import { useNavigation } from "@react-navigation/native";
 import navigationPaths from "../../../navigation/navigationPaths.js";
 
 export const InitialPage = ({navigation}) => {
-  const navigation = useNavigation(); // Get the navigation object
-
   onPressSignIn = () => {
     // Navigate to the Login screen
     navigation.navigate(navigationPaths.login);

@@ -7,11 +7,11 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import colors from "../../styles/colors.js";
+import colors from "../../../styles/colors.js";
 import { RegisterStyles } from "./RegisterStyles.js";
-import { globalStyles } from "../../styles/globalStyles.js";
-import navigationPaths from "../../navigation/navigationPaths.js";
-import TextInputDefault from "../../components/TextInputDefault/TextInputDefault.js";
+import { globalStyles } from "../../../styles/globalStyles.js";
+import navigationPaths from "../../../navigation/navigationPaths.js";
+import TextInputDefault from "../../../components/TextInputDefault/TextInputDefault.js";
 
 export const Register = ({ navigation }) => {
   onPressRegister = () => {

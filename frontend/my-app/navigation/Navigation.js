@@ -11,8 +11,8 @@ import UserSessionContext from '../services/UserSessionContext';
 // Screens
 import { Home } from "../screens/Home/Home";
 import { InitialPage } from "../screens/auth/InitialPage/InitialPage";
-import { Login } from '../screens/Login/Login';
-import { Register } from '../screens/Register/Register';
+import { Login } from '../screens/auth/Login/Login';
+import { Register } from '../screens/auth/Register/Register';
 
 
 const Stack = createNativeStackNavigator();

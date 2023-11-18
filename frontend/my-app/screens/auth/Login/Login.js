@@ -7,13 +7,13 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import colors from "../../styles/colors.js";
+import colors from "../../../styles/colors.js";
 import { LoginStyles } from "./LoginStyles.js";
-import { globalStyles } from "../../styles/globalStyles.js";
-import navigationPaths from "../../navigation/navigationPaths.js";
-import TextInputDefault from "../../components/TextInputDefault/TextInputDefault.js";
+import { globalStyles } from "../../../styles/globalStyles.js";
+import navigationPaths from "../../../navigation/navigationPaths.js";
+import TextInputDefault from "../../../components/TextInputDefault/TextInputDefault.js";
 import { useState, useContext } from "react";
-import UserSessionContext from "../../services/UserSessionContext.js";
+import UserSessionContext from "../../../services/UserSessionContext.js";
 
 export const Login = ({navigation}) => {
 
