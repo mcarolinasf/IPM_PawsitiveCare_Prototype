@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native'
 import { globalStyles } from '../../styles/globalStyles'
 import { PetStyles } from './PetStyles'
@@ -8,10 +8,13 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import colors from '../../styles/colors';
 import TodoItem from '../../components/TodoItem/TodoItem';
 import navigationPaths from '../../navigation/navigationPaths';
+import UserSessionContext from '../../services/UserSessionContext.js';
 
 
 export const Pet = ({ navigation, route }) => {
+    
     const { pet } = route.params;
+    const { user } = useContext(UserSessionContext);
 
     const [toDos, setToDos] = useState([
         { key: 0, text: 'Med 1', type: 'Health', time: '10:30', animal: { key: 0, name: 'Max', age: 5, photoUrl: 'https://www.hindustantimes.com/ht-img/img/2023/08/25/1600x900/international_dog_day_1692974397743_1692974414085.jpg' } },
@@ -29,7 +32,6 @@ export const Pet = ({ navigation, route }) => {
         <SafeAreaView style={globalStyles.container}>
             <ScrollView>
                 <Header title={pet.name} />
-
                 <View >
                     <Image
                         style={PetStyles.image}{...globalStyles.shadow}

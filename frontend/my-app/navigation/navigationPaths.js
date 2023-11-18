@@ -7,6 +7,7 @@ export default {
     training: "Training",
     diary: "Diary",
     pet: "Pet",
+    profile: "Profile",
     vetAppointments: 'Vet',
     body: 'Body',
     medication: 'Medication',

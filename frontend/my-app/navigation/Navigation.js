@@ -13,6 +13,7 @@ import { Home } from "../screens/Home/Home";
 import { InitialPage } from "../screens/auth/InitialPage/InitialPage";
 import { Login } from '../screens/auth/Login/Login';
 import { Register } from '../screens/auth/Register/Register';
+import { Profile } from '../screens/Profile/Profile'; 
 
 
 const Stack = createNativeStackNavigator();
@@ -24,14 +25,21 @@ export const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName={user ? Home : InitialPage} screenOptions={{animationEnabled: false, headerShown: false}}>
-           <Stack.Screen name={"BottomBar"}>
+          {user ? 
+            <>
+              <Stack.Screen name={"BottomBar"}>
               {() => <BottomTabs />}
-            </Stack.Screen>
-            <Stack.Screen name={navigationScreens.pet} component={Pet} />
-            <Stack.Screen name={navigationScreens.initial} component={InitialPage} />
-            <Stack.Screen name={navigationScreens.login} component={Login} />
-            <Stack.Screen name={navigationScreens.register} component={Register} />
-   
+              </Stack.Screen>
+              <Stack.Screen name={navigationScreens.pet} component={Pet} />
+              <Stack.Screen name={navigationScreens.profile} component={Profile} />
+            </>
+          :
+            <>
+              <Stack.Screen name={navigationScreens.initial} component={InitialPage} />
+              <Stack.Screen name={navigationScreens.login} component={Login} />
+              <Stack.Screen name={navigationScreens.register} component={Register} />
+            </>
+          }
       </Stack.Navigator>
     </NavigationContainer>
   );

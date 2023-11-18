@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { View, Text, SafeAreaView, ScrollView, Image } from 'react-native'
+import React, { useContext, useState } from 'react'
+import { View, Text, SafeAreaView, ScrollView, Image, Button } from 'react-native'
 import Card from '../../components/Card/Card'
 import Divider from '../../components/Divider'
 import TodoItem from '../../components/TodoItem/TodoItem'
@@ -9,6 +9,8 @@ import navigationScreens from '../../navigation/navigationPaths'
 import { AntDesign } from '@expo/vector-icons';
 import colors from '../../styles/colors'
 import Header from '../../components/Header.js'
+import UserSessionContext from '../../services/UserSessionContext.js'
+import navigationPaths from '../../navigation/navigationPaths'
 import { petsData } from '../../data/petsData'
 
 
@@ -16,7 +18,7 @@ export const Home = ({ navigation }) => {
 
   const [animal, setAnimal] = useState(Object.values(petsData));
 
-  const cardPressHandeler = (item) => {
+  const cardPressHandler = (item) => {
     navigation.navigate(navigationScreens.pet, { pet: item });
   }
 
@@ -33,7 +35,19 @@ export const Home = ({ navigation }) => {
 
   ])
 
-  const todoPressHandeler = (key) => {
+  useEffect(() => {
+    getPets()
+  }, [])
+  
+
+  const getPets = () => {
+      const petIds = user.petIds;
+
+      //For each petId retrieve information and then set the list of pet objects with setPets
+
+  }
+
+  const todoPressHandler = (key) => {
     setToDos((prevTodos) => (
       prevTodos.filter(todo => todo.key != key)
     ));
@@ -45,13 +59,18 @@ export const Home = ({ navigation }) => {
   const pageTitle = 'Home'
   //Maybe turn header into a component
 
+  const handleLogout = () => {
+    clearUserSession();
+    navigation.navigate(navigationPaths.initial);
+  }
+
   return (
     <SafeAreaView style={globalStyles.container}>
       <ScrollView>
-        <Header title={pageTitle} />
+        <Header title={pageTitle} showProfile/>
         <ScrollView horizontal={true}>
           {animal.map(item => (
-            <Card key={item.key} item={item} pressHandeler={cardPressHandeler} />
+            <Card key={item.key} item={item} pressHandler={cardPressHandler} />
           ))}
           <View style={HomeStyles.button} >
             <AntDesign name="plussquare" size={32} color={colors.primary} onPress={addPetButtonPressed} />
@@ -63,14 +82,12 @@ export const Home = ({ navigation }) => {
         <View>
           {
             toDos.map(item => (
-              <TodoItem key={item.key} item={item} pressHandeler={todoPressHandeler} />
+              <TodoItem key={item.key} item={item} pressHandler={todoPressHandler} />
             ))
           }
         </View>
-
-
+        <Button title='Logout' onPress={handleLogout} />
       </ScrollView>
-
     </SafeAreaView >
   )
 }

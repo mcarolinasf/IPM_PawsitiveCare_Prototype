@@ -5,7 +5,7 @@ import { TodoItemStyles } from './TodoItemStyles'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colors from '../../styles/colors';
 
-export default function TodoItem({ item, pressHandeler }) {
+export default function TodoItem({ item, pressHandler }) {
 
 
     const typeToColorMap = {
@@ -18,7 +18,7 @@ export default function TodoItem({ item, pressHandeler }) {
 
     return (
         <TouchableOpacity
-            onPress={() => pressHandeler(item.key)} style={globalStyles.shadow} >
+            onPress={() => pressHandler(item.key)} style={globalStyles.shadow} >
             <View style={TodoItemStyles.container}>
                 <View style={{ flexDirection: 'row' }}>
                     <MaterialCommunityIcons name="checkbox-blank-outline" size={24} color={colors.secondary} />

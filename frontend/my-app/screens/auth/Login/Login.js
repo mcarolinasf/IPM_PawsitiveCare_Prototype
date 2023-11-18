@@ -14,6 +14,7 @@ import navigationPaths from "../../../navigation/navigationPaths.js";
 import TextInputDefault from "../../../components/TextInputDefault/TextInputDefault.js";
 import { useState, useContext } from "react";
 import UserSessionContext from "../../../services/UserSessionContext.js";
+import userData from "../../../data/userData.js";
 
 export const Login = ({navigation}) => {
 
@@ -30,9 +31,18 @@ export const Login = ({navigation}) => {
   
   const handleLogin = () => {
    
-    setUserSession({email: email, pwd:password});
-    //TODO: See if needed 
-    navigation.navigate(navigationPaths.home);
+    var user = userData[email.toLowerCase().trim()];
+
+    if (user != null && user.pwd === password) {
+      setUserSession(user);
+      //TODO: See if needed 
+      //navigation.navigate(navigationPaths.home);
+    } else {
+      console.log("Error")
+      setEmail("")
+      setPassword("")
+    }
+   
   };
 
 
