@@ -14,23 +14,15 @@ export const NavigationStyle = StyleSheet.create({
         height: 60,
     },
 
-    
-
-    /* tab: {
-        alignItems: "center",
-        justifyContent: "center",
-        top: Platform.OS === 'ios' ? 10 : 0
-    },
-
-    text: {
-        fontSize: 12,
-        color: focused ? Colors.secondary : "#748c94"
-    },
-
-    icon: {
-        width: 25,
-        height: 25,
-        tintColor: focused ? Colors.secondary : "#748c94"
-    } */
+    pawIcon: {
+        width: 60,
+        height: 60,
+        borderRadius: 35,
+        backgroundColor: colors.primary,
+        position:"absolute",
+        bottom:20,
+        justifyContent:"center",
+        alignItems:"center"
+    }
 
 })

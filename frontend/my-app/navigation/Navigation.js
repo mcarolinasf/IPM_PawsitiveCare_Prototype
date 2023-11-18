@@ -37,9 +37,6 @@ export const Navigation = () => {
               )}
         </Stack.Screen>
         <Stack.Screen name={navigationScreens.pet} component={Pet}/>
-        {/* <Stack.Screen name={navigationScreens.calendarName} component={Calendar}/>
-        <Stack.Screen name={navigationScreens.trainingName} component={Training}/>
-        <Stack.Screen name={navigationScreens.diaryName} component={Diary}/> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
