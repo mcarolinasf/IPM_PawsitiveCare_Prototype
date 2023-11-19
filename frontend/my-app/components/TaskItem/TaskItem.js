@@ -4,7 +4,7 @@ import { globalStyles } from '../../styles/globalStyles'
 import { TaskItemStyles } from './TaskItemStyles'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colors from '../../styles/colors';
-import { PetsData } from '../../data/PetsData';
+import { PetsData } from '../../data/petsData';
 import { TaskType } from '../../data/TaskType';
 
 export default function TaskItem({ task, pressHandler }) {
@@ -16,9 +16,9 @@ export default function TaskItem({ task, pressHandler }) {
     }, [])
 
     const getPet = () => {
-       setPet(PetsData[task.petId])
+        setPet(PetsData[task.petId])
     }
-    
+
 
 
     const backgroundColor = () => {

@@ -3,7 +3,7 @@ import { BottomTabBar, createBottomTabNavigator } from '@react-navigation/bottom
 import { NavigationStyle } from './NavigationStyles';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { View, TouchableOpacity } from 'react-native';
-import { PetsData } from '../data/PetsData';
+import { PetsData } from '../data/petsData';
 
 
 // Screens
