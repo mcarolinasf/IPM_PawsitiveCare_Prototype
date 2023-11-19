@@ -22,7 +22,7 @@ export const Training = () => {
     <SafeAreaView style={globalStyles.container}>
       <View>
         <Header title={"Training"} showProfile />
-        <View style={TrainingStyles.filterButtonsView}>
+        <View style={{ ...TrainingStyles.filterButtonsView, paddingBottom: 5 }}>
           <FilterButton
             name={"All"}
             onPressFunction={() => onPressFilter("All")}
@@ -42,9 +42,7 @@ export const Training = () => {
         </View>
         <Divider />
         <NewButton title="New Training" onPressFunction={onPressNewTraining} />
-        <ScrollView>
-          <View style={TrainingStyles.listView}></View>
-        </ScrollView>
+        <ScrollView style={TrainingStyles.listView}></ScrollView>
       </View>
     </SafeAreaView>
   );
