@@ -3,7 +3,7 @@ import { BottomTabBar, createBottomTabNavigator } from '@react-navigation/bottom
 import { NavigationStyle } from './NavigationStyles';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { View, TouchableOpacity } from 'react-native';
-import { petsData } from '../data/petsData';
+import { PetsData } from '../data/PetsData';
 
 
 // Screens
@@ -75,7 +75,7 @@ export const BottomTabs = () => {
       })}>
       <Tab.Screen name={navigationScreens.home} component={Home} />
       <Tab.Screen name={navigationScreens.calendar} component={Calendar} />
-      <Tab.Screen name={navigationScreens.pet} component={Pet} initialParams={petsData[0]} />
+      <Tab.Screen name={navigationScreens.pet} component={Pet} initialParams={PetsData[0]} />
       <Tab.Screen name={navigationScreens.training} component={Training} />
       <Tab.Screen name={navigationScreens.diary} component={Diary} />
     </Tab.Navigator>

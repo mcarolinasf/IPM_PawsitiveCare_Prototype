@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text, SafeAreaView, ScrollView, Image, TouchableOpacity } from 'react-native'
-import Header from '../../components/Header'
+import Header from '../../components/Header/Header'
 import { globalStyles } from '../../styles/globalStyles'
 import { AddPetStyles } from './AddPetStyles'
 import { FontAwesome5 } from '@expo/vector-icons';

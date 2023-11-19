@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { View, Text, SafeAreaView, ScrollView, Image, Button } from 'react-native'
 import Card from '../../components/Card/Card'
 import Divider from '../../components/Divider'
-import TodoItem from '../../components/TodoItem/TodoItem'
+import TaskItem from '../../components/TaskItem/TaskItem.js'
 import { globalStyles } from '../../styles/globalStyles'
 import { HomeStyles } from './HomeStyles'
 import navigationScreens from '../../navigation/navigationPaths'
@@ -11,59 +11,59 @@ import colors from '../../styles/colors'
 import Header from '../../components/Header/Header.js'
 import UserSessionContext from '../../services/UserSessionContext.js'
 import navigationPaths from '../../navigation/navigationPaths'
-import { petsData } from '../../data/petsData';
-import { toDosData } from '../../data/toDosData.js';
+import { PetsData } from '../../data/PetsData.js'
+import { TasksData } from '../../data/TasksData.js'
 
 
 export const Home = ({ navigation }) => {
 
-  const [animal, setAnimal] = useState(Object.values(petsData));
+  const [pets, setPets] = useState([]);
+  const [tasks, setTasks] = useState([]);
+
   const { user } = useContext(UserSessionContext);
 
   const cardPressHandler = (item) => {
     navigation.navigate(navigationScreens.pet, { pet: item });
   }
 
-  // If possible pass only key to todos
-  const getAnimalByKey = (id) => (
-    animal.find(animal.id == id)
-  )
-
-
-
-
   useEffect(() => {
-    getPets()
+    getData()
   }, [])
 
 
-  const getPets = () => {
-    const petIds = user.petIds;
-
-    //For each petId retrieve information and then set the list of pet objects with setPets
+  const getData = () => {
+    var petIds = user.petIds;
+    
+    //Set pets
+    var pets = petIds.map((id) => PetsData[id]);
+    setPets(pets);
+ 
+    //Set tasks
+    const tasks = pets.flatMap((pet) =>
+      pet.tasksIds.map((id) => TasksData[id])
+    );
+    setTasks(tasks); 
 
   }
 
-  const todoPressHandler = (key) => {
-    setToDos((prevTodos) => (
-      prevTodos.filter(todo => todo.id != key)
+  const handleTaskPress = (key) => {
+    setTasks((prevTasks) => (
+      prevTasks.filter(task => task.id != key)
     ));
   }
+
   const addPetButtonPressed = () => {
     navigation.navigate(navigationScreens.addPet);
   }
 
   const pageTitle = 'Home'
 
-
-
-
   return (
     <SafeAreaView style={globalStyles.container}>
       <ScrollView>
         <Header title={pageTitle} showProfile />
         <ScrollView horizontal={true}>
-          {animal.map(item => (
+          {pets.map(item => (
             <Card key={item.id} item={item} pressHandler={cardPressHandler} />
           ))}
           <View style={HomeStyles.button} >
@@ -75,8 +75,8 @@ export const Home = ({ navigation }) => {
         <Text style={globalStyles.subtitleText}>Today</Text>
         <View>
           {
-            toDos.map(item => (
-              <TodoItem key={item.id} item={item} pressHandler={todoPressHandler} />
+            tasks.map(task => (
+              <TaskItem key={task.id} task={task} pressHandler={handleTaskPress} />
             ))
           }
         </View>

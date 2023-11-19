@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import colors from '../../styles/colors';
 
 
-export const TodoItemStyles = StyleSheet.create({
+export const TaskItemStyles = StyleSheet.create({
 
     container: {
         padding: 15,
