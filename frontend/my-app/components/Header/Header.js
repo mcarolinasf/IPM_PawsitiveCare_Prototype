@@ -20,20 +20,20 @@ export default function Header({ title, showProfile, goBack }) {
     return (
         <View style={HeaderStyles.container} >
 
-            { goBack && 
+            {goBack &&
                 <View style={HeaderStyles.backButton}>
-                    <BackButton navigation={navigation}/>
+                    <BackButton navigation={navigation} />
                 </View>
             }
 
             <Text style={globalStyles.titleText}> {title} </Text>
 
-            { showProfile &&
+            {showProfile &&
                 <TouchableOpacity onPress={handleProfileClick} style={HeaderStyles.image}>
-                    <Image style={{...HeaderStyles.image, ...globalStyles.shadow}} source={{ uri: user.photoUrl}}/>
+                    <Image style={{ ...HeaderStyles.image, ...globalStyles.shadow }} source={{ uri: user.photoUrl }} />
                 </TouchableOpacity>
             }
-           
+
         </View>
     )
 }

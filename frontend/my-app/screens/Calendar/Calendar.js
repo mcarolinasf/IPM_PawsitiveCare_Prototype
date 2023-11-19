@@ -4,7 +4,7 @@ import { Button, View, Text, SafeAreaView, ScrollView } from 'react-native'
 import { globalStyles } from '../../styles/globalStyles'
 import Header from '../../components/Header/Header'
 import { Calendar as CustomCalendar, LocaleConfig } from 'react-native-calendars';
-import { TasksData } from "../../data/TasksData" 
+import { TasksData } from "../../data/TasksData"
 import UserSessionContext from '../../services/UserSessionContext';
 import { getCurrentDate } from '../../services/utils';
 import { CalendarStyles } from './CalendarStyles';
@@ -21,9 +21,9 @@ export const Calendar = () => {
 
   const [scheduleModalVisible, setScheduleModalVisible] = useState(false)
 
-  const {user} = useContext(UserSessionContext);
+  const { user } = useContext(UserSessionContext);
 
-  
+
 
   useEffect(() => {
     setMarkedTasks()
@@ -31,25 +31,25 @@ export const Calendar = () => {
 
 
   useEffect(() => {
-      fetchTasks();
-      setMarkedTasks()
+    fetchTasks();
+    setMarkedTasks()
   }, []);
 
   useFocusEffect(
-      useCallback(() => {
-          fetchTasks();
-      }, [])
+    useCallback(() => {
+      fetchTasks();
+    }, [])
   );
 
   async function fetchTasks() {
-      
-      //const response = await getUserEvents({email: emailUser});
-      const tasks = Object.values(TasksData); // Convert object values to an array
 
-      // Filter the array by owner
-      const filteredByOwner = tasks.filter(task => task.owner === user.email);
+    //const response = await getUserEvents({email: emailUser});
+    const tasks = Object.values(TasksData); // Convert object values to an array
 
-      setTasks(filteredByOwner);
+    // Filter the array by owner
+    const filteredByOwner = tasks.filter(task => task.owner === user.email);
+
+    setTasks(filteredByOwner);
   }
 
   const handleSchedulePopup = () => {
@@ -58,21 +58,21 @@ export const Calendar = () => {
 
 
   function setMarkedTasks() {
-      let tmp = {}
-      tmp[selected] = {selected: true, disableTouchEvent: true, selectedDotColor: 'orange'}
+    let tmp = {}
+    tmp[selected] = { selected: true, disableTouchEvent: true, selectedDotColor: 'orange' }
 
-      //Select events of the current selected date
-      setTasksByDate(tasks?.filter((task) =>
-          task.date === selected))
+    //Select events of the current selected date
+    setTasksByDate(tasks?.filter((task) =>
+      task.date === selected))
 
-      tasks?.forEach((task) => {
-          tmp[task.date] = {
-              dotColor: Colors.secondary,
-              marked: true
-          }
-      });
-      
-      setMarked(tmp)
+    tasks?.forEach((task) => {
+      tmp[task.date] = {
+        dotColor: Colors.secondary,
+        marked: true
+      }
+    });
+
+    setMarked(tmp)
   }
 
   return (
@@ -81,13 +81,13 @@ export const Calendar = () => {
         <Header title={"Calendar"} showProfile />
 
         <CustomCalendar
-                    onDayPress={day => {
-                        setSelected(day.dateString);
-                    }}
-                    markedDates={markedL}
-                    theme={CalendarStyles.calendarTheme}
-                />
-        
+          onDayPress={day => {
+            setSelected(day.dateString);
+          }}
+          markedDates={markedL}
+          theme={CalendarStyles.calendarTheme}
+        />
+
         <View style={CalendarStyles.buttonContainer} >
           <CustomButton title={"Add a task"} onPressFunction={handleSchedulePopup} />
         </View>

@@ -8,7 +8,7 @@ import colors from '../../styles/colors';
 
 
 
-export default function MenuCard({ iconName, title, navigateTo, navigation }) {
+export default function MenuCard({ iconName, title, navigateTo, subtitile, navigation }) {
 
 
     const pressHandler = () => {
@@ -23,6 +23,11 @@ export default function MenuCard({ iconName, title, navigateTo, navigation }) {
                 </View>
 
                 <Text style={MenuCardStyles.title}> {title}</Text>
+                {subtitile &&
+                    <Text style={globalStyles.secondaryText}>{subtitile}</Text>
+                }
+
+
 
             </View>
         </TouchableOpacity>

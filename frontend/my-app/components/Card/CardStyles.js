@@ -9,6 +9,7 @@ export const CardStyles = StyleSheet.create({
         height: 146,
         width: 115,
         margin: 5,
+        marginBottom: 10,
         borderRadius: 10,
         justifyContent: "flex-end",
         alignItems: "center"

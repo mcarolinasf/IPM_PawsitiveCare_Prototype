@@ -58,7 +58,8 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: colors.secondary,
     opacity: 0.5,
     height: 1,
-    marginVertical: 14,
+    marginVertical: 5,
     marginHorizontal: 4,
+
   },
 });
