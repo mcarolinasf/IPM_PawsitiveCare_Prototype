@@ -11,7 +11,7 @@ import colors from '../../styles/colors'
 import Header from '../../components/Header/Header'
 import UserSessionContext from '../../services/UserSessionContext.js'
 import navigationPaths from '../../navigation/navigationPaths'
-import { PetsData } from '../../data/petsData.js'
+import { PetsData } from '../../data/PetsData.js'
 import { TasksData } from '../../data/TasksData.js'
 
 

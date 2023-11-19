@@ -10,6 +10,7 @@ import { getCurrentDate } from '../../services/utils';
 import { CalendarStyles } from './CalendarStyles';
 import { CustomButton } from '../../components/CustomButton/CustomButton';
 import { ModalComponent } from '../../components/Modal/ModalComponent';
+import Divider from '../../components/Divider'
 
 export const Calendar = () => {
 
@@ -77,14 +78,14 @@ export const Calendar = () => {
   return (
     <SafeAreaView style={globalStyles.container}>
       <ScrollView>
-        <Header title={"Calendar"} showProfile />  
+        <Header title={"Calendar"} showProfile />
+
         <CustomCalendar
                     onDayPress={day => {
                         setSelected(day.dateString);
                     }}
                     markedDates={markedL}
                     theme={CalendarStyles.calendarTheme}
-                    style={{marginTop: 10}}
                 />
         
         <View style={CalendarStyles.buttonContainer} >

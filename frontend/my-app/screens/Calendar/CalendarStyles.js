@@ -5,14 +5,13 @@ import colors from '../../styles/colors'
 export const CalendarStyles = StyleSheet.create({
 
     calendarTheme: {
-        backgroundColor: 'red',
         calendarBackground: 'transparent',
-        textSectionTitleColor: 'grey',
+        textSectionTitleColor: colors.grey,
         selectedDayBackgroundColor: colors.primary,
-        selectedDayTextColor: 'white',
+        selectedDayTextColor: colors.white,
         todayTextColor: colors.primary,
-        dayTextColor: colors.grey,
-        textDisabledColor: 'grey',
+        dayTextColor: colors.text,
+        textDisabledColor: colors.grey,
         arrowColor: colors.primary
     },
 
