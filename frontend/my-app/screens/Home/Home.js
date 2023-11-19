@@ -8,7 +8,7 @@ import { HomeStyles } from './HomeStyles'
 import navigationScreens from '../../navigation/navigationPaths'
 import { AntDesign } from '@expo/vector-icons';
 import colors from '../../styles/colors'
-import Header from '../../components/Header.js'
+import Header from '../../components/Header/Header.js'
 import UserSessionContext from '../../services/UserSessionContext.js'
 import navigationPaths from '../../navigation/navigationPaths'
 import { petsData } from '../../data/petsData'

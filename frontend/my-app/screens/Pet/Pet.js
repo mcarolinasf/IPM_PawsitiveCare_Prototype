@@ -3,7 +3,7 @@ import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'r
 import { globalStyles } from '../../styles/globalStyles'
 import { PetStyles } from './PetStyles'
 import MenuCard from '../../components/MenuCard/MenuCard.js';
-import Header from '../../components/Header.js';
+import Header from '../../components/Header/Header.js';
 import { FontAwesome5 } from '@expo/vector-icons';
 import colors from '../../styles/colors';
 import TodoItem from '../../components/TodoItem/TodoItem';

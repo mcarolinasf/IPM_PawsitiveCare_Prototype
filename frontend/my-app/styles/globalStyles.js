@@ -10,22 +10,6 @@ export const globalStyles = StyleSheet.create({
 
     },
 
-    header: {
-        flexDirection: 'row',
-        justifyContent: "center",
-        alignItems: 'center',
-        position: 'relative'
-
-
-    },
-    image: {
-        height: 35,
-        width: 35,
-        position: "absolute",
-        right: 10,
-        borderRadius: 20
-    },
-
     titleText: {
         //fontFamily: 'poppins',
         fontSize: 30,
