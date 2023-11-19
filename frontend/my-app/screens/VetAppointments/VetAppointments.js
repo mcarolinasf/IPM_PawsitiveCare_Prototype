@@ -7,6 +7,8 @@ import MenuCard from '../../components/MenuCard/MenuCard'
 import { globalStyles } from '../../styles/globalStyles'
 import { VetAppointmentsStyles } from './VetAppointmentsStyles'
 
+import NoteTacker from '../../components/NoteTaker/NoteTacker'
+
 
 export const VetAppointments = ({ navigation }) => {
 
@@ -24,6 +26,11 @@ export const VetAppointments = ({ navigation }) => {
 
     ]);
 
+    const addVetAppointment = () => {
+
+        /* Todo: Add functionality */
+    }
+
 
     return (
         <SafeAreaView style={globalStyles.container}>
@@ -31,6 +38,7 @@ export const VetAppointments = ({ navigation }) => {
                 <Header title={'Vet Appoint'} goBack showProfile />
                 <ScrollView horizontal={true}>
                     {
+                        /* Todo: add "navigateTo" choose correct appointment to display */
                         vetApp.map(item => (
                             <MenuCard iconName={'paw'} title={'Vet App ' + item.id} subtitile={item.date} />
                         ))
@@ -38,15 +46,10 @@ export const VetAppointments = ({ navigation }) => {
                 </ScrollView>
                 <Divider />
                 <View style={{ alignItems: 'flex-end', marginTop: 15 }}>
-                    <CustomButton title={'New Vet Appointment'} iconName={'plus'} />
+                    <CustomButton title={'New Vet Appointment'} iconName={'plus'} onPressFunction={addVetAppointment} />
                 </View>
-                <View style={VetAppointmentsStyles.container}>
-                    <View style={{ padding: 5 }}>
-                        <Text style={globalStyles.secondaryText}>5 of October</Text>
-                    </View>
-                    <Divider />
-                    <TextInput style={VetAppointmentsStyles.input} multiline={true} />
-                </View>
+                {/* Todo: Add pop up and its functionality */}
+                <NoteTacker />
             </ScrollView>
 
         </SafeAreaView>

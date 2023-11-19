@@ -24,10 +24,8 @@ export default function MenuCard({ iconName, title, navigateTo, subtitile, navig
 
                 <Text style={MenuCardStyles.title}> {title}</Text>
                 {subtitile &&
-                    <Text style={globalStyles.secondaryText}>{subtitile}</Text>
+                    <Text style={{ ...globalStyles.secondaryText, fontSize: 11 }}>{subtitile}</Text>
                 }
-
-
 
             </View>
         </TouchableOpacity>
