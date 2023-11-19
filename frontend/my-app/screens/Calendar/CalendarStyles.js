@@ -18,6 +18,12 @@ export const CalendarStyles = StyleSheet.create({
 
     buttonContainer: {
         marginVertical: 10,
-    }
+    },
+
+    tasksContainer: {
+
+    },
+
+    
 
 })

@@ -5,7 +5,8 @@ import { TaskItemStyles } from './TaskItemStyles'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colors from '../../styles/colors';
 import { PetsData } from '../../data/PetsData';
-import { TaskType } from '../../data/TaskType';
+import { getTypeColor } from '../../services/utils';
+
 
 export default function TaskItem({ task, pressHandler }) {
 
@@ -19,23 +20,6 @@ export default function TaskItem({ task, pressHandler }) {
         setPet(PetsData[task.petId])
     }
 
-
-
-    const backgroundColor = () => {
-        console.log(" TASK DEBUG --------------- " + task)
-        console.log(" TYPE DEBUG --------------- " + type)
-        switch (task.type) {
-            case TaskType.HEALTH:
-                return '#A1E1A4';
-            case TaskType.FEEDING:
-                return '#F0C49C';
-            case TaskType.TRAINING:
-                return '#DF909B';
-            default:
-                return colors.background;
-        }
-    }
-
     return (
         <TouchableOpacity
             onPress={() => pressHandler(task.id)} style={globalStyles.shadow} >
@@ -44,7 +28,7 @@ export default function TaskItem({ task, pressHandler }) {
                     <MaterialCommunityIcons name="checkbox-blank-outline" size={24} color={colors.secondary} />
                     <View>
                         <Text style={TaskItemStyles.text}>{task.text}</Text>
-                        <View style={[TaskItemStyles.tags, { backgroundColor }]}>
+                        <View style={[TaskItemStyles.tags, { backgroundColor: getTypeColor(task.type) }]}>
                             <Text style={TaskItemStyles.tagType}>{task.type}</Text>
                         </View>
                     </View>
