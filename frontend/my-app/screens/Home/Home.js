@@ -17,7 +17,7 @@ import { petsData } from '../../data/petsData'
 export const Home = ({ navigation }) => {
 
   const [animal, setAnimal] = useState(Object.values(petsData));
-  const { user } = useContext(UserSessionContext);
+  const { user, clearUserSession } = useContext(UserSessionContext);
 
   const cardPressHandler = (item) => {
     navigation.navigate(navigationScreens.pet, { pet: item });
@@ -42,9 +42,9 @@ export const Home = ({ navigation }) => {
   
 
   const getPets = () => {
-      const petIds = user.petIds;
+    const petIds = user.petIds;
 
-      //For each petId retrieve information and then set the list of pet objects with setPets
+    //For each petId retrieve information and then set the list of pet objects with setPets
 
   }
 
