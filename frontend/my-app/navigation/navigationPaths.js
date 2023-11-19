@@ -8,9 +8,10 @@ export default {
     diary: "Diary",
     pet: "Pet",
     profile: "Profile",
-    vetAppointments: 'Vet',
+    vetAppointments: 'VetAppointments',
     body: 'Body',
     medication: 'Medication',
-    feeding: 'Feeding'
+    feeding: 'Feeding',
+    addPet: 'AddPet'
 }
 
