@@ -7,7 +7,7 @@ import colors from '../../styles/colors';
 import { useState } from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
 
-export const ModalComponent = ({ navigation, visible, onClose, title, actions }) => {
+export const ModalComponent = ({ navigation, visible, onClose, title, actions, day }) => {
 
   return (
     <Modal
@@ -21,9 +21,9 @@ export const ModalComponent = ({ navigation, visible, onClose, title, actions })
           <TouchableOpacity activeOpacity={1} style={{...ModalComponentStyles.container, ...globalStyles.shadow}}>
             <View style={ModalComponentStyles.titleContainer}>
                 <Text style={{...globalStyles.subtitleText, ...ModalComponentStyles.title}}>{title}</Text>
+                <Text> {day} (to remove) </Text>
             </View>
             <View style={ModalComponentStyles.modalContent}>
-              {console.log("ACTIONS   " + actions)}
                { actions && actions.map((action) => 
                   <TouchableHighlight 
                     onPress={()=>{ navigation.navigate(action.navigateTo) }}

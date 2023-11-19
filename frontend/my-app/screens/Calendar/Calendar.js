@@ -13,6 +13,9 @@ import { ModalComponent } from '../../components/Modal/ModalComponent';
 import Divider from '../../components/Divider'
 import navigationPaths from '../../navigation/navigationPaths';
 import { SchedulingActions as actions } from '../../data/SchedulingActions';
+import colors from '../../styles/colors';
+import TaskItem from '../../components/TaskItem/TaskItem';
+import NewButton from '../../components/NewButton/NewButton';
 
 export const Calendar = ({navigation}) => {
 
@@ -45,11 +48,10 @@ export const Calendar = ({navigation}) => {
 
   async function fetchTasks() {
 
-    //const response = await getUserEvents({email: emailUser});
     const tasks = Object.values(TasksData); // Convert object values to an array
 
     // Filter the array by owner
-    const filteredByOwner = tasks.filter(task => task.owner === user.email);
+    const filteredByOwner = tasks.filter(task => task.owners.includes(user.email.toLowerCase()));
 
     setTasks(filteredByOwner);
   }
@@ -69,7 +71,7 @@ export const Calendar = ({navigation}) => {
 
     tasks?.forEach((task) => {
       tmp[task.date] = {
-        dotColor: Colors.secondary,
+        dotColor: colors.secondary,
         marked: true
       }
     });
@@ -79,20 +81,35 @@ export const Calendar = ({navigation}) => {
 
   return (
     <SafeAreaView style={globalStyles.container}>
-      <ScrollView>
-        <Header title={"Calendar"} showProfile />
+      
+      <Header title={"Calendar"} showProfile style={{marginBottom:-20}} />
 
-        <CustomCalendar
-          onDayPress={day => {
-            setSelected(day.dateString);
-          }}
-          markedDates={markedL}
-          theme={CalendarStyles.calendarTheme}
-        />
+      <CustomCalendar
+        onDayPress={day => {
+          setSelected(day.dateString);
+        }}
+        markedDates={markedL}
+        theme={CalendarStyles.calendarTheme}
+      />
 
-        <View style={CalendarStyles.buttonContainer} >
-          <CustomButton title={"Add a task"} onPressFunction={handleSchedulePopup} />
-        </View>
+      <View style={CalendarStyles.buttonContainer} >
+        
+        <CustomButton title={"Add a task"} onPressFunction={handleSchedulePopup} />
+        {/* <NewButton title={"Add a task"} onPressFunction={handleSchedulePopup}/> */}
+      </View>
+
+      <ScrollView showsVerticalScrollIndicator={false} style={CalendarStyles.tasksContainer}>
+        
+        {tasksByDate?.length > 0 ?
+            tasksByDate.map(task => {
+                return (
+                    <TaskItem  key={task.id} task={task}/>
+                )
+            })
+            :
+            <Text style={globalStyles.text}> You have nothing scheduled for today </Text>
+        }
+       
       </ScrollView>
 
       <ModalComponent
@@ -101,6 +118,7 @@ export const Calendar = ({navigation}) => {
         onClose={handleSchedulePopup}
         title={'Scheduling'}
         actions={actions}
+        day={selected}
       />
 
     </SafeAreaView>

@@ -8,7 +8,7 @@ import { BackButton } from '../BackButton/BackButton';
 import { HeaderStyles } from './HeaderStyles';
 
 
-export default function Header({ title, showProfile, goBack }) {
+export default function Header({ title, showProfile, goBack, style }) {
     const navigation = useNavigation();
 
     const { user } = useContext(UserSessionContext);
@@ -18,7 +18,7 @@ export default function Header({ title, showProfile, goBack }) {
     }
 
     return (
-        <View style={HeaderStyles.container} >
+        <View style={[HeaderStyles.container, style]} >
 
             {goBack &&
                 <View style={HeaderStyles.backButton}>

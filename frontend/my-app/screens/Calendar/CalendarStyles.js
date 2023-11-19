@@ -12,11 +12,12 @@ export const CalendarStyles = StyleSheet.create({
         todayTextColor: colors.primary,
         dayTextColor: colors.text,
         textDisabledColor: colors.grey,
-        arrowColor: colors.primary
+        arrowColor: colors.primary,
+        paddingTop: '-20%',
     },
 
     buttonContainer: {
-        marginTop: 40,
+        marginVertical: 10,
     }
 
 })

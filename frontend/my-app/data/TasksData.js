@@ -7,8 +7,9 @@ export const TasksData = {
         text: 'Med 1',
         type: TaskType.HEALTH,
         time: '10:30',
-        date: '',
+        date: '2023-11-19',
         petId: 0,
+        owners: ['admin'],
         done: false,
     },
     1: {
@@ -16,8 +17,9 @@ export const TasksData = {
         text: 'Med 2',
         type: TaskType.FEEDING,
         time: '10:30',
-        date: '',
+        date: '2023-11-19',
         petId: 1,
+        owners: ['admin'],
         done: false,
     },
     2: {
@@ -25,8 +27,9 @@ export const TasksData = {
         text: 'Lay Down Exercise',
         type: TaskType.TRAINING,
         time: '10:30',
-        date: '',
+        date: '2023-11-19',
         petId: 2,
+        owners: ['admin'],
         done: false,
     },
 
