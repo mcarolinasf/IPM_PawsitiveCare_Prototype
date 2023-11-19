@@ -12,7 +12,7 @@ import UserSessionContext from '../../services/UserSessionContext.js';
 
 
 export const Pet = ({ navigation, route }) => {
-    
+
     const { pet } = route.params;
 
     const [toDos, setToDos] = useState([
@@ -31,14 +31,13 @@ export const Pet = ({ navigation, route }) => {
         <SafeAreaView style={globalStyles.container}>
             <ScrollView>
                 <Header title={pet.name} />
-                <View >
+                <View style={PetStyles.container}{...globalStyles.shadow} >
                     <Image
-                        style={PetStyles.image}{...globalStyles.shadow}
+                        style={PetStyles.image}
                         source={{
                             uri: pet.photoUrl
                         }}
                     />
-
                 </View>
                 <ScrollView horizontal={true}>
                     <MenuCard iconName={'paw'} title={'Vet Ap.'} navigation={navigation} navigateTo={navigationPaths.vetAppointments} />
@@ -49,7 +48,7 @@ export const Pet = ({ navigation, route }) => {
                 <Text style={globalStyles.subtitleText}>Today</Text>
                 <View>
                     {
-                        toDos.filter(toDo => toDo.animal.key == pet.key).map(item => (
+                        toDos.filter(toDo => toDo.animal.key == pet.id).map(item => (
                             <TodoItem key={item.key} item={item} pressHandeler={todoPressHandeler} />
                         ))
                     }
