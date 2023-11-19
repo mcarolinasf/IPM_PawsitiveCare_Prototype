@@ -30,7 +30,7 @@ export const Pet = ({ navigation, route }) => {
     return (
         <SafeAreaView style={globalStyles.container}>
             <ScrollView>
-                <Header title={pet.name} />
+                <Header title={pet.name} goBack showProfile />
                 <View style={PetStyles.container}{...globalStyles.shadow} >
                     <Image
                         style={PetStyles.image}
@@ -49,7 +49,7 @@ export const Pet = ({ navigation, route }) => {
                 <View>
                     {
                         toDos.filter(toDo => toDo.animal.key == pet.id).map(item => (
-                            <TodoItem key={item.key} item={item} pressHandeler={todoPressHandeler} />
+                            <TodoItem key={item.key} item={item} pressHandler={todoPressHandeler} />
                         ))
                     }
                 </View>

@@ -35,5 +35,11 @@ export const AddPetStyles = StyleSheet.create({
 
     },
 
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+
+    }
+
 
 })

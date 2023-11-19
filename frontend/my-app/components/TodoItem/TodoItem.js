@@ -18,7 +18,7 @@ export default function TodoItem({ item, pressHandler }) {
 
     return (
         <TouchableOpacity
-            onPress={() => pressHandler(item.id)} style={globalStyles.shadow} >
+            onPress={() => pressHandler(item.key)} style={globalStyles.shadow} >
             <View style={TodoItemStyles.container}>
                 <View style={{ flexDirection: 'row' }}>
                     <MaterialCommunityIcons name="checkbox-blank-outline" size={24} color={colors.secondary} />
