@@ -20,10 +20,12 @@ export const CalendarStyles = StyleSheet.create({
         marginVertical: 10,
     },
 
-    tasksContainer: {
+    infoText: {
+        marginTop: '20%',
+        paddingVertical: 20,
+        color: colors.secondary,
+    }
 
-    },
 
-    
 
 })

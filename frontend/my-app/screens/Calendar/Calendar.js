@@ -126,8 +126,10 @@ export const Calendar = ({navigation}) => {
                 )
             })
             :
-            <Text style={globalStyles.text}> You have nothing scheduled for today </Text>
-        }
+            <View style={CalendarStyles.infoContainer}>
+              <Text style={[globalStyles.text, CalendarStyles.infoText]}> You have nothing scheduled for this day </Text>
+            </View>
+            }
        
       </ScrollView>
 
