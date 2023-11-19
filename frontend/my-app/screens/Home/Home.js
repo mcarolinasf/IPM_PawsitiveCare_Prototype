@@ -17,7 +17,7 @@ import { petsData } from '../../data/petsData'
 export const Home = ({ navigation }) => {
 
   const [animal, setAnimal] = useState(Object.values(petsData));
-  const { user, clearUserSession } = useContext(UserSessionContext);
+  const { user } = useContext(UserSessionContext);
 
   const cardPressHandler = (item) => {
     navigation.navigate(navigationScreens.pet, { pet: item });
@@ -60,10 +60,7 @@ export const Home = ({ navigation }) => {
   const pageTitle = 'Home'
   //Maybe turn header into a component
 
-  const handleLogout = () => {
-    clearUserSession();
-    navigation.navigate(navigationPaths.initial);
-  }
+
 
   return (
     <SafeAreaView style={globalStyles.container}>
@@ -87,7 +84,7 @@ export const Home = ({ navigation }) => {
             ))
           }
         </View>
-        <Button title='Logout' onPress={handleLogout} />
+        
       </ScrollView>
     </SafeAreaView >
   )

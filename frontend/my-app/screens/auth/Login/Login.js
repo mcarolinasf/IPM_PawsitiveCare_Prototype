@@ -35,8 +35,6 @@ export const Login = ({navigation}) => {
 
     if (user != null && user.pwd === password) {
       setUserSession(user);
-      //TODO: See if needed 
-      //navigation.navigate(navigationPaths.home);
     } else {
       console.log("Error")
       setEmail("")
