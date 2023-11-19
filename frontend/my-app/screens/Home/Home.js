@@ -18,7 +18,7 @@ import { toDosData } from '../../data/toDosData.js';
 export const Home = ({ navigation }) => {
 
   const [animal, setAnimal] = useState(Object.values(petsData));
-  const { user, clearUserSession } = useContext(UserSessionContext);
+  const { user } = useContext(UserSessionContext);
 
   const [toDos, setToDos] = useState([
     { key: 0, text: 'Med 1', type: 'Health', time: '10:30', animal: { key: 0, name: 'Max', age: 5, photoUrl: 'https://www.hindustantimes.com/ht-img/img/2023/08/25/1600x900/international_dog_day_1692974397743_1692974414085.jpg' } },
@@ -63,10 +63,7 @@ export const Home = ({ navigation }) => {
   const pageTitle = 'Home'
 
 
-  const handleLogout = () => {
-    clearUserSession();
-    navigation.navigate(navigationPaths.initial);
-  }
+
 
   return (
     <SafeAreaView style={globalStyles.container}>
@@ -90,7 +87,7 @@ export const Home = ({ navigation }) => {
             ))
           }
         </View>
-        <Button title='Logout' onPress={handleLogout} />
+        
       </ScrollView>
     </SafeAreaView >
   )

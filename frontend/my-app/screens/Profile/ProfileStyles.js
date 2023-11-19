@@ -13,4 +13,27 @@ export const ProfileStyles = StyleSheet.create({
         borderBottomRightRadius: 10
     },
 
+    infoContainer: {
+        backgroundColor: colors.white,
+        borderRadius: 10,
+        paddingHorizontal:10,
+        marginTop: 20,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        textAlign: 'justify',
+    },
+
+    info: {
+        marginLeft: 10,
+        marginTop: 2,
+    },
+
+    buttonContainer: {
+        marginTop: 40,
+        //flex: 1,
+        //justifyContent: 'center',
+        //alignItems: 'center',
+    },
+
 })
