@@ -4,6 +4,7 @@ import colors from "../../styles/colors";
 export const NewButtonStyles = StyleSheet.create({
   container: {
     alignItems: "flex-end",
+    paddingVertical: 5,
   },
 
   button: {

@@ -7,7 +7,6 @@ export const FilterButtonStyles = StyleSheet.create({
     borderRadius: 11,
     width: 100,
     height: 35,
-    backgroundColor: colors.filterButtonGrey,
   },
 
   text: {
