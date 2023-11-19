@@ -2,7 +2,7 @@
 import React from 'react'
 import { Button, View, Text, SafeAreaView, ScrollView } from 'react-native'
 import { globalStyles } from '../../styles/globalStyles'
-import Header from '../../components/Header'
+import Header from '../../components/Header/Header'
 
 
 export const Training = () => {
