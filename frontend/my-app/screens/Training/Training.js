@@ -6,6 +6,7 @@ import Header from "../../components/Header/Header";
 import { TrainingStyles } from "./TrainingStyles";
 import { Ionicons } from "@expo/vector-icons";
 import Divider from "../../components/Divider";
+import { NewButton } from "../../components/NewButton/NewButton";
 
 export const Training = () => {
   /*TODO: finish this function*/
@@ -19,9 +20,8 @@ export const Training = () => {
 
   return (
     <SafeAreaView style={globalStyles.container}>
-      <ScrollView>
+      <View>
         <Header title={"Training"} showProfile />
-
         <View style={TrainingStyles.filterButtonsView}>
           <FilterButton
             name={"All"}
@@ -41,7 +41,11 @@ export const Training = () => {
           <Ionicons name="filter" size={30} color="black" />
         </View>
         <Divider />
-      </ScrollView>
+        <NewButton title="New Training" onPressFunction={onPressNewTraining} />
+        <ScrollView>
+          <View style={TrainingStyles.listView}></View>
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };
