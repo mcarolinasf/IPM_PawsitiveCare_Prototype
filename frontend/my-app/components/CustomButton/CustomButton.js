@@ -10,7 +10,7 @@ export const CustomButton = ({ title, onPressFunction, iconName }) => {
   return (
     <TouchableOpacity
       onPress={onPressFunction}
-      style={CustomButtonStyles.button}
+      style={CustomButtonStyles.button}{...globalStyles.shadow}
     >
       <View style={CustomButtonStyles.contents}>
         {iconName &&

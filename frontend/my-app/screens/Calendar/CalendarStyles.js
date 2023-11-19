@@ -18,6 +18,14 @@ export const CalendarStyles = StyleSheet.create({
 
     buttonContainer: {
         marginVertical: 10,
+    },
+
+    infoText: {
+        marginTop: '20%',
+        paddingVertical: 20,
+        color: colors.secondary,
     }
+
+
 
 })

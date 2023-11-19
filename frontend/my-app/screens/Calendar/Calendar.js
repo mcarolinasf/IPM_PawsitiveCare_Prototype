@@ -10,14 +10,14 @@ import { getCurrentDate } from '../../services/utils';
 import { CalendarStyles } from './CalendarStyles';
 import { CustomButton } from '../../components/CustomButton/CustomButton';
 import { ModalComponent } from '../../components/Modal/ModalComponent';
-import Divider from '../../components/Divider'
-import navigationPaths from '../../navigation/navigationPaths';
 import { SchedulingActions as actions } from '../../data/SchedulingActions';
-import colors from '../../styles/colors';
 import TaskItem from '../../components/TaskItem/TaskItem';
 import NewButton from '../../components/NewButton/NewButton';
+import { getTypeColor } from '../../services/utils';
+import colors from '../../styles/colors';
 
-export const Calendar = ({navigation}) => {
+
+export const Calendar = ({ navigation }) => {
 
   const [selected, setSelected] = useState(getCurrentDate());
   const [markedL, setMarked] = useState({});
@@ -60,31 +60,50 @@ export const Calendar = ({navigation}) => {
     setScheduleModalVisible(!scheduleModalVisible);
   }
 
-
   function setMarkedTasks() {
-    let tmp = {}
-    tmp[selected] = { selected: true, disableTouchEvent: true, selectedDotColor: 'orange' }
-
-    //Select events of the current selected date
-    setTasksByDate(tasks?.filter((task) =>
-      task.date === selected))
-
+    let tmp = {};
+  
+    // Mark selected date
+    tmp[selected] = {
+      selected: true,
+      disableTouchEvent: true,
+      selectedDotColor: 'orange'
+    };
+  
+    // Select events of the current selected date
+    setTasksByDate(tasks?.filter((task) => task.date === selected));
+  
     tasks?.forEach((task) => {
-      tmp[task.date] = {
-        dotColor: colors.secondary,
-        marked: true
+      // Check if the date already has dots assigned
+      if (!tmp[task.date]) {
+        tmp[task.date] = {};
       }
+  
+      // Create an array of dots if it doesn't exist
+      if (!tmp[task.date].dots) {
+        tmp[task.date].dots = [];
+      }
+  
+      // Add a new dot to the array for each task
+      tmp[task.date].dots.push({
+        key: task.id, // unique identifier for the dot
+        color: getTypeColor(task.type), // color for the dot based on task type
+        selectedDotColor: colors.primary
+      });
     });
-
-    setMarked(tmp)
+  
+    setMarked(tmp);
   }
+  
+
 
   return (
     <SafeAreaView style={globalStyles.container}>
-      
-      <Header title={"Calendar"} showProfile style={{marginBottom:-20}} />
+
+      <Header title={"Calendar"} showProfile style={{ marginBottom: -20 }} />
 
       <CustomCalendar
+        markingType={'multi-dot'}
         onDayPress={day => {
           setSelected(day.dateString);
         }}
@@ -93,13 +112,13 @@ export const Calendar = ({navigation}) => {
       />
 
       <View style={CalendarStyles.buttonContainer} >
-        
+
         <CustomButton title={"Add a task"} onPressFunction={handleSchedulePopup} />
         {/* <NewButton title={"Add a task"} onPressFunction={handleSchedulePopup}/> */}
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false} style={CalendarStyles.tasksContainer}>
-        
+
         {tasksByDate?.length > 0 ?
             tasksByDate.map(task => {
                 return (
@@ -107,8 +126,10 @@ export const Calendar = ({navigation}) => {
                 )
             })
             :
-            <Text style={globalStyles.text}> You have nothing scheduled for today </Text>
-        }
+            <View style={CalendarStyles.infoContainer}>
+              <Text style={[globalStyles.text, CalendarStyles.infoText]}> You have nothing scheduled for this day </Text>
+            </View>
+            }
        
       </ScrollView>
 
