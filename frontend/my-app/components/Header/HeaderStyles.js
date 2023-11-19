@@ -8,7 +8,7 @@ export const HeaderStyles = StyleSheet.create({
         alignItems: 'center',
         position: 'relative'
     },
-    
+
     image: {
         height: 35,
         width: 35,
