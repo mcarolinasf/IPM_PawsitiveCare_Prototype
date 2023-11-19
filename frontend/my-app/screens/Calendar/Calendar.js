@@ -11,8 +11,10 @@ import { CalendarStyles } from './CalendarStyles';
 import { CustomButton } from '../../components/CustomButton/CustomButton';
 import { ModalComponent } from '../../components/Modal/ModalComponent';
 import Divider from '../../components/Divider'
+import navigationPaths from '../../navigation/navigationPaths';
+import { SchedulingActions as actions } from '../../data/SchedulingActions';
 
-export const Calendar = () => {
+export const Calendar = ({navigation}) => {
 
   const [selected, setSelected] = useState(getCurrentDate());
   const [markedL, setMarked] = useState({});
@@ -94,10 +96,11 @@ export const Calendar = () => {
       </ScrollView>
 
       <ModalComponent
+        navigation={navigation}
         visible={scheduleModalVisible}
         onClose={handleSchedulePopup}
         title={'Scheduling'}
-        actions={["Medication", "Feeding", "Training", "Grooming"]}
+        actions={actions}
       />
 
     </SafeAreaView>
