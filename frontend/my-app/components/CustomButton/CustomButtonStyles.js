@@ -11,7 +11,7 @@ export const CustomButtonStyles = StyleSheet.create({
         alignItems: "center",
         padding: 2,
         paddingHorizontal: 10
-        //marginHorizontal: 60
+
     },
     contents:
     {
@@ -21,6 +21,7 @@ export const CustomButtonStyles = StyleSheet.create({
     },
 
     buttonText: {
+        textAlign: "center",
         color: colors.white,
         fontSize: 18
     }

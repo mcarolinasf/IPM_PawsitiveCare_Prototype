@@ -17,7 +17,7 @@ import colors from '../../styles/colors';
 import TaskItem from '../../components/TaskItem/TaskItem';
 import NewButton from '../../components/NewButton/NewButton';
 
-export const Calendar = ({navigation}) => {
+export const Calendar = ({ navigation }) => {
 
   const [selected, setSelected] = useState(getCurrentDate());
   const [markedL, setMarked] = useState({});
@@ -81,8 +81,8 @@ export const Calendar = ({navigation}) => {
 
   return (
     <SafeAreaView style={globalStyles.container}>
-      
-      <Header title={"Calendar"} showProfile style={{marginBottom:-20}} />
+
+      <Header title={"Calendar"} showProfile style={{ marginBottom: -20 }} />
 
       <CustomCalendar
         onDayPress={day => {
@@ -93,23 +93,23 @@ export const Calendar = ({navigation}) => {
       />
 
       <View style={CalendarStyles.buttonContainer} >
-        
+
         <CustomButton title={"Add a task"} onPressFunction={handleSchedulePopup} />
         {/* <NewButton title={"Add a task"} onPressFunction={handleSchedulePopup}/> */}
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false} style={CalendarStyles.tasksContainer}>
-        
+
         {tasksByDate?.length > 0 ?
-            tasksByDate.map(task => {
-                return (
-                    <TaskItem  key={task.id} task={task}/>
-                )
-            })
-            :
-            <Text style={globalStyles.text}> You have nothing scheduled for today </Text>
+          tasksByDate.map(task => {
+            return (
+              <TaskItem key={task.id} task={task} />
+            )
+          })
+          :
+          <Text style={globalStyles.text}> You have nothing scheduled for today </Text>
         }
-       
+
       </ScrollView>
 
       <ModalComponent

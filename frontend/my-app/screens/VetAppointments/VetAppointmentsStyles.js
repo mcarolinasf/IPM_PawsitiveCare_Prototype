@@ -1,19 +1,10 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import colors from "../../styles/colors";
 
 
+const screenWidth = Dimensions.get("window").width;
+
 export const VetAppointmentsStyles = StyleSheet.create({
 
-    container: {
 
-        backgroundColor: colors.white,
-        borderRadius: 10,
-        padding: 10,
-        margin: 5,
-        marginVertical: 30
-    },
-
-    input: {
-        height: 100
-    }
 })
