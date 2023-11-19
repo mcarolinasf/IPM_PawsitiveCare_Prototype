@@ -10,6 +10,7 @@ export const CustomButtonStyles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         paddingVertical: 2,
+        marginHorizontal: 70
     },
 
     buttonText: {

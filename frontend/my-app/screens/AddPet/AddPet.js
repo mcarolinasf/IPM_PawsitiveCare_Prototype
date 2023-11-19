@@ -7,12 +7,14 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import colors from '../../styles/colors'
 import * as ImagePicker from 'expo-image-picker';
 import TextInputDefault from '../../components/TextInputDefault/TextInputDefault'
+import { CustomButton } from '../../components/CustomButton/CustomButton'
+import { PetsData } from '../../data/petsData'
 
 
 export const AddPet = ({ navigation }) => {
 
     const [image, setImage] = useState();
-    const [pet, setPet] = useState({
+    const [newPet, setNewPet] = useState({
         name: '',
         age: '',
         gender: '',
@@ -27,6 +29,52 @@ export const AddPet = ({ navigation }) => {
 
     })
 
+
+    //Review
+
+    const addPet = () => {
+
+        const newPetId = Object.keys(PetsData).length;
+
+        // Create a new pet object with the provided information
+        const newPetObject = {
+            id: newPetId,
+            name: newPet.name,
+            breed: newPet.breed,
+            age: newPet.age,
+            photoUrl: newPet.photoUrl,
+            tasksIds: [],
+            ownersIds: ['admin'],
+        };
+
+        // Update the PetsData object with the new pet
+        PetsData[newPetId] = newPetObject;
+
+        // Log the updated PetsData object
+        console.log(PetsData);
+
+        // Clear the form or navigate to another screen if needed
+        setNewPet({
+            name: '',
+            age: '',
+            gender: '',
+            breed: '',
+            color: '',
+            typeOfCoat: '',
+            tail: '',
+            distinguishMarks: '',
+            height: '',
+            weight: '',
+            photoUrl: '',
+        });
+
+        navigation.goBack();
+    };
+
+
+
+
+
     const pickImage = async () => {
 
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -40,7 +88,7 @@ export const AddPet = ({ navigation }) => {
 
         if (!result.canceled) {
             setImage(result.assets[0].uri);
-            setPet({ ...pet, photoUrl: result.assets[0].uri })
+            setNewPet({ ...newPet, photoUrl: result.assets[0].uri })
         }
     };
 
@@ -62,34 +110,37 @@ export const AddPet = ({ navigation }) => {
                     </View>
                 </TouchableOpacity>
                 <View style={{ paddingHorizontal: 10 }}>
-                    <TextInputDefault label={'Name'} setFunction={(value) => setPet({ ...pet, name: value })} value={pet.name} />
+                    <TextInputDefault label={'Name'} setFunction={(value) => setNewPet({ ...newPet, name: value })} value={newPet.name} />
 
                     <View style={AddPetStyles.row}>
                         <View style={{ flex: 1, paddingRight: 10 }}>
-                            <TextInputDefault label={'Age'} setFunction={(value) => setPet({ ...pet, age: value })} value={pet.age} />
-                            <TextInputDefault label={'Breed'} setFunction={(value) => setPet({ ...pet, breed: value })} value={pet.breed} />
-                            <TextInputDefault label={'Type of coat'} setFunction={(value) => setPet({ ...pet, typeOfCoat: value })} value={pet.typeOfCoat} />
+                            <TextInputDefault label={'Age'} setFunction={(value) => setNewPet({ ...newPet, age: value })} value={newPet.age} />
+                            <TextInputDefault label={'Breed'} setFunction={(value) => setNewPet({ ...newPet, breed: value })} value={newPet.breed} />
+                            <TextInputDefault label={'Type of coat'} setFunction={(value) => setNewPet({ ...newPet, typeOfCoat: value })} value={newPet.typeOfCoat} />
                         </View>
 
                         <View style={{ flex: 1 }}>
-                            <TextInputDefault label={'Gender'} setFunction={(value) => setPet({ ...pet, gender: value })} value={pet.gender} />
-                            <TextInputDefault label={'Color'} setFunction={(value) => setPet({ ...pet, color: value })} value={pet.color} />
-                            <TextInputDefault label={'Tail'} setFunction={(value) => setPet({ ...pet, tail: value })} value={pet.tail} />
+                            <TextInputDefault label={'Gender'} setFunction={(value) => setNewPet({ ...newPet, gender: value })} value={newPet.gender} />
+                            <TextInputDefault label={'Color'} setFunction={(value) => setNewPet({ ...newPet, color: value })} value={newPet.color} />
+                            <TextInputDefault label={'Tail'} setFunction={(value) => setNewPet({ ...newPet, tail: value })} value={newPet.tail} />
                         </View>
                     </View>
-                    <TextInputDefault label={'Distinguish Marks'} setFunction={(value) => setPet({ ...pet, distinguishMarks: value })} value={pet.distinguishMarks} />
+                    <TextInputDefault label={'Distinguish Marks'} setFunction={(value) => setNewPet({ ...newPet, distinguishMarks: value })} value={newPet.distinguishMarks} />
                     <View style={AddPetStyles.row}>
                         <View style={{ flex: 1, paddingRight: 10 }}>
-                            <TextInputDefault label={'Weight'} setFunction={(value) => setPet({ ...pet, weight: value })} value={pet.weight} />
+                            <TextInputDefault label={'Weight'} setFunction={(value) => setNewPet({ ...newPet, weight: value })} value={newPet.weight} />
                         </View>
                         <View style={{ flex: 1 }}>
-                            <TextInputDefault label={'Height'} setFunction={(value) => setPet({ ...pet, height: value })} value={pet.height} />
+                            <TextInputDefault label={'Height'} setFunction={(value) => setNewPet({ ...newPet, height: value })} value={newPet.height} />
                         </View>
 
                     </View>
                 </View>
 
                 {/* Add button */}
+                <CustomButton title={'Add pet'} onPressFunction={addPet} />
+
+
 
             </ScrollView>
         </SafeAreaView >

@@ -14,9 +14,9 @@ import navigationPaths from "../../../navigation/navigationPaths.js";
 import TextInputDefault from "../../../components/TextInputDefault/TextInputDefault.js";
 import { useState, useContext } from "react";
 import UserSessionContext from "../../../services/UserSessionContext.js";
-import userData from "../../../data/UserData.js";
+import userData from "../../../data/userData.js";
 
-export const Login = ({navigation}) => {
+export const Login = ({ navigation }) => {
 
   const { user, setUserSession, clearUserSession } = useContext(UserSessionContext);
   const [email, setEmail] = useState("");
@@ -28,9 +28,9 @@ export const Login = ({navigation}) => {
     navigation.navigate(navigationPaths.register);
   };
 
-  
+
   const handleLogin = () => {
-   
+
     var user = userData[email.toLowerCase().trim()];
 
     if (user != null && user.pwd === password) {
@@ -40,7 +40,7 @@ export const Login = ({navigation}) => {
       setEmail("")
       setPassword("")
     }
-   
+
   };
 
 
@@ -52,8 +52,8 @@ export const Login = ({navigation}) => {
         <View style={LoginStyles.container}>
           <Text style={LoginStyles.welcome}>Welcome</Text>
           <View style={LoginStyles.inputsView}>
-            <TextInputDefault label={"Email"} isSecure={false} setFunction={setEmail} value={email}/>
-            <TextInputDefault label={"Password"} isSecure={true} setFunction={setPassword} value={password}/>
+            <TextInputDefault label={"Email"} isSecure={false} setFunction={setEmail} value={email} />
+            <TextInputDefault label={"Password"} isSecure={true} setFunction={setPassword} value={password} />
             <View style={{ flexDirection: "row" }}>
               {/* TODO: add checkbox */}
               <Text>I agree with terms & conditions</Text>
