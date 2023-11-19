@@ -12,7 +12,7 @@ export const MenuCardStyles = StyleSheet.create({
     },
 
     container: {
-        marginVertical: 25,
+        marginVertical: 20,
         justifyContent: "space-evenly",
         alignItems: "center",
         backgroundColor: colors.white,

@@ -136,9 +136,9 @@ export const AddPet = ({ navigation }) => {
 
                     </View>
                 </View>
-
-                {/* Add button */}
-                <CustomButton title={'Add pet'} onPressFunction={addPet} />
+                <View style={{ paddingVertical: 10 }}>
+                    <CustomButton title={'Add pet'} onPressFunction={addPet} />
+                </View>
 
 
 

@@ -9,12 +9,20 @@ export const CustomButtonStyles = StyleSheet.create({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        paddingVertical: 2,
-        marginHorizontal: 70
+        padding: 2,
+        paddingHorizontal: 10
+        //marginHorizontal: 60
+    },
+    contents:
+    {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
 
     buttonText: {
         color: colors.white,
+        fontSize: 18
     }
 
 })
