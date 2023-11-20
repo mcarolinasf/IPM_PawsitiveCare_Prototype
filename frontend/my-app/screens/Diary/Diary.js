@@ -68,7 +68,7 @@ export const Diary = () => {
   return (
     <SafeAreaView style={globalStyles.container}>
       <ScrollView>
-        <Header title={'Diary'} goBack showProfile />
+        <Header title={'Diary'} showProfile />
         <ScrollView horizontal={true}>
           {
             /* Todo: add "navigateTo" choose correct appointment to display */
@@ -79,7 +79,7 @@ export const Diary = () => {
         </ScrollView>
         <Divider />
         <View style={{ alignItems: 'flex-end', marginTop: 15 }}>
-          <CustomButton title={'New diary entry'} iconName={'plus'} onPressFunction={addDiaryEntry} />
+          <CustomButton title={'New entry'} iconName={'plus'} onPressFunction={addDiaryEntry} />
         </View>
         {/* Todo: Add pop up and its functionality */}
         <NoteTacker selectedEntry={selectedEntry} />
