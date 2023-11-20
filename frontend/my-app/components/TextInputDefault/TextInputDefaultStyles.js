@@ -13,9 +13,9 @@ export const TextInputDefaultStyles = StyleSheet.create({
 
     fontSize: 16,
     color: colors.secondary,
-    borderRadius: 12,
+    borderRadius: 10,
     backgroundColor: colors.white,
-    height: 54,
+    height: 45,
     paddingHorizontal: 10,
     marginBottom: 15,
   },

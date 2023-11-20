@@ -53,7 +53,7 @@ export const AddFeeding = ({ navigation }) => {
 
     //Set pets
     let petNames = [];
-    
+
     PetsData.forEach(element => {
         petNames.push(element.name)
     });
@@ -158,13 +158,20 @@ export const AddFeeding = ({ navigation }) => {
                 <Text>Debug: Pet selected: {selectedComponent}</Text>
 
                 <View style={{ paddingHorizontal: 10 }}>
+                    <Text style={globalStyles.text}>To which pet?</Text>
+                    <SelectList
+                        setSelected={(val) => setSelected(val)}
+                        data={petNames}
+                        save="name"
+                        setFunction={() => alert("PET WAS SET")}
+                    />
                     <TextInputDefault label={'Food'} setFunction={(value) => setNewFeeding({ ...newFeeding, food: value })} value={newFeeding.food} />
                     <TextInputDefault label={'Starting Date'} setFunction={(value) => setNewFeeding({ ...newFeeding, startD: value })} value={newFeeding.food} />
                     <TextInputDefault label={'End Date'} setFunction={(value) => setNewFeeding({ ...newFeeding, endD: value })} value={newFeeding.food} />
                     <TextInputDefault label={'Periodicity'} setFunction={(value) => setNewFeeding({ ...newFeeding, period: value })} value={newFeeding.food} />
                     <TextInputDefault label={'Dosage'} setFunction={(value) => setNewFeeding({ ...newFeeding, dosage: value })} value={newFeeding.food} />
-                    
-              
+
+
                 </View>
                 <View style={{ paddingVertical: 10 }}>
                     <CustomButton title={'Add'} onPressFunction={addFeeding} />
@@ -176,3 +183,12 @@ export const AddFeeding = ({ navigation }) => {
 
 }
 
+export const getPetNames = () => {
+    return (
+        <SelectList
+            setSelected={(val) => setSelected(val)}
+            data={PetsData}
+            save="name"
+        />
+    )
+}

@@ -20,22 +20,22 @@ export const Pet = ({ navigation, route }) => {
 
     useEffect(() => {
         getData()
-      }, [pet])
-    
-    
-      const getData = () => {
-        
+    }, [pet])
+
+
+    const getData = () => {
+
         //Set tasks
         const tasks = pet.tasksIds.map((id) => TasksData[id])
-        setTasks(tasks); 
-    
-      }
+        setTasks(tasks);
+
+    }
 
     const handleTaskPress = (key) => {
         setTasks((prevTasks) => (
-          prevTasks.filter(task => task.id != key)
+            prevTasks.filter(task => task.id != key)
         ));
-      }
+    }
 
     return (
         <SafeAreaView style={globalStyles.container}>

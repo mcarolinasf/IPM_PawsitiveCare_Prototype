@@ -6,7 +6,6 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: colors.background,
     flex: 1,
     padding: 20,
-    paddingBottom: 100,
   },
 
   titleText: {
@@ -46,13 +45,14 @@ export const globalStyles = StyleSheet.create({
   goBackButton: {},
 
   shadow: {
+
     shadowColor: "black",
     shadowOffset: {
       height: 3,
       width: 0,
     },
     shadowOpacity: 1.25,
-    elevation: 4,
+    elevation: 3,
   },
 
   divider: {
