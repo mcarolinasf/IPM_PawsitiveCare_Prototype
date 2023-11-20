@@ -21,7 +21,7 @@ export const ModalComponent = ({ navigation, visible, handleModal, title, action
           <TouchableOpacity activeOpacity={1} style={{...ModalComponentStyles.container, ...globalStyles.shadow}}>
             <View style={ModalComponentStyles.titleContainer}>
                 <Text style={{...globalStyles.subtitleText, ...ModalComponentStyles.title}}>{title}</Text>
-                <Text> {day} (to remove) </Text>
+                {/* <Text> {day} (to remove) </Text> */}
             </View>
             <View style={ModalComponentStyles.modalContent}>
                { actions && actions.map((action) => 
