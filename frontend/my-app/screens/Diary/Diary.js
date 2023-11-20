@@ -65,7 +65,7 @@ export const Diary = () => {
             //Suggestion 2 :Store a property in the item(bool) selected and update when setSelected
             //Suggestion 3 :Do the verification here and pass the bool as a param
             diaryEntry.map(item => (
-              <MenuCard iconName={'paw'} title={item.title} subtitle={item.date} itemId={item.id} setFunction={selectDiaryEntry} selected={selectedEntry} />
+              <MenuCard iconName={'paw'} title={item.title} subtitle={item.date} item={item} setFunction={selectDiaryEntry} selected={selectedEntry} />
             ))
           }
         </ScrollView>
