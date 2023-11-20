@@ -1,10 +1,10 @@
 
-import { View, Text, Modal, TouchableOpacity  } from 'react-native';
+import { View, Text, Modal, TouchableOpacity } from 'react-native';
 import { globalStyles } from '../../styles/globalStyles';
 import { ModalComponentStyles } from './ModalComponentStyles';
 import { TouchableWithoutFeedback } from 'react-native';
-import Card from '../Card/Card';
 import React, { useContext, useState, useEffect } from 'react'
+import Card from '../../components/Card/Card'
 import UserSessionContext from '../../services/UserSessionContext.js'
 import {getPetsByOwner} from '../../services/utils';
 
@@ -14,7 +14,7 @@ import {getPetsByOwner} from '../../services/utils';
 export const PickPetModal = ({ navigation, visible, handleModal, title, setPet }) => {
 
     const { user } = useContext(UserSessionContext);
-    const  [pets, setPets] = useState([]);
+    const [pets, setPets] = useState([]);
 
 
     const cardPressHandler = (pet) => {
@@ -22,18 +22,18 @@ export const PickPetModal = ({ navigation, visible, handleModal, title, setPet }
         handleModal(false)
     }
 
-    
+
     useEffect(() => {
         setPets(getPetsByOwner(user))
     }, [])
-    
+
 
     return (
         <Modal
-        animationType="fade"
-        transparent={true}
-        visible={visible}
-        onRequestClose={() => {handleModal(false)}}
+            animationType="fade"
+            transparent={true}
+            visible={visible}
+            onRequestClose={() => { handleModal(false) }}
         >
         <TouchableWithoutFeedback onPress={() => {handleModal(false)}}>
             <View style={ModalComponentStyles.overlay}>

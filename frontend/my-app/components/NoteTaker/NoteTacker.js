@@ -10,7 +10,7 @@ import { ModalComponent } from '../Modal/ModalComponent';
 
 
 
-export default function NoteTacker({ selectedEntry, setFunction, value }) {
+export default function NoteTacker({ selectedEntry, setFunction }) {
 
     const [menuModalVisible, setMenuModalVisible] = useState(false)
 

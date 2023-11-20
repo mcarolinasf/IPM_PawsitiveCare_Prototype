@@ -5,7 +5,6 @@ import Divider from '../../components/Divider'
 import Header from '../../components/Header/Header'
 import MenuCard from '../../components/MenuCard/MenuCard'
 import { globalStyles } from '../../styles/globalStyles'
-import { VetAppointmentsStyles } from './VetAppointmentsStyles'
 import UserSessionContext from '../../services/UserSessionContext.js'
 import { PetsData } from '../../data/PetsData'
 import { VetAppointmentsData } from '../../data/VetAppointmentsData'
@@ -69,7 +68,7 @@ export const VetAppointments = ({ navigation }) => {
                 <ScrollView horizontal={true}>
                     {
                         vetApp.map(item => (
-                            <MenuCard iconName={'paw'} title={'Vet App ' + item.id} itemId={item.id} subtitle={item.date} setFunction={selectVetApp} />
+                            <MenuCard key={item.id} iconName={'paw'} title={'Vet App ' + item.id} item={item} subtitle={item.date} setFunction={selectVetApp} selected={selectedEntry} />
                         ))
                     }
                 </ScrollView>
