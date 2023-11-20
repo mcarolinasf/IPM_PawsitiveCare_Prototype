@@ -33,7 +33,7 @@ export const PetsData = {
     photoUrl: 'https://www.cbc.ca/kids/images/weird_wonderful_bunnies_header_update_1140.jpg',
     tasksIds: [1],
     diaryEntrysIds: [1],
-    vetAppointIds: [0],
+    vetAppointIds: [1],
     ownersIds: ['admin'],
   },
   2: {
@@ -51,7 +51,7 @@ export const PetsData = {
     photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpnhjZPqOwRcDXdFn5gEY49CVEb7QIiat4UA&usqp=CAU',
     tasksIds: [2],
     diaryEntrysIds: [2, 3],
-    vetAppointIds: [0],
+    vetAppointIds: [2],
     ownersIds: ['admin'],
   },
   // Add more pet objects as needed

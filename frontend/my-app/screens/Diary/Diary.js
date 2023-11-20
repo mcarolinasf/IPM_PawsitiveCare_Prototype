@@ -44,12 +44,7 @@ export const Diary = () => {
     getData()
   }, []);
 
-  useEffect(() => {
-    // Update selectedEntry when diaryEntry changes
-    if (diaryEntry.length > 0) {
-      setSelectedEntry(diaryEntry[diaryEntry.length - 1]);
-    }
-  }, [diaryEntry]);
+
 
 
   const selectDiaryEntry = (itemId) => {
@@ -82,7 +77,7 @@ export const Diary = () => {
         <View style={{ alignItems: 'flex-end', marginTop: 15 }}>
           <CustomButton title={'New entry'} iconName={'plus'} onPressFunction={addDiaryEntry} />
         </View>
-        {/* Todo: Add pop up and its functionality */}
+
         <NoteTacker selectedEntry={selectedEntry} />
       </ScrollView>
 
