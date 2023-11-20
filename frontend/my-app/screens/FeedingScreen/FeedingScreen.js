@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { View, Text, SafeAreaView, ScrollView, Image, TouchableOpacity, TouchableHighlight } from 'react-native'
 import Header from '../../components/Header/Header'
 import { globalStyles } from '../../styles/globalStyles'
-import { AddFeedingStyles } from './AddFeedingStyles'
+import { FeedingScreenStyles } from './AddFeedingStyles'
 import { FontAwesome5 } from '@expo/vector-icons';
 import colors from '../../styles/colors'
 import * as ImagePicker from 'expo-image-picker';
@@ -22,7 +22,7 @@ import { CardStyles } from '../../components/Card/CardStyles.js'
 
 
 
-export const AddFeeding = ({ navigation }) => {
+export const FeedingScreen = ({ navigation }) => {
 
     const [image, setImage] = useState();
     const [petSelected, setPetSelected] = useState("");

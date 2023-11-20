@@ -6,6 +6,7 @@ import { CardStyles } from './CardStyles.js'
 
 export default function Card({ item, pressHandler }) {
 
+
     // Todo: onPress function to pet page
     return (
         <TouchableOpacity onPress={() => pressHandler(item)} style={globalStyles.shadow}>
