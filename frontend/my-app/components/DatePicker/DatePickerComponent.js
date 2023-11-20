@@ -1,60 +1,51 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, TextInput } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import TextInputDefault from '../TextInputDefault/TextInputDefault';
 
-export const DatePickerComponent = () => {
-  const [chosenDate, setChosenDate] = useState(new Date());
-  const [showDatePicker, setShowDatePicker] = useState(false);
+export const DatePickerComponent = ({value, label, setFunction, time}) => {
+  const [show, setShow] = useState(false);
 
-  const handleDateChange = (event, selectedDate) => {
-    setShowDatePicker(Platform.OS === 'ios'); // Hide picker on iOS after selection
-    if (selectedDate) {
-      setChosenDate(selectedDate);
-    }
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || value;
+    setShow(Platform.OS === 'ios'); // For iOS compatibility
+    setDate(currentDate);
   };
 
-  const showDatepicker = () => {
-    setShowDatePicker(true);
+  const showDateTimePicker = () => {
+    setShow(true);
+    console.log("HEREEEE")
   };
+
+  const formattedValue = time
+  ? (() => {
+      const hours = String(value.getHours()).padStart(2, '0');
+      const minutes = String(value.getMinutes()).padStart(2, '0');
+
+      return `${hours}:${minutes}`;
+    })()
+  : value.toISOString().split('T')[0];
+
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>Select Date:</Text>
-      <View>
-        <Text onPress={showDatepicker} style={styles.dateText}>
-          {chosenDate.toLocaleDateString()}
-        </Text>
-        {showDatePicker && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={chosenDate}
-            mode="date"
-            display="default"
-            onChange={handleDateChange}
-          />
-        )}
-      </View>
+    <View>
+    <TextInputDefault 
+        label={label}
+        setFunction={showDateTimePicker}
+        value={formattedValue}
+        onPress={showDateTimePicker}
+        />
+      
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={ value}
+          mode={time? 'time' : "date"}
+          display="default"
+          onChange={onChange}
+        />
+      )}
+      
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  label: {
-    fontSize: 18,
-    marginBottom: 10,
-  },
-  dateText: {
-    fontSize: 16,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-  },
-});
-

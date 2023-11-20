@@ -14,5 +14,6 @@ export default {
     feeding: 'Feeding',
     addPet: 'AddPet',
     scheduleMed: 'ScheduleMedication',
+    scheduleFed: 'ScheduleFeeding',
 }
 

@@ -8,7 +8,7 @@ import colors from '../../styles/colors'
 import * as ImagePicker from 'expo-image-picker';
 import TextInputDefault from '../../components/TextInputDefault/TextInputDefault'
 import { CustomButton } from '../../components/CustomButton/CustomButton'
-import { PetsData } from '../../data/petsDataArray'
+import { PetsData } from '../../data/PetsDataArray'
 import { SelectList } from 'react-native-dropdown-select-list'
 
 
