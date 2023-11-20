@@ -40,7 +40,6 @@ export const Diary = () => {
 
   }
 
-
   useEffect(() => {
     getData()
   }, []);
@@ -71,9 +70,8 @@ export const Diary = () => {
         <Header title={'Diary'} showProfile />
         <ScrollView horizontal={true}>
           {
-            /* Todo: add "navigateTo" choose correct appointment to display */
             diaryEntry.map(item => (
-              <MenuCard iconName={'paw'} title={item.title} subtitile={item.date} /* stateHandeler={selectDiaryEntry(item.id)} */ />
+              <MenuCard iconName={'paw'} title={item.title} subtitle={item.date} itemId={item.id} setFunction={selectDiaryEntry} selected={selectedEntry}/>
             ))
           }
         </ScrollView>
