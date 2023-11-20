@@ -16,34 +16,38 @@ export const ScheduleMedication = ({navigation, route}) => {
   currentTime.setHours(hours);
   currentTime.setMinutes(minutes);
 
-  const [medicine, setMedicine] = useState(false);
-  const [time, setTime] = useState(currentTime);
-  const [startDate, setStartDate] = useState(new Date(day));
-  const [endDate, setEndDate] = useState(new Date(day));
-  const [periodicity, setPeriodicity] = useState(false);
-  const [dosage, setDosage] = useState(false);
-  const [alarm, setAlarm] = useState(false);
+  const [newMedication, setNewMedication] = useState({
+    medicine: '',
+    time: currentTime,
+    startDate: new Date(day),
+    endDate: new Date(day),
+    periodicity: '',
+    dosage: '',
+    alarm: false,
 
-  console.log(currentTime)
+})
+
+
+  const setField = (fieldName, value) => {
+    setNewMedication((prevMedication) => ({
+      ...prevMedication,
+      [fieldName]: value,
+    }));
+  };
 
   return (
     <SafeAreaView style={globalStyles.container}>
-        <ScrollView>
-
-            <Header title={'Schedule Medication'} showProfile goBack/>
-
-            <Text> Image of pet </Text>
-            <Image/>
-            
-            <TextInputDefault label={'Select medicine'}  setFunction={setMedicine}  value={medicine} />
-            <DatePickerComponent label={'Start Date'} value={startDate} setFunction={setStartDate} />
-            <DatePickerComponent label={'End Date'} value={endDate} setFunction={setEndDate} />
-            <DatePickerComponent label={'Time'} value={time} setFunction={setTime} time/>
-            <TextInputDefault label={'Periodicity'}  setFunction={setPeriodicity}  value={periodicity} />
-            <TextInputDefault label={'Dosage (mg)'}  setFunction={setDosage}  value={dosage} keyboardType={'numeric'} />
-            
-        </ScrollView>
-    </SafeAreaView >
-  )
+      <ScrollView>
+        {/* Your other JSX components */}
+        <TextInputDefault label={'Select medicine'} setFunction={(value) => setField('medicine', value)} value={newMedication.medicine} />
+        <DatePickerComponent label={'Start Date'} setFunction={(value) => setField('startDate', value)} value={newMedication.startDate} />
+        <DatePickerComponent label={'End Date'} setFunction={(value) => setField('endDate', value)} value={newMedication.endDate} />
+        <DatePickerComponent label={'Time'} setFunction={(value) => setField('time', value)} value={newMedication.time} time />
+        <TextInputDefault label={'Periodicity'} setFunction={(value) => setField('periodicity', value)} value={newMedication.periodicity} />
+        <TextInputDefault label={'Dosage (mg)'} setFunction={(value) => setField('dosage', value)} value={newMedication.dosage} keyboardType={'numeric'} />
+      </ScrollView>
+    </SafeAreaView>
+  );
+  
 
 }

@@ -41,13 +41,6 @@ export const Diary = () => {
     getData();
   }, []);
 
-  useEffect(() => {
-    // Update selectedEntry when diaryEntry changes
-    if (diaryEntry.length > 0) {
-      setSelectedEntry(diaryEntry[diaryEntry.length - 1]);
-    }
-  }, [diaryEntry]);
-
   const selectDiaryEntry = (itemId) => {
     if (selectedEntry && selectedEntry.id === itemId) {
       return;
@@ -65,14 +58,17 @@ export const Diary = () => {
         <Header title={"Diary"} showProfile />
         <ScrollView horizontal={true}>
           {
-            /* Todo: add "navigateTo" choose correct appointment to display */
+            //Suggestion 1 : Pass the item and pass the selected item and compare them
+            //Suggestion 2 :Store a property in the item(bool) selected and update when setSelected
+            //Suggestion 3 :Do the verification here and pass the bool as a param
             diaryEntry.map((item) => (
               <MenuCard
                 iconName={"paw"}
                 title={item.title}
-                subtitile={
-                  item.date
-                } /* stateHandeler={selectDiaryEntry(item.id)} */
+                subtitle={item.date}
+                itemId={item.id}
+                setFunction={selectDiaryEntry}
+                selected={selectedEntry}
               />
             ))
           }
@@ -85,7 +81,7 @@ export const Diary = () => {
             onPressFunction={addDiaryEntry}
           />
         </View>
-        {/* Todo: Add pop up and its functionality */}
+
         <NoteTacker selectedEntry={selectedEntry} />
       </ScrollView>
     </SafeAreaView>

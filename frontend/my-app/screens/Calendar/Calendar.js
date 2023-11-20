@@ -56,8 +56,8 @@ export const Calendar = ({ navigation }) => {
     setTasks(filteredByOwner);
   }
 
-  const handleSchedulePopup = () => {
-    setScheduleModalVisible(!scheduleModalVisible);
+  const handleScheduleModal = (value) => {
+    setScheduleModalVisible(value);
   }
 
   function setMarkedTasks() {
@@ -113,7 +113,7 @@ export const Calendar = ({ navigation }) => {
 
       <View style={CalendarStyles.buttonContainer} >
 
-        <CustomButton title={"Add a task"} onPressFunction={handleSchedulePopup} />
+        <CustomButton title={"Add a task"} onPressFunction={handleScheduleModal} />
         {/* <NewButton title={"Add a task"} onPressFunction={handleSchedulePopup}/> */}
       </View>
 
@@ -136,7 +136,7 @@ export const Calendar = ({ navigation }) => {
       <ModalComponent
         navigation={navigation}
         visible={scheduleModalVisible}
-        onClose={handleSchedulePopup}
+        handleModal={handleScheduleModal}
         title={'Scheduling'}
         actions={actions}
         day={selected}
