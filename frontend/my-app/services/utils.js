@@ -23,3 +23,8 @@ export const getTypeColor = (type) => {
             return colors.secondary;
     }
 }
+
+export const getPetsByOwner = (owner) => {
+    var petIds = owner.petIds; 
+    return petIds.map((id) => PetsData[id]);
+}

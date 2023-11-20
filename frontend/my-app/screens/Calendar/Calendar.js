@@ -113,7 +113,7 @@ export const Calendar = ({ navigation }) => {
 
       <View style={CalendarStyles.buttonContainer} >
 
-        <CustomButton title={"Add a task"} onPressFunction={handleScheduleModal} />
+        <CustomButton title={"Add a task"} onPressFunction={() => {handleScheduleModal(true)}} />
         {/* <NewButton title={"Add a task"} onPressFunction={handleSchedulePopup}/> */}
       </View>
 
