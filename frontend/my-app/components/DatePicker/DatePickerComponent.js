@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import TextInputDefault from '../TextInputDefault/TextInputDefault';
+import { dateToString, stringToTime, timeToString } from '../../services/utils';
 
 export const DatePickerComponent = ({value, label, setFunction, time}) => {
   const [show, setShow] = useState(false);
@@ -9,21 +10,14 @@ export const DatePickerComponent = ({value, label, setFunction, time}) => {
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || value;
     setShow(Platform.OS === 'ios'); // For iOS compatibility
-    setDate(currentDate);
+
+    time ? setFunction(timeToString(value)) : setFunction(dateToString(value))
+    
   };
 
   const showDateTimePicker = () => {
     setShow(true);
   };
-
-  const formattedValue = time
-  ? (() => {
-      const hours = String(value.getHours()).padStart(2, '0');
-      const minutes = String(value.getMinutes()).padStart(2, '0');
-
-      return `${hours}:${minutes}`;
-    })()
-  : value.toISOString().split('T')[0];
 
 
   return (
@@ -31,7 +25,7 @@ export const DatePickerComponent = ({value, label, setFunction, time}) => {
     <TextInputDefault 
         label={label}
         setFunction={setFunction}
-        value={formattedValue}
+        value={value}
         onPress={showDateTimePicker}
         notEditable
         />
@@ -39,7 +33,7 @@ export const DatePickerComponent = ({value, label, setFunction, time}) => {
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
-          value={ value}
+          value={ time ? stringToTime(time)  : new Date(value)}
           mode={time? 'time' : "date"}
           display="default"
           onChange={onChange}

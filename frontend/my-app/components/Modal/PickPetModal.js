@@ -5,9 +5,9 @@ import { ModalComponentStyles } from './ModalComponentStyles';
 import { TouchableWithoutFeedback } from 'react-native';
 import Card from '../Card/Card';
 import React, { useContext, useState, useEffect } from 'react'
-import Card from '../../components/Card/Card'
-import { globalStyles } from '../../styles/globalStyles'
 import UserSessionContext from '../../services/UserSessionContext.js'
+import {getPetsByOwner} from '../../services/utils';
+
 
 
 
@@ -35,15 +35,15 @@ export const PickPetModal = ({ navigation, visible, handleModal, title, setPet }
         visible={visible}
         onRequestClose={() => {handleModal(false)}}
         >
-        <TouchableWithoutFeedback onPress={() => {handleModal(true)}}>
+        <TouchableWithoutFeedback onPress={() => {handleModal(false)}}>
             <View style={ModalComponentStyles.overlay}>
             <TouchableOpacity activeOpacity={1} style={{...ModalComponentStyles.container, ...globalStyles.shadow}}>
                 <View style={ModalComponentStyles.titleContainer}>
                     <Text style={{...globalStyles.subtitleText, ...ModalComponentStyles.title}}>{title}</Text>
                 </View>
-                <View style={ModalComponentStyles.modalContent}>
+                <View style={[ModalComponentStyles.modalContent, ModalComponentStyles.rowContainer]}>
                 { pets && pets.map((pet) => 
-                        <Card key={pet.id} item={pet} pressHandler={cardPressHandler} />
+                        <Card key={pet.id} item={pet} pressHandler={cardPressHandler} styleCard={{width: 70, height: 80,}} styleImage={{width: 70, height: 60}} />
                     )}
                 </View>
             </TouchableOpacity>

@@ -16,7 +16,7 @@ export const ModalComponent = ({ navigation, visible, handleModal, title, action
       visible={visible}
       onRequestClose={() => {handleModal(false)}}
     >
-      <TouchableWithoutFeedback onPress={() => {handleModal(true)}}>
+      <TouchableWithoutFeedback onPress={() => {handleModal(false)}}>
         <View style={ModalComponentStyles.overlay}>
           <TouchableOpacity activeOpacity={1} style={{...ModalComponentStyles.container, ...globalStyles.shadow}}>
             <View style={ModalComponentStyles.titleContainer}>
