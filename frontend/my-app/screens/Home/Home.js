@@ -61,7 +61,11 @@ export const Home = ({ navigation }) => {
   return (
     <SafeAreaView style={globalStyles.container}>
       <Header title={pageTitle} showProfile />
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+      <ScrollView
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        style={{ height: "25%" }}
+      >
         {pets.map((item) => (
           <Card key={item.id} item={item} pressHandler={cardPressHandler} />
         ))}
@@ -78,7 +82,7 @@ export const Home = ({ navigation }) => {
       <Text style={globalStyles.subtitleText}>Today</Text>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{ marginBottom: 90 }}
+        style={{ marginBottom: 90, height: "75%" }}
       >
         <View>
           {tasks.map((task) => (

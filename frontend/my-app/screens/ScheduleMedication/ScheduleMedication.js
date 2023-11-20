@@ -1,24 +1,17 @@
 import React, { useState } from 'react'
 
-import { Text, SafeAreaView, ScrollView, Image } from 'react-native';
+import { Text, View,  SafeAreaView, ScrollView, Image } from 'react-native';
 import { globalStyles } from '../../styles/globalStyles';
 import TextInputDefault from '../../components/TextInputDefault/TextInputDefault';
 import Header from '../../components/Header/Header.js'
 import { DatePickerComponent } from '../../components/DatePicker/DatePickerComponent.js';
 import { PickPetModal } from '../../components/Modal/PickPetModal';
-
+import { PetPicker } from '../../components/PetPicker/PetPicker.js';
 
 
 export const ScheduleMedication = ({navigation, route}) => {
 
   const { day } = route.params;
-
-  //REMOVE FROM HERE
-  const timeString = '14:30';
-  const [hours, minutes] = timeString.split(':').map(Number);
-  const currentTime = new Date();
-  currentTime.setHours(hours);
-  currentTime.setMinutes(minutes);
 
   const [selectPetModal, setSelectPetModal] = useState(false)
   const [pet, setPet] = useState(false)
@@ -29,9 +22,9 @@ export const ScheduleMedication = ({navigation, route}) => {
 
   const [newMedication, setNewMedication] = useState({
     medicine: '',
-    time: currentTime,
-    startDate: new Date(day),
-    endDate: new Date(day),
+    time: '14:30',
+    startDate: day,
+    endDate: day,
     periodicity: '',
     dosage: '',
     alarm: false,
@@ -44,6 +37,7 @@ export const ScheduleMedication = ({navigation, route}) => {
       ...prevMedication,
       [fieldName]: value,
     }));
+    console.log(newMedication)
   };
 
   return (
@@ -52,22 +46,24 @@ export const ScheduleMedication = ({navigation, route}) => {
         
         <Header title={"Schedule Medication"}  goBack showProfile />
 
-        <PetPicker url={pet-photoUrl} handleModal={handlePetModal}/>
+        <PetPicker url={pet.photoUrl} handleModal={handlePetModal}/>
         
+        <View>
+          <TextInputDefault label={'Select medicine'} setFunction={(value) => setField('medicine', value)} value={newMedication.medicine} />
+          <DatePickerComponent label={'Start Date'} setFunction={(value) => setField('startDate', value)} value={newMedication.startDate} />
+          <DatePickerComponent label={'End Date'} setFunction={(value) => setField('endDate', value)} value={newMedication.endDate} />
+          <DatePickerComponent label={'Time'} setFunction={(value) => setField('time', value)} value={newMedication.time} time />
+          <TextInputDefault label={'Periodicity'} setFunction={(value) => setField('periodicity', value)} value={newMedication.periodicity} />
+          <TextInputDefault label={'Dosage (mg)'} setFunction={(value) => setField('dosage', value)} value={newMedication.dosage} keyboardType={'numeric'} />
+        </View>
 
-        <TextInputDefault label={'Select medicine'} setFunction={(value) => setField('medicine', value)} value={newMedication.medicine} />
-        <DatePickerComponent label={'Start Date'} setFunction={(value) => setField('startDate', value)} value={newMedication.startDate} />
-        <DatePickerComponent label={'End Date'} setFunction={(value) => setField('endDate', value)} value={newMedication.endDate} />
-        <DatePickerComponent label={'Time'} setFunction={(value) => setField('time', value)} value={newMedication.time} time />
-        <TextInputDefault label={'Periodicity'} setFunction={(value) => setField('periodicity', value)} value={newMedication.periodicity} />
-        <TextInputDefault label={'Dosage (mg)'} setFunction={(value) => setField('dosage', value)} value={newMedication.dosage} keyboardType={'numeric'} />
       </ScrollView>
 
       <PickPetModal 
           navigation={navigation}
           visible={selectPetModal}
           handleModal={handlePetModal}
-          title={'Scheduling'}
+          title={'Select your pet'}
           setPet={setPet}
       />
     </SafeAreaView>

@@ -1,5 +1,8 @@
 import { TaskType } from "../data/TaskType";
 import colors from "../styles/colors";
+import { PetsData } from '../data/PetsData.js';
+
+
 
 export const getCurrentDate = () => {
   const date = new Date();
@@ -29,4 +32,25 @@ export const getTypeColor = (type) => {
 export const getPetsByOwner = (owner) => {
     var petIds = owner.petIds; 
     return petIds.map((id) => PetsData[id]);
+}
+
+export const stringToTime = (timeStr) => {
+  const [hours, minutes] = timeStr.split(':').map(Number);
+  const currentTime = new Date();
+  currentTime.setHours(hours);
+  currentTime.setMinutes(minutes);
+
+  return currentTime;
+}
+
+export const timeToString = (time) => {
+
+  const hours = String(time.getHours()).padStart(2, '0');
+  const minutes = String(time.getMinutes()).padStart(2, '0');
+
+  return `${hours}:${minutes}`;
+}
+
+export const dateToString = (date) => {
+    return  date.toISOString().split('T')[0]
 }

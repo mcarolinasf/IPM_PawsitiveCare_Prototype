@@ -63,4 +63,13 @@ export const globalStyles = StyleSheet.create({
     marginHorizontal: 4,
 
   },
+
+  selectPetText: {
+    fontSize: 18,
+    height: 25,
+    left: 0,
+    textAlign: "left",
+    marginBottom: 5,
+    marginLeft: 9
+  },
 });
