@@ -8,7 +8,7 @@ import colors from '../../styles/colors'
 import * as ImagePicker from 'expo-image-picker';
 import TextInputDefault from '../../components/TextInputDefault/TextInputDefault'
 import { CustomButton } from '../../components/CustomButton/CustomButton'
-import { PetsData } from '../../data/PetsData'
+import { PetsData } from '../../data/petsData'
 
 
 export const AddPet = ({ navigation }) => {
