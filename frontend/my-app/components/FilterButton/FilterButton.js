@@ -2,10 +2,9 @@ import React from "react";
 import tinycolor from "tinycolor2"; // Library used to convert hex to rgba
 import { FilterButtonStyles } from "./FilterButtonStyles";
 import { TouchableOpacity, Text } from "react-native";
-import { globalStyles } from "../../styles/globalStyles";
 import colors from "../../styles/colors";
 
-export const FilterButton = ({ name, onPressFunction, isDarkGrey }) => {
+export const FilterButton = ({ name, onPressFunction, isDarkGrey, isFlex }) => {
   let buttonBGOpacity = 0.5;
 
   if (isDarkGrey) {
@@ -22,6 +21,7 @@ export const FilterButton = ({ name, onPressFunction, isDarkGrey }) => {
       style={{
         ...FilterButtonStyles.button,
         backgroundColor: convertedBGColor,
+        ...(isFlex ? { flex: 1 } : { width: "100%" }),
       }}
     >
       <Text style={FilterButtonStyles.text}>{name}</Text>
