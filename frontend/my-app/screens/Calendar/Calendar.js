@@ -62,28 +62,28 @@ export const Calendar = ({ navigation }) => {
 
   function setMarkedTasks() {
     let tmp = {};
-  
+
     // Mark selected date
     tmp[selected] = {
       selected: true,
       disableTouchEvent: true,
       selectedDotColor: 'orange'
     };
-  
+
     // Select events of the current selected date
     setTasksByDate(tasks?.filter((task) => task.date === selected));
-  
+
     tasks?.forEach((task) => {
       // Check if the date already has dots assigned
       if (!tmp[task.date]) {
         tmp[task.date] = {};
       }
-  
+
       // Create an array of dots if it doesn't exist
       if (!tmp[task.date].dots) {
         tmp[task.date].dots = [];
       }
-  
+
       // Add a new dot to the array for each task
       tmp[task.date].dots.push({
         key: task.id, // unique identifier for the dot
@@ -91,10 +91,10 @@ export const Calendar = ({ navigation }) => {
         selectedDotColor: colors.primary
       });
     });
-  
+
     setMarked(tmp);
   }
-  
+
 
 
   return (
@@ -120,17 +120,17 @@ export const Calendar = ({ navigation }) => {
       <ScrollView showsVerticalScrollIndicator={false} style={CalendarStyles.tasksContainer}>
 
         {tasksByDate?.length > 0 ?
-            tasksByDate.map(task => {
-                return (
-                    <TaskItem  key={task.id} task={task}/>
-                )
-            })
-            :
-            <View style={CalendarStyles.infoContainer}>
-              <Text style={[globalStyles.text, CalendarStyles.infoText]}> You have nothing scheduled for this day </Text>
-            </View>
-            }
-       
+          tasksByDate.map(task => {
+            return (
+              <TaskItem key={task.id} task={task} />
+            )
+          })
+          :
+          <View style={CalendarStyles.infoContainer}>
+            <Text style={[globalStyles.text, CalendarStyles.infoText]}> You have nothing scheduled for this day </Text>
+          </View>
+        }
+
       </ScrollView>
 
       <ModalComponent
