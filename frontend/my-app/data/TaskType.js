@@ -1,7 +1,8 @@
 export const TaskType = {
-    MEDICATION: "Medication",
-    TRAINING: "Training",
-    GROOMING: "Grooming",
-    FEEDING: "Feeding",
-    HEALTH: "Health"
-}
+  MEDICATION: "Medication",
+  TRICKS: "Tricks",
+  COACHING: "Coaching",
+  GROOMING: "Grooming",
+  FEEDING: "Feeding",
+  HEALTH: "Health",
+};
