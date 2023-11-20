@@ -63,4 +63,9 @@ export const globalStyles = StyleSheet.create({
     marginHorizontal: 4,
 
   },
+
+  rowCenter: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  }
 });

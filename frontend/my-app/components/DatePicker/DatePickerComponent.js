@@ -8,10 +8,11 @@ export const DatePickerComponent = ({value, label, setFunction, time}) => {
   const [show, setShow] = useState(false);
 
   const onChange = (event, selectedDate) => {
+    
     const currentDate = selectedDate || value;
     setShow(Platform.OS === 'ios'); // For iOS compatibility
 
-    time ? setFunction(timeToString(value)) : setFunction(dateToString(value))
+    time ? setFunction(timeToString(currentDate)) : setFunction(dateToString(currentDate))
     
   };
 
@@ -33,7 +34,7 @@ export const DatePickerComponent = ({value, label, setFunction, time}) => {
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
-          value={ time ? stringToTime(time)  : new Date(value)}
+          value={ time ? stringToTime(value) : new Date(value)}
           mode={time? 'time' : "date"}
           display="default"
           onChange={onChange}

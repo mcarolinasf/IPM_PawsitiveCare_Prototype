@@ -23,9 +23,12 @@ export const PetPicker = ({ url, handleModal }) => {
                         uri: url
                     }}
                 />
-                <View style={AddPetStyles.icon}>
-                    <FontAwesome5 name="plus" size={24} color={colors.primary} />
-                </View>
+                { !url &&
+                    <View style={AddPetStyles.icon}>
+                        <FontAwesome5 name="plus" size={24} color={colors.primary} />
+                    </View>
+                }
+                
             </View>
         </TouchableOpacity>
     );

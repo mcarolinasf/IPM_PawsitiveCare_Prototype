@@ -41,7 +41,7 @@ export const ModalComponentStyles = StyleSheet.create({
 
     modalContent:{
         marginTop: 20,
-        paddingVertical:10,
+        paddingVertical:5,
         width: '100%',
     },
 

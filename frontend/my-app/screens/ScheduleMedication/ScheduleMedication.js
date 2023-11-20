@@ -7,6 +7,7 @@ import Header from '../../components/Header/Header.js'
 import { DatePickerComponent } from '../../components/DatePicker/DatePickerComponent.js';
 import { PickPetModal } from '../../components/Modal/PickPetModal';
 import { PetPicker } from '../../components/PetPicker/PetPicker.js';
+import { ScheduleMedicationStyles } from './ScheduleMedicationStyles.js';
 
 
 export const ScheduleMedication = ({navigation, route}) => {
@@ -48,10 +49,16 @@ export const ScheduleMedication = ({navigation, route}) => {
 
         <PetPicker url={pet.photoUrl} handleModal={handlePetModal}/>
         
-        <View>
+        <View style={ScheduleMedicationStyles.inputsContainer}>
           <TextInputDefault label={'Select medicine'} setFunction={(value) => setField('medicine', value)} value={newMedication.medicine} />
-          <DatePickerComponent label={'Start Date'} setFunction={(value) => setField('startDate', value)} value={newMedication.startDate} />
-          <DatePickerComponent label={'End Date'} setFunction={(value) => setField('endDate', value)} value={newMedication.endDate} />
+          <View style={[globalStyles.rowCenter]} >
+            <View style={ScheduleMedicationStyles.multipleInputContainer} >
+              <DatePickerComponent label={'Start Date'} setFunction={(value) => setField('startDate', value)} value={newMedication.startDate} />
+            </View>
+            <View style={ScheduleMedicationStyles.multipleInputContainer} >
+              <DatePickerComponent label={'End Date'} setFunction={(value) => setField('endDate', value)} value={newMedication.endDate} />
+            </View>
+          </View>
           <DatePickerComponent label={'Time'} setFunction={(value) => setField('time', value)} value={newMedication.time} time />
           <TextInputDefault label={'Periodicity'} setFunction={(value) => setField('periodicity', value)} value={newMedication.periodicity} />
           <TextInputDefault label={'Dosage (mg)'} setFunction={(value) => setField('dosage', value)} value={newMedication.dosage} keyboardType={'numeric'} />
