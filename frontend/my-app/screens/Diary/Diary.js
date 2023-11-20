@@ -1,38 +1,69 @@
-import React, { useState } from 'react'
-import { Button, View, Text, SafeAreaView, ScrollView } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
+import { View, SafeAreaView, ScrollView } from 'react-native'
 import { globalStyles } from '../../styles/globalStyles'
 import Header from '../../components/Header/Header'
 import MenuCard from '../../components/MenuCard/MenuCard'
 import Divider from '../../components/Divider'
 import { CustomButton } from '../../components/CustomButton/CustomButton'
 import NoteTacker from '../../components/NoteTaker/NoteTacker'
+import UserSessionContext from '../../services/UserSessionContext.js'
+import { PetsData } from '../../data/PetsData'
+import { DiaryEntryData } from '../../data/DiaryEntryData'
 
 
 export const Diary = () => {
 
-  const [entry, setEntry] = useState([
+  const { user } = useContext(UserSessionContext);
 
-    {
-      id: 0,
-      title: 'Walk',
-      date: '2023/11/19',
-      petId: 1
-    },
-    {
-      id: 1,
-      title: 'Beach Day',
-      date: '2023/11/19',
-      petId: 1
-    }
-  ])
+  const [diaryEntry, setDiaryEntry] = useState([]);
+
+  const [selectedEntry, setSelectedEntry] = useState('');
+
 
 
   const addDiaryEntry = () => {
     /* Todo: Add functionality */
   }
 
+  const getData = () => {
+    var petIds = user.petIds;
+
+    var pets = petIds.map((id) => PetsData[id]);
+
+    // Set Entrys
+    const diaryEntrys = pets.flatMap((pet) => pet.diaryEntrysIds.map((id) => DiaryEntryData[id]));
+    setDiaryEntry(diaryEntrys);
+
+    if (diaryEntrys.length > 0) {
+      setSelectedEntry(diaryEntrys[diaryEntrys.length - 1]);
+    }
+
+  }
 
 
+  useEffect(() => {
+    getData()
+  }, []);
+
+  useEffect(() => {
+    // Update selectedEntry when diaryEntry changes
+    if (diaryEntry.length > 0) {
+      setSelectedEntry(diaryEntry[diaryEntry.length - 1]);
+    }
+  }, [diaryEntry]);
+
+
+  const selectDiaryEntry = (itemId) => {
+
+    if (selectedEntry && selectedEntry.id === itemId) {
+      return;
+    }
+
+    const selectedDiaryEntry = diaryEntry.find(entry => entry.id === itemId);
+
+    // Update selectedEntry with the selected diary entry
+    setSelectedEntry(selectedDiaryEntry);
+  }
 
   return (
     <SafeAreaView style={globalStyles.container}>
@@ -41,8 +72,8 @@ export const Diary = () => {
         <ScrollView horizontal={true}>
           {
             /* Todo: add "navigateTo" choose correct appointment to display */
-            entry.map(item => (
-              <MenuCard iconName={'paw'} title={item.title} subtitile={item.date} />
+            diaryEntry.map(item => (
+              <MenuCard iconName={'paw'} title={item.title} subtitile={item.date} /* stateHandeler={selectDiaryEntry(item.id)} */ />
             ))
           }
         </ScrollView>
@@ -51,7 +82,7 @@ export const Diary = () => {
           <CustomButton title={'New diary entry'} iconName={'plus'} onPressFunction={addDiaryEntry} />
         </View>
         {/* Todo: Add pop up and its functionality */}
-        <NoteTacker />
+        <NoteTacker selectedEntry={selectedEntry} />
       </ScrollView>
 
     </SafeAreaView>
