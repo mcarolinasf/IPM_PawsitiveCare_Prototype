@@ -14,7 +14,6 @@ export const DatePickerComponent = ({value, label, setFunction, time}) => {
 
   const showDateTimePicker = () => {
     setShow(true);
-    console.log("HEREEEE")
   };
 
   const formattedValue = time
@@ -31,9 +30,10 @@ export const DatePickerComponent = ({value, label, setFunction, time}) => {
     <View>
     <TextInputDefault 
         label={label}
-        setFunction={showDateTimePicker}
+        setFunction={setFunction}
         value={formattedValue}
         onPress={showDateTimePicker}
+        notEditable
         />
       
       {show && (

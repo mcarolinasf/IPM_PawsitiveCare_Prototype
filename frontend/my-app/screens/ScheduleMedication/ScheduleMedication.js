@@ -24,7 +24,16 @@ export const ScheduleMedication = ({navigation, route}) => {
   const [dosage, setDosage] = useState(false);
   const [alarm, setAlarm] = useState(false);
 
-  console.log(currentTime)
+  const [newMedication, setNewMedication] = useState({
+    medicine: '',
+    time: '',
+    startDate: new Date(day),
+    endDate: new Date(day),
+    periodicity: '',
+    dosage: '',
+    alarm: false,
+
+})
 
   return (
     <SafeAreaView style={globalStyles.container}>
