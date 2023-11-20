@@ -8,28 +8,28 @@ import colors from '../../styles/colors';
 
 
 
-export default function MenuCard({ iconName, title, navigateTo, subtitile, stateHandeler, navigation }) {
+export default function MenuCard({ iconName, title, navigateTo, subtitle, stateHandler, navigation }) {
 
 
     const pressHandler = () => {
         navigation.navigate(navigateTo)
     }
 
-    /*  const stateHandeler = () => {
+    /*  const stateHandler = () => {
  
      } */
 
     // If navigateTo do pressHandler else do fucntion?
 
     return (
-        <TouchableOpacity onPress={() => navigateTo ? pressHandler() : stateHandeler()} style={globalStyles.shadow}>
+        <TouchableOpacity onPress={() => navigateTo ? pressHandler() : stateHandler()} style={globalStyles.shadow}>
             <View style={MenuCardStyles.container}>
                 <View style={MenuCardStyles.circle}>
                     <FontAwesome5 name={iconName} size={23} color={colors.primary} />
                 </View>
 
                 <Text style={MenuCardStyles.title}> {title}</Text>
-                {subtitile &&
+                {subtitle &&
                     <Text style={{ ...globalStyles.secondaryText, fontSize: 11 }}>{subtitile}</Text>
                 }
 
