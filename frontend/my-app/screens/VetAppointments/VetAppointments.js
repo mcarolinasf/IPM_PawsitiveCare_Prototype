@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { View, Text, SafeAreaView, ScrollView, Image, Button, TextInput } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView } from 'react-native'
 import { CustomButton } from '../../components/CustomButton/CustomButton'
 import Divider from '../../components/Divider'
 import Header from '../../components/Header/Header'
@@ -67,6 +67,7 @@ export const VetAppointments = ({ navigation }) => {
                 <Header title={'Vet Appoint'} goBack showProfile />
                 <ScrollView horizontal={true}>
                     {
+                        /* Maybe change direction of list */
                         vetApp.map(item => (
                             <MenuCard key={item.id} iconName={'paw'} title={'Vet App ' + item.id} item={item} subtitle={item.date} setFunction={selectVetApp} selected={selectedEntry} />
                         ))

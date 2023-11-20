@@ -15,7 +15,6 @@ export default function NoteTacker({ selectedEntry, setFunction }) {
     const [menuModalVisible, setMenuModalVisible] = useState(false)
 
     const actions = [
-        { name: 'Edit', action: 'do something' },
         { name: 'Delete', action: 'do something' }
     ]
 

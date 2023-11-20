@@ -12,7 +12,6 @@ import Divider from "../../components/Divider";
 import TaskItem from "../../components/TaskItem/TaskItem.js";
 import { globalStyles } from "../../styles/globalStyles";
 import { HomeStyles } from "./HomeStyles";
-import navigationScreens from "../../navigation/navigationPaths";
 import { AntDesign } from "@expo/vector-icons";
 import colors from "../../styles/colors";
 import Header from "../../components/Header/Header";
@@ -28,7 +27,7 @@ export const Home = ({ navigation }) => {
   const { user } = useContext(UserSessionContext);
 
   const cardPressHandler = (item) => {
-    navigation.navigate(navigationScreens.pet, { pet: item });
+    navigation.navigate(navigationPaths.pet, { pet: item });
   };
 
   useEffect(() => {
