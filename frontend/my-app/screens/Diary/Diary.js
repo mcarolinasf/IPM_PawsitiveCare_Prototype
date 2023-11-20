@@ -41,6 +41,9 @@ export const Diary = () => {
     getData();
   }, []);
 
+
+
+
   const selectDiaryEntry = (itemId) => {
     if (selectedEntry && selectedEntry.id === itemId) {
       return;
@@ -61,15 +64,8 @@ export const Diary = () => {
             //Suggestion 1 : Pass the item and pass the selected item and compare them
             //Suggestion 2 :Store a property in the item(bool) selected and update when setSelected
             //Suggestion 3 :Do the verification here and pass the bool as a param
-            diaryEntry.map((item) => (
-              <MenuCard
-                iconName={"paw"}
-                title={item.title}
-                subtitle={item.date}
-                itemId={item.id}
-                setFunction={selectDiaryEntry}
-                selected={selectedEntry}
-              />
+            diaryEntry.map(item => (
+              <MenuCard iconName={'paw'} title={item.title} subtitle={item.date} itemId={item.id} setFunction={selectDiaryEntry} selected={selectedEntry} />
             ))
           }
         </ScrollView>
