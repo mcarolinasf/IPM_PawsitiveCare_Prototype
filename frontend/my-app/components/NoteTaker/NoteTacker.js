@@ -10,7 +10,7 @@ import { ModalComponent } from '../Modal/ModalComponent';
 
 
 
-export default function NoteTacker({ item }) {
+export default function NoteTacker({ selectedEntry, setFunction, value }) {
 
     const [menuModalVisible, setMenuModalVisible] = useState(false)
 
@@ -23,17 +23,25 @@ export default function NoteTacker({ item }) {
         setMenuModalVisible(!menuModalVisible);
     }
 
+    const handleTextChange = (text) => {
+        setFunction(text);
+    };
+
 
     return (
         <View style={NoteTackerStyles.container}{...globalStyles.shadow}>
             <View style={{ flexDirection: 'row', padding: 5, justifyContent: 'space-between' }}>
-                {/* Add item data */}
-                <Text style={globalStyles.secondaryText}>5 of October</Text>
+                <Text style={globalStyles.secondaryText}>{selectedEntry.date}</Text>
                 <Entypo name="dots-three-horizontal" size={24} color={colors.secondary} onPress={handleMenuPopUp} />
             </View>
             <Divider />
-            <View >
-                <TextInput autoFocus={true} style={NoteTackerStyles.input} multiline={true} />
+            <View style={{ paddingHorizontal: 5 }}>
+                <TextInput
+                    style={NoteTackerStyles.input}
+                    multiline={true}
+                    onChangeText={handleTextChange}
+                    value={selectedEntry.text}
+                />
             </View>
 
             <ModalComponent

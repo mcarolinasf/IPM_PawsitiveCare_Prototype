@@ -4,7 +4,7 @@ import { globalStyles } from '../../styles/globalStyles'
 import { TaskItemStyles } from './TaskItemStyles'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colors from '../../styles/colors';
-import { PetsData } from '../../data/petsData';
+import { PetsData } from '../../data/PetsData';
 import { getTypeColor } from '../../services/utils';
 
 

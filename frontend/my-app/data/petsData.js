@@ -14,6 +14,8 @@ export const PetsData = {
     weight: '',
     photoUrl: 'https://www.hindustantimes.com/ht-img/img/2023/08/25/1600x900/international_dog_day_1692974397743_1692974414085.jpg',
     tasksIds: [0],
+    diaryEntrysIds: [0],
+    vetAppointIds: [0],
     ownersIds: ['admin'],
   },
   1: {
@@ -30,6 +32,8 @@ export const PetsData = {
     weight: '',
     photoUrl: 'https://www.cbc.ca/kids/images/weird_wonderful_bunnies_header_update_1140.jpg',
     tasksIds: [1],
+    diaryEntrysIds: [1],
+    vetAppointIds: [0],
     ownersIds: ['admin'],
   },
   2: {
@@ -46,6 +50,8 @@ export const PetsData = {
     weight: '',
     photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpnhjZPqOwRcDXdFn5gEY49CVEb7QIiat4UA&usqp=CAU',
     tasksIds: [2],
+    diaryEntrysIds: [2, 3],
+    vetAppointIds: [0],
     ownersIds: ['admin'],
   },
   // Add more pet objects as needed
