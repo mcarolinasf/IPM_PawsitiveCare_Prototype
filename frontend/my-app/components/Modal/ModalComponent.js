@@ -26,7 +26,7 @@ export const ModalComponent = ({ navigation, visible, onClose, title, actions, d
             <View style={ModalComponentStyles.modalContent}>
                { actions && actions.map((action) => 
                   <TouchableHighlight 
-                    onPress={()=>{ navigation.navigate(action.navigateTo) }}
+                    onPress={()=>{ navigation.navigate(action.navigateTo, {day: day}) }}
                     underlayColor={colors.white}
                     style={[ModalComponentStyles.action,]}>
                     <Text style={{...globalStyles.text, ...ModalComponentStyles.actionText}}>{action.name}</Text>

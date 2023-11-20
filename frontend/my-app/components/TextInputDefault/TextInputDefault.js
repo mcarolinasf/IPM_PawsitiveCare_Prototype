@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View, TextInput } from "react-native";
 import { TextInputDefaultStyles } from "./TextInputDefaultStyles";
 
-export default function TextInputDefault({ label, isSecure, setFunction, value }) {
+export default function TextInputDefault({ label, isSecure, setFunction, value, keyboardType }) {
 
   const handleTextChange = (text) => {
     setFunction(text);
@@ -16,6 +16,7 @@ export default function TextInputDefault({ label, isSecure, setFunction, value }
         style={TextInputDefaultStyles.textInputs}
         onChangeText={handleTextChange}
         value={value}
+        keyboardType={keyboardType ? keyboardType : "default"}
       />
     </View>
   );
