@@ -17,6 +17,8 @@ import { Profile } from '../screens/Profile/Profile';
 import { AddPet } from '../screens/AddPet/AddPet';
 import { VetAppointments } from '../screens/VetAppointments/VetAppointments';
 import { ScheduleMedication } from '../screens/ScheduleMedication/ScheduleMedication';
+import { AddFeeding } from '../screens/AddFeeding/AddFeeding';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +37,7 @@ export const Navigation = () => {
             <Stack.Screen name={navigationScreens.pet} component={Pet} />
             <Stack.Screen name={navigationScreens.profile} component={Profile} />
             <Stack.Screen name={navigationScreens.addPet} component={AddPet} />
+            <Stack.Screen name={navigationScreens.feeding} component={AddFeeding} />
             <Stack.Screen name={navigationScreens.vetAppointments} component={VetAppointments} />
             <Stack.Screen name={navigationScreens.scheduleMed} component={ScheduleMedication} />
           </>

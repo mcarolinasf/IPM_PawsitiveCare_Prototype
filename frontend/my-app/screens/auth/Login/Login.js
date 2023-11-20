@@ -14,7 +14,7 @@ import navigationPaths from "../../../navigation/navigationPaths.js";
 import TextInputDefault from "../../../components/TextInputDefault/TextInputDefault.js";
 import { useState, useContext } from "react";
 import UserSessionContext from "../../../services/UserSessionContext.js";
-import userData from "../../../data/UserData.js";
+import userData from "../../../data/userData.js";
 
 export const Login = ({ navigation }) => {
 
