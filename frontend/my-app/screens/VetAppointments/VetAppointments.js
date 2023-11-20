@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { View, Text, SafeAreaView, ScrollView, Image, Button, TextInput } from 'react-native'
 import { CustomButton } from '../../components/CustomButton/CustomButton'
 import Divider from '../../components/Divider'
@@ -48,15 +48,28 @@ export const VetAppointments = ({ navigation }) => {
 
 
 
+    const selectVetApp = (itemId) => {
+
+        if (selectedEntry && selectedEntry.id === itemId) {
+            return;
+        }
+
+        const selectedVetApp = vetApp.find(entry => entry.id === itemId);
+
+        // Update selectedEntry with the selected diary entry
+        setSelectedEntry(selectedVetApp);
+    }
+
+
+
     return (
         <SafeAreaView style={globalStyles.container}>
             <ScrollView>
                 <Header title={'Vet Appoint'} goBack showProfile />
                 <ScrollView horizontal={true}>
                     {
-                        /* Todo: add "navigateTo" choose correct appointment to display */
                         vetApp.map(item => (
-                            <MenuCard iconName={'paw'} title={'Vet App ' + item.id} subtitle={item.date} />
+                            <MenuCard iconName={'paw'} title={'Vet App ' + item.id} itemId={item.id} subtitle={item.date} setFunction={selectVetApp} />
                         ))
                     }
                 </ScrollView>
@@ -65,7 +78,7 @@ export const VetAppointments = ({ navigation }) => {
                     <CustomButton title={'New Vet Appointment'} iconName={'plus'} onPressFunction={addVetAppointment} />
                 </View>
                 {/* Todo: Add pop up and its functionality */}
-                <NoteTacker />
+                <NoteTacker selectedEntry={selectedEntry} />
             </ScrollView>
 
         </SafeAreaView>
