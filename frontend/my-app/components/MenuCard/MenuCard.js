@@ -12,11 +12,11 @@ export default function MenuCard({ iconName, title, navigateTo, subtitle, setFun
 
 
     const handlePress = () => {
-        navigateTo ?  navigation.navigate(navigateTo)
-            : setFunction(itemId) 
+        navigateTo ? navigation.navigate(navigateTo)
+            : setFunction(itemId)
     }
 
- 
+
     return (
         <TouchableOpacity onPress={handlePress} style={[globalStyles.shadow]}>
             {/* Change container of selected */}
