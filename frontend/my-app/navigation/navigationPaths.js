@@ -12,6 +12,7 @@ export default {
     body: 'Body',
     medication: 'Medication',
     feeding: 'Feeding',
-    addPet: 'AddPet'
+    addPet: 'AddPet',
+    scheduleMed: 'ScheduleMedication',
 }
 
