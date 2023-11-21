@@ -1,11 +1,12 @@
 
 
 const mongoose = require('mongoose');
+const { v4: uuidv4 } = require('uuid');
 
 
 const taskSchema = new mongoose.Schema({
 
-  idT: { type: String, required: true },
+  idT: { type: String, default: uuidv4 },
   text: { type: String, required: true },
   type: { type: String, required: true },
   time: { type: String, required: true },

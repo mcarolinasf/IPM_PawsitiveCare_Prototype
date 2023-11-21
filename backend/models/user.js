@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
   idU: { type: String, default: uuidv4 },
   name: { type: String, required: true },
   email: { type: String, required: true },
+  password: { type: String, required: true },
   photoUrl: { type: String },
   petIds: { type: [String] },
   tasksIds: { type: [String] },

@@ -8,8 +8,8 @@ const Pet = require('../models/pet');
 const createUserSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().required(),
-  photoUrl: Joi.string(),
   password: Joi.string().required(),
+  photoUrl: Joi.string(),
   petIds: Joi.array().items(Joi.string()),
 });
 

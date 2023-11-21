@@ -77,6 +77,94 @@ try {
 
 
 
+
+
+
+
+/****************************************/
+
+
+//CREATE
+
+const createEntrySchema = Joi.object({
+  title: Joi.string().required(),
+  type: Joi.string().required(),
+  date: Joi.string().required(),
+  text: Joi.string().required(),
+  ownersIds: Joi.array(string()).required(),
+});
+
+const createEntryParamSchema = Joi.object({
+  idP: Joi.string().required(),
+});
+
+exports.createEntry = async (req, res) => {
+    try {
+
+      const { errorParam } = createEntryParamSchema.validate(req.params);
+
+      const { error } = createEntrySchema.validate(req.body);
+  
+      if (error || errorParam) {
+        return res.status(400).json({ message: error.details[0].message });
+      }
+  
+      const newEntry = new Entry(req.body);
+      const savedEntry = await newEntry.save();
+  
+      res.status(201).json(savedEntry);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Server Error while creating user' });
+    }
+  };
+
+
+//DELETE
+
+const deleteEntrySchema = Joi.object({
+  idP: Joi.string().required(),
+  idE: Joi.string().required(),
+});
+
+exports.deleteEntry = async (req, res) => {
+  try {
+    // validate the request body using Joi
+    const { error } = deleteEntrySchema.validate(req.params);
+
+    if (error ) {
+      return res.status(400).json({ message: error.details[0].message });
+    }
+
+    // find pet by ID in the database
+    const pet = await Pet.findOne({ idP: req.params.idP });
+
+    if (!pet) {
+      return res.status(404).json({ message: "Pet not found" });
+    }
+
+    // delete user from the database
+    const deletedEntry = await Entry.findOneAndDelete({ idE: req.params.idE });
+
+    if (deletedEntry === 0) {
+      return res.status(404).json({ message: "Entry not found" });
+    }
+
+    res.status(204).send();
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
+
+
+//UPDATE
+
+
+
+//Get Pet Entries
+
 const getPetEntriesSchema = Joi.object({
     idP: Joi.string().required(),
   });
@@ -107,41 +195,6 @@ exports.getPetEntries = async (req, res) => {
   }
 };
 
-const getEntrySchema = Joi.object({
-    idP: Joi.string().required(),
-    idE: Joi.string().required(),
-  });
-  
-exports.getEntry = async (req, res) => {
-try {
-    // validate the pet ID parameter using Joi
-    const { error } = getEntrySchema.validate(req.params);
-
-    if (error) {
-    return res.status(400).json({ message: error.details[0].message });
-    }
-
-    // find pet by ID in the database
-    const pet = await Pet.findOne({ idP: req.params.idP });
-
-    if (!pet) {
-    return res.status(404).json({ message: "Pet not found" });
-    }
-
-    // find pet by ID in the database
-    const entry = await Entry.findOne({ idE: req.params.idE });
-
-    if (!entry) {
-    return res.status(404).json({ message: "Entry not found" });
-    }
-
-   
-    res.status(200).json(entry);
-} catch (error) {
-    console.error(error);
-    res.status(500).json({ message: error });
-}
-};
 
 
 

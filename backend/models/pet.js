@@ -1,11 +1,12 @@
 
 
 const mongoose = require('mongoose');
+const { v4: uuidv4 } = require('uuid');
 
 
 const petSchema = new mongoose.Schema({
 
-  idP: { type: String, required: true },
+  idP: { type: String, default: uuidv4 },
   name: { type: String, required: true },
   age: { type: String },
   breed: { type: String },
