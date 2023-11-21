@@ -1,20 +1,21 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { View, Text, SafeAreaView, ScrollView, Image, TouchableOpacity, TouchableHighlight } from 'react-native'
-import Header from '../../components/Header/Header'
-import { globalStyles } from '../../styles/globalStyles'
-import { AddFeedingStyles } from './AddFeedingStyles'
+import Header from '../../components/Header/Header.js'
+import { globalStyles } from '../../styles/globalStyles.js'
+import { ScheduleFeedingStyles } from './ScheduleFeedingStyles.js'
 import { FontAwesome5 } from '@expo/vector-icons';
-import colors from '../../styles/colors'
+import colors from '../../styles/colors.js'
 import * as ImagePicker from 'expo-image-picker';
-import TextInputDefault from '../../components/TextInputDefault/TextInputDefault'
-import { CustomButton } from '../../components/CustomButton/CustomButton'
-import { PetsData } from '../../data/petsDataArray'
+import TextInputDefault from '../../components/TextInputDefault/TextInputDefault.js'
+import { CustomButton } from '../../components/CustomButton/CustomButton.js'
+import { PetsData } from '../../data/petsDataArray.js'
+import { FeedingsData } from '../../data/FeedingsData.js'
 import { SelectList } from 'react-native-dropdown-select-list'
-import { ModalComponent } from '../../components/Modal/ModalComponent';
-import { SchedulingActions as actions } from '../../data/SchedulingActions';
+import { ModalComponent } from '../../components/Modal/ModalComponent.js';
+import { SchedulingActions as actions } from '../../data/SchedulingActions.js';
 import UserSessionContext from '../../services/UserSessionContext.js';
 import { AntDesign } from '@expo/vector-icons';
-import SelectableCard from '../../components/Card/SelectableCard'
+import SelectableCard from '../../components/Card/SelectableCard.js'
 import { CardStyles } from '../../components/Card/CardStyles.js'
 
 
@@ -22,11 +23,9 @@ import { CardStyles } from '../../components/Card/CardStyles.js'
 
 
 
-export const AddFeeding = ({ navigation }) => {
+export const ScheduleFeeding = ({ navigation }) => {
 
-    const [image, setImage] = useState();
-    const [petSelected, setPetSelected] = useState("");
-    const [petSelectedCard, setPetSelectedCard] = useState(null);
+    const [petSelected, setPetSelected] = useState('');
     const [pets, setPets] = useState([]);
     const [newFeeding, setNewFeeding] = useState({
         petName: '',
@@ -45,7 +44,13 @@ export const AddFeeding = ({ navigation }) => {
     };
 
     const cardPressHandler = (item) => {
-        if(petSelected === "")
+        useEffect(() => {
+            if(petSelected === "" || petSelected !== item.name)
+                setPetSelected(item.name);
+            else
+                setPetSelected("");
+        }, [])
+        if(petSelected === "" || petSelected !== item.name)
             setPetSelected(item.name);
         else
             setPetSelected("");
@@ -58,7 +63,7 @@ export const AddFeeding = ({ navigation }) => {
         petNames.push(element.name)
     });
 
-    let petIds = PetsData.map((pet) => pet.id);
+    //let petIds = PetsData.map((pet) => pet.id);
     
     useEffect(() => {
         getData()
@@ -75,7 +80,7 @@ export const AddFeeding = ({ navigation }) => {
 
     //Review
 
-    const addFeeding = () => {
+    const ScheduleFeeding = () => {
 
         const newFeedingId = Object.keys(FeedingsData).length;
 
@@ -110,30 +115,30 @@ export const AddFeeding = ({ navigation }) => {
     };
 
 
-    handlePetPickPopup = () => {
-        setScheduleModalVisible(!scheduleModalVisible);
-    }
+    // handlePetPickPopup = () => {
+    //     setScheduleModalVisible(!scheduleModalVisible);
+    // }
 
-    const [selectedComponent, setSelectedComponent] = useState(null);
+    // const [selectedComponent, setSelectedComponent] = useState(null);
 
-    const handleSelectComponent = (componentId) => {
-        setSelectedComponent(componentId);
-    };
+    // const handleSelectComponent = (componentId) => {
+    //     setSelectedComponent(componentId);
+    // };
     
-    const SelectableComponent = ({ id, selected, onSelect, data }) => {
-        const handlePress = () => {
-          onSelect(id);
-        };
+    // const SelectableComponent = ({ id, selected, onSelect, data }) => {
+    //     const handlePress = () => {
+    //       onSelect(id);
+    //     };
       
-        return (
-          <TouchableOpacity
-            style={[CardStyles.card, selected && CardStyles.selectedCard]}
-            onPress={handlePress}
-          >
-            <SelectableCard key={data.id} item={data} isSelected={data.id === selectedComponent} pressHandler={cardPressHandler} />
-          </TouchableOpacity>
-        );
-    };
+    //     return (
+    //       <TouchableOpacity
+    //         style={[CardStyles.card, selected && CardStyles.selectedCard]}
+    //         onPress={handlePress}
+    //       >
+    //         <SelectableCard key={data.id} item={data} isSelected={data.id === selectedComponent} pressHandler={cardPressHandler} />
+    //       </TouchableOpacity>
+    //     );
+    // };
 
     return (
         <SafeAreaView style={globalStyles.container}>
@@ -142,7 +147,7 @@ export const AddFeeding = ({ navigation }) => {
 
                 <Text style={globalStyles.selectPetText}>Select pet</Text>
 
-                <ScrollView horizontal={true}>
+                {/* <ScrollView horizontal={true}>
                     {pets.map((item, i) => (
                         <SelectableComponent 
                             id = {i}
@@ -153,18 +158,18 @@ export const AddFeeding = ({ navigation }) => {
                             
                         </SelectableComponent>
                     ))}
+                </ScrollView> */}
+
+
+                <ScrollView horizontal={true}>
+                    {pets.map((item) => (
+                        <SelectableCard key={item.id} item={item} pressHandler={cardPressHandler} />
+                    ))}
                 </ScrollView>
 
-                <Text>Debug: Pet selected: {selectedComponent}</Text>
+                <Text style={globalStyles.selectPetText}>Selected: {petSelected}</Text>
 
                 <View style={{ paddingHorizontal: 10 }}>
-                    <Text style={globalStyles.text}>To which pet?</Text>
-                    <SelectList
-                        setSelected={(val) => setSelected(val)}
-                        data={petNames}
-                        save="name"
-                        setFunction={() => alert("PET WAS SET")}
-                    />
                     <TextInputDefault label={'Food'} setFunction={(value) => setNewFeeding({ ...newFeeding, food: value })} value={newFeeding.food} />
                     <TextInputDefault label={'Starting Date'} setFunction={(value) => setNewFeeding({ ...newFeeding, startD: value })} value={newFeeding.food} />
                     <TextInputDefault label={'End Date'} setFunction={(value) => setNewFeeding({ ...newFeeding, endD: value })} value={newFeeding.food} />
@@ -174,7 +179,7 @@ export const AddFeeding = ({ navigation }) => {
 
                 </View>
                 <View style={{ paddingVertical: 10 }}>
-                    <CustomButton title={'Add'} onPressFunction={addFeeding} />
+                    <CustomButton title={'Add'} onPressFunction={ScheduleFeeding} />
                 </View>
 
             </ScrollView>

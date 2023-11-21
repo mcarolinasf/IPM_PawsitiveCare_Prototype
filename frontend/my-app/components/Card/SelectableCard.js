@@ -4,24 +4,23 @@ import { globalStyles } from '../../styles/globalStyles.js'
 import { CardStyles } from './CardStyles.js'
 
 
-export default function SelectableCard({ item, pressHandler, isSelected }) {
+export default function SelectableCard({ item }) {
 
-    // const [bgColor, setBgColor] = useState(true);
+    const [bgColor, setBgColor] = useState(true);
 
     // Todo: onPress function to pet page
     return (
-        <TouchableOpacity onPress={() => {pressHandler(item);}} style={ globalStyles.shadow}>
-            <View key={item.key} style={isSelected ? CardStyles.card : CardStyles.selectedCard}>
+        <TouchableHighlight onPress={() => setBgColor(!bgColor)} >
+            <View key={item.key} style={bgColor ? CardStyles.nCard : CardStyles.selectedCard}>
                 <Image
                     style={CardStyles.image}
                     source={{
                         uri: item.photoUrl
                     }}
                 />
-                <Text style={isSelected ? CardStyles.text : CardStyles.selectedText}>{item.name}</Text>
+                <Text style={bgColor ? CardStyles.text : CardStyles.selectedText}>{item.name}</Text>
             </View>
-        </TouchableOpacity>
-
+        </TouchableHighlight>
     );
 
 
