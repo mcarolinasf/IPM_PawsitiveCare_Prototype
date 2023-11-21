@@ -165,7 +165,7 @@ exports.getUserPets = async (req, res) => {
 };
 
 
-const createPetSchema = Joi.object({
+const addPetSchema = Joi.object({
   name: Joi.string().required(),
   age: Joi.string(),
   breed: Joi.string(),
@@ -189,9 +189,9 @@ exports.addPet = async (req, res) => {
     // validate the user ID parameter using Joi
     const { errorParam } = Joi.string().validate(req.params.idU);
 
-    const { error } = createPetSchema.validate(req.body);
+    const { error } = addPetSchema.validate(req.body);
 
-    if (error || paramError) {
+    if (error || errorParam) {
       return res.status(400).json({ message: error.details[0].message });
     }
 

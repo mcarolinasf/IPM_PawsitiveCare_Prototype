@@ -76,7 +76,6 @@ try {
     return res.status(404).json({ message: "Pet not found" });
     }
 
-    //TODO: TEST
     const petTasks = await Task.find({ petId: req.params.idP });
 
     res.status(200).json(petTasks);
