@@ -16,10 +16,12 @@ import { Register } from '../screens/auth/Register/Register';
 import { Profile } from '../screens/Profile/Profile';
 import { AddPet } from '../screens/AddPet/AddPet';
 import { VetAppointments } from '../screens/VetAppointments/VetAppointments';
-import { ScheduleMedication } from '../screens/ScheduleMedication/ScheduleMedication';
 import { AddFeeding } from '../screens/AddFeeding/AddFeeding';
 import { Body } from '../screens/Body/Body';
 import { Medication } from '../screens/Medication/Medication';
+import { ScheduleMedication } from '../screens/Schedule/ScheduleMedication';
+import { ScheduleFeeding } from '../screens/Schedule/ScheduleFeeding';
+import { ScheduleGrooming } from '../screens/Schedule/ScheduleGrooming';
 
 
 
@@ -45,7 +47,8 @@ export const Navigation = () => {
             <Stack.Screen name={navigationScreens.body} component={Body} />
             <Stack.Screen name={navigationScreens.medication} component={Medication} />
             <Stack.Screen name={navigationScreens.scheduleMed} component={ScheduleMedication} />
-
+            <Stack.Screen name={navigationScreens.scheduleFed} component={ScheduleFeeding} />
+            <Stack.Screen name={navigationScreens.scheduleGroom} component={ScheduleGrooming} />
           </>
           :
           <>

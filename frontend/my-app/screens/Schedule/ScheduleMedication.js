@@ -7,7 +7,7 @@ import Header from '../../components/Header/Header.js'
 import { DatePickerComponent } from '../../components/DatePicker/DatePickerComponent.js';
 import { PickPetModal } from '../../components/Modal/PickPetModal';
 import { PetPicker } from '../../components/PetPicker/PetPicker.js';
-import { ScheduleMedicationStyles } from './ScheduleMedicationStyles.js';
+import { ScheduleMedicationStyles } from './ScheduleStyles.js';
 import { TasksData } from '../../data/TasksData.js';
 import { CustomButton } from '../../components/CustomButton/CustomButton.js';
 import { TaskType } from '../../data/TaskType.js';
@@ -92,7 +92,7 @@ export const ScheduleMedication = ({navigation, route}) => {
           <TextInputDefault label={'Dosage (mg)'} setFunction={(value) => setNewMedication({ ...newMedication, dosage: value })} value={newMedication.dosage} keyboardType={'numeric'} />
         </View>
 
-        <View style={{ paddingVertical: 10 }}>
+        <View style={{ paddingBottom: 50 }}>
             <CustomButton title={'Schedule'} onPressFunction={addTask} />
         </View>
 

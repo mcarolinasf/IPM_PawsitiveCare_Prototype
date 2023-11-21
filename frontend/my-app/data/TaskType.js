@@ -5,4 +5,5 @@ export const TaskType = {
   GROOMING: "Grooming",
   FEEDING: "Feeding",
   HEALTH: "Health",
+  TRAINING: "Training",
 };

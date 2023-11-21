@@ -12,6 +12,7 @@ export const ItemsByTag = ({ tasks, type }) => {
           onPressFunction={() => {}}
           isDarkGrey={false}
           isFlex={false}
+          buttonHeight={30}
         />
       </View>
 
