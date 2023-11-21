@@ -1,5 +1,10 @@
 import axios from 'axios';
 
+export const CONSTANTS = {
+  BACKEND_URL_API: "https://pawsitive-care.onrender.com/api",
+  BACKEND_URL_API_LOCAL: "https:localhost:8080/api"
+}
+
 export const request = async (method, url, data) => {
 
     const headers = {
