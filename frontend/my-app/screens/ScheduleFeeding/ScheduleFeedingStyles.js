@@ -3,7 +3,7 @@ import colors from "../../styles/colors";
 
 const screenWidth = Dimensions.get("window").width;
 
-export const AddFeedingStyles = StyleSheet.create({
+export const ScheduleFeedingStyles = StyleSheet.create({
 
 
     container: {

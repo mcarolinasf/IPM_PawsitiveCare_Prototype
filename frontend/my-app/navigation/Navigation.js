@@ -53,6 +53,8 @@ export const Navigation = () => {
               name={navigationScreens.vetAppointments}
               component={VetAppointments}
             />
+            <Stack.Screen name={navigationScreens.scheduleFed} component={ScheduleFeeding} />
+            <Stack.Screen name={navigationScreens.vetAppointments} component={VetAppointments} />
             <Stack.Screen name={navigationScreens.body} component={Body} />
             <Stack.Screen
               name={navigationScreens.medication}

@@ -11,17 +11,25 @@ export const CardStyles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: "flex-end",
     alignItems: "center",
-  },
+    },
+  nCard: {
+        backgroundColor: colors.white,
+        height: 146,
+        width: 115,
+        margin: 5,
+        marginBottom: 10,
+        justifyContent: "flex-end",
+        alignItems: "center",
+        },
+  
   selectedCard: {
     backgroundColor: colors.secondary,
     height: 146,
     width: 115,
     margin: 5,
     marginBottom: 10,
-    borderRadius: 10,
     justifyContent: "flex-end",
     alignItems: "center"
-
   },
   text: {
     padding: 5,
