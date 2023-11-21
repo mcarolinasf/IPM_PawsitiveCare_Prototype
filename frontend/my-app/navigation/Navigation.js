@@ -15,9 +15,9 @@ import { Register } from "../screens/auth/Register/Register";
 import { Profile } from "../screens/Profile/Profile";
 import { AddPet } from "../screens/AddPet/AddPet";
 import { VetAppointments } from "../screens/VetAppointments/VetAppointments";
-import { FeedingScreen } from "../screens/FeedingScreen/FeedingScreen";
 import { Body } from "../screens/Body/Body";
 import { Medication } from "../screens/Medication/Medication";
+import { Feeding } from "../screens/FeedingScreen/FeedingScreen";
 import { ScheduleMedication } from "../screens/Schedule/ScheduleMedication";
 import { ScheduleFeeding } from "../screens/Schedule/ScheduleFeeding";
 import { ScheduleGrooming } from "../screens/Schedule/ScheduleGrooming";
@@ -47,9 +47,12 @@ export const Navigation = () => {
             <Stack.Screen name={navigationScreens.addPet} component={AddPet} />
             <Stack.Screen
               name={navigationScreens.feeding}
-              component={FeedingScreen}
+              component={Feeding}
             />
-            <Stack.Screen name={navigationScreens.vetAppointments} component={VetAppointments} />
+            <Stack.Screen
+              name={navigationScreens.vetAppointments}
+              component={VetAppointments}
+            />
             <Stack.Screen name={navigationScreens.body} component={Body} />
             <Stack.Screen
               name={navigationScreens.medication}

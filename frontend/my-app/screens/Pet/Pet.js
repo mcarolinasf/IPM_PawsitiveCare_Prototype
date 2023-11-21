@@ -54,8 +54,8 @@ export const Pet = ({ navigation, route }) => {
                 <ScrollView horizontal={true}>
                     <MenuCard iconName={'paw'} title={'Vet Ap.'} navigation={navigation} navigateTo={navigationPaths.vetAppointments} />
                     <MenuCard iconName={'dog'} title={'Body'} navigation={navigation} navigateTo={navigationPaths.body} pet={pet} />
-                    <MenuCard iconName={'pills'} title={'Medication'} navigation={navigation} navigateTo={navigationPaths.medication} />
-                    <MenuCard iconName={'bone'} title={'Feeding'} navigation={navigation} navigateTo={navigationPaths.feeding} />
+                    <MenuCard iconName={'pills'} title={'Medication'} navigation={navigation} navigateTo={navigationPaths.medication} pet={pet}/>
+                    <MenuCard iconName={'bone'} title={'Feeding'} navigation={navigation} navigateTo={navigationPaths.feeding} pet={pet} />
                 </ScrollView>
                 <Text style={globalStyles.subtitleText}>Today</Text>
                 <View>

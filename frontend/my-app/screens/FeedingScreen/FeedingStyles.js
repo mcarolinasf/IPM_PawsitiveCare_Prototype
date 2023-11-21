@@ -3,8 +3,17 @@ import colors from "../../styles/colors";
 
 const screenWidth = Dimensions.get("window").width;
 
-export const FeedingScreenStyles = StyleSheet.create({
+export const FeedingStyles = StyleSheet.create({
 
+    filterButtonsView: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+      },
+    
+      listView: {
+        paddingTop: 20,
+        marginBottom: 300,
+      },
 
     container: {
         justifyContent: "center",
