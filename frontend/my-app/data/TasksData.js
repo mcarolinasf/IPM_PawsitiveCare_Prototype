@@ -10,6 +10,7 @@ export const TasksData = {
     petId: 0,
     owners: ["admin"],
     done: false,
+    trainingPlanId: -1,
   },
   1: {
     id: 1,
@@ -20,6 +21,7 @@ export const TasksData = {
     petId: 1,
     owners: ["admin"],
     done: false,
+    trainingPlanId: -1,
   },
   2: {
     id: 2,
@@ -30,6 +32,7 @@ export const TasksData = {
     petId: 2,
     owners: ["admin"],
     done: false,
+    trainingPlanId: 0,
   },
   3: {
     id: 3,
@@ -40,6 +43,7 @@ export const TasksData = {
     petId: 2,
     owners: ["admin"],
     done: false,
+    trainingPlanId: 1,
   },
   4: {
     id: 4,
@@ -50,6 +54,7 @@ export const TasksData = {
     petId: 2,
     owners: ["admin"],
     done: false,
+    trainingPlanId: 2,
   },
   5: {
     id: 5,
@@ -60,6 +65,7 @@ export const TasksData = {
     petId: 2,
     owners: ["admin"],
     done: false,
+    trainingPlanId: 2,
   },
   6: {
     id: 6,
@@ -70,6 +76,7 @@ export const TasksData = {
     petId: 2,
     owners: ["admin"],
     done: false,
+    trainingPlanId: 2,
   },
   7: {
     id: 7,
@@ -80,6 +87,7 @@ export const TasksData = {
     petId: 2,
     owners: ["admin"],
     done: false,
+    trainingPlanId: 2,
   },
   8: {
     id: 8,
@@ -90,6 +98,7 @@ export const TasksData = {
     petId: 2,
     owners: ["admin"],
     done: false,
+    trainingPlanId: 2,
   },
   9: {
     id: 9,
@@ -100,5 +109,6 @@ export const TasksData = {
     petId: 2,
     owners: ["admin"],
     done: false,
+    trainingPlanId: 2,
   },
 };
