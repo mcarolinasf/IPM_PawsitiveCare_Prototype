@@ -111,4 +111,27 @@ export const TasksData = {
     done: false,
     trainingPlanId: 2,
   },
+
+  10: {
+    id: 10,
+    text: "Obidience",
+    type: 'Upcoming',
+    time: "16:00",
+    date: "2023-11-19",
+    petId: 2,
+    owners: ["admin"],
+    done: false,
+    trainingPlanId: 2,
+  },
+  11: {
+    id: 11,
+    text: "Obidience",
+    type: 'Done',
+    time: "16:00",
+    date: "2023-11-19",
+    petId: 2,
+    owners: ["admin"],
+    done: false,
+    trainingPlanId: 2,
+  },
 };

@@ -46,27 +46,26 @@ export const Feeding = ({ navigation, route }) => {
     setType(type);
   };
 
-//   useEffect(() => {
-//     getData();
-//   }, []);
+  useEffect(() => {
+    getData();
+  }, []);
 
-//   const getData = () => {
-//     var petIds = user.petIds;
 
-//     //Set upcoming
-//     var upcoming = (pet) =>
-//         pet.tasksIds.map(
-//           (id) => TasksData[id].type === listFilters[1].type && TasksData[id]
-//         );
-//     setUpcoming(upcoming);
+  const getData = () => {
 
-//     //Set done
-//     var done = (pet) =>
-//         pet.tasksIds.map(
-//           (id) => TasksData[id].type === listFilters[2].type && TasksData[id]
-//         );
-//     setDone(done);
-//   };
+    var tasks = pet.tasksIds.map((id) => TasksData[id])
+
+    //Set upcoming
+    var upcoming =
+      tasks.filter((task) => (task.type == listFilters[1].type));
+    setUpcoming(upcoming);
+
+    //Set done
+    var done =
+      tasks.filter(
+        (task) => (task.type == listFilters[2].type));
+    setDone(done);
+  };
 
   const handlePressNewFeeding = (navigateTo) => {
     navigation.navigate(navigateTo);
@@ -76,18 +75,18 @@ export const Feeding = ({ navigation, route }) => {
     <SafeAreaView style={globalStyles.container}>
       <View>
         <Header title={"Feeding"} showProfile goBack />
-        <View style={{  paddingBottom: 20 }}>
-        <View style={PetPictureStyles.container}{...globalStyles.shadow}>
+        <View style={{ paddingBottom: 20 }}>
+          <View style={PetPictureStyles.container}{...globalStyles.shadow}>
             <Image
-                    style={PetPictureStyles.rectangle}
-                    source={{
-                                uri: pet.photoUrl
-                            }}
-                    resizeMode={'cover'} 
-                />
-                <Text>{pet.name}</Text>
-        </View>
-            
+              style={PetPictureStyles.rectangle}
+              source={{
+                uri: pet.photoUrl
+              }}
+              resizeMode={'cover'}
+            />
+            <Text>{pet.name}</Text>
+          </View>
+
         </View>
         <ScrollView
           style={FeedingStyles.listView}

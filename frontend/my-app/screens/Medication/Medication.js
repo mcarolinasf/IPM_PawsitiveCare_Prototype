@@ -40,33 +40,33 @@ export const Medication = ({ navigation, route }) => {
   const [upcoming, setUpcoming] = useState([]);
   const [done, setDone] = useState([]);
 
-  const { user } = useContext(UserSessionContext);
 
   const setTypeFilter = (type) => {
     setType(type);
   };
 
-//   useEffect(() => {
-//     getData();
-//   }, []);
 
-//   const getData = () => {
-//     var petIds = user.petIds;
+  const getData = () => {
 
-//     //Set upcoming
-//     var upcoming = (pet) =>
-//         pet.tasksIds.map(
-//           (id) => TasksData[id].type === listFilters[1].type && TasksData[id]
-//         );
-//     setUpcoming(upcoming);
+    var tasks = pet.tasksIds.map((id) => TasksData[id])
 
-//     //Set done
-//     var done = (pet) =>
-//         pet.tasksIds.map(
-//           (id) => TasksData[id].type === listFilters[2].type && TasksData[id]
-//         );
-//     setDone(done);
-//   };
+
+    //Set upcoming
+    var upcoming =
+      tasks.filter((task) => (task.type == listFilters[1].type));
+    setUpcoming(upcoming);
+
+
+    //Set done
+    var done =
+      tasks.filter(
+        (task) => (task.type == listFilters[2].type));
+    setDone(done);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const handlePressNewMedication = (navigateTo) => {
     navigation.navigate(navigateTo);
@@ -74,20 +74,18 @@ export const Medication = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={globalStyles.container}>
-      <View>
-        <Header title={"Medication"} showProfile goBack />
-        <View style={{  paddingBottom: 20 }}>
+
+      <Header title={"Medication"} showProfile goBack />
+      <View style={{ paddingBottom: 20 }}>
         <View style={PetPictureStyles.container}{...globalStyles.shadow}>
-            <Image
-                    style={PetPictureStyles.rectangle}
-                    source={{
-                                uri: pet.photoUrl
-                            }}
-                    resizeMode={'cover'} // cover or contain its upto you view look
-                />
-                <Text>{pet.name}</Text>
-        </View>
-            
+          <Image
+            style={PetPictureStyles.rectangle}
+            source={{
+              uri: pet.photoUrl
+            }}
+            resizeMode={'cover'} // cover or contain its upto you view look
+          />
+          <Text>{pet.name}</Text>
         </View>
         <ScrollView
           style={MedicationStyles.listView}
@@ -97,6 +95,7 @@ export const Medication = ({ navigation, route }) => {
             <>
               {upcoming && (
                 <>
+                  {/*  <Text>{console.log(upcoming)}</Text> */}
                   <ItemsByTag tasks={upcoming} type={listFilters[1].type} />
                   <View style={{ height: 10 }}></View>
                 </>
@@ -152,7 +151,10 @@ export const Medication = ({ navigation, route }) => {
             </>
           )}
         </ScrollView>
+
       </View>
+
+
     </SafeAreaView>
   );
 };
