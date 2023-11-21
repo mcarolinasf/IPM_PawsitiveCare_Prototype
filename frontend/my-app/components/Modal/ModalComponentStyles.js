@@ -14,39 +14,39 @@ export const ModalComponentStyles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: colors.background,
         borderRadius: 10,
-        paddingHorizontal:30,
-        paddingVertical:20,
+        paddingHorizontal: 30,
+        paddingVertical: 20,
         shadowColor: colors.grey,
-        shadowOffset: {width: 0, height: 2,},
+        shadowOffset: { width: 0, height: 2, },
     },
 
-    actionContainer:{
-        flexDirection:"row",
-        justifyContent:"space-evenly",
-        width:'100%',
-    },
-
-    titleContainer:{
-        justifyContent:"center",
-        alignItems: "center",
-        width:'100%',
-        borderBottomWidth:1,
-        borderColor: colors.grey,
-        paddingBottom:10
-    },
-
-    title :{
-        fontWeight: 'bold',
-    },
-
-    modalContent:{
-        marginTop: 20,
-        paddingVertical:5,
+    actionContainer: {
+        flexDirection: "row",
+        justifyContent: "space-evenly",
         width: '100%',
     },
 
-    actionButton:{
-        backgroundColor:colors.primary
+    titleContainer: {
+        justifyContent: "center",
+        alignItems: "center",
+        width: '100%',
+        borderBottomWidth: 1,
+        borderColor: colors.grey,
+        paddingBottom: 10
+    },
+
+    title: {
+        fontWeight: 'bold',
+    },
+
+    modalContent: {
+        marginTop: 20,
+        paddingVertical: 5,
+        width: '100%',
+    },
+
+    actionButton: {
+        backgroundColor: colors.primary
     },
 
     action: {
@@ -61,7 +61,7 @@ export const ModalComponentStyles = StyleSheet.create({
     },
 
     actionText: {
-        
+
     },
 
     rowContainer: {
@@ -70,6 +70,15 @@ export const ModalComponentStyles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    text: {
+        fontSize: 17,
+        paddingBottom: 30
+    },
+    confAction: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignItems: 'center'
     }
 
- })
+})

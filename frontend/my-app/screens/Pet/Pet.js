@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image, FlatList } from 'react-native'
 import { globalStyles } from '../../styles/globalStyles'
 import { PetStyles } from './PetStyles'
 import MenuCard from '../../components/MenuCard/MenuCard.js';
@@ -10,6 +10,8 @@ import TaskItem from '../../components/TaskItem/TaskItem.js';
 import navigationPaths from '../../navigation/navigationPaths';
 import UserSessionContext from '../../services/UserSessionContext.js';
 import { TasksData } from '../../data/TasksData.js';
+import chart from "../../assets/Chart.png";
+
 
 
 export const Pet = ({ navigation, route }) => {
@@ -38,7 +40,7 @@ export const Pet = ({ navigation, route }) => {
     }
 
     return (
-        <SafeAreaView style={globalStyles.container}>
+        <SafeAreaView style={globalStyles.swipe}>
             <ScrollView>
                 <Header title={pet.name} goBack showProfile />
                 <View style={PetStyles.container}{...globalStyles.shadow} >
@@ -62,6 +64,14 @@ export const Pet = ({ navigation, route }) => {
                             <TaskItem key={task.key} task={task} pressHandler={handleTaskPress} />
                         ))
                     }
+                </View>
+                <View style={{ ...PetStyles.container, ...globalStyles.shadow }}>
+                    <Image
+                        style={PetStyles.chart}
+                        source={chart}
+                    />
+
+
                 </View>
 
             </ScrollView>

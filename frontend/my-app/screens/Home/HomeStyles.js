@@ -1,22 +1,19 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import colors from "../../styles/colors";
 
 export const HomeStyles = StyleSheet.create({
-
   header: {
-    flexDirection: 'row',
+    flexDirection: "row",
     justifyContent: "center",
-    alignItems: 'center',
-    position: 'relative'
-
-
+    alignItems: "center",
+    position: "relative",
   },
   image: {
     height: 35,
     width: 35,
     position: "absolute",
     right: 10,
-    borderRadius: 20
+    borderRadius: 20,
   },
   button: {
     //position: 'absolute'
@@ -25,9 +22,11 @@ export const HomeStyles = StyleSheet.create({
     top: 60,
     height: 33,
     right: 0,
-    marginHorizontal: 10
+    marginHorizontal: 10,
+  },
 
-  }
-
-
+  tasksView: {
+    marginBottom: 90,
+    height: Dimensions.get("window").height - 90,
+  },
 });

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { FilterButton } from "../../components/FilterButton/FilterButton";
 import TaskItem from "../../components/TaskItem/TaskItem";
 
@@ -12,6 +12,7 @@ export const ItemsByTag = ({ tasks, type }) => {
           onPressFunction={() => {}}
           isDarkGrey={false}
           isFlex={false}
+          buttonHeight={30}
         />
       </View>
 

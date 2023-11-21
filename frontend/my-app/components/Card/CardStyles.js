@@ -21,6 +21,7 @@ export const CardStyles = StyleSheet.create({
         justifyContent: "flex-end",
         alignItems: "center",
         },
+  
   selectedCard: {
     backgroundColor: colors.secondary,
     height: 146,
@@ -32,11 +33,11 @@ export const CardStyles = StyleSheet.create({
   },
   text: {
     padding: 5,
-        backgroundColor: colors.white
-    },
-    selectedText: {
-        padding: 5,
-        backgroundColor: colors.secondary
+    backgroundColor: colors.white
+  },
+  selectedText: {
+    padding: 5,
+    backgroundColor: colors.secondary
   },
   image: {
     height: 120,
@@ -45,4 +46,13 @@ export const CardStyles = StyleSheet.create({
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
   },
+  icon: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    backgroundColor: colors.white,
+    borderRadius: 25
+
+  }
+
 });

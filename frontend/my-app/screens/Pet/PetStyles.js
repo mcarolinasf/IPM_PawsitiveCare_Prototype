@@ -21,6 +21,13 @@ export const PetStyles = StyleSheet.create({
 
     },
 
+    chart: {
+        marginVertical: 50,
+        borderRadius: 20,
+        height: screenWidth * 0.6,
+        width: screenWidth * 0.89,
+    }
+
 
 
 

@@ -23,6 +23,7 @@ import { TasksData } from "../../data/TasksData.js";
 export const Home = ({ navigation }) => {
   const [pets, setPets] = useState([]);
   const [tasks, setTasks] = useState([]);
+  let allTasks;
 
   const { user } = useContext(UserSessionContext);
 
@@ -43,12 +44,19 @@ export const Home = ({ navigation }) => {
 
     //Set tasks
     const tasks = pets.flatMap((pet) =>
-      pet.tasksIds.map((id) => TasksData[id])
+      pet.tasksIds.map((id) => TasksData[id].done === false && TasksData[id])
     );
     setTasks(tasks);
   };
 
   const handleTaskPress = (key) => {
+    TasksData[key].done = true;
+    console.log(key);
+    console.log(TasksData[0]);
+    console.log(TasksData[1]);
+    console.log(TasksData[2]);
+    console.log(TasksData[3]);
+    console.log(TasksData[4]);
     setTasks((prevTasks) => prevTasks.filter((task) => task.id != key));
   };
 
@@ -64,10 +72,11 @@ export const Home = ({ navigation }) => {
       <ScrollView
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-        style={{ height: "25%" }}
+        style={{ height: 260 }}
       >
+        {/* If it has tasks in the day set hasNotification to true in item?? */}
         {pets.map((item) => (
-          <Card key={item.id} item={item} pressHandler={cardPressHandler} />
+          <Card key={item.id} item={item} pressHandler={cardPressHandler} hasNotification={'yes'} />
         ))}
         <View style={HomeStyles.button}>
           <AntDesign
@@ -82,7 +91,7 @@ export const Home = ({ navigation }) => {
       <Text style={globalStyles.subtitleText}>Today</Text>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{ marginBottom: 90, height: "75%" }}
+        style={HomeStyles.tasksView}
       >
         <View>
           {tasks.map((task) => (
