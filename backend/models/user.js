@@ -5,10 +5,11 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
   idU: { type: String, required: true },
   name: { type: String, required: true },
-  email: { type: String, required: true },
+  password: { type: String, required: true },
   photoUrl: { type: String },
-  position: { type: String },
-  pets: { type: [String], required: true },
+  petIds: { type: [String] },
+  tasksIds: { type: [String] },
+  entryIds: { type: [String] },
 });
 
 const User = mongoose.model('users', userSchema);

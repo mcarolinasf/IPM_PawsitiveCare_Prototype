@@ -11,6 +11,7 @@ export const TasksData = {
     owners: ["admin"],
     done: false,
     trainingPlanId: -1,
+    info: {"periodicity": "2"}
   },
   1: {
     id: 1,
@@ -104,6 +105,29 @@ export const TasksData = {
     id: 9,
     text: "Obidience",
     type: TaskType.COACHING,
+    time: "16:00",
+    date: "2023-11-19",
+    petId: 2,
+    owners: ["admin"],
+    done: false,
+    trainingPlanId: 2,
+  },
+
+  10: {
+    id: 10,
+    text: "Obidience",
+    type: 'Upcoming',
+    time: "16:00",
+    date: "2023-11-19",
+    petId: 2,
+    owners: ["admin"],
+    done: false,
+    trainingPlanId: 2,
+  },
+  11: {
+    id: 11,
+    text: "Obidience",
+    type: 'Done',
     time: "16:00",
     date: "2023-11-19",
     petId: 2,

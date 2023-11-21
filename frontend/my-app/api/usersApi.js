@@ -6,10 +6,15 @@ import axios from 'axios';
 const baseURL = CONSTANTS.BACKEND_URL_API + "/users";
 
 
+export const createUser = async (user) => {
+  const response = await request("post", baseURL, user);
+  return response.data;
+}
+
 export const getAll = async () => {
-  
+
   const response = await request("get", baseURL);
-  return response.data; 
+  return response.data;
 };
 
 export const getUser = async (idU) => {

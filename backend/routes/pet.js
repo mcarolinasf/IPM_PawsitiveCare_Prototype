@@ -4,19 +4,29 @@ const router = express.Router();
 
 const pet = require("../controllers/pet");
 
-const userAPI = "/api/pets";
+const petAPI = "/pets";
 
-router.post(userAPI, pet.createPet);
+router.get(petAPI + "/:idP", pet.getPet);
 
-router.delete(userAPI + "/:idP",  pet.deletePet);
+router.get(petAPI,  pet.getAll);
 
-router.get(userAPI + "/:idP", pet.getPet);
 
-router.get(userAPI,  pet.getAll);
+/*          Tasks          */
 
-router.put(userAPI + "/:idP",  pet.updatePet);
 
-router.get(userAPI + "/:idU/tasks",  pet.getPetTasks);
+router.get(petAPI + "/:idU/tasks",  pet.getPetTasks);
+
+
+
+/*          Entries          */
+
+router.post(petAPI + ":idP/entries", task.createEntry);
+
+router.delete(petAPI + ":idP/entries/:idE",  task.deleteEntry);
+
+router.put(petAPI + ":idP/entries/:idE",  task.updateEntry);
+
+router.get(petAPI + ":idP/entries",  task.getPetEntries);
 
 
 

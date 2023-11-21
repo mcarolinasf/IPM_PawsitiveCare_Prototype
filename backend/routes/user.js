@@ -16,6 +16,15 @@ router.get(userAPI,  user.getAll);
 
 router.put(userAPI + "/:idU",  user.updateUser);
 
+
+/*          Pet          */
+
+router.post(userAPI + "/:idU/pets",  user.addPet);
+
+router.put(userAPI + "/:idU/pets/:idP",  user.updatePet);
+
+router.delete(userAPI + "/:idU/pets/:idP",  user.deletePet);
+
 router.get(userAPI + "/:idU/pets",  user.getUserPets);
 
 
