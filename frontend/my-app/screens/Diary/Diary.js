@@ -61,7 +61,7 @@ export const Diary = () => {
         <Header title={"Diary"} showProfile />
         <ScrollView horizontal={true}>
           {
-            diaryEntry.map(item => (
+            diaryEntry.slice().reverse().map(item => (
               <MenuCard key={item.id} iconName={'paw'} title={item.title} subtitle={item.date} item={item} setFunction={selectDiaryEntry} selected={selectedEntry} />
             ))
           }

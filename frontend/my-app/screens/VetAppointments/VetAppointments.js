@@ -68,7 +68,7 @@ export const VetAppointments = ({ navigation }) => {
                 <ScrollView horizontal={true}>
                     {
                         /* Maybe change direction of list */
-                        vetApp.map(item => (
+                        vetApp.slice().reverse().map(item => (
                             <MenuCard key={item.id} iconName={'paw'} title={'Vet App ' + item.id} item={item} subtitle={item.date} setFunction={selectVetApp} selected={selectedEntry} />
                         ))
                     }
