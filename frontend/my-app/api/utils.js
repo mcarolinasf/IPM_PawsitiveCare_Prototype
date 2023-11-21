@@ -1,8 +1,12 @@
 import axios from 'axios';
 
 export const request = async (method, url, data) => {
+
+    const headers = {
+        'Content-Type': 'application/json', // Example of setting the Content-Type header
+      };
   
-    return axios({ method, url, data });
+    return axios({ method, url, data, headers });
 
   }; 
 /* 
