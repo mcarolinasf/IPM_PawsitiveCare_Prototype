@@ -11,10 +11,8 @@ const taskSchema = new mongoose.Schema({
   time: { type: String, required: true },
   date: { type: String, required: true },
   petId: { type: String, required: true },
-  //Set default false?
-  done: { type: String },
-  //May not be needed
-  owners: { type: [String], required: true },
+  done: { type: Boolean, default: false },
+  ownersIds: { type: [String], required: true },
   trainingPlanId: { type: String },
 
 });

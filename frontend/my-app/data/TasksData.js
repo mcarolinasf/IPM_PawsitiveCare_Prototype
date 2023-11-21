@@ -11,6 +11,7 @@ export const TasksData = {
     owners: ["admin"],
     done: false,
     trainingPlanId: -1,
+    info: {"periodicity": "2"}
   },
   1: {
     id: 1,
