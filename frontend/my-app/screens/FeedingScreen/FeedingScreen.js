@@ -1,178 +1,168 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { View, Text, SafeAreaView, ScrollView, Image, TouchableOpacity, TouchableHighlight } from 'react-native'
-import Header from '../../components/Header/Header'
-import { globalStyles } from '../../styles/globalStyles'
-import { FeedingScreenStyles } from './AddFeedingStyles'
-import { FontAwesome5 } from '@expo/vector-icons';
-import colors from '../../styles/colors'
-import * as ImagePicker from 'expo-image-picker';
-import TextInputDefault from '../../components/TextInputDefault/TextInputDefault'
-import { CustomButton } from '../../components/CustomButton/CustomButton'
-import { PetsData } from '../../data/petsDataArray'
-import { SelectList } from 'react-native-dropdown-select-list'
-import { ModalComponent } from '../../components/Modal/ModalComponent';
-import { SchedulingActions as actions } from '../../data/SchedulingActions';
-import UserSessionContext from '../../services/UserSessionContext.js';
-import { AntDesign } from '@expo/vector-icons';
-import SelectableCard from '../../components/Card/SelectableCard'
-import { CardStyles } from '../../components/Card/CardStyles.js'
+import React, { useState, useEffect } from "react";
+import { View, Text, SafeAreaView, ScrollView, Image } from "react-native";
+import { globalStyles } from "../../styles/globalStyles";
+import { FilterButton } from "../../components/FilterButton/FilterButton";
+import Header from "../../components/Header/Header";
+import { FeedingStyles } from "./FeedingStyles.js";
+import { Ionicons } from "@expo/vector-icons";
+import Divider from "../../components/Divider";
+import { NewButton } from "../../components/NewButton/NewButton";
+import colors from "../../styles/colors";
+import UserSessionContext from "../../services/UserSessionContext.js";
+import { PetsData } from "../../data/PetsData.js";
+import { TasksData } from "../../data/TasksData.js";
+import { useContext } from "react";
+import { ItemsByTag } from "../../components/ItemsByTag/ItemsByTag.js";
+import navigationPaths from "../../navigation/navigationPaths.js";
+import { PetPicture } from "../../components/PetPicture/PetPicture.js";
+import { PetPictureStyles } from "../../components/PetPicture/PetPictureStyles.js";
 
+const listFilters = [
+  {
+    type: "All",
+    darkGrey: true,
+  },
+  {
+    type: "Upcoming",
+    darkGrey: false,
+  },
+  {
+    type: "Done",
+    darkGrey: false,
+  },
+];
 
+export const Feeding = ({ navigation, route }) => {
 
+  const { pet } = route.params;
 
+  const [type, setType] = useState(listFilters[0].type);
+  const [upcoming, setUpcoming] = useState([]);
+  const [done, setDone] = useState([]);
 
+  const { user } = useContext(UserSessionContext);
 
-export const FeedingScreen = ({ navigation }) => {
+  const setTypeFilter = (type) => {
+    setType(type);
+  };
 
-    const [image, setImage] = useState();
-    const [petSelected, setPetSelected] = useState("");
-    const [petSelectedCard, setPetSelectedCard] = useState(null);
-    const [pets, setPets] = useState([]);
-    const [newFeeding, setNewFeeding] = useState({
-        petName: '',
-        food: '',
-        startD: '',
-        endD: '',
-        period: '',
-        doseage: ''
-    });
-    const [scheduleModalVisible, setScheduleModalVisible] = useState(false);
+//   useEffect(() => {
+//     getData();
+//   }, []);
 
-    const { user } = useContext(UserSessionContext);
+//   const getData = () => {
+//     var petIds = user.petIds;
 
-    const handleButtonPress = (buttonId) => {
-        setSelectedButton(buttonId);
-    };
+//     //Set upcoming
+//     var upcoming = (pet) =>
+//         pet.tasksIds.map(
+//           (id) => TasksData[id].type === listFilters[1].type && TasksData[id]
+//         );
+//     setUpcoming(upcoming);
 
-    const cardPressHandler = (item) => {
-        if(petSelected === "")
-            setPetSelected(item.name);
-        else
-            setPetSelected("");
-    }
+//     //Set done
+//     var done = (pet) =>
+//         pet.tasksIds.map(
+//           (id) => TasksData[id].type === listFilters[2].type && TasksData[id]
+//         );
+//     setDone(done);
+//   };
 
-    //Set pets
-    let petNames = [];
-    
-    PetsData.forEach(element => {
-        petNames.push(element.name)
-    });
+  const handlePressNewFeeding = (navigateTo) => {
+    navigation.navigate(navigateTo);
+  };
 
-    let petIds = PetsData.map((pet) => pet.id);
-    
-    useEffect(() => {
-        getData()
-      }, [])
-    
-    
-    const getData = () => {
-        var petIds = user.petIds;
-
-        //Set pets
-        var pets = petIds.map((id) => PetsData[id]);
-        setPets(pets);
-    }
-
-    //Review
-
-    const addFeeding = () => {
-
-        const newFeedingId = Object.keys(FeedingsData).length;
-
-        // Create a new pet object with the provided information
-        const newFeedingObject = {
-            id: newFeedingId,
-            petName: petSelected,
-            food: newFeeding.food,
-            startD: newFeeding.startD,
-            endD: newFeeding.endD,
-            period: newFeeding.period,
-            doseage: newFeeding.doseage
-        };
-
-        // Update the FeedingsData object with the new pet
-        FeedingsData[newFeedingId] = newFeedingObject;
-
-        // Log the updated FeedingsData object
-        console.log(FeedingsData);
-
-        // Clear the form or navigate to another screen if needed
-        setNewFeeding({
-            petName: '',
-            food: '',
-            startD: '',
-            endD: '',
-            period: '',
-            doseage: ''
-        });
-
-        navigation.goBack();
-    };
-
-
-    handlePetPickPopup = () => {
-        setScheduleModalVisible(!scheduleModalVisible);
-    }
-
-    const [selectedComponent, setSelectedComponent] = useState(null);
-
-    const handleSelectComponent = (componentId) => {
-        setSelectedComponent(componentId);
-    };
-    
-    const SelectableComponent = ({ id, selected, onSelect, data }) => {
-        const handlePress = () => {
-          onSelect(id);
-        };
-      
-        return (
-          <TouchableOpacity
-            style={[CardStyles.card, selected && CardStyles.selectedCard]}
-            onPress={handlePress}
-          >
-            <SelectableCard key={data.id} item={data} isSelected={data.id === selectedComponent} pressHandler={cardPressHandler} />
-          </TouchableOpacity>
-        );
-    };
-
-    return (
-        <SafeAreaView style={globalStyles.container}>
-            <ScrollView>
-                <Header title={'Schedule Feeding'} goBack />
-
-                <Text style={globalStyles.selectPetText}>Select pet</Text>
-
-                <ScrollView horizontal={true}>
-                    {pets.map((item, i) => (
-                        <SelectableComponent 
-                            id = {i}
-                            selected = {selectedComponent === i}
-                            onSelect={handleSelectComponent(i)}
-                            data = {item}
-                        >
-                            
-                        </SelectableComponent>
-                    ))}
-                </ScrollView>
-
-                <Text>Debug: Pet selected: {selectedComponent}</Text>
-
-                <View style={{ paddingHorizontal: 10 }}>
-                    <TextInputDefault label={'Food'} setFunction={(value) => setNewFeeding({ ...newFeeding, food: value })} value={newFeeding.food} />
-                    <TextInputDefault label={'Starting Date'} setFunction={(value) => setNewFeeding({ ...newFeeding, startD: value })} value={newFeeding.food} />
-                    <TextInputDefault label={'End Date'} setFunction={(value) => setNewFeeding({ ...newFeeding, endD: value })} value={newFeeding.food} />
-                    <TextInputDefault label={'Periodicity'} setFunction={(value) => setNewFeeding({ ...newFeeding, period: value })} value={newFeeding.food} />
-                    <TextInputDefault label={'Dosage'} setFunction={(value) => setNewFeeding({ ...newFeeding, dosage: value })} value={newFeeding.food} />
-                    
-              
-                </View>
-                <View style={{ paddingVertical: 10 }}>
-                    <CustomButton title={'Add'} onPressFunction={addFeeding} />
-                </View>
-
-            </ScrollView>
-        </SafeAreaView >
-    )
-
-}
-
+  return (
+    <SafeAreaView style={globalStyles.container}>
+      <View>
+        <Header title={"Feeding"} showProfile goBack />
+        <View style={{  paddingBottom: 20 }}>
+          {/* <View style={PetPictureStyles.rectangle}>
+        
+          <Image
+                        
+                        source={{uri:'https://cdn.britannica.com/92/212692-004-D4E5AD34/labradoodle-dog-stick-running-grass.jpg'}} 
+                        // source={{
+                        //     uri: pet.photoUrl
+                        // }}
+          />
+          </View> */}
+        <View style={PetPictureStyles.container}{...globalStyles.shadow}>
+            <Image
+                    style={PetPictureStyles.rectangle}
+                    source={{
+                                uri: pet.photoUrl
+                            }}
+                    resizeMode={'cover'} // cover or contain its upto you view look
+                />
+                <Text>{pet.name}</Text>
+        </View>
+            
+        </View>
+        <ScrollView
+          style={FeedingStyles.listView}
+          showsVerticalScrollIndicator={false}
+        >
+          {type === listFilters[0].type && (
+            <>
+              {upcoming && (
+                <>
+                  <ItemsByTag tasks={upcoming} type={listFilters[1].type} />
+                  <View style={{ height: 10 }}></View>
+                </>
+              )}
+              {done && (
+                <ItemsByTag tasks={done} type={listFilters[2].type} />
+              )}
+              {!upcoming && !done && (
+                <Text
+                  style={{
+                    alignSelf: "center",
+                    color: colors.secondary,
+                    marginTop: 50,
+                  }}
+                >
+                  No Feedings schedule
+                </Text>
+              )}
+            </>
+          )}
+          {type === listFilters[1].type && (
+            <>
+              {upcoming ? (
+                <ItemsByTag tasks={upcoming} type={type} />
+              ) : (
+                <Text
+                  style={{
+                    alignSelf: "center",
+                    color: colors.secondary,
+                    marginTop: 50,
+                  }}
+                >
+                  No Feedings schedule
+                </Text>
+              )}
+            </>
+          )}
+          {type === listFilters[2].type && (
+            <>
+              {done ? (
+                <ItemsByTag tasks={done} type={type} />
+              ) : (
+                <Text
+                  style={{
+                    alignSelf: "center",
+                    color: colors.secondary,
+                    marginTop: 50,
+                  }}
+                >
+                  No Feedings schedule
+                </Text>
+              )}
+            </>
+          )}
+        </ScrollView>
+      </View>
+    </SafeAreaView>
+  );
+};
