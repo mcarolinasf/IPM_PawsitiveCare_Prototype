@@ -109,7 +109,10 @@ export const Training = ({ navigation }) => {
           />
         </View>
 
-        <ScrollView style={TrainingStyles.listView}>
+        <ScrollView
+          style={TrainingStyles.listView}
+          showsVerticalScrollIndicator={false}
+        >
           {type === listFilters[0].type && (
             <>
               {tricks && (
