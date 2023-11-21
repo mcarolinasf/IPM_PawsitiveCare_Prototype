@@ -16,6 +16,9 @@ router.get(userAPI,  user.getAll);
 
 router.put(userAPI + "/:idU",  user.updateUser);
 
+
+/*          Pet          */
+
 router.post(userAPI + "/:idU/pets",  user.addPet);
 
 router.put(userAPI + "/:idU/pets/:idP",  user.updatePet);

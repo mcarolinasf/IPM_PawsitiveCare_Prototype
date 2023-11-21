@@ -6,10 +6,9 @@ const Pet = require('../models/pet');
 
 
 const createUserSchema = Joi.object({
-  idU: Joi.string().required(),
   name: Joi.string().required(),
   email: Joi.string().required(),
-  photoUrl: Joi.string().required(),
+  photoUrl: Joi.string(),
   password: Joi.string().required(),
   petIds: Joi.array().items(Joi.string()),
 });
