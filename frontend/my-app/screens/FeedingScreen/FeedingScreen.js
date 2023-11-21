@@ -2,13 +2,13 @@ import React, { useContext, useState, useEffect } from 'react'
 import { View, Text, SafeAreaView, ScrollView, Image, TouchableOpacity, TouchableHighlight } from 'react-native'
 import Header from '../../components/Header/Header'
 import { globalStyles } from '../../styles/globalStyles'
-import { FeedingScreenStyles } from './AddFeedingStyles'
+import { FeedingScreenStyles } from './FeedingScreenStyles'
 import { FontAwesome5 } from '@expo/vector-icons';
 import colors from '../../styles/colors'
 import * as ImagePicker from 'expo-image-picker';
 import TextInputDefault from '../../components/TextInputDefault/TextInputDefault'
 import { CustomButton } from '../../components/CustomButton/CustomButton'
-import { PetsData } from '../../data/petsDataArray'
+import { PetsData } from '../../data/PetsDataArray'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { ModalComponent } from '../../components/Modal/ModalComponent';
 import { SchedulingActions as actions } from '../../data/SchedulingActions';
@@ -45,7 +45,7 @@ export const FeedingScreen = ({ navigation }) => {
     };
 
     const cardPressHandler = (item) => {
-        if(petSelected === "")
+        if (petSelected === "")
             setPetSelected(item.name);
         else
             setPetSelected("");
@@ -53,18 +53,18 @@ export const FeedingScreen = ({ navigation }) => {
 
     //Set pets
     let petNames = [];
-    
+
     PetsData.forEach(element => {
         petNames.push(element.name)
     });
 
     let petIds = PetsData.map((pet) => pet.id);
-    
+
     useEffect(() => {
         getData()
-      }, [])
-    
-    
+    }, [])
+
+
     const getData = () => {
         var petIds = user.petIds;
 
@@ -119,19 +119,19 @@ export const FeedingScreen = ({ navigation }) => {
     const handleSelectComponent = (componentId) => {
         setSelectedComponent(componentId);
     };
-    
+
     const SelectableComponent = ({ id, selected, onSelect, data }) => {
         const handlePress = () => {
-          onSelect(id);
+            onSelect(id);
         };
-      
+
         return (
-          <TouchableOpacity
-            style={[CardStyles.card, selected && CardStyles.selectedCard]}
-            onPress={handlePress}
-          >
-            <SelectableCard key={data.id} item={data} isSelected={data.id === selectedComponent} pressHandler={cardPressHandler} />
-          </TouchableOpacity>
+            <TouchableOpacity
+                style={[CardStyles.card, selected && CardStyles.selectedCard]}
+                onPress={handlePress}
+            >
+                <SelectableCard key={data.id} item={data} isSelected={data.id === selectedComponent} pressHandler={cardPressHandler} />
+            </TouchableOpacity>
         );
     };
 
@@ -144,13 +144,13 @@ export const FeedingScreen = ({ navigation }) => {
 
                 <ScrollView horizontal={true}>
                     {pets.map((item, i) => (
-                        <SelectableComponent 
-                            id = {i}
-                            selected = {selectedComponent === i}
+                        <SelectableComponent
+                            id={i}
+                            selected={selectedComponent === i}
                             onSelect={handleSelectComponent(i)}
-                            data = {item}
+                            data={item}
                         >
-                            
+
                         </SelectableComponent>
                     ))}
                 </ScrollView>
@@ -163,8 +163,8 @@ export const FeedingScreen = ({ navigation }) => {
                     <TextInputDefault label={'End Date'} setFunction={(value) => setNewFeeding({ ...newFeeding, endD: value })} value={newFeeding.food} />
                     <TextInputDefault label={'Periodicity'} setFunction={(value) => setNewFeeding({ ...newFeeding, period: value })} value={newFeeding.food} />
                     <TextInputDefault label={'Dosage'} setFunction={(value) => setNewFeeding({ ...newFeeding, dosage: value })} value={newFeeding.food} />
-                    
-              
+
+
                 </View>
                 <View style={{ paddingVertical: 10 }}>
                     <CustomButton title={'Add'} onPressFunction={addFeeding} />
