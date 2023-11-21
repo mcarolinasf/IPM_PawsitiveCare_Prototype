@@ -1,9 +1,11 @@
 
 const express = require('express');
+
+const serverless = require('serverless-http')
+
 const app = express();
 const mongooseConnection = require('./config/connection'); 
 
-const User = require('./models/user'); 
 
 app.use(express.json());
 
@@ -18,6 +20,9 @@ mongooseConnection.once('open', () => {
 
 // Use your routes after the server starts
 const userRoutes = require('./routes/user');
-app.use('/', userRoutes);
+app.use('/.netlify/functions/api', userRoutes);
+
+
+module.exports.handler = serverless(app);
 
 

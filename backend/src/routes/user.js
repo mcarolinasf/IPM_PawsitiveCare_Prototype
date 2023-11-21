@@ -4,7 +4,7 @@ const router = express.Router();
 
 const user = require("../controllers/user");
 
-const userAPI = "/api/users";
+const userAPI = "/users";
 
 router.post(userAPI, user.createUser);
 
