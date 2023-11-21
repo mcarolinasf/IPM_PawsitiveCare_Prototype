@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { TextInputDefaultStyles } from "./TextInputDefaultStyles";
 
-export default function TextInputDefault({ label, isSecure, setFunction, value, keyboardType, onPress, notEditable }) {
+export default function TextInputDefault({ label, isSecure, setFunction, value, keyboardType, onPress, notEditable, placeholder }) {
 
   const handleTextChange = (text) => {
     setFunction(text);
@@ -19,6 +19,7 @@ export default function TextInputDefault({ label, isSecure, setFunction, value, 
           value={value}
           keyboardType={keyboardType ? keyboardType : "default"}
           editable={!notEditable}
+          placeholder={placeholder}
         />
       </View>
     </TouchableOpacity>
