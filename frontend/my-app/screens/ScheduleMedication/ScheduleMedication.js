@@ -11,7 +11,7 @@ import { ScheduleMedicationStyles } from './ScheduleMedicationStyles.js';
 import { TasksData } from '../../data/TasksData.js';
 import { CustomButton } from '../../components/CustomButton/CustomButton.js';
 import { TaskType } from '../../data/TaskType.js';
-import fs from 'fs';
+
 
 export const ScheduleMedication = ({navigation, route}) => {
 
