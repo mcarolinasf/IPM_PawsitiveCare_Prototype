@@ -33,14 +33,14 @@ export const Login = ({ navigation }) => {
   const handleLogin = async () => {
 
     // Needs to be tested 
-    
+
     try {
 
       //Method for login after
       const user = await usersApi.getUser(email.toLowerCase().trim())
-      if(user != null) setUserSession(user);
+      if (user != null) setUserSession(user);
       console.log("USER: " + user)
-      
+
     } catch (error) {
       //_handleLoginError(error.message);
       console.log("Error Message: " + error.message)

@@ -13,7 +13,7 @@ import colors from "../../../styles/colors.js";
 import { useNavigation } from "@react-navigation/native";
 import navigationPaths from "../../../navigation/navigationPaths.js";
 
-export const InitialPage = ({navigation}) => {
+export const InitialPage = ({ navigation }) => {
   onPressSignIn = () => {
     // Navigate to the Login screen
     navigation.navigate(navigationPaths.login);
