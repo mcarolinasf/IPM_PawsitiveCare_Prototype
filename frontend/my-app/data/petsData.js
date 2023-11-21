@@ -52,7 +52,7 @@ export const PetsData = {
     weight: "",
     photoUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpnhjZPqOwRcDXdFn5gEY49CVEb7QIiat4UA&usqp=CAU",
-    tasksIds: [2, 3, 4],
+    tasksIds: [2, 3, 4, 5, 6, 7, 8],
     diaryEntrysIds: [2, 3],
     vetAppointIds: [2],
     ownersIds: ["admin"],

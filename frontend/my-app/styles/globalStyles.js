@@ -1,5 +1,7 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import colors from "./colors";
+
+
 
 export const globalStyles = StyleSheet.create({
   container: {
@@ -68,7 +70,7 @@ export const globalStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
-  
+
   selectPetText: {
     fontSize: 18,
     height: 25,
@@ -77,4 +79,16 @@ export const globalStyles = StyleSheet.create({
     marginBottom: 5,
     marginLeft: 9
   },
+
+  swipe: {
+    backgroundColor: colors.background,
+    flex: 1,
+    justifyContent: 'center',
+    width: Dimensions.get('window').width,
+    padding: 10
+
+
+  }
+
+
 });

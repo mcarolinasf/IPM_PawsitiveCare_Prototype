@@ -64,7 +64,7 @@ export const VetAppointments = ({ navigation }) => {
     return (
         <SafeAreaView style={globalStyles.container}>
             <ScrollView>
-                <Header title={'Vet Appoint'} goBack showProfile />
+                <Header title={'Vet\nAppointments'} goBack showProfile />
                 <ScrollView horizontal={true}>
                     {
                         /* Maybe change direction of list */
@@ -75,7 +75,7 @@ export const VetAppointments = ({ navigation }) => {
                 </ScrollView>
                 <Divider />
                 <View style={{ alignItems: 'flex-end', marginTop: 15 }}>
-                    <CustomButton title={'New Vet Appointment'} iconName={'plus'} onPressFunction={addVetAppointment} />
+                    <CustomButton title={'New entry'} iconName={'plus'} onPressFunction={addVetAppointment} />
                 </View>
                 {/* Todo: Add pop up and its functionality */}
                 <NoteTacker selectedEntry={selectedEntry} />

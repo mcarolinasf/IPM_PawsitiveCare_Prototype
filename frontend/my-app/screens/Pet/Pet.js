@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image, FlatList } from 'react-native'
 import { globalStyles } from '../../styles/globalStyles'
 import { PetStyles } from './PetStyles'
 import MenuCard from '../../components/MenuCard/MenuCard.js';
@@ -38,7 +38,7 @@ export const Pet = ({ navigation, route }) => {
     }
 
     return (
-        <SafeAreaView style={globalStyles.container}>
+        <SafeAreaView style={globalStyles.swipe}>
             <ScrollView>
                 <Header title={pet.name} goBack showProfile />
                 <View style={PetStyles.container}{...globalStyles.shadow} >

@@ -22,6 +22,7 @@ import { Body } from '../screens/Body/Body';
 import { Medication } from '../screens/Medication/Medication';
 
 
+
 const Stack = createNativeStackNavigator();
 
 
@@ -44,6 +45,7 @@ export const Navigation = () => {
             <Stack.Screen name={navigationScreens.body} component={Body} />
             <Stack.Screen name={navigationScreens.medication} component={Medication} />
             <Stack.Screen name={navigationScreens.scheduleMed} component={ScheduleMedication} />
+
           </>
           :
           <>
