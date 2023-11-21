@@ -24,33 +24,26 @@ export const Login = ({ navigation }) => {
   const [password, setPassword] = useState("");
 
 
-  useEffect(() => {
-    getData()
-  },[])
-
-
-  const getData = async () => {
-
-    const response = await usersApi.getAll();
-    console.log("ALL USERS " + response)
-  }
-
 
   onPressRegister = () => {
     // Navigate to the Register screen
-    //navigation.navigate(navigationPaths.register);
-
+    navigation.navigate(navigationPaths.register);
   };
 
+  const handleLogin = async () => {
 
-  const handleLogin = () => {
+    // Needs to be tested 
+    
+    try {
 
-    var user = userData[email.toLowerCase().trim()];
-
-    if (user != null && user.pwd === password) {
-      setUserSession(user);
-    } else {
-      console.log("Error")
+      //Method for login after
+      const user = await usersApi.getUser(email.toLowerCase().trim())
+      if(user != null) setUserSession(user);
+      console.log("USER: " + user)
+      
+    } catch (error) {
+      //_handleLoginError(error.message);
+      console.log("Error Message: " + error.message)
       setEmail("")
       setPassword("")
     }

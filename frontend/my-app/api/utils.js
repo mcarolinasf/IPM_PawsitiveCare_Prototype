@@ -14,6 +14,7 @@ export const request = async (method, url, data) => {
     return axios({ method, url, data, headers });
 
   }; 
+  
 /* 
   export const request = async (method, url, data) => {
     try {
