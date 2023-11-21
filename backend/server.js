@@ -3,7 +3,8 @@ const express = require('express');
 const app = express();
 const mongooseConnection = require('./config/connection'); // Import Mongoose connection
 
-const User = require('./models/user'); // Import your Mongoose model
+var cors = require('cors');
+app.use(cors());
 
 app.use(express.json());
 
