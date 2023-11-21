@@ -8,7 +8,10 @@ import { DatePickerComponent } from '../../components/DatePicker/DatePickerCompo
 import { PickPetModal } from '../../components/Modal/PickPetModal';
 import { PetPicker } from '../../components/PetPicker/PetPicker.js';
 import { ScheduleMedicationStyles } from './ScheduleMedicationStyles.js';
-
+import { TasksData } from '../../data/TasksData.js';
+import { CustomButton } from '../../components/CustomButton/CustomButton.js';
+import { TaskType } from '../../data/TaskType.js';
+import fs from 'fs';
 
 export const ScheduleMedication = ({navigation, route}) => {
 
@@ -29,17 +32,42 @@ export const ScheduleMedication = ({navigation, route}) => {
     periodicity: '',
     dosage: '',
     alarm: false,
+  })
 
-})
+  const addTask = () => {
+
+    //Add taskId in pet
+
+    //Create task and store
+    const newTaskId = Object.keys(TasksData).length;
+
+    const newTaskObject = {
+      id: newTaskId,
+      text: newMedication.medicine,
+      type: TaskType.HEALTH,
+      time: newMedication.time,
+      date: newMedication.startDate,
+      petId: pet.id,
+      owners: pet.owners,
+      done: false,
+      info: {dosage: newMedication.dosage, periodicity: newMedication.periodicity}
+    }
+
+    TasksData[newTaskId] = newTaskObject;
+    console.log(TasksData)
+
+   /*  // Write the updated data back to the file
+    try {
+      fs.writeFileSync('TasksData.js', `export const TasksData = ${JSON.stringify(TasksData, null, 2)};`);
+    } catch (error) {
+      console.error('Error writing TasksData file:', error);
+    } */
+
+    navigation.goBack();
+
+  }
 
 
-  const setField = (fieldName, value) => {
-    setNewMedication((prevMedication) => ({
-      ...prevMedication,
-      [fieldName]: value,
-    }));
-    console.log(newMedication)
-  };
 
   return (
     <SafeAreaView style={globalStyles.container}>
@@ -50,18 +78,22 @@ export const ScheduleMedication = ({navigation, route}) => {
         <PetPicker url={pet.photoUrl} handleModal={handlePetModal}/>
         
         <View style={ScheduleMedicationStyles.inputsContainer}>
-          <TextInputDefault label={'Select medicine'} setFunction={(value) => setField('medicine', value)} value={newMedication.medicine} />
+          <TextInputDefault label={'Select medicine'} setFunction={(value) => setNewMedication({ ...newMedication, medicine: value })} value={newMedication.medicine} />
           <View style={[globalStyles.rowCenter]} >
             <View style={ScheduleMedicationStyles.multipleInputContainer} >
-              <DatePickerComponent label={'Start Date'} setFunction={(value) => setField('startDate', value)} value={newMedication.startDate} />
+              <DatePickerComponent label={'Start Date'} setFunction={(value) => setNewMedication({ ...newMedication, startDate: value })} value={newMedication.startDate} />
             </View>
             <View style={ScheduleMedicationStyles.multipleInputContainer} >
-              <DatePickerComponent label={'End Date'} setFunction={(value) => setField('endDate', value)} value={newMedication.endDate} />
+              <DatePickerComponent label={'End Date'} setFunction={(value) => setNewMedication({ ...newMedication, endDate: value })} value={newMedication.endDate} />
             </View>
           </View>
-          <DatePickerComponent label={'Time'} setFunction={(value) => setField('time', value)} value={newMedication.time} time />
-          <TextInputDefault label={'Periodicity'} setFunction={(value) => setField('periodicity', value)} value={newMedication.periodicity} />
-          <TextInputDefault label={'Dosage (mg)'} setFunction={(value) => setField('dosage', value)} value={newMedication.dosage} keyboardType={'numeric'} />
+          <DatePickerComponent label={'Time'} setFunction={(value) => setNewMedication({ ...newMedication, time: value })} value={newMedication.time} time />
+          <TextInputDefault label={'Periodicity'} setFunction={(value) => setNewMedication({ ...newMedication, periodicity: value })} value={newMedication.periodicity} />
+          <TextInputDefault label={'Dosage (mg)'} setFunction={(value) => setNewMedication({ ...newMedication, dosage: value })} value={newMedication.dosage} keyboardType={'numeric'} />
+        </View>
+
+        <View style={{ paddingVertical: 10 }}>
+            <CustomButton title={'Schedule'} onPressFunction={addTask} />
         </View>
 
       </ScrollView>
