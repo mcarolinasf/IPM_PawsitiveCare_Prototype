@@ -1,11 +1,9 @@
 
 const express = require('express');
-
-const serverless = require('serverless-http')
-
 const app = express();
-const mongooseConnection = require('./config/connection'); 
+const mongooseConnection = require('./config/connection'); // Import Mongoose connection
 
+const User = require('./models/user'); // Import your Mongoose model
 
 app.use(express.json());
 
@@ -21,8 +19,5 @@ mongooseConnection.once('open', () => {
 // Use your routes after the server starts
 const userRoutes = require('./routes/user');
 app.use('/api', userRoutes);
-
-
-module.exports.handler = serverless(app);
 
 

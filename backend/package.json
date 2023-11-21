@@ -15,8 +15,6 @@
     "joi": "^17.11.0",
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.1",
-    "netlify-lambda": "^2.0.16",
-    "sequelize": "^6.35.1",
-    "serverless-http": "^3.2.0"
+    "sequelize": "^6.35.1"
   }
 }
