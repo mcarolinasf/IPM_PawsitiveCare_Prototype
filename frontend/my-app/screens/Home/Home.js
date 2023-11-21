@@ -61,7 +61,7 @@ export const Home = ({ navigation }) => {
   };
 
   const addPetButtonPressed = () => {
-    navigation.navigate(navigationScreens.addPet);
+    navigation.navigate(navigationPaths.addPet);
   };
 
   const pageTitle = "Home";
@@ -76,7 +76,12 @@ export const Home = ({ navigation }) => {
       >
         {/* If it has tasks in the day set hasNotification to true in item?? */}
         {pets.map((item) => (
-          <Card key={item.id} item={item} pressHandler={cardPressHandler} hasNotification={'yes'} />
+          <Card
+            key={item.id}
+            item={item}
+            pressHandler={cardPressHandler}
+            hasNotification={"yes"}
+          />
         ))}
         <View style={HomeStyles.button}>
           <AntDesign

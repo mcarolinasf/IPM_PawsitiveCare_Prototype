@@ -8,7 +8,7 @@ export const FilterButton = ({
   name,
   onPressFunction,
   isDarkGrey,
-  isFlex,
+
   buttonHeight,
 }) => {
   let buttonBGOpacity = 0.5;
@@ -28,7 +28,7 @@ export const FilterButton = ({
         ...FilterButtonStyles.button,
         backgroundColor: convertedBGColor,
         height: buttonHeight,
-        ...(isFlex ? { flex: 1 } : { width: "100%" }),
+        flex: 1,
       }}
     >
       <Text style={FilterButtonStyles.text}>{name}</Text>

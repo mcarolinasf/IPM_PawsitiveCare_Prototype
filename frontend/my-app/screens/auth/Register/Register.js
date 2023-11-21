@@ -30,9 +30,9 @@ export const Register = ({ navigation }) => {
         <View style={RegisterStyles.container}>
           <Text style={RegisterStyles.register}>Register</Text>
           <View style={RegisterStyles.inputsView}>
-            <TextInputDefault label={"Name"} isSecure={false} />
-            <TextInputDefault label={"Email"} isSecure={false} />
-            <TextInputDefault label={"Password"} isSecure={true} />
+            <TextInputDefault label={"Name   *"} isSecure={false} />
+            <TextInputDefault label={"Email   *"} isSecure={false} />
+            <TextInputDefault label={"Password   *"} isSecure={true} />
             <View style={{ flexDirection: "row" }}>
               {/* TODO: add checkbox */}
               <Text>I agree with terms & conditions</Text>
