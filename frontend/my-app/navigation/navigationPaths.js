@@ -15,5 +15,6 @@ export default {
     addPet: 'AddPet',
     scheduleMed: 'ScheduleMedication',
     scheduleFed: 'ScheduleFeeding',
+    scheduleGroom: 'ScheduleGrooming',
 }
 
