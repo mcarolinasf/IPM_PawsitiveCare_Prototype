@@ -20,7 +20,7 @@ mongooseConnection.once('open', () => {
 
 // Use your routes after the server starts
 const userRoutes = require('./routes/user');
-app.use('/.netlify/functions/api', userRoutes);
+app.use('/api', userRoutes);
 
 
 module.exports.handler = serverless(app);
