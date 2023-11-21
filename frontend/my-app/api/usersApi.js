@@ -2,39 +2,14 @@ import { CONSTANTS, request } from "./utils";
 import axios from 'axios';
 
 
-//const baseURL = process.env.BACKEND_URL_API + "/users";
+
 const baseURL = CONSTANTS.BACKEND_URL_API + "/users";
 
-console.log("-------- " + baseURL)
-console.log( CONSTANTS.BACKEND_URL_API)
 
 export const getAll = async () => {
-
-  axios.get(baseURL)
-  .then(response => {
-    // Handle successful response
-    console.log(response.data);
-  })
-  .catch(error => {
-    // Handle error
-    if (error.response) {
-      // The request was made and the server responded with a status code
-      console.log(error.response.data);
-      console.log(error.response.status);
-    } else if (error.request) {
-      // The request was made but no response was received
-      console.log(error.request);
-    } else {
-      // Something happened in setting up the request that triggered an error
-      console.log('Error', error.message);
-    }
-    console.log(error.config);
-  });
-
   
-/*   const response = await request("get", baseURL);
-
-  return response.data; */
+  const response = await request("get", baseURL);
+  return response.data; 
 };
 
 export const getUser = async (idU) => {
