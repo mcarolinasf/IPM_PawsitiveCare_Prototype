@@ -8,12 +8,12 @@ import { Ionicons } from "@expo/vector-icons";
 import Divider from "../../components/Divider";
 import { NewButton } from "../../components/NewButton/NewButton";
 import colors from "../../styles/colors";
-import TaskItem from "../../components/TaskItem/TaskItem";
 import UserSessionContext from "../../services/UserSessionContext.js";
 import { PetsData } from "../../data/PetsData.js";
 import { TasksData } from "../../data/TasksData.js";
 import { useContext } from "react";
 import { ItemsByTag } from "../../components/ItemsByTag/ItemsByTag.js";
+import navigationPaths from "../../navigation/navigationPaths.js";
 
 const listFilters = [
   {
@@ -30,9 +30,7 @@ const listFilters = [
   },
 ];
 
-const emptyList = [];
-
-export const Training = () => {
+export const Training = ({ navigation }) => {
   const [type, setType] = useState(listFilters[0].type);
   const [pets, setPets] = useState([]);
   const [tricks, setTricks] = useState([]);
@@ -63,7 +61,6 @@ export const Training = () => {
         )
       )
       .filter(Boolean);
-
     setTricks(tricks);
 
     //Set coachings
@@ -77,6 +74,10 @@ export const Training = () => {
     setCoaching(coaching);
   };
 
+  const handlePressNewTraining = (navigateTo) => {
+    navigation.navigate(navigateTo);
+  };
+
   return (
     <SafeAreaView style={globalStyles.container}>
       <View>
@@ -84,7 +85,6 @@ export const Training = () => {
         <View style={{ ...TrainingStyles.filterButtonsView, paddingBottom: 5 }}>
           {listFilters.map((e) => (
             <FilterButton
-              key={e.type}
               name={e.type}
               onPressFunction={() => setTypeFilter(e.type)}
               isDarkGrey={type === e.type}
@@ -101,7 +101,12 @@ export const Training = () => {
         </View>
         <Divider />
         <View style={{ marginTop: 5 }}>
-          <NewButton title="New Training" onPressFunction={() => {}} />
+          <NewButton
+            title="New Training"
+            onPressFunction={() =>
+              handlePressNewTraining(navigationPaths.newTraining)
+            }
+          />
         </View>
 
         <ScrollView style={TrainingStyles.listView}>
