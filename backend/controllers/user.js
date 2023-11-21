@@ -157,7 +157,7 @@ exports.getUserPets = async (req, res) => {
     // find all pets by user ID in the database
     const pets = await Pet.find({ idU: req.params.idU });
 
-    res.status(200).json(projects);
+    res.status(200).json(pets);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
