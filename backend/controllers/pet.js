@@ -75,12 +75,6 @@ try {
 };
 
 
-
-
-
-
-
-
 /****************************************/
 
 
@@ -91,7 +85,7 @@ const createEntrySchema = Joi.object({
   type: Joi.string().required(),
   date: Joi.string().required(),
   text: Joi.string().required(),
-  ownersIds: Joi.array(string()).required(),
+  ownersIds: Joi.array().items(Joi.string()),
 });
 
 const createEntryParamSchema = Joi.object({
@@ -115,9 +109,9 @@ exports.createEntry = async (req, res) => {
       res.status(201).json(savedEntry);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Server Error while creating user' });
+      res.status(500).json({ message: 'Server Error while creating entry' });
     }
-  };
+};
 
 
 //DELETE
@@ -143,7 +137,7 @@ exports.deleteEntry = async (req, res) => {
       return res.status(404).json({ message: "Pet not found" });
     }
 
-    // delete user from the database
+    // delete entry from the database
     const deletedEntry = await Entry.findOneAndDelete({ idE: req.params.idE });
 
     if (deletedEntry === 0) {
@@ -161,6 +155,57 @@ exports.deleteEntry = async (req, res) => {
 
 //UPDATE
 
+const updateEntryParamSchema = Joi.object({
+  idP: Joi.string().required(),
+  idE: Joi.string().required(),
+});
+
+const updateEntrySchema = Joi.object({
+  title: Joi.string().required(),
+  type: Joi.string().required(),
+  date: Joi.string().required(),
+  text: Joi.string().required(),
+  ownersIds: Joi.array().items(Joi.string()),
+});
+
+exports.updateEntry = async (req, res) => {
+try {
+  //Validate the request params
+  const { paramError } = updateEntryParamSchema(req.params);
+
+  // validate the request body using Joi
+  const { error } = updateEntrySchema.validate(req.body);
+
+  if (error || paramError) {
+    return res.status(400).json({ message: error.details[0].message });
+  }
+
+   // find pet by ID in the database
+   const pet = await Pet.findOne({ idP: req.params.idP });
+
+   if (!pet) {
+     return res.status(404).json({ message: "Pet not found" });
+   }
+
+  // find entry by ID in the database
+  const entry = await Entry.findOne({ idE: req.params.idE });
+
+  if (!entry) {
+    return res.status(404).json({ message: "Entry not found" });
+  }
+
+  const updatedEntry = await Entry.findOneAndUpdate(
+    { idE: req.params.idE }, 
+    req.body,
+    { new: true }
+  );
+  
+  res.status(200).json(updatedEntry);
+} catch (error) {
+  console.error(error);
+  res.status(500).json({ message: "Server Error" });
+}
+};
 
 
 //Get Pet Entries
@@ -186,7 +231,7 @@ exports.getPetEntries = async (req, res) => {
     return res.status(404).json({ message: "Pet not found" });
     }
 
-    const entries = await Entry.find();
+    const entries = await Entry.find({ petId: pet._id });
 
     res.status(200).json(entries);
   } catch (error) {

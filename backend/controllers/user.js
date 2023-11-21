@@ -7,7 +7,7 @@ const Pet = require('../models/pet');
 
 const createUserSchema = Joi.object({
   name: Joi.string().required(),
-  email: Joi.string().required(),
+  idU: Joi.string().required(),
   password: Joi.string().required(),
   photoUrl: Joi.string(),
   petIds: Joi.array().items(Joi.string()),
@@ -153,7 +153,6 @@ exports.getUserPets = async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 };
-
 
 
 const createPetSchema = Joi.object({
