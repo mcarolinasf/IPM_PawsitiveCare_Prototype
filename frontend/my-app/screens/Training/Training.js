@@ -88,6 +88,7 @@ export const Training = () => {
               onPressFunction={() => setTypeFilter(e.type)}
               isDarkGrey={type === e.type}
               isFlex={true}
+              buttonHeight={35}
             />
           ))}
           <Ionicons

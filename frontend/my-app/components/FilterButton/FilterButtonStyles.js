@@ -6,7 +6,6 @@ export const FilterButtonStyles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 11,
     marginHorizontal: 2,
-    height: 35,
   },
 
   text: {

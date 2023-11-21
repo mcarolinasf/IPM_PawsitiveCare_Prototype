@@ -45,7 +45,6 @@ export const globalStyles = StyleSheet.create({
   goBackButton: {},
 
   shadow: {
-
     shadowColor: "black",
     shadowOffset: {
       height: 3,
@@ -61,6 +60,5 @@ export const globalStyles = StyleSheet.create({
     height: 1,
     marginVertical: 5,
     marginHorizontal: 4,
-
   },
 });

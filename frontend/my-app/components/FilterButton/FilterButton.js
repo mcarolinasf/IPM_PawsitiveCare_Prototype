@@ -4,7 +4,13 @@ import { FilterButtonStyles } from "./FilterButtonStyles";
 import { TouchableOpacity, Text } from "react-native";
 import colors from "../../styles/colors";
 
-export const FilterButton = ({ name, onPressFunction, isDarkGrey, isFlex }) => {
+export const FilterButton = ({
+  name,
+  onPressFunction,
+  isDarkGrey,
+  isFlex,
+  buttonHeight,
+}) => {
   let buttonBGOpacity = 0.5;
 
   if (isDarkGrey) {
@@ -21,6 +27,7 @@ export const FilterButton = ({ name, onPressFunction, isDarkGrey, isFlex }) => {
       style={{
         ...FilterButtonStyles.button,
         backgroundColor: convertedBGColor,
+        height: buttonHeight,
         ...(isFlex ? { flex: 1 } : { width: "100%" }),
       }}
     >
