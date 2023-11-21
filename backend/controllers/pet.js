@@ -3,8 +3,10 @@
 const Joi = require("joi");
 const Pet = require('../models/pet');
 const Task = require('../models/task');
+const Entry = require('../models/entry');
 
 
+// Get Pet
 
 const getPetSchema = Joi.object({
   idP: Joi.string().required(),
@@ -33,6 +35,8 @@ exports.getPet = async (req, res) => {
   }
 };
 
+// Get All Pets
+
 exports.getAll = async (req, res) => {
   try {
     const pets = await Pet.find();
@@ -43,6 +47,14 @@ exports.getAll = async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 };
+
+
+
+
+/*************  Tasks  ***************/
+
+
+// Get pet Tasks
 
 const getPetTasksSchema = Joi.object({
     idP: Joi.string().required(),
@@ -75,7 +87,7 @@ try {
 };
 
 
-/****************************************/
+/*************  Entries  ***************/
 
 
 //CREATE
