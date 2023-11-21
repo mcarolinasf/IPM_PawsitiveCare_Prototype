@@ -1,12 +1,13 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import colors from "./colors";
+
+
 
 export const globalStyles = StyleSheet.create({
   container: {
     backgroundColor: colors.background,
     flex: 1,
     padding: 20,
-    paddingBottom: 100,
   },
 
   titleText: {
@@ -52,7 +53,7 @@ export const globalStyles = StyleSheet.create({
       width: 0,
     },
     shadowOpacity: 1.25,
-    elevation: 4,
+    elevation: 3,
   },
 
   divider: {
@@ -61,6 +62,31 @@ export const globalStyles = StyleSheet.create({
     height: 1,
     marginVertical: 5,
     marginHorizontal: 4,
-
   },
+
+  rowCenter: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  },
+
+  selectPetText: {
+    fontSize: 18,
+    height: 25,
+    left: 0,
+    textAlign: "left",
+    marginBottom: 5,
+    marginLeft: 9
+  },
+
+  swipe: {
+    backgroundColor: colors.background,
+    flex: 1,
+    justifyContent: 'center',
+    width: Dimensions.get('window').width,
+    padding: 10
+
+
+  }
+
+
 });

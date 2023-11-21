@@ -19,6 +19,7 @@ export const NewButtonStyles = StyleSheet.create({
   },
 
   buttonText: {
+    marginLeft: 5,
     textAlign: "center",
     color: colors.white,
     fontSize: 13,

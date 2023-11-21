@@ -6,11 +6,11 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import colors from '../../styles/colors';
 
 
-export const CustomButton = ({ title, onPressFunction, iconName }) => {
+export const CustomButton = ({ title, onPressFunction, iconName, color }) => {
   return (
     <TouchableOpacity
       onPress={onPressFunction}
-      style={CustomButtonStyles.button}{...globalStyles.shadow}
+      style={color ? ({ ...CustomButtonStyles.button, backgroundColor: color }) : { ...CustomButtonStyles.button, ...globalStyles.shadow }}
     >
       <View style={CustomButtonStyles.contents}>
         {iconName &&

@@ -13,11 +13,12 @@ export const NoteTackerStyles = StyleSheet.create({
         padding: 10,
         margin: 5,
         marginVertical: 30,
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
+        height: screenWidth * 0.75
     },
 
     input: {
-        justifyContent: 'flex-start',
-        height: screenWidth * 0.65
+        //height: screenWidth * 0.65
+
     }
 })

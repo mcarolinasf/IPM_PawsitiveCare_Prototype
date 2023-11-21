@@ -30,7 +30,7 @@ export default function Header({ title, showProfile, goBack, style }) {
 
             {showProfile &&
                 <TouchableOpacity onPress={handleProfileClick} style={HeaderStyles.image}>
-                    <Image style={{ ...HeaderStyles.image, ...globalStyles.shadow }} source={{ uri: user.photoUrl }} />
+                    <Image style={HeaderStyles.image} source={{ uri: user.photoUrl }} />
                 </TouchableOpacity>
             }
 

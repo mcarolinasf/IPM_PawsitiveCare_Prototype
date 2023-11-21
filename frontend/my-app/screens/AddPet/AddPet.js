@@ -104,9 +104,11 @@ export const AddPet = ({ navigation }) => {
                                 uri: image
                             }}
                         />
-                        <View style={AddPetStyles.icon}>
-                            <FontAwesome5 name="plus" size={24} color={colors.primary} />
-                        </View>
+                        { !image &&
+                            <View style={AddPetStyles.icon}>
+                                <FontAwesome5 name="plus" size={24} color={colors.primary} />
+                            </View>
+                        }
                     </View>
                 </TouchableOpacity>
                 <View style={{ paddingHorizontal: 10 }}>

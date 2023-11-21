@@ -1,0 +1,1 @@
+export { DeviceDeviceFrame } from "./DeviceDeviceFrame";
