@@ -10,6 +10,8 @@ import TaskItem from '../../components/TaskItem/TaskItem.js';
 import navigationPaths from '../../navigation/navigationPaths';
 import UserSessionContext from '../../services/UserSessionContext.js';
 import { TasksData } from '../../data/TasksData.js';
+import chart from "../../assets/Chart.png";
+
 
 
 export const Pet = ({ navigation, route }) => {
@@ -62,6 +64,14 @@ export const Pet = ({ navigation, route }) => {
                             <TaskItem key={task.key} task={task} pressHandler={handleTaskPress} />
                         ))
                     }
+                </View>
+                <View style={{ ...PetStyles.container, ...globalStyles.shadow }}>
+                    <Image
+                        style={PetStyles.chart}
+                        source={chart}
+                    />
+
+
                 </View>
 
             </ScrollView>

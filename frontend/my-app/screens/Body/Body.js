@@ -4,6 +4,9 @@ import Header from '../../components/Header/Header'
 import TextInputDefault from '../../components/TextInputDefault/TextInputDefault'
 import { globalStyles } from '../../styles/globalStyles'
 import { BodySTyles as BodyStyles } from './BodyStyles'
+import chart from "../../assets/ChartWeight.png";
+import { PetStyles } from '../Pet/PetStyles'
+
 
 
 export const Body = ({ navigation, route }) => {
@@ -64,7 +67,14 @@ export const Body = ({ navigation, route }) => {
 
                     </View>
                 </View>
+                <View style={{ ...PetStyles.container, ...globalStyles.shadow }}>
+                    <Image
+                        style={PetStyles.chart}
+                        source={chart}
+                    />
 
+
+                </View>
 
 
 
