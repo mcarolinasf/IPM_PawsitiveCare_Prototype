@@ -12,9 +12,10 @@ import { LoginStyles } from "./LoginStyles.js";
 import { globalStyles } from "../../../styles/globalStyles.js";
 import navigationPaths from "../../../navigation/navigationPaths.js";
 import TextInputDefault from "../../../components/TextInputDefault/TextInputDefault.js";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import UserSessionContext from "../../../services/UserSessionContext.js";
 import userData from "../../../data/UserData.js";
+import { usersApi } from "../../../api/index.js";
 
 export const Login = ({ navigation }) => {
 
@@ -23,9 +24,22 @@ export const Login = ({ navigation }) => {
   const [password, setPassword] = useState("");
 
 
+  useEffect(() => {
+    getData()
+  },[])
+
+
+  const getData = async () => {
+
+    const response = await usersApi.getAll();
+    console.log("ALL USERS " + response)
+  }
+
+
   onPressRegister = () => {
     // Navigate to the Register screen
-    navigation.navigate(navigationPaths.register);
+    //navigation.navigate(navigationPaths.register);
+
   };
 
 
