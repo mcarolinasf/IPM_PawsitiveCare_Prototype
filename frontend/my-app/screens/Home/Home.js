@@ -74,8 +74,9 @@ export const Home = ({ navigation }) => {
         showsHorizontalScrollIndicator={false}
         style={{ height: 260 }}
       >
+        {/* If it has tasks in the day set hasNotification to true in item?? */}
         {pets.map((item) => (
-          <Card key={item.id} item={item} pressHandler={cardPressHandler} />
+          <Card key={item.id} item={item} pressHandler={cardPressHandler} hasNotification={'yes'} />
         ))}
         <View style={HomeStyles.button}>
           <AntDesign

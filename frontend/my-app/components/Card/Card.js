@@ -2,9 +2,11 @@ import React from 'react'
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import { globalStyles } from '../../styles/globalStyles'
 import { CardStyles } from './CardStyles.js'
+import { AntDesign } from '@expo/vector-icons';
+import colors from '../../styles/colors';
 
 
-export default function Card({ item, pressHandler }) {
+export default function Card({ item, pressHandler, hasNotification }) {
 
     // Todo: onPress function to pet page
     return (
@@ -18,6 +20,13 @@ export default function Card({ item, pressHandler }) {
                 />
                 <Text style={CardStyles.text}>{item.name}</Text>
             </View>
+            {
+                hasNotification &&
+                <View style={CardStyles.icon}>
+                    <AntDesign name="exclamationcircle" size={24} color={colors.primary} />
+                </View>
+            }
+
         </TouchableOpacity >
 
     );

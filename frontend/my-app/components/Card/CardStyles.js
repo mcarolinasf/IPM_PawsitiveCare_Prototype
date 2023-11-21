@@ -38,4 +38,13 @@ export const CardStyles = StyleSheet.create({
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
   },
+  icon: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    backgroundColor: colors.white,
+    borderRadius: 25
+
+  }
+
 });
