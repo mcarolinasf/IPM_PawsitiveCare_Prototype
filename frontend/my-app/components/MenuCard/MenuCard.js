@@ -8,11 +8,11 @@ import colors from '../../styles/colors';
 
 
 
-export default function MenuCard({ iconName, item, title, navigateTo, subtitle, setFunction, navigation, selected }) {
+export default function MenuCard({ iconName, item, title, navigateTo, subtitle, setFunction, navigation, selected, pet }) {
 
 
     const handlePress = () => {
-        navigateTo ? navigation.navigate(navigateTo)
+        navigateTo ? (pet ? navigation.navigate(navigateTo, { pet: pet }) : navigation.navigate(navigateTo))
             : setFunction(item.id)
     }
 
@@ -22,7 +22,7 @@ export default function MenuCard({ iconName, item, title, navigateTo, subtitle, 
         <TouchableOpacity onPress={handlePress} style={globalStyles.shadow}>
             {/* Change container of selected */}
             <View style={selected ? ((item == selected) ? { ...MenuCardStyles.container, backgroundColor: colors.primary } : MenuCardStyles.container) : MenuCardStyles.container}>
-                <View style={(item == selected) ? { ...MenuCardStyles.circle, backgroundColor: colors.white } : MenuCardStyles.styles}>
+                <View style={(item == selected) ? { ...MenuCardStyles.circle, backgroundColor: colors.white } : MenuCardStyles.circle}>
                     <FontAwesome5 name={iconName} size={23} color={colors.primary} />
                 </View>
 

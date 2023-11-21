@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  TouchableHighlight,
 } from "react-native";
 import Header from "../../components/Header/Header";
 import { globalStyles } from "../../styles/globalStyles";
@@ -15,12 +16,20 @@ import colors from "../../styles/colors";
 import * as ImagePicker from "expo-image-picker";
 import TextInputDefault from "../../components/TextInputDefault/TextInputDefault";
 import { CustomButton } from "../../components/CustomButton/CustomButton";
-import { PetsData } from "../../data/PetsDataArray";
+import { PetsData } from "../../data/petsDataArray";
 import { SelectList } from "react-native-dropdown-select-list";
+import { ModalComponent } from "../../components/Modal/ModalComponent";
+import { SchedulingActions as actions } from "../../data/SchedulingActions";
+import UserSessionContext from "../../services/UserSessionContext.js";
+import { AntDesign } from "@expo/vector-icons";
+import SelectableCard from "../../components/Card/SelectableCard";
+import { CardStyles } from "../../components/Card/CardStyles.js";
 
 export const AddFeeding = ({ navigation }) => {
   const [image, setImage] = useState();
-  const [petSelected, setSelected] = useState("");
+  const [petSelected, setPetSelected] = useState("");
+  const [petSelectedCard, setPetSelectedCard] = useState(null);
+  const [pets, setPets] = useState([]);
   const [newFeeding, setNewFeeding] = useState({
     petName: "",
     food: "",
@@ -29,6 +38,18 @@ export const AddFeeding = ({ navigation }) => {
     period: "",
     doseage: "",
   });
+  const [scheduleModalVisible, setScheduleModalVisible] = useState(false);
+
+  const { user } = useContext(UserSessionContext);
+
+  const handleButtonPress = (buttonId) => {
+    setSelectedButton(buttonId);
+  };
+
+  const cardPressHandler = (item) => {
+    if (petSelected === "") setPetSelected(item.name);
+    else setPetSelected("");
+  };
 
   //Set pets
   let petNames = [];
@@ -38,6 +59,18 @@ export const AddFeeding = ({ navigation }) => {
   });
 
   let petIds = PetsData.map((pet) => pet.id);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = () => {
+    var petIds = user.petIds;
+
+    //Set pets
+    var pets = petIds.map((id) => PetsData[id]);
+    setPets(pets);
+  };
 
   //Review
 
@@ -74,10 +107,56 @@ export const AddFeeding = ({ navigation }) => {
     navigation.goBack();
   };
 
+  handlePetPickPopup = () => {
+    setScheduleModalVisible(!scheduleModalVisible);
+  };
+
+  const [selectedComponent, setSelectedComponent] = useState(null);
+
+  const handleSelectComponent = (componentId) => {
+    setSelectedComponent(componentId);
+  };
+
+  const SelectableComponent = ({ id, selected, onSelect, data }) => {
+    const handlePress = () => {
+      onSelect(id);
+    };
+
+    return (
+      <TouchableOpacity
+        style={[CardStyles.card, selected && CardStyles.selectedCard]}
+        onPress={handlePress}
+      >
+        <SelectableCard
+          key={data.id}
+          item={data}
+          isSelected={data.id === selectedComponent}
+          pressHandler={cardPressHandler}
+        />
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <SafeAreaView style={globalStyles.container}>
       <ScrollView>
-        <Header title={"Add Feeding"} goBack />
+        <Header title={"Schedule Feeding"} goBack />
+
+        <Text style={globalStyles.selectPetText}>Select pet</Text>
+
+        <ScrollView horizontal={true}>
+          {pets.map((item, i) => (
+            <SelectableComponent
+              id={i}
+              selected={selectedComponent === i}
+              onSelect={handleSelectComponent(i)}
+              data={item}
+            ></SelectableComponent>
+          ))}
+        </ScrollView>
+
+        <Text>Debug: Pet selected: {selectedComponent}</Text>
+
         <View style={{ paddingHorizontal: 10 }}>
           <Text style={globalStyles.text}>To which pet?</Text>
           <SelectList

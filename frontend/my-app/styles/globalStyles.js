@@ -61,4 +61,18 @@ export const globalStyles = StyleSheet.create({
     marginVertical: 5,
     marginHorizontal: 4,
   },
+
+  rowCenter: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  },
+  
+  selectPetText: {
+    fontSize: 18,
+    height: 25,
+    left: 0,
+    textAlign: "left",
+    marginBottom: 5,
+    marginLeft: 9
+  },
 });
