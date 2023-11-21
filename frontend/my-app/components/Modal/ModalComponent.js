@@ -30,6 +30,7 @@ export const ModalComponent = ({ navigation, visible, handleModal, title, action
             <View style={ModalComponentStyles.modalContent}>
                { actions && actions.map((action) => 
                   <TouchableHighlight 
+                    key={action.name}
                     onPress={()=>{ handlePress(action.navigateTo) }}
                     underlayColor={colors.white}
                     style={[ModalComponentStyles.action,]}>

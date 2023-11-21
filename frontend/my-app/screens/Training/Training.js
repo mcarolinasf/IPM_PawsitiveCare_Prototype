@@ -84,6 +84,7 @@ export const Training = () => {
         <View style={{ ...TrainingStyles.filterButtonsView, paddingBottom: 5 }}>
           {listFilters.map((e) => (
             <FilterButton
+              key={e.type}
               name={e.type}
               onPressFunction={() => setTypeFilter(e.type)}
               isDarkGrey={type === e.type}
