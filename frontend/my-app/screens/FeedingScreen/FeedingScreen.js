@@ -77,23 +77,13 @@ export const Feeding = ({ navigation, route }) => {
       <View>
         <Header title={"Feeding"} showProfile goBack />
         <View style={{  paddingBottom: 20 }}>
-          {/* <View style={PetPictureStyles.rectangle}>
-        
-          <Image
-                        
-                        source={{uri:'https://cdn.britannica.com/92/212692-004-D4E5AD34/labradoodle-dog-stick-running-grass.jpg'}} 
-                        // source={{
-                        //     uri: pet.photoUrl
-                        // }}
-          />
-          </View> */}
         <View style={PetPictureStyles.container}{...globalStyles.shadow}>
             <Image
                     style={PetPictureStyles.rectangle}
                     source={{
                                 uri: pet.photoUrl
                             }}
-                    resizeMode={'cover'} // cover or contain its upto you view look
+                    resizeMode={'cover'} 
                 />
                 <Text>{pet.name}</Text>
         </View>

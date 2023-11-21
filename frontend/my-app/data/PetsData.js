@@ -18,6 +18,7 @@ export const PetsData = {
     diaryEntrysIds: [0],
     vetAppointIds: [0],
     ownersIds: ["admin"],
+    feedingIds: [0]
   },
   1: {
     id: 1,
@@ -37,6 +38,7 @@ export const PetsData = {
     diaryEntrysIds: [1],
     vetAppointIds: [1],
     ownersIds: ["admin"],
+    feedingIds: [0]
   },
   2: {
     id: 2,
@@ -56,6 +58,7 @@ export const PetsData = {
     diaryEntrysIds: [2, 3],
     vetAppointIds: [2],
     ownersIds: ["admin"],
+    feedingIds: [0]
   },
   // Add more pet objects as needed
 };
