@@ -156,7 +156,8 @@ exports.getUserPets = async (req, res) => {
     }
 
     // find all pets by user ID in the database
-    const pets = await Pet.find({ idU: req.params.idU });
+    const pets = await Pet.find({ ownersIds: { $in: [req.params.idU] } });
+
 
     res.status(200).json(pets);
   } catch (error) {
@@ -209,6 +210,10 @@ exports.addPet = async (req, res) => {
     const filter = { idU: req.params.idU };
     const update = { $push: { petIds: newPet.idP } };
     const updatedUser = await User.findOneAndUpdate( filter, update, { new: true } );
+
+
+    //Add to pet owner
+    newPet.ownersIds.push(req.params.idU);
 
     const savedPet = await newPet.save();
     
@@ -345,9 +350,9 @@ exports.getUserTasks = async (req, res) => {
     }
 
     // find all pets by user ID in the database
-    const tasks = await Task.find({ usersId: { $in: [userId] } });
+    const tasks = await Task.find({ ownersIds: { $in: [req.params.idU] } });
 
-    res.status(200).json(pets);
+    res.status(200).json(tasks);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
