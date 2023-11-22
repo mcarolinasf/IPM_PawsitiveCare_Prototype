@@ -28,7 +28,7 @@ export default function TaskItem({ task, pressHandler }) {
 
     return (
         <TouchableOpacity
-            onPress={() => pressHandler(task.id)} style={globalStyles.shadow} >
+            onPress={() => pressHandler(task.idT)} style={globalStyles.shadow} >
             <View style={TaskItemStyles.container}>
                 <View style={{ flexDirection: 'row' }}>
                     <MaterialCommunityIcons name="checkbox-blank-outline" size={24} color={colors.secondary} />

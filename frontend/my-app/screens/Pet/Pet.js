@@ -1,47 +1,41 @@
-import React, { useState, useEffect } from 'react'
-import { View, Text, SafeAreaView, ScrollView, Image } from 'react-native'
-import { globalStyles } from '../../styles/globalStyles'
-import { PetStyles } from './PetStyles'
-import MenuCard from '../../components/MenuCard/MenuCard.js';
-import Header from '../../components/Header/Header.js';
+import React, { useState, useEffect } from "react";
+import { View, Text, SafeAreaView, ScrollView, Image } from "react-native";
+import { globalStyles } from "../../styles/globalStyles";
+import { PetStyles } from "./PetStyles";
+import MenuCard from "../../components/MenuCard/MenuCard.js";
+import Header from "../../components/Header/Header.js";
 
-import TaskItem from '../../components/TaskItem/TaskItem.js';
-import navigationPaths from '../../navigation/navigationPaths';
+import TaskItem from "../../components/TaskItem/TaskItem.js";
+import navigationPaths from "../../navigation/navigationPaths";
 
 import chart from "../../assets/Chart.png";
-import { petsApi } from '../../api';
-
-
+import { petsApi } from "../../api";
 
 export const Pet = ({ navigation, route }) => {
-
     const { pet } = route.params;
 
-    const [tasks, setTasks] = useState([])
+    const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
-        getData()
-    }, [pet])
-
+        getData();
+    }, [pet]);
 
     const getData = async () => {
-
         try {
-            console.log(pet.idP)
-            const tasksRes = await petsApi.getPetTasks(pet.idP)
-            setTasks(tasksRes)
+            console.log(pet.idP);
+            const tasksRes = await petsApi.getPetTasks(pet.idP);
+            setTasks(tasksRes);
         } catch (error) {
-            console.log("Error Message: " + error.message)
+            console.log("Error Message: " + error.message);
         }
-
-
     }
 
     const handleTaskPress = (key) => {
         setTasks((prevTasks) => (
-            prevTasks.filter(task => task.id != key)
+            prevTasks.filter(task => task.idT != key)
         ));
     }
+
 
     return (
         <SafeAreaView style={globalStyles.swipe}>
@@ -82,4 +76,4 @@ export const Pet = ({ navigation, route }) => {
         </SafeAreaView >
     );
 
-}
+};

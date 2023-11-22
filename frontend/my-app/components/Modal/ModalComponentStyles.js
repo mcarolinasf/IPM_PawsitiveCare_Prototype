@@ -9,7 +9,7 @@ export const ModalComponentStyles = StyleSheet.create({
 
   container: {
     marginHorizontal: 20,
-    marginVertical: "58%",
+    marginVertical: "40%",
     alignItems: "center",
     backgroundColor: colors.background,
     borderRadius: 10,
@@ -42,7 +42,7 @@ export const ModalComponentStyles = StyleSheet.create({
     marginTop: 20,
     width: "100%",
     paddingVertical: 20,
-    paddingHorizontal: 25,
+    paddingHorizontal: 10,
   },
 
   newTrainingPlanModal: {
@@ -75,7 +75,7 @@ export const ModalComponentStyles = StyleSheet.create({
     display: "flex",
     flexWrap: "wrap",
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: 'space-between',
     alignItems: "center",
   },
   text: {

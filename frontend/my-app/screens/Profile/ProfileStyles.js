@@ -5,18 +5,22 @@ const screenWidth = Dimensions.get("window").width;
 
 export const ProfileStyles = StyleSheet.create({
 
+    containerImage: {
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 10,
+    },
+
     image: {
         height: screenWidth * 0.6,
-        width: screenWidth,
+        width: screenWidth * 0.89,
         borderRadius: 10,
-        borderTopRightRadius: 10,
-        borderBottomRightRadius: 10
     },
 
     infoContainer: {
         backgroundColor: colors.white,
         borderRadius: 10,
-        paddingHorizontal:10,
+        paddingHorizontal: 10,
         marginTop: 20,
         display: 'flex',
         flexDirection: 'row',

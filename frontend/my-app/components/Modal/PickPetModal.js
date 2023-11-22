@@ -22,7 +22,7 @@ export const PickPetModal = ({ navigation, visible, handleModal, title, setPet, 
         handleModal(false)
 
     }
-    handleModal(false);
+
 
 
     const getPetsByOwner = async () => {
@@ -86,8 +86,8 @@ export const PickPetModal = ({ navigation, visible, handleModal, title, setPet, 
                                             key={pet.id}
                                             item={pet}
                                             pressHandler={cardPressHandler}
-                                            styleCard={{ width: 70, height: 80 }}
-                                            styleImage={{ width: 70, height: 60 }}
+                                            styleCard={{ width: 90, height: 100 }}
+                                            styleImage={{ width: 90, height: 100 }}
                                         />
                                     ))}
                             </View>
