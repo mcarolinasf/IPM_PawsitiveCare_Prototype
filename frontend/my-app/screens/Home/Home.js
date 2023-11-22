@@ -37,23 +37,17 @@ export const Home = ({ navigation }) => {
   }, []);
 
   const getData = async () => {
-
     try {
-      const pets = await usersApi.getUserPets(user.idU)
+      const pets = await usersApi.getUserPets(user.idU);
 
-      setPets(pets)
+      setPets(pets);
 
-      const allTasks = await usersApi.getUserTasks(user.idU)
-
-
-
+      const allTasks = await usersApi.getUserTasks(user.idU);
 
       //const tasks = await usersApi.getPetTasks(pets)
-
     } catch (error) {
-      console.log("Error Message: " + error.message)
+      console.log("Error Message: " + error.message);
     }
-
 
     /*  var petIds = user.petIds;
  

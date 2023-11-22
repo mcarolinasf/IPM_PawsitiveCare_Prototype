@@ -157,13 +157,13 @@ export const NewTrainingModal = ({ visible, handleModal, plan }) => {
               <>
                 <View style={ModalComponentStyles.textInputsView}>
                   <TextInputDefault
-                    label={"Starting Date"}
+                    label={"Starting Date   *"}
                     setFunction={(value) =>
                       setNewSchedule({ ...newSchedule, date: value })
                     }
                   />
                   <TextInputDefault
-                    label={"Time"}
+                    label={"Time   *"}
                     setFunction={(value) =>
                       setNewSchedule({ ...newSchedule, time: value })
                     }
