@@ -28,50 +28,52 @@ export const Pet = ({ navigation, route }) => {
         } catch (error) {
             console.log("Error Message: " + error.message);
         }
-
-        const handleTaskPress = (key) => {
-            setTasks((prevTasks) => (
-                prevTasks.filter(task => task.idT != key)
-            ));
-        }
-
-        return (
-            <SafeAreaView style={globalStyles.swipe}>
-                <ScrollView>
-                    <Header title={pet.name} goBack showProfile />
-                    <View style={PetStyles.container}{...globalStyles.shadow} >
-                        <Image
-                            style={PetStyles.image}
-                            source={{
-                                uri: pet.photoUrl
-                            }}
-                        />
-                    </View>
-                    <ScrollView horizontal={true}>
-                        <MenuCard iconName={'paw'} title={'Vet Ap.'} navigation={navigation} navigateTo={navigationPaths.vetAppointments} />
-                        <MenuCard iconName={'dog'} title={'Body'} navigation={navigation} navigateTo={navigationPaths.body} pet={pet} />
-                        <MenuCard iconName={'pills'} title={'Medication'} navigation={navigation} navigateTo={navigationPaths.medication} pet={pet} />
-                        <MenuCard iconName={'bone'} title={'Feeding'} navigation={navigation} navigateTo={navigationPaths.feeding} pet={pet} />
-                    </ScrollView>
-                    <Text style={globalStyles.subtitleText}>Today</Text>
-                    <View>
-                        {
-                            tasks && tasks.filter(task => task.petId == pet.idP).map(task => (
-                                <TaskItem key={task.key} task={task} pressHandler={handleTaskPress} />
-                            ))
-                        }
-                    </View>
-                    <View style={{ ...PetStyles.container, ...globalStyles.shadow }}>
-                        <Image
-                            style={PetStyles.chart}
-                            source={chart}
-                        />
-
-
-                    </View>
-
-                </ScrollView>
-            </SafeAreaView >
-        );
-
     }
+
+    const handleTaskPress = (key) => {
+        setTasks((prevTasks) => (
+            prevTasks.filter(task => task.idT != key)
+        ));
+    }
+
+
+    return (
+        <SafeAreaView style={globalStyles.swipe}>
+            <ScrollView>
+                <Header title={pet.name} goBack showProfile />
+                <View style={PetStyles.container}{...globalStyles.shadow} >
+                    <Image
+                        style={PetStyles.image}
+                        source={{
+                            uri: pet.photoUrl
+                        }}
+                    />
+                </View>
+                <ScrollView horizontal={true}>
+                    <MenuCard iconName={'paw'} title={'Vet Ap.'} navigation={navigation} navigateTo={navigationPaths.vetAppointments} />
+                    <MenuCard iconName={'dog'} title={'Body'} navigation={navigation} navigateTo={navigationPaths.body} pet={pet} />
+                    <MenuCard iconName={'pills'} title={'Medication'} navigation={navigation} navigateTo={navigationPaths.medication} pet={pet} />
+                    <MenuCard iconName={'bone'} title={'Feeding'} navigation={navigation} navigateTo={navigationPaths.feeding} pet={pet} />
+                </ScrollView>
+                <Text style={globalStyles.subtitleText}>Today</Text>
+                <View>
+                    {
+                        tasks && tasks.filter(task => task.petId == pet.idP).map(task => (
+                            <TaskItem key={task.key} task={task} pressHandler={handleTaskPress} />
+                        ))
+                    }
+                </View>
+                <View style={{ ...PetStyles.container, ...globalStyles.shadow }}>
+                    <Image
+                        style={PetStyles.chart}
+                        source={chart}
+                    />
+
+
+                </View>
+
+            </ScrollView>
+        </SafeAreaView >
+    );
+
+};

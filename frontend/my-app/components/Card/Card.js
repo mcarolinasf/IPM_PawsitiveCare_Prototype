@@ -12,9 +12,9 @@ export default function Card({ item, pressHandler, hasNotification }) {
       onPress={() => pressHandler(item)}
       style={globalStyles.shadow}
     >
-      <View key={item && item.key} style={CardStyles.card}>
+      <View key={item && item.key} style={[CardStyles.card]}>
         <Image
-          style={CardStyles.image}
+          style={[CardStyles.image]}
           source={{
             uri: item && item.photoUrl,
           }}
