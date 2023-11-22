@@ -28,5 +28,12 @@ router.delete(userAPI + "/:idU/pets/:idP",  user.deletePet);
 router.get(userAPI + "/:idU/pets",  user.getUserPets);
 
 
+/*          Tasks          */
+
+
+router.get(userAPI + "/:idU/tasks",  user.getUserTasks);
+
+
+
 
 module.exports = router;

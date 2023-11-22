@@ -16,6 +16,6 @@ const entrySchema = new mongoose.Schema({
 
 });
 
-const Entry = mongoose.model('tasks', entrySchema);
+const Entry = mongoose.model('entries', entrySchema);
 
 module.exports = Entry;
