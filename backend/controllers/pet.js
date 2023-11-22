@@ -174,6 +174,7 @@ const updateEntryParSchema = Joi.object({
 
 
 const updateEntrySchema = Joi.object({
+  idE: Joi.string(),
   title: Joi.string().required(),
   type: Joi.string().required(),
   date: Joi.string().required(),
