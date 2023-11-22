@@ -21,11 +21,11 @@ mongooseConnection.once('open', () => {
 const userRoutes = require('./routes/user');
 const petRoutes = require('./routes/pet');
 const taskRoutes = require('./routes/task');
-//const entryRoutes = require('./routes/entry');
+const entryRoutes = require('./routes/entry');
 
 app.use('/api', userRoutes);
 app.use('/api', petRoutes);
 app.use('/api', taskRoutes);
-//app.use('/api', entryRoutes);
+app.use('/api', entryRoutes);
 
 

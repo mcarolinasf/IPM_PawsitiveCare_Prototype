@@ -34,6 +34,9 @@ router.get(userAPI + "/:idU/pets",  user.getUserPets);
 router.get(userAPI + "/:idU/tasks",  user.getUserTasks);
 
 
+/*          Entries          */
+
+router.get(userAPI + "/:idU/entries",  user.getUserEntries);
 
 
 module.exports = router;
