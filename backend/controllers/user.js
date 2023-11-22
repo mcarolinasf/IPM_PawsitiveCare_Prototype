@@ -169,15 +169,15 @@ exports.getUserPets = async (req, res) => {
 const addPetSchema = Joi.object({
   name: Joi.string().required(),
   age: Joi.string(),
-  breed: Joi.string(),
   gender: Joi.string(),
-  photoUrl: Joi.string().required(),
+  breed: Joi.string(),
   color: Joi.string(),
+  typeOfCoat: Joi.string(),
   tail: Joi.string(),
   distinguishMarks: Joi.string(),
-  typeOfCoat: Joi.string(),
   height: Joi.string(),
   weight: Joi.string(),
+  photoUrl: Joi.string().required(),
   tasksIds: Joi.array().items(Joi.string()),
   entryIds: Joi.array().items(Joi.string()),
   ownersIds: Joi.array().items(Joi.string()),
@@ -187,12 +187,12 @@ const addPetSchema = Joi.object({
 exports.addPet = async (req, res) => {
   try {
 
-    // validate the user ID parameter using Joi
+   /*  // validate the user ID parameter using Joi
     const { errorParam } = Joi.string().validate(req.params.idU);
-
+ */
     const { error } = addPetSchema.validate(req.body);
 
-    if (error || errorParam) {
+    if (error ) {
       return res.status(400).json({ message: error.details[0].message });
     }
 
