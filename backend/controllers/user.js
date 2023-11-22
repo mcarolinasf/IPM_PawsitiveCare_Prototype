@@ -3,6 +3,7 @@
 const Joi = require("joi");
 const User = require('../models/user');
 const Pet = require('../models/pet');
+const Task = require('../models/task');
 
 
 const createUserSchema = Joi.object({
@@ -127,8 +128,8 @@ exports.updateUser = async (req, res) => {
     }
 
     const updatedUser = await User.findOneAndUpdate(
-      { idU: req.params.idU }, // This should be an object specifying the filter criteria
-      req.body, // Data to update
+      { idU: req.params.idU },
+      req.body,
       { new: true }
     );
     
@@ -168,15 +169,15 @@ exports.getUserPets = async (req, res) => {
 const addPetSchema = Joi.object({
   name: Joi.string().required(),
   age: Joi.string(),
-  breed: Joi.string(),
   gender: Joi.string(),
-  photoUrl: Joi.string().required(),
+  breed: Joi.string(),
   color: Joi.string(),
+  typeOfCoat: Joi.string(),
   tail: Joi.string(),
   distinguishMarks: Joi.string(),
-  typeOfCoat: Joi.string(),
   height: Joi.string(),
   weight: Joi.string(),
+  photoUrl: Joi.string().required(),
   tasksIds: Joi.array().items(Joi.string()),
   entryIds: Joi.array().items(Joi.string()),
   ownersIds: Joi.array().items(Joi.string()),
@@ -186,12 +187,12 @@ const addPetSchema = Joi.object({
 exports.addPet = async (req, res) => {
   try {
 
-    // validate the user ID parameter using Joi
+   /*  // validate the user ID parameter using Joi
     const { errorParam } = Joi.string().validate(req.params.idU);
-
+ */
     const { error } = addPetSchema.validate(req.body);
 
-    if (error || errorParam) {
+    if (error ) {
       return res.status(400).json({ message: error.details[0].message });
     }
 
@@ -316,6 +317,41 @@ try {
   console.error(error);
   res.status(500).json({ message: "Server Error" });
 }
+};
+
+
+
+/*          Tasks        */
+
+const getUserTasksSchema = Joi.object({
+  idU: Joi.string().required(),
+});
+
+exports.getUserTasks = async (req, res) => {
+  try {
+
+    // validate the user ID parameter using Joi
+    const { error } = getUserTasksSchema.validate(req.params);
+
+    if (error) {
+      return res.status(400).json({ message: error.details[0].message });
+    }
+
+    // find user by ID in the database
+    const user = await User.findOne({ idU: req.params.idU });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // find all pets by user ID in the database
+    const tasks = await Task.find({ usersId: { $in: [userId] } });
+
+    res.status(200).json(pets);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
 };
 
 
