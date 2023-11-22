@@ -92,6 +92,7 @@ try {
 //CREATE
 
 const createEntrySchema = Joi.object({
+  idE: Joi.string().required(),
   title: Joi.string().required(),
   type: Joi.string().required(),
   date: Joi.string().required(),
