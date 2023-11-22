@@ -31,7 +31,6 @@ export const Register = ({ navigation }) => {
   })
 
   const onPressRegister = async () => {
-    console.log('User rggdhre-----------------> ' + user)
 
     try {
       await usersApi.createUser(user)

@@ -15,6 +15,7 @@ import TaskItem from '../../components/TaskItem/TaskItem';
 import NewButton from '../../components/NewButton/NewButton';
 import { getTypeColor } from '../../services/utils';
 import colors from '../../styles/colors';
+import { usersApi } from '../../api';
 
 
 export const Calendar = ({ navigation }) => {
@@ -48,12 +49,12 @@ export const Calendar = ({ navigation }) => {
 
   async function fetchTasks() {
 
-    const tasks = Object.values(TasksData); // Convert object values to an array
-
-    // Filter the array by owner
-    const filteredByOwner = tasks.filter(task => task.owners.includes(user.email.toLowerCase()));
-
-    setTasks(filteredByOwner);
+    try {
+      const allTasks = await usersApi.getUserTasks(user.idU)
+      setTasks(allTasks);
+    } catch (error) {
+      console.log("Error Message: " + error.message)
+    }
   }
 
   const handleScheduleModal = (value) => {
@@ -113,7 +114,7 @@ export const Calendar = ({ navigation }) => {
 
       <View style={CalendarStyles.buttonContainer} >
 
-        <CustomButton title={"Add a task"} onPressFunction={() => {handleScheduleModal(true)}} />
+        <CustomButton title={"Add a task"} onPressFunction={() => { handleScheduleModal(true) }} />
         {/* <NewButton title={"Add a task"} onPressFunction={handleSchedulePopup}/> */}
       </View>
 

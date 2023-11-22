@@ -6,6 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colors from '../../styles/colors';
 import { PetsData } from '../../data/PetsData';
 import { getTypeColor } from '../../services/utils';
+import { petsApi } from '../../api';
 
 
 export default function TaskItem({ task, pressHandler }) {
@@ -16,8 +17,13 @@ export default function TaskItem({ task, pressHandler }) {
         getPet();
     }, [])
 
-    const getPet = () => {
-        setPet(PetsData[task.petId])
+    const getPet = async () => {
+        try {
+            const petRes = await petsApi.getPet(task.petId)
+            setPet(petRes)
+        } catch (error) {
+            console.log("Error Message: " + error.message)
+        }
     }
 
     return (

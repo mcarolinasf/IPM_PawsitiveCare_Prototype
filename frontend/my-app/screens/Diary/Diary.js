@@ -14,11 +14,33 @@ export const Diary = () => {
   const { user } = useContext(UserSessionContext);
 
   const [diaryEntry, setDiaryEntry] = useState([]);
+  const [pet, setPet] = useState(false)
+  const [selectedEntry, setSelectedEntry] = useState({
+    title: 'Diary entry ',
+    type: TaskType.HEALTH,
+    date: dateToString(new Date()),
+    idP: '',
+    ownersIds: []
+  });
 
-  const [selectedEntry, setSelectedEntry] = useState("");
-
-  const addDiaryEntry = () => {
+  const addDiaryEntry = async () => {
     /* Todo: Add functionality */
+
+    setSelectedEntry({ ...selectedEntry, idP: pet.idP, ownersIds: pet.ownersIds })
+
+    try {
+      const newEntry = {
+        title: selectedEntry.title,
+        type: selectedEntry.type,
+        date: selectedEntry.date,
+        idP: pet.idP,
+        ownersIds: pet.ownersIds
+      }
+
+      await petsApi.createEntry(pet.idP, newEntry)
+    } catch (error) {
+      console.log("Error Message: " + error.message)
+    }
   };
 
   const getData = () => {
@@ -36,6 +58,10 @@ export const Diary = () => {
       setSelectedEntry(diaryEntrys[diaryEntrys.length - 1]);
     }
   };
+
+  const handlePetModal = (value) => {
+    setSelectPetModal(value)
+  }
 
   useEffect(() => {
     getData();
@@ -77,6 +103,16 @@ export const Diary = () => {
 
         <NoteTacker selectedEntry={selectedEntry} />
       </ScrollView>
+
+      <PickPetModal
+        navigation={navigation}
+        visible={selectPetModal}
+        handleModal={handlePetModal}
+        title={'Select your pet'}
+        setPet={setPet}
+        createEntry={addDiaryEntry}
+
+      />
     </SafeAreaView>
   );
 };

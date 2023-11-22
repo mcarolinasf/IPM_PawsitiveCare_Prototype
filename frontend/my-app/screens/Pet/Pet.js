@@ -11,6 +11,7 @@ import navigationPaths from '../../navigation/navigationPaths';
 import UserSessionContext from '../../services/UserSessionContext.js';
 import { TasksData } from '../../data/TasksData.js';
 import chart from "../../assets/Chart.png";
+import { petsApi } from '../../api';
 
 
 
@@ -25,11 +26,16 @@ export const Pet = ({ navigation, route }) => {
     }, [pet])
 
 
-    const getData = () => {
+    const getData = async () => {
 
-        //Set tasks
-        const tasks = pet.tasksIds.map((id) => TasksData[id])
-        setTasks(tasks);
+        try {
+            console.log(pet.idP)
+            const tasksRes = await petsApi.getPetTasks(pet.idP)
+            setTasks(tasksRes)
+        } catch (error) {
+            console.log("Error Message: " + error.message)
+        }
+
 
     }
 
@@ -60,7 +66,7 @@ export const Pet = ({ navigation, route }) => {
                 <Text style={globalStyles.subtitleText}>Today</Text>
                 <View>
                     {
-                        tasks && tasks.filter(task => task.petId == pet.id).map(task => (
+                        tasks && tasks.filter(task => task.petId == pet.idP).map(task => (
                             <TaskItem key={task.key} task={task} pressHandler={handleTaskPress} />
                         ))
                     }

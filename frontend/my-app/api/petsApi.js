@@ -9,3 +9,18 @@ export const getPetTasks = async (idP) => {
 
     return response.data;
 };
+
+export const getPet = async (idP) => {
+    const response = await request("get", baseURL + "/" + idP);
+
+    return response.data;
+};
+
+
+export const createEntry = async (idP, entry) => {
+
+    const response = await request("post", baseURL + "/" + idP + "/entries", entry);
+
+    return response.data;
+};
+

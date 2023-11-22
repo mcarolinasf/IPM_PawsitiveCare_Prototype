@@ -9,3 +9,10 @@ export const getTasks = async () => {
     return response.data;
 };
 
+export const createTask = async (task) => {
+
+    const response = await request("post", baseURL + "/", task);
+
+    return response.data;
+};
+

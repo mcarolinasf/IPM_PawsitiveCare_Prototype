@@ -20,15 +20,6 @@ export const AddPet = ({ navigation }) => {
     const [image, setImage] = useState();
     const [newPet, setNewPet] = useState({
         name: '',
-        age: '',
-        gender: '',
-        breed: '',
-        color: '',
-        typeOfCoat: '',
-        tail: '',
-        distinguishMarks: '',
-        height: '',
-        weight: '',
         photoUrl: ''
 
     })
@@ -46,15 +37,6 @@ export const AddPet = ({ navigation }) => {
             console.log("Error Message: " + error.message)
             setNewPet({
                 name: '',
-                age: '',
-                gender: '',
-                breed: '',
-                color: '',
-                typeOfCoat: '',
-                tail: '',
-                distinguishMarks: '',
-                height: '',
-                weight: '',
                 photoUrl: '',
 
             });
@@ -62,10 +44,6 @@ export const AddPet = ({ navigation }) => {
 
         navigation.goBack();
     };
-
-
-
-
 
     const pickImage = async () => {
 

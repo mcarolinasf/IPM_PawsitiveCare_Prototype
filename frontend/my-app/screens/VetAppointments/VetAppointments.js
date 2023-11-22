@@ -10,6 +10,10 @@ import { PetsData } from '../../data/PetsData'
 import { VetAppointmentsData } from '../../data/VetAppointmentsData'
 
 import NoteTacker from '../../components/NoteTaker/NoteTacker'
+import { PickPetModal } from '../../components/Modal/PickPetModal'
+import { dateToString } from '../../services/utils'
+import { TaskType } from '../../data/TaskType'
+import { petsApi } from '../../api'
 
 
 export const VetAppointments = ({ navigation }) => {
@@ -17,16 +21,50 @@ export const VetAppointments = ({ navigation }) => {
     const { user } = useContext(UserSessionContext);
 
     const [vetApp, setVetApp] = useState([]);
+    const [selectedEntry, setSelectedEntry] = useState({
+        title: 'Vet App ',
+        type: TaskType.HEALTH,
+        date: dateToString(new Date()),
+        idP: '',
+        ownersIds: []
+    });
+    const [selectPetModal, setSelectPetModal] = useState(false)
+    const [pet, setPet] = useState(false)
 
-    const [selectedEntry, setSelectedEntry] = useState('');
+    const addVetAppointment = async (pet) => {
 
-    const addVetAppointment = () => {
+        setSelectedEntry({ ...selectedEntry, idP: pet.idP, ownersIds: pet.ownersIds })
 
-        /* Todo: Add functionality */
+
+        try {
+
+            const newEntry = {
+                title: selectedEntry.title,
+                type: selectedEntry.type,
+                date: selectedEntry.date,
+                idP: pet.idP,
+                ownersIds: pet.ownersIds
+            }
+
+            console.log('PeeeeAlgoooooooooooooottt ' + Object.values(newEntry))
+
+
+            await petsApi.createEntry(pet.idP, newEntry)
+        } catch (error) {
+            console.log("Error Message: " + error.message)
+        }
+
+    }
+
+    const handlePetModal = (value) => {
+        setSelectPetModal(value)
+
+
     }
 
 
-    const getData = () => {
+    const getData = async () => {
+
         var petIds = user.petIds;
 
         var pets = petIds.map((id) => PetsData[id]);
@@ -69,17 +107,27 @@ export const VetAppointments = ({ navigation }) => {
                     {
                         /* Maybe change direction of list */
                         vetApp.slice().reverse().map(item => (
-                            <MenuCard key={item.id} iconName={'paw'} title={'Vet App ' + item.id} item={item} subtitle={item.date} setFunction={selectVetApp} selected={selectedEntry} />
+                            <MenuCard key={item.id} iconName={'paw'} title={item.title + item.id} item={item} subtitle={item.date} setFunction={selectVetApp} selected={selectedEntry} />
                         ))
                     }
                 </ScrollView>
                 <Divider />
                 <View style={{ alignItems: 'flex-end', marginTop: 15 }}>
-                    <CustomButton title={'New entry'} iconName={'plus'} onPressFunction={addVetAppointment} />
+                    <CustomButton title={'New entry'} iconName={'plus'} onPressFunction={() => handlePetModal(true)} />
                 </View>
                 {/* Todo: Add pop up and its functionality */}
                 <NoteTacker selectedEntry={selectedEntry} />
             </ScrollView>
+
+            <PickPetModal
+                navigation={navigation}
+                visible={selectPetModal}
+                handleModal={handlePetModal}
+                title={'Select your pet'}
+                setPet={setPet}
+                createEntry={addVetAppointment}
+
+            />
 
         </SafeAreaView>
     )
