@@ -244,7 +244,7 @@ exports.getPetEntries = async (req, res) => {
     return res.status(404).json({ message: "Pet not found" });
     }
 
-    const entries = await Entry.find({ petId: pet._id });
+    const entries = await Entry.find({ idP: pet.idP });
 
     res.status(200).json(entries);
   } catch (error) {
