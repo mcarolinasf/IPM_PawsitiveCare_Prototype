@@ -1,5 +1,5 @@
 
-import { View, Text, Modal, TouchableOpacity } from 'react-native';
+import { View, Text, Modal, TouchableOpacity, ScrollView } from 'react-native';
 import { globalStyles } from '../../styles/globalStyles';
 import { ModalComponentStyles } from './ModalComponentStyles';
 import { TouchableWithoutFeedback } from 'react-native';
@@ -23,78 +23,78 @@ export const PickPetModal = ({ navigation, visible, handleModal, title, setPet, 
 
     }
     handleModal(false);
-};
 
-const getPetsByOwner = async () => {
-    try {
-        const petsResponse = await usersApi.getUserPets(user.idU);
-        setPets(petsResponse);
-    } catch (error) {
-        console.log("Error Message: " + error.message);
-    }
-};
 
-useEffect(() => {
-    getPetsByOwner();
-}, []);
+    const getPetsByOwner = async () => {
+        try {
+            const petsResponse = await usersApi.getUserPets(user.idU);
+            setPets(petsResponse);
+        } catch (error) {
+            console.log("Error Message: " + error.message);
+        }
+    };
 
-return (
-    <Modal
-        animationType="fade"
-        transparent={true}
-        visible={visible}
-        onRequestClose={() => {
-            handleModal(false);
-        }}
-    >
-        <TouchableWithoutFeedback
-            onPress={() => {
+    useEffect(() => {
+        getPetsByOwner();
+    }, []);
+
+    return (
+        <Modal
+            animationType="fade"
+            transparent={true}
+            visible={visible}
+            onRequestClose={() => {
                 handleModal(false);
             }}
         >
-            <View style={ModalComponentStyles.overlay}>
-                <TouchableOpacity
-                    activeOpacity={1}
-                    style={{
-                        ...ModalComponentStyles.container,
-                        ...globalStyles.shadow,
-                    }}
-                >
-                    <View style={ModalComponentStyles.titleContainer}>
-                        <Text
-                            style={{
-                                ...globalStyles.subtitleText,
-                                ...ModalComponentStyles.title,
-                            }}
-                        >
-                            {title}
-                        </Text>
-                    </View>
-                    <ScrollView
-                        showsVerticalScrollIndicator={false}
-                        style={{ height: 450 }}
+            <TouchableWithoutFeedback
+                onPress={() => {
+                    handleModal(false);
+                }}
+            >
+                <View style={ModalComponentStyles.overlay}>
+                    <TouchableOpacity
+                        activeOpacity={1}
+                        style={{
+                            ...ModalComponentStyles.container,
+                            ...globalStyles.shadow,
+                        }}
                     >
-                        <View
-                            style={[
-                                ModalComponentStyles.modalContent,
-                                ModalComponentStyles.rowContainer,
-                            ]}
-                        >
-                            {pets &&
-                                pets.map((pet) => (
-                                    <Card
-                                        key={pet.id}
-                                        item={pet}
-                                        pressHandler={cardPressHandler}
-                                        styleCard={{ width: 70, height: 80 }}
-                                        styleImage={{ width: 70, height: 60 }}
-                                    />
-                                ))}
+                        <View style={ModalComponentStyles.titleContainer}>
+                            <Text
+                                style={{
+                                    ...globalStyles.subtitleText,
+                                    ...ModalComponentStyles.title,
+                                }}
+                            >
+                                {title}
+                            </Text>
                         </View>
-                    </ScrollView>
-                </TouchableOpacity>
-            </View>
-        </TouchableWithoutFeedback>
-    </Modal>
-);
+                        <ScrollView
+                            showsVerticalScrollIndicator={false}
+                            style={{ height: 450 }}
+                        >
+                            <View
+                                style={[
+                                    ModalComponentStyles.modalContent,
+                                    ModalComponentStyles.rowContainer,
+                                ]}
+                            >
+                                {pets &&
+                                    pets.map((pet) => (
+                                        <Card
+                                            key={pet.id}
+                                            item={pet}
+                                            pressHandler={cardPressHandler}
+                                            styleCard={{ width: 70, height: 80 }}
+                                            styleImage={{ width: 70, height: 60 }}
+                                        />
+                                    ))}
+                            </View>
+                        </ScrollView>
+                    </TouchableOpacity>
+                </View>
+            </TouchableWithoutFeedback>
+        </Modal>
+    );
 };
