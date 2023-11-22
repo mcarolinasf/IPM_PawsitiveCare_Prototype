@@ -25,6 +25,8 @@ export const VetAppointments = ({ navigation }) => {
     const [selectPetModal, setSelectPetModal] = useState(false)
     const [pet, setPet] = useState(false)
     const isFocused = useIsFocused();
+    const [text, setText] = useState('')
+
 
 
     const addVetAppointment = async (pet) => {
@@ -98,6 +100,8 @@ export const VetAppointments = ({ navigation }) => {
 
         const selectedVetApp = vetApp.find((entry) => entry.idE === itemId);
 
+        setText(selectedVetApp.text)
+
         console.log(itemId)
         console.log(Object.values(selectedVetApp))
 
@@ -124,7 +128,7 @@ export const VetAppointments = ({ navigation }) => {
                     <CustomButton title={'New entry'} iconName={'plus'} onPressFunction={() => handlePetModal(true)} />
                 </View>
                 {/* Todo: Add pop up and its functionality */}
-                <NoteTacker selectedEntry={selectedEntry} setEntry={setSelectedEntry} />
+                <NoteTacker selectedEntry={selectedEntry} setEntry={setSelectedEntry} setVetApp={setVetApp} vetApp={vetApp} />
             </ScrollView>
 
             <PickPetModal
@@ -134,7 +138,8 @@ export const VetAppointments = ({ navigation }) => {
                 title={'Select your pet'}
                 setPet={setPet}
                 createEntry={addVetAppointment}
-
+                setText={setText}
+                text={text}
             />
 
         </SafeAreaView>

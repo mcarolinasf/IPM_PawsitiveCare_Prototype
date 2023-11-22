@@ -9,7 +9,7 @@ import Divider from "../../components/Divider";
 import { ConfirmationModal } from "../Modal/ConfirmationModal";
 import { petsApi } from "../../api";
 
-export default function NoteTacker({ selectedEntry, setEntry }) {
+export default function NoteTacker({ selectedEntry, setEntry, text, setText }) {
   const [menuModalVisible, setMenuModalVisible] = useState(false);
 
   const handleMenuPopUp = () => {
@@ -18,15 +18,27 @@ export default function NoteTacker({ selectedEntry, setEntry }) {
 
   const handleTextChange = async (newText) => {
 
-    console.log('hbrgjubvgljsnvg' + newText)
-
+    setText(newText)
 
     try {
-      const updatedEntry = { ...selectedEntry, text: newText }
-      console.log(updatedEntry)
+
+      const updatedEntry = {
+        idE: selectedEntry.idE,
+        title: selectedEntry.title,
+        type: selectedEntry.type,
+        date: selectedEntry.date,
+        idP: selectedEntry.idP,
+        ownersIds: selectedEntry.ownersIds,
+        text: newText
+      }
+      console.log(Object.values(updatedEntry))
 
       await petsApi.updateEntry(selectedEntry.idP, updatedEntry, selectedEntry.idE)
-      setEntry(updatedEntry)
+      setEntry({
+        ...updatedEntry
+        , text: newText
+      })
+
 
     } catch (error) {
       console.log("Error Message: " + error.message)
@@ -57,7 +69,7 @@ export default function NoteTacker({ selectedEntry, setEntry }) {
           style={NoteTackerStyles.input}
           multiline={true}
           onChangeText={handleTextChange}
-          value={selectedEntry.text}
+          value={text}
         />
       </View>
 
