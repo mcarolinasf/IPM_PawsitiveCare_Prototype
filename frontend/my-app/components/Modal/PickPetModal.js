@@ -6,11 +6,7 @@ import { TouchableWithoutFeedback } from 'react-native';
 import React, { useContext, useState, useEffect } from 'react'
 import Card from '../../components/Card/Card'
 import UserSessionContext from '../../services/UserSessionContext.js'
-import { getPetsByOwner } from '../../services/utils';
-import { useCameraPermissions } from 'expo-image-picker';
 import { usersApi } from '../../api';
-
-
 
 
 export const PickPetModal = ({ navigation, visible, handleModal, title, setPet, createEntry }) => {
