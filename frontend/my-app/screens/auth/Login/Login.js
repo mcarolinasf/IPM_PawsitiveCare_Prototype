@@ -16,16 +16,22 @@ import { useState, useContext, useEffect } from "react";
 import UserSessionContext from "../../../services/UserSessionContext.js";
 import userData from "../../../data/UserData.js";
 import { usersApi } from "../../../api/index.js";
+import { InfoModal } from "../../../components/Modal/InfoModal";
 
 export const Login = ({ navigation }) => {
-
-  const { user, setUserSession, clearUserSession } = useContext(UserSessionContext);
+  const { user, setUserSession, clearUserSession } =
+    useContext(UserSessionContext);
   const [idU, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [menuModalVisible, setMenuModalVisible] = useState(false);
 
   onPressRegister = () => {
     // Navigate to the Register screen
     navigation.navigate(navigationPaths.register);
+  };
+
+  const handleMenuPopUp = () => {
+    setMenuModalVisible(!menuModalVisible);
   };
 
   const handleLogin = async () => {
@@ -33,15 +39,23 @@ export const Login = ({ navigation }) => {
 
     try {
       //Method for login after
-      const user = await usersApi.getUser(idU.toLowerCase().trim())
+      const user = await usersApi.getUser(idU.toLowerCase().trim());
+      console.log(user[0]);
+
       if (user != null) setUserSession(user);
       console.log("USER: " + user);
     } catch (error) {
       //_handleLoginError(error.message);
-      console.log("Error Message: " + error.message);
-      setEmail("");
-      setPassword("");
+
+      handleLoginError(error.message);
     }
+  };
+
+  const handleLoginError = () => {
+    console.log("Error Message: Invalid parameters");
+    setMenuModalVisible(true);
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -51,8 +65,18 @@ export const Login = ({ navigation }) => {
         <View style={LoginStyles.container}>
           <Text style={LoginStyles.welcome}>Welcome</Text>
           <View style={LoginStyles.inputsView}>
-            <TextInputDefault label={"Email"} isSecure={false} setFunction={setEmail} value={idU} />
-            <TextInputDefault label={"Password"} isSecure={true} setFunction={setPassword} value={password} />
+            <TextInputDefault
+              label={"Email"}
+              isSecure={false}
+              setFunction={setEmail}
+              value={idU}
+            />
+            <TextInputDefault
+              label={"Password"}
+              isSecure={true}
+              setFunction={setPassword}
+              value={password}
+            />
             <View style={{ flexDirection: "row" }}>
               {/* TODO: add checkbox */}
               <Text>I agree with terms & conditions</Text>
@@ -76,6 +100,12 @@ export const Login = ({ navigation }) => {
             </View>
           </View>
         </View>
+        <InfoModal
+          visible={menuModalVisible}
+          handleModal={handleMenuPopUp}
+          title={"Warning"}
+          text={"Invalid parameters"}
+        />
       </ScrollView>
     </SafeAreaView>
   );
