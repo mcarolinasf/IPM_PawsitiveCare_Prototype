@@ -1,26 +1,29 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
-import { Text, View, SafeAreaView, ScrollView, Image } from "react-native";
-import { globalStyles } from "../../styles/globalStyles";
-import TextInputDefault from "../../components/TextInputDefault/TextInputDefault";
-import Header from "../../components/Header/Header.js";
-import { DatePickerComponent } from "../../components/DatePicker/DatePickerComponent.js";
-import { PickPetModal } from "../../components/Modal/PickPetModal";
-import { PetPicker } from "../../components/PetPicker/PetPicker.js";
-import { ScheduleMedicationStyles } from "./ScheduleStyles.js";
-import { TasksData } from "../../data/TasksData.js";
-import { CustomButton } from "../../components/CustomButton/CustomButton.js";
-import { TaskType } from "../../data/TaskType.js";
+import { Text, View, SafeAreaView, ScrollView, Image } from 'react-native';
+import { globalStyles } from '../../styles/globalStyles';
+import TextInputDefault from '../../components/TextInputDefault/TextInputDefault';
+import Header from '../../components/Header/Header.js'
+import { DatePickerComponent } from '../../components/DatePicker/DatePickerComponent.js';
+import { PickPetModal } from '../../components/Modal/PickPetModal';
+import { PetPicker } from '../../components/PetPicker/PetPicker.js';
+import { ScheduleMedicationStyles } from './ScheduleStyles.js';
+import { TasksData } from '../../data/TasksData.js';
+import { CustomButton } from '../../components/CustomButton/CustomButton.js';
+import { TaskType } from '../../data/TaskType.js';
+import { usersApi, tasksApi } from '../../api';
+
 
 export const ScheduleMedication = ({ navigation, route }) => {
+
   const { day } = route.params;
 
   const [selectPetModal, setSelectPetModal] = useState(false);
   const [pet, setPet] = useState(false);
 
   const handlePetModal = (value) => {
-    setSelectPetModal(value);
-  };
+    setSelectPetModal(value)
+  }
 
   const [newMedication, setNewMedication] = useState({
     medicine: "",
@@ -32,36 +35,41 @@ export const ScheduleMedication = ({ navigation, route }) => {
     alarm: false,
   });
 
-  const addTask = () => {
-    //Add taskId in pet
+  const addTask = async () => {
+    console.log(pet)
 
-    //Create task and store
-    const newTaskId = Object.keys(TasksData).length;
 
     const newTaskObject = {
-      id: newTaskId,
       text: newMedication.medicine,
       type: TaskType.HEALTH,
       time: newMedication.time,
       date: newMedication.startDate,
-      petId: pet.id,
-      owners: pet.owners,
+      petId: pet.idP,
+      ownersIds: pet.ownersIds,
       done: false,
-      info: {
-        dosage: newMedication.dosage,
-        periodicity: newMedication.periodicity,
-      },
-    };
+      info: { dosage: newMedication.dosage, periodicity: newMedication.periodicity }
+    }
 
-    TasksData[newTaskId] = newTaskObject;
-    console.log(TasksData);
+    console.log(newTaskObject)
 
-    /*  // Write the updated data back to the file
     try {
-      fs.writeFileSync('TasksData.js', `export const TasksData = ${JSON.stringify(TasksData, null, 2)};`);
+
+      await tasksApi.createTask(newTaskObject)
+
     } catch (error) {
-      console.error('Error writing TasksData file:', error);
-    } */
+      console.log("Error Message: " + error.message)
+      useState({
+        medicine: '',
+        time: '14:30',
+        startDate: day,
+        endDate: day,
+        periodicity: '',
+        dosage: '',
+        alarm: false,
+      })
+    }
+
+
 
     navigation.goBack();
   };
@@ -69,6 +77,7 @@ export const ScheduleMedication = ({ navigation, route }) => {
   return (
     <SafeAreaView style={globalStyles.container}>
       <ScrollView>
+
         <Header title={"Schedule Medication"} goBack showProfile />
 
         <PetPicker url={pet.photoUrl} handleModal={handlePetModal} />
@@ -127,7 +136,7 @@ export const ScheduleMedication = ({ navigation, route }) => {
         </View>
 
         <View style={{ paddingBottom: 50 }}>
-          <CustomButton title={"Schedule"} onPressFunction={addTask} />
+          <CustomButton title={'Schedule'} onPressFunction={addTask} />
         </View>
       </ScrollView>
 
@@ -135,9 +144,11 @@ export const ScheduleMedication = ({ navigation, route }) => {
         navigation={navigation}
         visible={selectPetModal}
         handleModal={handlePetModal}
-        title={"Select your pet"}
+        title={'Select your pet'}
         setPet={setPet}
       />
     </SafeAreaView>
   );
-};
+
+
+}

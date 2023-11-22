@@ -16,6 +16,7 @@ import { ItemsByTag } from "../../components/ItemsByTag/ItemsByTag.js";
 import navigationPaths from "../../navigation/navigationPaths.js";
 import { PetPicture } from "../../components/PetPicture/PetPicture.js";
 import { PetPictureStyles } from "../../components/PetPicture/PetPictureStyles.js";
+import { petsApi } from "../../api";
 
 const listFilters = [
   {
@@ -46,9 +47,18 @@ export const Medication = ({ navigation, route }) => {
   };
 
 
-  const getData = () => {
+  const getData = async () => {
 
     var tasks = pet.tasksIds.map((id) => TasksData[id])
+
+    try {
+      const tasksRes = await petsApi.getPetTasks(pet.idP)
+
+      setUpcoming(tasksRes)
+
+    } catch (error) {
+
+    }
 
 
     //Set upcoming

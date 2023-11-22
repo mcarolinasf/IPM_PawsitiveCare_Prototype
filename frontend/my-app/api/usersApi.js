@@ -50,11 +50,11 @@ export const deleteUser = async (idU) => {
 
 export const getUserPets = async (idU) => {
   const response = await request("get", baseURL + "/" + idU + "/pets/");
-
   return response.data;
 };
 
 export const createPet = async (idU, pet) => {
+
   const response = await request("post", baseURL + "/" + idU + "/pets", pet);
 
   return response.data;

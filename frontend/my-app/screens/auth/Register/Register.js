@@ -32,9 +32,9 @@ export const Register = ({ navigation }) => {
   const onPressRegister = async () => {
     console.log(
       "User rggdhre-----------------> " +
-        user.idU +
-        " | pass ----> " +
-        user.password
+      user.idU +
+      " | pass ----> " +
+      user.password
     );
 
     try {

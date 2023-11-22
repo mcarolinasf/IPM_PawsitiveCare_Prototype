@@ -15,7 +15,7 @@ export const getCurrentDate = () => {
 export const getTypeColor = (type) => {
   switch (type) {
     case TaskType.HEALTH:
-      return "#A1E1A4";
+      return "#A2DFA5";
     case TaskType.FEEDING:
       return "#F0C49C";
     case TaskType.TRICKS:
@@ -23,15 +23,15 @@ export const getTypeColor = (type) => {
     case TaskType.COACHING:
       return "#6ADBE3";
     case TaskType.GROOMING:
-      return "#DF0000";
+      return "#DF909B";
     default:
       return colors.secondary;
   }
 };
 
 export const getPetsByOwner = (owner) => {
-    var petIds = owner.petIds; 
-    return petIds.map((id) => PetsData[id]);
+  var petIds = owner.petIds;
+  return petIds.map((id) => PetsData[id]);
 }
 
 export const stringToTime = (timeStr) => {
@@ -52,5 +52,5 @@ export const timeToString = (time) => {
 }
 
 export const dateToString = (date) => {
-    return  date.toISOString().split('T')[0]
+  return date.toISOString().split('T')[0]
 }
