@@ -14,7 +14,7 @@ router.get(petAPI,  pet.getAll);
 /*          Tasks          */
 
 
-router.get(petAPI + "/:idU/tasks",  pet.getPetTasks);
+router.get(petAPI + "/:idP/tasks",  pet.getPetTasks);
 
 
 
