@@ -4,6 +4,7 @@ const Joi = require("joi");
 const User = require('../models/user');
 const Pet = require('../models/pet');
 const Task = require('../models/task');
+const Entry = require('../models/entry');
 
 
 const createUserSchema = Joi.object({
@@ -353,6 +354,42 @@ exports.getUserTasks = async (req, res) => {
     const tasks = await Task.find({ ownersIds: { $in: [req.params.idU] } });
 
     res.status(200).json(tasks);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
+
+
+
+/*          Tasks        */
+
+const getUserEntriesSchema = Joi.object({
+  idU: Joi.string().required(),
+});
+
+exports.getUserEntries = async (req, res) => {
+  try {
+
+    // validate the user ID parameter using Joi
+    const { error } = getUserEntriesSchema.validate(req.params);
+
+    if (error) {
+      return res.status(400).json({ message: error.details[0].message });
+    }
+
+    // find user by ID in the database
+    const user = await User.findOne({ idU: req.params.idU });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // find all pets by user ID in the database
+    const entries = await Entry.find({ ownersIds: { $in: [req.params.idU] } });
+
+    res.status(200).json(entries);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });

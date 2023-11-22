@@ -6,7 +6,7 @@ const entry = require("../controllers/entry");
 
 const entryAPI = "/entries";
 
-router.get(entryAPI + "/:idE", entry.getEntry);
+//router.get(entryAPI + "/:idE", entry.getEntry);
 
 router.get(entryAPI,  entry.getAll);
 
