@@ -15,6 +15,7 @@ const taskSchema = new mongoose.Schema({
   done: { type: Boolean, default: false },
   ownersIds: { type: [String], required: true },
   trainingPlanId: { type: String },
+  info: { type: Object },
 
 });
 

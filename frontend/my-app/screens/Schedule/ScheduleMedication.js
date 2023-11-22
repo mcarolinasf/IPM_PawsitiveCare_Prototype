@@ -18,22 +18,22 @@ export const ScheduleMedication = ({ navigation, route }) => {
 
   const { day } = route.params;
 
-  const [selectPetModal, setSelectPetModal] = useState(false)
-  const [pet, setPet] = useState(false)
+  const [selectPetModal, setSelectPetModal] = useState(false);
+  const [pet, setPet] = useState(false);
 
   const handlePetModal = (value) => {
     setSelectPetModal(value)
   }
 
   const [newMedication, setNewMedication] = useState({
-    medicine: '',
-    time: '14:30',
+    medicine: "",
+    time: "14:30",
     startDate: day,
     endDate: day,
-    periodicity: '',
-    dosage: '',
+    periodicity: "",
+    dosage: "",
     alarm: false,
-  })
+  });
 
   const addTask = async () => {
     console.log(pet)
@@ -72,10 +72,7 @@ export const ScheduleMedication = ({ navigation, route }) => {
 
 
     navigation.goBack();
-
-  }
-
-
+  };
 
   return (
     <SafeAreaView style={globalStyles.container}>
@@ -86,24 +83,61 @@ export const ScheduleMedication = ({ navigation, route }) => {
         <PetPicker url={pet.photoUrl} handleModal={handlePetModal} />
 
         <View style={ScheduleMedicationStyles.inputsContainer}>
-          <TextInputDefault label={'Select medicine'} setFunction={(value) => setNewMedication({ ...newMedication, medicine: value })} value={newMedication.medicine} />
-          <View style={[globalStyles.rowCenter]} >
-            <View style={ScheduleMedicationStyles.multipleInputContainer} >
-              <DatePickerComponent label={'Start Date'} setFunction={(value) => setNewMedication({ ...newMedication, startDate: value })} value={newMedication.startDate} />
+          <TextInputDefault
+            label={"Select medicine   *"}
+            setFunction={(value) =>
+              setNewMedication({ ...newMedication, medicine: value })
+            }
+            value={newMedication.medicine}
+          />
+          <View style={[globalStyles.rowCenter]}>
+            <View style={ScheduleMedicationStyles.multipleInputContainer}>
+              <DatePickerComponent
+                label={"Start Date   *"}
+                setFunction={(value) =>
+                  setNewMedication({ ...newMedication, startDate: value })
+                }
+                value={newMedication.startDate}
+              />
             </View>
-            <View style={ScheduleMedicationStyles.multipleInputContainer} >
-              <DatePickerComponent label={'End Date'} setFunction={(value) => setNewMedication({ ...newMedication, endDate: value })} value={newMedication.endDate} />
+            <View style={ScheduleMedicationStyles.multipleInputContainer}>
+              <DatePickerComponent
+                label={"End Date"}
+                setFunction={(value) =>
+                  setNewMedication({ ...newMedication, endDate: value })
+                }
+                value={newMedication.endDate}
+              />
             </View>
           </View>
-          <DatePickerComponent label={'Time'} setFunction={(value) => setNewMedication({ ...newMedication, time: value })} value={newMedication.time} time />
-          <TextInputDefault label={'Periodicity'} setFunction={(value) => setNewMedication({ ...newMedication, periodicity: value })} value={newMedication.periodicity} />
-          <TextInputDefault label={'Dosage (mg)'} setFunction={(value) => setNewMedication({ ...newMedication, dosage: value })} value={newMedication.dosage} keyboardType={'numeric'} />
+          <DatePickerComponent
+            label={"Time   *"}
+            setFunction={(value) =>
+              setNewMedication({ ...newMedication, time: value })
+            }
+            value={newMedication.time}
+            time
+          />
+          <TextInputDefault
+            label={"Periodicity"}
+            setFunction={(value) =>
+              setNewMedication({ ...newMedication, periodicity: value })
+            }
+            value={newMedication.periodicity}
+          />
+          <TextInputDefault
+            label={"Dosage (mg)"}
+            setFunction={(value) =>
+              setNewMedication({ ...newMedication, dosage: value })
+            }
+            value={newMedication.dosage}
+            keyboardType={"numeric"}
+          />
         </View>
 
         <View style={{ paddingBottom: 50 }}>
           <CustomButton title={'Schedule'} onPressFunction={addTask} />
         </View>
-
       </ScrollView>
 
       <PickPetModal

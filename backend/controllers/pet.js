@@ -95,7 +95,8 @@ const createEntrySchema = Joi.object({
   title: Joi.string().required(),
   type: Joi.string().required(),
   date: Joi.string().required(),
-  text: Joi.string().required(),
+  text: Joi.string(),
+  idP: Joi.string().required(),
   ownersIds: Joi.array().items(Joi.string()),
 });
 
@@ -176,7 +177,8 @@ const updateEntrySchema = Joi.object({
   type: Joi.string().required(),
   date: Joi.string().required(),
   text: Joi.string().required(),
-  ownersIds: Joi.array().items(Joi.string()),
+  petId: Joi.string().required(),
+  ownersIds: Joi.array().items(Joi.string())
 });
 
 exports.updateEntry = async (req, res) => {

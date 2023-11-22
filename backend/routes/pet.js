@@ -14,19 +14,19 @@ router.get(petAPI,  pet.getAll);
 /*          Tasks          */
 
 
-router.get(petAPI + "/:idU/tasks",  pet.getPetTasks);
+router.get(petAPI + "/:idP/tasks",  pet.getPetTasks);
 
 
 
 /*          Entries          */
 
-router.post(petAPI + ":idP/entries", pet.createEntry);
+router.post(petAPI + "/:idP/entries", pet.createEntry);
 
-router.delete(petAPI + ":idP/entries/:idE",  pet.deleteEntry);
+router.delete(petAPI + "/:idP/entries/:idE",  pet.deleteEntry);
 
-router.put(petAPI + ":idP/entries/:idE",  pet.updateEntry);
+router.put(petAPI + "/:idP/entries/:idE",  pet.updateEntry);
 
-router.get(petAPI + ":idP/entries",  pet.getPetEntries);
+router.get(petAPI + "/:idP/entries",  pet.getPetEntries);
 
 
 

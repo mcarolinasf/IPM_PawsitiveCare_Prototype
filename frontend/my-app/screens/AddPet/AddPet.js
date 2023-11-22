@@ -1,17 +1,23 @@
-import React, { useContext, useState } from 'react'
-import { View, Text, SafeAreaView, ScrollView, Image, TouchableOpacity } from 'react-native'
-import Header from '../../components/Header/Header'
-import { globalStyles } from '../../styles/globalStyles'
-import { AddPetStyles } from './AddPetStyles'
-import { FontAwesome5 } from '@expo/vector-icons';
-import colors from '../../styles/colors'
-import * as ImagePicker from 'expo-image-picker';
-import TextInputDefault from '../../components/TextInputDefault/TextInputDefault'
-import { CustomButton } from '../../components/CustomButton/CustomButton'
-import { PetsData } from '../../data/PetsData'
-import { usersApi } from '../../api'
-import UserSessionContext from '../../services/UserSessionContext'
-
+import React, { useContext, useState } from "react";
+import {
+    View,
+    Text,
+    SafeAreaView,
+    ScrollView,
+    Image,
+    TouchableOpacity,
+} from "react-native";
+import Header from "../../components/Header/Header";
+import { globalStyles } from "../../styles/globalStyles";
+import { AddPetStyles } from "./AddPetStyles";
+import { FontAwesome5 } from "@expo/vector-icons";
+import colors from "../../styles/colors";
+import * as ImagePicker from "expo-image-picker";
+import TextInputDefault from "../../components/TextInputDefault/TextInputDefault";
+import { CustomButton } from "../../components/CustomButton/CustomButton";
+import { PetsData } from "../../data/PetsData";
+import { usersApi } from "../../api";
+import UserSessionContext from "../../services/UserSessionContext";
 
 export const AddPet = ({ navigation }) => {
 

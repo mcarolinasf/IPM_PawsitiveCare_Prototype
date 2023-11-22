@@ -18,8 +18,8 @@ export const ScheduleGrooming = ({ navigation, route }) => {
 
   const { day } = route.params;
 
-  const [selectPetModal, setSelectPetModal] = useState(false)
-  const [pet, setPet] = useState(false)
+  const [selectPetModal, setSelectPetModal] = useState(false);
+  const [pet, setPet] = useState(false);
 
   const handlePetModal = (value) => {
     setSelectPetModal(value)
@@ -31,7 +31,7 @@ export const ScheduleGrooming = ({ navigation, route }) => {
     date: day,
     periodicity: '',
     alarm: false,
-  })
+  });
 
   const addTask = async () => {
 
@@ -63,10 +63,7 @@ export const ScheduleGrooming = ({ navigation, route }) => {
 
 
     navigation.goBack();
-
-  }
-
-
+  };
 
   return (
     <SafeAreaView style={globalStyles.container}>
@@ -92,7 +89,6 @@ export const ScheduleGrooming = ({ navigation, route }) => {
         <View style={{ paddingBottom: 50 }}>
           <CustomButton title={'Schedule'} onPressFunction={addTask} />
         </View>
-
       </ScrollView>
 
       <PickPetModal

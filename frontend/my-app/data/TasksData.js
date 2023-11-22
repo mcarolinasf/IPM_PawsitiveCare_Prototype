@@ -11,7 +11,7 @@ export const TasksData = {
     owners: ["admin"],
     done: false,
     trainingPlanId: -1,
-    info: {"periodicity": "2"}
+    info: { periodicity: "2" },
   },
   1: {
     id: 1,
@@ -26,7 +26,7 @@ export const TasksData = {
   },
   2: {
     id: 2,
-    text: "Lay Down Exercise",
+    text: "Dog backflip",
     type: TaskType.TRICKS,
     time: "10:30",
     date: "2023-11-19",
@@ -37,7 +37,7 @@ export const TasksData = {
   },
   3: {
     id: 3,
-    text: "Roll Over",
+    text: "Cat Frontflip",
     type: TaskType.TRICKS,
     time: "15:00",
     date: "2023-11-19",
@@ -116,7 +116,7 @@ export const TasksData = {
   10: {
     id: 10,
     text: "Obidience",
-    type: 'Upcoming',
+    type: "Upcoming",
     time: "16:00",
     date: "2023-11-19",
     petId: 2,
@@ -127,7 +127,7 @@ export const TasksData = {
   11: {
     id: 11,
     text: "Obidience",
-    type: 'Done',
+    type: "Done",
     time: "16:00",
     date: "2023-11-19",
     petId: 2,

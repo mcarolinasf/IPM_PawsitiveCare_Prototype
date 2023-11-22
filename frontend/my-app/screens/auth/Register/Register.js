@@ -14,34 +14,40 @@ import navigationPaths from "../../../navigation/navigationPaths.js";
 import TextInputDefault from "../../../components/TextInputDefault/TextInputDefault.js";
 import { usersApi } from "../../../api/index.js";
 import { useState } from "react";
-import { InfoModal } from '../../../components/Modal/InfoModal';
-
+import { InfoModal } from "../../../components/Modal/InfoModal";
 
 export const Register = ({ navigation }) => {
   const [menuModalVisible, setMenuModalVisible] = useState(false);
 
   const handleMenuPopUp = () => {
     setMenuModalVisible(!menuModalVisible);
-  }
+  };
 
   const [user, setUser] = useState({
-    name: '',
-    idU: '',
-    password: ''
-  })
+    name: "",
+    idU: "",
+    password: "",
+  });
 
   const onPressRegister = async () => {
+    console.log(
+      "User rggdhre-----------------> " +
+      user.idU +
+      " | pass ----> " +
+      user.password
+    );
 
     try {
-      await usersApi.createUser(user)
+      const user = await usersApi.createUser(user);
+      console.log(user);
     } catch (error) {
-      console.log("Error Message: " + error.message)
-      useState({
-        name: '',
-        idU: '',
-        password: ''
-      });
+      console.log("Error Message: " + error.message);
       setMenuModalVisible(!menuModalVisible);
+      useState({
+        name: "",
+        idU: "",
+        password: "",
+      });
     }
     navigation.navigate(navigationPaths.login);
   };
@@ -57,9 +63,24 @@ export const Register = ({ navigation }) => {
         <View style={RegisterStyles.container}>
           <Text style={RegisterStyles.register}>Register</Text>
           <View style={RegisterStyles.inputsView}>
-            <TextInputDefault label={"Name"} isSecure={false} setFunction={(value) => setUser({ ...user, name: value })} value={user.name} />
-            <TextInputDefault label={"Email"} isSecure={false} setFunction={(value) => setUser({ ...user, idU: value.trim() })} value={user.idU} />
-            <TextInputDefault label={"Password"} isSecure={true} setFunction={(value) => setUser({ ...user, password: value })} value={user.password} />
+            <TextInputDefault
+              label={"Name"}
+              isSecure={false}
+              setFunction={(value) => setUser({ ...user, name: value })}
+              value={user.name}
+            />
+            <TextInputDefault
+              label={"Email"}
+              isSecure={false}
+              setFunction={(value) => setUser({ ...user, idU: value.trim() })}
+              value={user.idU}
+            />
+            <TextInputDefault
+              label={"Password"}
+              isSecure={true}
+              setFunction={(value) => setUser({ ...user, password: value })}
+              value={user.password}
+            />
             <View style={{ flexDirection: "row" }}>
               {/* TODO: add checkbox */}
               <Text>I agree with terms & conditions</Text>
@@ -84,11 +105,11 @@ export const Register = ({ navigation }) => {
           </View>
         </View>
 
-        < InfoModal
+        <InfoModal
           visible={menuModalVisible}
           handleModal={handleMenuPopUp}
           title={"Warning"}
-          text={"Wrong email or password"}
+          text={"Invalid parameters"}
         />
       </ScrollView>
     </SafeAreaView>

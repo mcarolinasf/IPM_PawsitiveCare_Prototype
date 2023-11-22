@@ -43,7 +43,6 @@ export const Home = ({ navigation }) => {
 
 
   const getData = async () => {
-
     try {
       const pets = await usersApi.getUserPets(user.idU)
       setPets(pets)
@@ -54,7 +53,7 @@ export const Home = ({ navigation }) => {
       setTasks(tasks)
 
     } catch (error) {
-      console.log("Error Message: " + error.message)
+      console.log("Error Message: " + error.message);
     }
 
   };

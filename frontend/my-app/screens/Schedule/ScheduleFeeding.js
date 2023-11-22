@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
 import { Text, View, SafeAreaView, ScrollView, Image } from 'react-native';
 import { globalStyles } from '../../styles/globalStyles';
@@ -11,31 +11,35 @@ import { ScheduleMedicationStyles } from './ScheduleStyles.js';
 import { TasksData } from '../../data/TasksData.js';
 import { CustomButton } from '../../components/CustomButton/CustomButton.js';
 import { TaskType } from '../../data/TaskType.js';
-import { tasksApi } from '../../api';
 
 
 export const ScheduleFeeding = ({ navigation, route }) => {
 
   const { day } = route.params;
 
-  const [selectPetModal, setSelectPetModal] = useState(false)
-  const [pet, setPet] = useState(false)
+  const [selectPetModal, setSelectPetModal] = useState(false);
+  const [pet, setPet] = useState(false);
 
   const handlePetModal = (value) => {
     setSelectPetModal(value)
   }
 
-  const [newFeeding, setNewFeeding] = useState({
+  const [newMedication, setNewMedication] = useState({
     food: '',
     time: '10:30',
     startDate: day,
     endDate: day,
-    periodicity: '',
-    dosage: '',
+    periodicity: "",
+    dosage: "",
     alarm: false,
-  })
+  });
 
-  const addTask = async () => {
+  const addTask = () => {
+
+    //Add taskId in pet
+
+    //Create task and store
+    const newTaskId = Object.keys(TasksData).length;
 
     const newTaskObject = {
       text: newFeeding.food,
@@ -45,69 +49,64 @@ export const ScheduleFeeding = ({ navigation, route }) => {
       petId: pet.idP,
       ownersIds: pet.ownersIds,
       done: false,
-      info: { dosage: newFeeding.dosage, periodicity: newFeeding.periodicity }
+      info: { dosage: newMedication.dosage, periodicity: newMedication.periodicity }
     }
-    console.log(newTaskObject)
-    try {
 
-      await tasksApi.createTask(newTaskObject)
+    TasksData[newTaskId] = newTaskObject;
+    console.log(TasksData)
 
-    } catch (error) {
-      console.log("Error Message: " + error.message)
-      useState({
-        food: '',
-        time: '10:30',
-        startDate: day,
-        endDate: day,
-        periodicity: '',
-        dosage: '',
-        alarm: false,
-      })
-    }
-    navigation.goBack();
-
+  } catch (error) {
+    console.log("Error Message: " + error.message)
+    useState({
+      food: '',
+      time: '10:30',
+      startDate: day,
+      endDate: day,
+      periodicity: '',
+      dosage: '',
+      alarm: false,
+    })
   }
+  navigation.goBack();
+};
 
+return (
+  <SafeAreaView style={globalStyles.container}>
+    <ScrollView>
 
+      <Header title={"Schedule\n  Feeding"} goBack showProfile />
 
-  return (
-    <SafeAreaView style={globalStyles.container}>
-      <ScrollView>
+      <PetPicker url={pet.photoUrl} handleModal={handlePetModal} />
 
-        <Header title={"Schedule\n  Feeding"} goBack showProfile />
-
-        <PetPicker url={pet.photoUrl} handleModal={handlePetModal} />
-
-        <View style={ScheduleMedicationStyles.inputsContainer}>
-          <TextInputDefault label={'Food'} setFunction={(value) => setNewFeeding({ ...newFeeding, food: value })} value={newFeeding.food} />
-          <View style={[globalStyles.rowCenter]} >
-            <View style={ScheduleMedicationStyles.multipleInputContainer} >
-              <DatePickerComponent label={'Start Date'} setFunction={(value) => setNewFeeding({ ...newFeeding, startDate: value })} value={newFeeding.startDate} />
-            </View>
-            <View style={ScheduleMedicationStyles.multipleInputContainer} >
-              <DatePickerComponent label={'End Date'} setFunction={(value) => setNewFeeding({ ...newFeeding, endDate: value })} value={newFeeding.endDate} />
-            </View>
+      <View style={ScheduleMedicationStyles.inputsContainer}>
+        <TextInputDefault label={'Food'} setFunction={(value) => setNewMedication({ ...newMedication, medicine: value })} value={newMedication.medicine} />
+        <View style={[globalStyles.rowCenter]} >
+          <View style={ScheduleMedicationStyles.multipleInputContainer} >
+            <DatePickerComponent label={'Start Date'} setFunction={(value) => setNewMedication({ ...newMedication, startDate: value })} value={newMedication.startDate} />
           </View>
-          <DatePickerComponent label={'Time'} setFunction={(value) => setNewFeeding({ ...newFeeding, time: value })} value={newFeeding.time} time />
-          <TextInputDefault label={'Periodicity'} setFunction={(value) => setNewFeeding({ ...newFeeding, periodicity: value })} value={newFeeding.periodicity} />
-          <TextInputDefault label={'Dosage (mg)'} setFunction={(value) => setNewFeeding({ ...newFeeding, dosage: value })} value={newFeeding.dosage} keyboardType={'numeric'} />
+          <View style={ScheduleMedicationStyles.multipleInputContainer} >
+            <DatePickerComponent label={'End Date'} setFunction={(value) => setNewMedication({ ...newMedication, endDate: value })} value={newMedication.endDate} />
+          </View>
         </View>
+        <DatePickerComponent label={'Time'} setFunction={(value) => setNewMedication({ ...newMedication, time: value })} value={newMedication.time} time />
+        <TextInputDefault label={'Periodicity'} setFunction={(value) => setNewMedication({ ...newMedication, periodicity: value })} value={newMedication.periodicity} />
+        <TextInputDefault label={'Dosage (mg)'} setFunction={(value) => setNewMedication({ ...newMedication, dosage: value })} value={newMedication.dosage} keyboardType={'numeric'} />
+      </View>
 
-        <View style={{ paddingBottom: 50 }}>
-          <CustomButton title={'Schedule'} onPressFunction={addTask} />
-        </View>
+      <View style={{ paddingBottom: 50 }}>
+        <CustomButton title={'Schedule'} onPressFunction={addTask} />
+      </View>
+    </ScrollView>
 
-      </ScrollView>
-
-      <PickPetModal
-        navigation={navigation}
-        visible={selectPetModal}
-        handleModal={handlePetModal}
-        title={'Select your pet'}
-        setPet={setPet}
-      />
-    </SafeAreaView>
-  );
-
+    <PickPetModal
+      navigation={navigation}
+      visible={selectPetModal}
+      handleModal={handlePetModal}
+      title={'Select your pet'}
+      setPet={setPet}
+    />
+  </SafeAreaView>
+);
+  
 
 }
