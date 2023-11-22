@@ -177,7 +177,8 @@ const updateEntrySchema = Joi.object({
   type: Joi.string().required(),
   date: Joi.string().required(),
   text: Joi.string().required(),
-  ownersIds: Joi.array().items(Joi.string()),
+  petId: Joi.string().required(),
+  ownersIds: Joi.array().items(Joi.string())
 });
 
 exports.updateEntry = async (req, res) => {

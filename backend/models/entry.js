@@ -10,9 +10,9 @@ const entrySchema = new mongoose.Schema({
   title: { type: String, required: true },
   type: { type: String, required: true },
   date: { type: String, required: true },
-  text: { type: String, required: true },
+  text: { type: String },
   ownersIds: { type: [String], required: true },
-  petId: { type: String, required: true },
+  idP: { type: String, required: true },
 
 });
 
