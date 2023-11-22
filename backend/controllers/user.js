@@ -156,7 +156,8 @@ exports.getUserPets = async (req, res) => {
     }
 
     // find all pets by user ID in the database
-    const pets = await Pet.find({ idU: req.params.idU });
+    const pets = await Pet.find({ ownersIds: { $in: [req.params.idU] } });
+
 
     res.status(200).json(pets);
   } catch (error) {
@@ -345,9 +346,9 @@ exports.getUserTasks = async (req, res) => {
     }
 
     // find all pets by user ID in the database
-    const tasks = await Task.find({ usersId: { $in: [userId] } });
+    const tasks = await Task.find({ ownersIds: { $in: [req.params.idU] } });
 
-    res.status(200).json(pets);
+    res.status(200).json(tasks);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
