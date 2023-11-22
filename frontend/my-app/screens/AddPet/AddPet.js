@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -16,8 +16,11 @@ import * as ImagePicker from "expo-image-picker";
 import TextInputDefault from "../../components/TextInputDefault/TextInputDefault";
 import { CustomButton } from "../../components/CustomButton/CustomButton";
 import { PetsData } from "../../data/PetsData";
+import { usersApi } from "../../api";
+import UserSessionContext from "../../services/UserSessionContext";
 
 export const AddPet = ({ navigation }) => {
+  const { user } = useContext(UserSessionContext);
   const [image, setImage] = useState();
   const [newPet, setNewPet] = useState({
     name: "",
@@ -35,40 +38,27 @@ export const AddPet = ({ navigation }) => {
 
   //Review
 
-  const addPet = () => {
-    const newPetId = Object.keys(PetsData).length;
-
-    // Create a new pet object with the provided information
-    const newPetObject = {
-      id: newPetId,
-      name: newPet.name,
-      breed: newPet.breed,
-      age: newPet.age,
-      photoUrl: newPet.photoUrl,
-      tasksIds: [],
-      ownersIds: ["admin"],
-    };
-
-    // Update the PetsData object with the new pet
-    PetsData[newPetId] = newPetObject;
-
-    // Log the updated PetsData object
-    console.log(PetsData);
-
-    // Clear the form or navigate to another screen if needed
-    setNewPet({
-      name: "",
-      age: "",
-      gender: "",
-      breed: "",
-      color: "",
-      typeOfCoat: "",
-      tail: "",
-      distinguishMarks: "",
-      height: "",
-      weight: "",
-      photoUrl: "",
-    });
+  const addPet = async () => {
+    try {
+      console.log("USER: " + user.idU);
+      console.log("NEW PET: " + Object.values(newPet));
+      await usersApi.createPet(user.idU, newPet);
+    } catch (error) {
+      console.log("Error Message: " + error.message);
+      setNewPet({
+        name: "",
+        age: "",
+        gender: "",
+        breed: "",
+        color: "",
+        typeOfCoat: "",
+        tail: "",
+        distinguishMarks: "",
+        height: "",
+        weight: "",
+        photoUrl: "",
+      });
+    }
 
     navigation.goBack();
   };
