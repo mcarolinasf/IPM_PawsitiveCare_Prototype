@@ -55,20 +55,24 @@ export const Training = ({ navigation }) => {
 
     //Set tricks
     var tricks = pets
-      .flatMap((pet) =>
-        pet.tasksIds.map(
-          (id) => TasksData[id].type === listFilters[1].type && TasksData[id]
-        )
+      .flatMap(
+        (pet) =>
+          pet &&
+          pet.tasksIds.map(
+            (id) => TasksData[id].type === listFilters[1].type && TasksData[id]
+          )
       )
       .filter(Boolean);
     setTricks(tricks);
 
     //Set coachings
     var coaching = pets
-      .flatMap((pet) =>
-        pet.tasksIds.map(
-          (id) => TasksData[id].type === listFilters[2].type && TasksData[id]
-        )
+      .flatMap(
+        (pet) =>
+          pet &&
+          pet.tasksIds.map(
+            (id) => TasksData[id].type === listFilters[2].type && TasksData[id]
+          )
       )
       .filter(Boolean);
     setCoaching(coaching);

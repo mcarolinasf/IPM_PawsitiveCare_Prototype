@@ -18,6 +18,7 @@ import { TaskType } from "../../data/TaskType";
 import { getPetsByOwner } from "../../services/utils";
 import UserSessionContext from "../../services/UserSessionContext.js";
 import Card from "../../components/Card/Card";
+import { PickPetModal } from "./PickPetModal.js";
 
 export const NewTrainingModal = ({ visible, handleModal, plan }) => {
   const { user } = useContext(UserSessionContext);
@@ -131,7 +132,7 @@ export const NewTrainingModal = ({ visible, handleModal, plan }) => {
             {modalFilterType === "Plan" && (
               <>
                 <ScrollView
-                  style={ModalComponentStyles.modalContent}
+                  style={ModalComponentStyles.newTrainingPlanModal}
                   showsVerticalScrollIndicator={false}
                 >
                   {modalFilterType === "Plan" &&
@@ -199,15 +200,18 @@ export const NewTrainingModal = ({ visible, handleModal, plan }) => {
                 >
                   <View style={ModalComponentStyles.petsView}>
                     {pets &&
-                      pets.map((pet) => (
-                        <Card
-                          key={pet.id}
-                          item={pet}
-                          pressHandler={cardPressHandler}
-                          styleCard={{ width: 70, height: 80 }}
-                          styleImage={{ width: 70, height: 60 }}
-                        />
-                      ))}
+                      pets.map(
+                        (pet) =>
+                          pet && (
+                            <Card
+                              key={pet && pet.id}
+                              item={pet && pet}
+                              pressHandler={cardPressHandler}
+                              styleCard={{ width: 70, height: 80 }}
+                              styleImage={{ width: 70, height: 60 }}
+                            />
+                          )
+                      )}
                   </View>
                 </ScrollView>
                 <View style={{ width: 100 }}>
