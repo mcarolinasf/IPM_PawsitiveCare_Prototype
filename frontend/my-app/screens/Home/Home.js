@@ -19,6 +19,7 @@ import UserSessionContext from "../../services/UserSessionContext.js";
 import navigationPaths from "../../navigation/navigationPaths";
 import { PetsData } from "../../data/PetsData.js";
 import { TasksData } from "../../data/TasksData.js";
+import { usersApi } from "../../api";
 
 export const Home = ({ navigation }) => {
   const [pets, setPets] = useState([]);
@@ -35,14 +36,32 @@ export const Home = ({ navigation }) => {
     getData();
   }, []);
 
-  const getData = () => {
-    var petIds = user.petIds;
+  const getData = async () => {
 
-    //Set pets
-    var pets = petIds.map((id) => PetsData[id]);
-    setPets(pets);
+    try {
+      const pets = await usersApi.getUserPets(user.idU)
 
-    //Set tasks
+      setPets(pets)
+
+      const allTasks = await usersApi.getUserTasks(user.idU)
+
+
+
+
+      //const tasks = await usersApi.getPetTasks(pets)
+
+    } catch (error) {
+      console.log("Error Message: " + error.message)
+    }
+
+
+    /*  var petIds = user.petIds;
+ 
+     //Set pets
+     var pets = petIds.map((id) => PetsData[id]);
+     setPets(pets);
+ 
+     //Set tasks */
     const tasks = pets.flatMap((pet) =>
       pet.tasksIds.map((id) => TasksData[id].done === false && TasksData[id])
     );
@@ -51,17 +70,12 @@ export const Home = ({ navigation }) => {
 
   const handleTaskPress = (key) => {
     TasksData[key].done = true;
-    console.log(key);
-    console.log(TasksData[0]);
-    console.log(TasksData[1]);
-    console.log(TasksData[2]);
-    console.log(TasksData[3]);
-    console.log(TasksData[4]);
+
     setTasks((prevTasks) => prevTasks.filter((task) => task.id != key));
   };
 
   const addPetButtonPressed = () => {
-    navigation.navigate(navigationScreens.addPet);
+    navigation.navigate(navigationPaths.addPet);
   };
 
   const pageTitle = "Home";

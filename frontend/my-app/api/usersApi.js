@@ -7,8 +7,12 @@ const baseURL = CONSTANTS.BACKEND_URL_API + "/users";
 
 
 export const createUser = async (user) => {
+
   const response = await request("post", baseURL, user);
+
   return response.data;
+
+
 }
 
 export const getAll = async () => {
@@ -49,5 +53,18 @@ export const getUserPets = async (idU) => {
 
   return response.data;
 };
+
+export const createPet = async (idU, pet) => {
+  const response = await request("post", baseURL + "/" + idU + "/pets", pet);
+
+  return response.data;
+};
+
+export const getUserTasks = async (idU) => {
+  const response = await request("get", baseURL + "/" + idU + '/tasks/');
+
+  return response.data;
+};
+
 
 
