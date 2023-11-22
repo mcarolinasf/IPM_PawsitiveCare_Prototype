@@ -18,12 +18,10 @@ import userData from "../../../data/UserData.js";
 import { usersApi } from "../../../api/index.js";
 
 export const Login = ({ navigation }) => {
-
-  const { user, setUserSession, clearUserSession } = useContext(UserSessionContext);
+  const { user, setUserSession, clearUserSession } =
+    useContext(UserSessionContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-
 
   onPressRegister = () => {
     // Navigate to the Register screen
@@ -31,26 +29,20 @@ export const Login = ({ navigation }) => {
   };
 
   const handleLogin = async () => {
-
-    // Needs to be tested 
+    // Needs to be tested
 
     try {
-
       //Method for login after
-      const user = await usersApi.getUser(email.toLowerCase().trim())
+      const user = await usersApi.getUser(email.toLowerCase().trim());
       if (user != null) setUserSession(user);
-      console.log("USER: " + user)
-
+      console.log("USER: " + user);
     } catch (error) {
       //_handleLoginError(error.message);
-      console.log("Error Message: " + error.message)
-      setEmail("")
-      setPassword("")
+      console.log("Error Message: " + error.message);
+      setEmail("");
+      setPassword("");
     }
-
   };
-
-
 
   return (
     <SafeAreaView style={globalStyles.container}>
@@ -59,8 +51,18 @@ export const Login = ({ navigation }) => {
         <View style={LoginStyles.container}>
           <Text style={LoginStyles.welcome}>Welcome</Text>
           <View style={LoginStyles.inputsView}>
-            <TextInputDefault label={"Email"} isSecure={false} setFunction={setEmail} value={email} />
-            <TextInputDefault label={"Password"} isSecure={true} setFunction={setPassword} value={password} />
+            <TextInputDefault
+              label={"Email"}
+              isSecure={false}
+              setFunction={setEmail}
+              value={email}
+            />
+            <TextInputDefault
+              label={"Password"}
+              isSecure={true}
+              setFunction={setPassword}
+              value={password}
+            />
             <View style={{ flexDirection: "row" }}>
               {/* TODO: add checkbox */}
               <Text>I agree with terms & conditions</Text>
