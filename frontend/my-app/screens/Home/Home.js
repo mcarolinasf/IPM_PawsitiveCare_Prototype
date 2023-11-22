@@ -51,12 +51,6 @@ export const Home = ({ navigation }) => {
 
   const handleTaskPress = (key) => {
     TasksData[key].done = true;
-    console.log(key);
-    console.log(TasksData[0]);
-    console.log(TasksData[1]);
-    console.log(TasksData[2]);
-    console.log(TasksData[3]);
-    console.log(TasksData[4]);
     setTasks((prevTasks) => prevTasks.filter((task) => task.id != key));
   };
 
