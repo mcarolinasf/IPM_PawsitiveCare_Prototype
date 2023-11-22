@@ -211,6 +211,10 @@ exports.addPet = async (req, res) => {
     const update = { $push: { petIds: newPet.idP } };
     const updatedUser = await User.findOneAndUpdate( filter, update, { new: true } );
 
+
+    //Add to pet owner
+    newPet.ownersIds.push(req.params.idU);
+
     const savedPet = await newPet.save();
     
 
