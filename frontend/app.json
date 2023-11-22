@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "6876001d-c5b1-461d-a65e-2cf2765718d1"
+      }
+    },
+    "android": {
+      "package": "com.a.gadelha.animaproject"
+    }
+  }
+}

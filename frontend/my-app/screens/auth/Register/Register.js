@@ -19,8 +19,8 @@ import { InfoModal } from "../../../components/Modal/InfoModal";
 export const Register = ({ navigation }) => {
   const [menuModalVisible, setMenuModalVisible] = useState(false);
 
-  const handleMenuPopUp = () => {
-    setMenuModalVisible(!menuModalVisible);
+  const handleMenuPopUp = (value) => {
+    setMenuModalVisible(value);
   };
 
   const [user, setUser] = useState({
@@ -30,19 +30,17 @@ export const Register = ({ navigation }) => {
   });
 
   const onPressRegister = async () => {
-    console.log(
-      "User rggdhre-----------------> " +
-      user.idU +
-      " | pass ----> " +
-      user.password
-    );
 
     try {
-      const user = await usersApi.createUser(user);
-      console.log(user);
+
+
+      console.log(Object.values(user))
+
+      const userRes = await usersApi.createUser(user);
+      console.log(userRes);
     } catch (error) {
       console.log("Error Message: " + error.message);
-      setMenuModalVisible(!menuModalVisible);
+      setMenuModalVisible(true);
       useState({
         name: "",
         idU: "",
@@ -66,19 +64,19 @@ export const Register = ({ navigation }) => {
             <TextInputDefault
               label={"Name"}
               isSecure={false}
-              setFunction={(value) => setUser({ ...user, name: value })}
+              setFunction={(value) => setUser({ ...user, name: value.trim().toLowerCase() })}
               value={user.name}
             />
             <TextInputDefault
               label={"Email"}
               isSecure={false}
-              setFunction={(value) => setUser({ ...user, idU: value.trim() })}
+              setFunction={(value) => setUser({ ...user, idU: value.trim().toLowerCase() })}
               value={user.idU}
             />
             <TextInputDefault
               label={"Password"}
               isSecure={true}
-              setFunction={(value) => setUser({ ...user, password: value })}
+              setFunction={(value) => setUser({ ...user, password: value.trim().toLowerCase() })}
               value={user.password}
             />
             <View style={{ flexDirection: "row" }}>

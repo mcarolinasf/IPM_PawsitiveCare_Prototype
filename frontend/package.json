@@ -10,13 +10,15 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "expo": "^49.0.20",
     "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.8.1"
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-router-dom": "^6.8.1",
+    "react-native": "0.72.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.4",
+    "@babel/core": "^7.20.0",
     "@babel/preset-env": "^7.21.4",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.21.4",
