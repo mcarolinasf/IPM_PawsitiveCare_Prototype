@@ -12,6 +12,7 @@ const createTaskSchema = Joi.object({
     done: Joi.boolean(),
     trainingPlanId: Joi.string(),
     ownersIds: Joi.array().items(Joi.string()).required(),
+    info: Joi.object().required() 
   });
   
   exports.createTask = async (req, res) => {
