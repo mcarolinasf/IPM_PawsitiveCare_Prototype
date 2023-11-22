@@ -7,3 +7,4 @@ export const TaskType = {
   HEALTH: "Health",
   TRAINING: "Training",
 };
+

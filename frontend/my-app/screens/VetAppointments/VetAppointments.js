@@ -6,14 +6,14 @@ import Header from '../../components/Header/Header'
 import MenuCard from '../../components/MenuCard/MenuCard'
 import { globalStyles } from '../../styles/globalStyles'
 import UserSessionContext from '../../services/UserSessionContext.js'
-import { PetsData } from '../../data/PetsData'
-import { VetAppointmentsData } from '../../data/VetAppointmentsData'
-
 import NoteTacker from '../../components/NoteTaker/NoteTacker'
 import { PickPetModal } from '../../components/Modal/PickPetModal'
 import { dateToString } from '../../services/utils'
-import { TaskType } from '../../data/TaskType'
-import { petsApi } from '../../api'
+import { petsApi, usersApi } from '../../api'
+import { EntryType } from '../../data/EntryType'
+import { useIsFocused } from '@react-navigation/native';
+import { v4 as uuidv4 } from 'uuid';
+
 
 
 export const VetAppointments = ({ navigation }) => {
@@ -21,15 +21,13 @@ export const VetAppointments = ({ navigation }) => {
     const { user } = useContext(UserSessionContext);
 
     const [vetApp, setVetApp] = useState([]);
-    const [selectedEntry, setSelectedEntry] = useState({
-        title: 'Vet App ',
-        type: TaskType.HEALTH,
-        date: dateToString(new Date()),
-        idP: '',
-        ownersIds: []
-    });
+    const [selectedEntry, setSelectedEntry] = useState({});
     const [selectPetModal, setSelectPetModal] = useState(false)
     const [pet, setPet] = useState(false)
+    const isFocused = useIsFocused();
+    const [text, setText] = useState('')
+
+
 
     const addVetAppointment = async (pet) => {
 
@@ -38,18 +36,24 @@ export const VetAppointments = ({ navigation }) => {
 
         try {
 
+            const idE = uuidv4();
+
             const newEntry = {
-                title: selectedEntry.title,
-                type: selectedEntry.type,
-                date: selectedEntry.date,
+                idE: idE,
+                title: 'Vet App ',
+                type: EntryType.VETAPPOINTMENT,
+                date: dateToString(new Date()),
                 idP: pet.idP,
                 ownersIds: pet.ownersIds
             }
 
             console.log('PeeeeAlgoooooooooooooottt ' + Object.values(newEntry))
 
-
             await petsApi.createEntry(pet.idP, newEntry)
+
+            setVetApp([...vetApp, newEntry])
+            setSelectedEntry(newEntry)
+
         } catch (error) {
             console.log("Error Message: " + error.message)
         }
@@ -65,33 +69,41 @@ export const VetAppointments = ({ navigation }) => {
 
     const getData = async () => {
 
-        var petIds = user.petIds;
+        try {
+            console.log(user.idU)
+            const entries = await usersApi.getUserEntries(user.idU)
 
-        var pets = petIds.map((id) => PetsData[id]);
+            const vetApps = entries.filter((entry) => entry.type === EntryType.VETAPPOINTMENT)
 
-        // Set Entrys
-        const vetApps = pets.flatMap((pet) => pet.vetAppointIds.map((id) => VetAppointmentsData[id]));
-        setVetApp(vetApps);
+            setVetApp(vetApps);
 
-        if (vetApps.length > 0) {
-            setSelectedEntry(vetApps[vetApps.length - 1]);
+            if (vetApps.length > 0) {
+                setSelectedEntry(vetApps[vetApps.length - 1]);
+            }
+
+        } catch (error) {
+            console.log("Error Message: " + error.message)
         }
 
     }
-
     useEffect(() => {
-        getData()
-    }, []);
-
+        getData();
+        if (isFocused) { getData(); }
+    }, [isFocused, user, navigation]);
 
 
     const selectVetApp = (itemId) => {
 
-        if (selectedEntry && selectedEntry.id === itemId) {
+        if (selectedEntry && selectedEntry.idE === itemId) {
             return;
         }
 
-        const selectedVetApp = vetApp.find(entry => entry.id === itemId);
+        const selectedVetApp = vetApp.find((entry) => entry.idE === itemId);
+
+        setText(selectedVetApp.text)
+
+        console.log(itemId)
+        console.log(Object.values(selectedVetApp))
 
         // Update selectedEntry with the selected diary entry
         setSelectedEntry(selectedVetApp);
@@ -106,8 +118,8 @@ export const VetAppointments = ({ navigation }) => {
                 <ScrollView horizontal={true}>
                     {
                         /* Maybe change direction of list */
-                        vetApp.slice().reverse().map(item => (
-                            <MenuCard key={item.id} iconName={'paw'} title={item.title + item.id} item={item} subtitle={item.date} setFunction={selectVetApp} selected={selectedEntry} />
+                        vetApp.slice().reverse().map((item, index) => (
+                            <MenuCard key={item.idE} iconName={'paw'} title={item.title + (vetApp.length - index)} item={item} subtitle={item.date} setFunction={() => selectVetApp(item.idE)} selected={selectedEntry} />
                         ))
                     }
                 </ScrollView>
@@ -116,7 +128,7 @@ export const VetAppointments = ({ navigation }) => {
                     <CustomButton title={'New entry'} iconName={'plus'} onPressFunction={() => handlePetModal(true)} />
                 </View>
                 {/* Todo: Add pop up and its functionality */}
-                <NoteTacker selectedEntry={selectedEntry} />
+                <NoteTacker selectedEntry={selectedEntry} setEntry={setSelectedEntry} setVetApp={setVetApp} vetApp={vetApp} />
             </ScrollView>
 
             <PickPetModal
@@ -126,7 +138,8 @@ export const VetAppointments = ({ navigation }) => {
                 title={'Select your pet'}
                 setPet={setPet}
                 createEntry={addVetAppointment}
-
+                setText={setText}
+                text={text}
             />
 
         </SafeAreaView>

@@ -24,3 +24,21 @@ export const createEntry = async (idP, entry) => {
     return response.data;
 };
 
+export const getPetEntries = async (idP) => {
+
+    const response = await request("get", baseURL + "/" + idP + "/entries");
+
+    return response.data;
+};
+
+
+export const updateEntry = async (idP, entry, idE) => {
+
+    const response = await request("put", baseURL + "/" + idP + "/entries/" + idE, entry);
+
+    return response.data;
+};
+
+
+
+

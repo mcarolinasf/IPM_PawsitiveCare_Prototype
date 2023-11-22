@@ -41,6 +41,13 @@ export const ModalComponentStyles = StyleSheet.create({
   modalContent: {
     marginTop: 20,
     width: "100%",
+    paddingVertical: 20,
+    paddingHorizontal: 25,
+  },
+
+  newTrainingPlanModal: {
+    marginTop: 20,
+    width: "100%",
     backgroundColor: "white",
     borderRadius: 20,
     paddingVertical: 20,
