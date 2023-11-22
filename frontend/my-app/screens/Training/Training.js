@@ -88,7 +88,6 @@ export const Training = ({ navigation }) => {
               name={e.type}
               onPressFunction={() => setTypeFilter(e.type)}
               isDarkGrey={type === e.type}
-              isFlex={true}
               buttonHeight={35}
             />
           ))}
@@ -115,16 +114,16 @@ export const Training = ({ navigation }) => {
         >
           {type === listFilters[0].type && (
             <>
-              {tricks && (
+              {tricks.length > 0 && (
                 <>
                   <ItemsByTag tasks={tricks} type={listFilters[1].type} />
                   <View style={{ height: 10 }}></View>
                 </>
               )}
-              {coaching && (
+              {coaching.length > 0 && (
                 <ItemsByTag tasks={coaching} type={listFilters[2].type} />
               )}
-              {!tricks && !coaching && (
+              {!tricks.length && !coaching.length && (
                 <Text
                   style={{
                     alignSelf: "center",
@@ -139,7 +138,7 @@ export const Training = ({ navigation }) => {
           )}
           {type === listFilters[1].type && (
             <>
-              {tricks ? (
+              {tricks.length > 0 ? (
                 <ItemsByTag tasks={tricks} type={type} />
               ) : (
                 <Text
@@ -156,7 +155,7 @@ export const Training = ({ navigation }) => {
           )}
           {type === listFilters[2].type && (
             <>
-              {coaching ? (
+              {coaching.length > 0 ? (
                 <ItemsByTag tasks={coaching} type={type} />
               ) : (
                 <Text

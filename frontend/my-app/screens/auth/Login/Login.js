@@ -23,34 +23,26 @@ export const Login = ({ navigation }) => {
   const [idU, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
-
   onPressRegister = () => {
     // Navigate to the Register screen
     navigation.navigate(navigationPaths.register);
   };
 
   const handleLogin = async () => {
-
-    // Needs to be tested 
+    // Needs to be tested
 
     try {
-
       //Method for login after
       const user = await usersApi.getUser(idU.toLowerCase().trim())
       if (user != null) setUserSession(user);
-      console.log("USER: " + user)
-
+      console.log("USER: " + user);
     } catch (error) {
       //_handleLoginError(error.message);
-      console.log("Error Message: " + error.message)
-      setEmail("")
-      setPassword("")
+      console.log("Error Message: " + error.message);
+      setEmail("");
+      setPassword("");
     }
-
   };
-
-
 
   return (
     <SafeAreaView style={globalStyles.container}>

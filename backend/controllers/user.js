@@ -7,9 +7,9 @@ const Pet = require('../models/pet');
 
 const createUserSchema = Joi.object({
   name: Joi.string().required(),
-  email: Joi.string().required(),
-  photoUrl: Joi.string(),
+  idU: Joi.string().required(),
   password: Joi.string().required(),
+  photoUrl: Joi.string(),
   petIds: Joi.array().items(Joi.string()),
 });
 
@@ -146,8 +146,18 @@ const getUserPetsSchema = Joi.object({
 
 exports.getUserPets = async (req, res) => {
   try {
-    
-    res.status(200).json(projects);
+
+    // validate the user ID parameter using Joi
+    const { error } = getUserPetsSchema.validate(req.params);
+
+    if (error) {
+      return res.status(400).json({ message: error.details[0].message });
+    }
+
+    // find all pets by user ID in the database
+    const pets = await Pet.find({ idU: req.params.idU });
+
+    res.status(200).json(pets);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
@@ -155,23 +165,21 @@ exports.getUserPets = async (req, res) => {
 };
 
 
-
-const createPetSchema = Joi.object({
-  idP: Joi.string().required(),
+const addPetSchema = Joi.object({
   name: Joi.string().required(),
-  age: Joi.string().required(),
-  breed: Joi.string().required(),
-  gender: Joi.string().required(),
+  age: Joi.string(),
+  breed: Joi.string(),
+  gender: Joi.string(),
   photoUrl: Joi.string().required(),
-  color: Joi.string().required(),
-  tail: Joi.string().required(),
-  distinguishMarks: Joi.string().required(),
-  typeOfCoat: Joi.string().required(),
-  height: Joi.string().required(),
-  weight: Joi.string().required(),
+  color: Joi.string(),
+  tail: Joi.string(),
+  distinguishMarks: Joi.string(),
+  typeOfCoat: Joi.string(),
+  height: Joi.string(),
+  weight: Joi.string(),
   tasksIds: Joi.array().items(Joi.string()),
   entryIds: Joi.array().items(Joi.string()),
-  ownersIds: Joi.array().items(Joi.string()).required(),
+  ownersIds: Joi.array().items(Joi.string()),
 });
 
 
@@ -181,9 +189,9 @@ exports.addPet = async (req, res) => {
     // validate the user ID parameter using Joi
     const { errorParam } = Joi.string().validate(req.params.idU);
 
-    const { error } = createPetSchema.validate(req.body);
+    const { error } = addPetSchema.validate(req.body);
 
-    if (error || paramError) {
+    if (error || errorParam) {
       return res.status(400).json({ message: error.details[0].message });
     }
 
@@ -293,6 +301,8 @@ try {
   if (!pet) {
     return res.status(404).json({ message: "Pet not found" });
   }
+
+  req.body.idP = req.params.idP;
 
   const updatedPet = await Pet.findOneAndUpdate(
     { idP: req.params.idP },

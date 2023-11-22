@@ -7,6 +7,11 @@ const task = require("../controllers/task");
 const taskAPI = "/tasks";
 
 
+
+router.post(taskAPI, task.createTask);
+
+router.delete(taskAPI + "/:idT",  task.deleteTask);
+
 router.get(taskAPI + "/:idT", task.getTask);
 
 router.get(taskAPI,  task.getAll);

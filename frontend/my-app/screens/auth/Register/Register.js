@@ -18,9 +18,7 @@ import { InfoModal } from '../../../components/Modal/InfoModal';
 
 
 export const Register = ({ navigation }) => {
-
-  const [menuModalVisible, setMenuModalVisible] = useState(false)
-
+  const [menuModalVisible, setMenuModalVisible] = useState(false);
 
   const handleMenuPopUp = () => {
     setMenuModalVisible(!menuModalVisible);
@@ -90,8 +88,8 @@ export const Register = ({ navigation }) => {
         < InfoModal
           visible={menuModalVisible}
           handleModal={handleMenuPopUp}
-          title={'Warning'}
-          text={'Wrong email or password'}
+          title={"Warning"}
+          text={"Wrong email or password"}
         />
       </ScrollView>
     </SafeAreaView>
