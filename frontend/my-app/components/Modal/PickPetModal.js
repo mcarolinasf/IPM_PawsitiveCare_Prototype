@@ -22,7 +22,7 @@ export const PickPetModal = ({ navigation, visible, handleModal, title, setPet, 
         handleModal(false)
 
     }
-    handleModal(false);
+
 
 
     const getPetsByOwner = async () => {

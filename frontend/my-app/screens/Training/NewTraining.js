@@ -85,10 +85,10 @@ export const NewTraining = () => {
               ))}
             {((type === "Tricks" && !tricksList.length) ||
               (type === "Coaching" && !coachingList.length)) && (
-              <Text style={NewTrainingStyles.noPlansText}>
-                No plans available
-              </Text>
-            )}
+                <Text style={NewTrainingStyles.noPlansText}>
+                  No plans available
+                </Text>
+              )}
           </View>
         </ScrollView>
 

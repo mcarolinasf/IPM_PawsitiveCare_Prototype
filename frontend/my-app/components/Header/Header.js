@@ -6,7 +6,8 @@ import navigationPaths from '../../navigation/navigationPaths';
 import { useNavigation } from '@react-navigation/native';
 import { BackButton } from '../BackButton/BackButton';
 import { HeaderStyles } from './HeaderStyles';
-
+import { Ionicons } from '@expo/vector-icons';
+import colors from '../../styles/colors';
 
 export default function Header({ title, showProfile, goBack, style }) {
     const navigation = useNavigation();
@@ -30,7 +31,12 @@ export default function Header({ title, showProfile, goBack, style }) {
 
             {showProfile &&
                 <TouchableOpacity onPress={handleProfileClick} style={HeaderStyles.image}>
-                    <Image style={HeaderStyles.image} source={{ uri: user.photoUrl }} />
+                    {user.photoUrl ?
+                        <Image style={HeaderStyles.image} source={{ uri: user.photoUrl }} />
+                        :
+                        <Image style={HeaderStyles.image} source={{ uri: 'https://www.verywellmind.com/thmb/pwEmuUJ6KO9OF8jeiQCDyKnaVQI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1187609003-73c8baf32a6a46a6b84fe931e0c51e7e.jpg' }} />
+                    }
+
                 </TouchableOpacity>
             }
 

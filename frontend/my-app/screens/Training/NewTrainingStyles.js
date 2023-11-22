@@ -26,8 +26,8 @@ export const NewTrainingStyles = StyleSheet.create({
 
   image: {
     borderRadius: 25,
-    height: 250,
-    width: 175,
+    height: 220,
+    width: 160,
   },
 
   noPlansText: {

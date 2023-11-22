@@ -9,11 +9,12 @@ import Divider from "../../components/Divider";
 import { NewButton } from "../../components/NewButton/NewButton";
 import colors from "../../styles/colors";
 import UserSessionContext from "../../services/UserSessionContext.js";
-import { PetsData } from "../../data/PetsData.js";
-import { TasksData } from "../../data/TasksData.js";
 import { useContext } from "react";
 import { ItemsByTag } from "../../components/ItemsByTag/ItemsByTag.js";
 import navigationPaths from "../../navigation/navigationPaths.js";
+import { TaskType } from "../../data/TaskType";
+import { usersApi } from "../../api";
+import { dateToString } from "../../services/utils";
 
 const listFilters = [
   {
@@ -46,41 +47,50 @@ export const Training = ({ navigation }) => {
     getData();
   }, []);
 
-  const getData = () => {
-    var petIds = user.petIds;
 
-    //Set pets
-    var pets = petIds.map((id) => PetsData[id]);
-    setPets(pets);
 
-    //Set tricks
-    var tricks = pets
-      .flatMap(
-        (pet) =>
-          pet &&
-          pet.tasksIds.map(
-            (id) => TasksData[id].type === listFilters[1].type && TasksData[id]
-          )
-      )
-      .filter(Boolean);
-    setTricks(tricks);
+  const getData = async () => {
 
-    //Set coachings
-    var coaching = pets
-      .flatMap(
-        (pet) =>
-          pet &&
-          pet.tasksIds.map(
-            (id) => TasksData[id].type === listFilters[2].type && TasksData[id]
-          )
-      )
-      .filter(Boolean);
-    setCoaching(coaching);
+    try {
+
+      const allTasks = await usersApi.getUserTasks(user.idU)
+
+      const tasks = allTasks.filter((task) => !task.done)
+
+
+      console.log(tasks)
+      var tricks = allTasks.filter((task) => (task.type === TaskType.TRICKS))
+      console.log('Tricks ->>' + tricks)
+
+      setTricks(tricks);
+      console.log('Tricks ----->>' + tricks)
+
+
+      var coaching = tasks.filter(task => task.type === TaskType.COACHING)
+      setCoaching(coaching);
+
+
+    } catch (error) {
+      console.log("Error Message: " + error.message);
+    }
+
   };
 
   const handlePressNewTraining = (navigateTo) => {
     navigation.navigate(navigateTo);
   };
+
+  const handleTaskPress = (key) => {
+
+    if (tricks.findIndex(v => v === key))
+      setTricks((prevTasks) => prevTasks.filter((task) => task.idT != key));
+
+    if (coaching.findIndex(v => v === key))
+      setCoaching((prevTasks) => prevTasks.filter((task) => task.idT != key));
+
+  };
+
+
 
   return (
     <SafeAreaView style={globalStyles.container}>
@@ -120,12 +130,12 @@ export const Training = ({ navigation }) => {
             <>
               {tricks.length > 0 && (
                 <>
-                  <ItemsByTag tasks={tricks} type={listFilters[1].type} />
+                  <ItemsByTag handleTaskPress={handleTaskPress} tasks={tricks} type={listFilters[1].type} />
                   <View style={{ height: 10 }}></View>
                 </>
               )}
               {coaching.length > 0 && (
-                <ItemsByTag tasks={coaching} type={listFilters[2].type} />
+                <ItemsByTag handleTaskPress={handleTaskPress} tasks={coaching} type={listFilters[2].type} />
               )}
               {!tricks.length && !coaching.length && (
                 <Text
@@ -143,7 +153,7 @@ export const Training = ({ navigation }) => {
           {type === listFilters[1].type && (
             <>
               {tricks.length > 0 ? (
-                <ItemsByTag tasks={tricks} type={type} />
+                <ItemsByTag handleTaskPress={handleTaskPress} tasks={tricks} type={type} />
               ) : (
                 <Text
                   style={{
@@ -160,7 +170,7 @@ export const Training = ({ navigation }) => {
           {type === listFilters[2].type && (
             <>
               {coaching.length > 0 ? (
-                <ItemsByTag tasks={coaching} type={type} />
+                <ItemsByTag handleTaskPress={handleTaskPress} tasks={coaching} type={type} />
               ) : (
                 <Text
                   style={{

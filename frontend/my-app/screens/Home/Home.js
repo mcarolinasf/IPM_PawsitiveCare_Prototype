@@ -59,9 +59,8 @@ export const Home = ({ navigation }) => {
   };
 
   const handleTaskPress = (key) => {
-    TasksData[key].done = true;
 
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id != key));
+    setTasks((prevTasks) => prevTasks.filter((task) => task.idT != key));
   };
 
   const addPetButtonPressed = () => {

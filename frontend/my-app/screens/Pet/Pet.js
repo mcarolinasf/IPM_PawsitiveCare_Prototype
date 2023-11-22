@@ -39,7 +39,7 @@ export const Pet = ({ navigation, route }) => {
 
     const handleTaskPress = (key) => {
         setTasks((prevTasks) => (
-            prevTasks.filter(task => task.id != key)
+            prevTasks.filter(task => task.idT != key)
         ));
     }
 
