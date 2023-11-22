@@ -166,25 +166,25 @@ exports.deleteEntry = async (req, res) => {
 
 
 //UPDATE
-
-const updateEntryParamSchema = Joi.object({
+const updateEntryParSchema = Joi.object({
   idP: Joi.string().required(),
   idE: Joi.string().required(),
 });
+
 
 const updateEntrySchema = Joi.object({
   title: Joi.string().required(),
   type: Joi.string().required(),
   date: Joi.string().required(),
   text: Joi.string().required(),
-  petId: Joi.string().required(),
+  idP: Joi.string().required(),
   ownersIds: Joi.array().items(Joi.string())
 });
 
 exports.updateEntry = async (req, res) => {
 try {
   //Validate the request params
-  const { paramError } = updateEntryParamSchema(req.params);
+  const { paramError } = updateEntryParSchema.validate(req.params);
 
   // validate the request body using Joi
   const { error } = updateEntrySchema.validate(req.body);
