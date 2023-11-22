@@ -30,10 +30,16 @@ export const Register = ({ navigation }) => {
   });
 
   const onPressRegister = async () => {
-    console.log("User rggdhre-----------------> " + user);
+    console.log(
+      "User rggdhre-----------------> " +
+        user.idU +
+        " | pass ----> " +
+        user.password
+    );
 
     try {
-      await usersApi.createUser(user);
+      const user = await usersApi.createUser(user);
+      console.log(user);
     } catch (error) {
       console.log("Error Message: " + error.message);
       setMenuModalVisible(!menuModalVisible);
