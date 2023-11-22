@@ -7,16 +7,43 @@ import { Entypo } from "@expo/vector-icons";
 import colors from "../../styles/colors";
 import Divider from "../../components/Divider";
 import { ConfirmationModal } from "../Modal/ConfirmationModal";
+import { petsApi } from "../../api";
 
-export default function NoteTacker({ selectedEntry, setFunction }) {
+export default function NoteTacker({ selectedEntry, setEntry, text, setText }) {
   const [menuModalVisible, setMenuModalVisible] = useState(false);
 
   const handleMenuPopUp = () => {
     setMenuModalVisible(!menuModalVisible);
   };
 
-  const handleTextChange = (text) => {
-    setFunction(text);
+  const handleTextChange = async (newText) => {
+
+    setText(newText)
+
+    try {
+
+      const updatedEntry = {
+        idE: selectedEntry.idE,
+        title: selectedEntry.title,
+        type: selectedEntry.type,
+        date: selectedEntry.date,
+        idP: selectedEntry.idP,
+        ownersIds: selectedEntry.ownersIds,
+        text: newText
+      }
+      console.log(Object.values(updatedEntry))
+
+      await petsApi.updateEntry(selectedEntry.idP, updatedEntry, selectedEntry.idE)
+      setEntry({
+        ...updatedEntry
+        , text: newText
+      })
+
+
+    } catch (error) {
+      console.log("Error Message: " + error.message)
+    }
+
   };
 
   return (
@@ -42,7 +69,7 @@ export default function NoteTacker({ selectedEntry, setFunction }) {
           style={NoteTackerStyles.input}
           multiline={true}
           onChangeText={handleTextChange}
-          value={selectedEntry.text}
+          value={text}
         />
       </View>
 

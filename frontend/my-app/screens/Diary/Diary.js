@@ -7,56 +7,68 @@ import Divider from "../../components/Divider";
 import { CustomButton } from "../../components/CustomButton/CustomButton";
 import NoteTacker from "../../components/NoteTaker/NoteTacker";
 import UserSessionContext from "../../services/UserSessionContext.js";
-import { PetsData } from "../../data/PetsData.js";
-import { DiaryEntryData } from "../../data/DiaryEntryData";
+import { usersApi, petsApi } from '../../api'
+import { dateToString } from "../../services/utils";
+import { PickPetModal } from "../../components/Modal/PickPetModal";
+import { EntryType } from "../../data/EntryType";
+import { useIsFocused } from '@react-navigation/native';
+import { v4 as uuidv4 } from 'uuid';
 
-export const Diary = () => {
+
+export const Diary = ({ navigation }) => {
   const { user } = useContext(UserSessionContext);
 
   const [diaryEntry, setDiaryEntry] = useState([]);
   const [pet, setPet] = useState(false)
-  const [selectedEntry, setSelectedEntry] = useState({
-    title: 'Diary entry ',
-    type: TaskType.HEALTH,
-    date: dateToString(new Date()),
-    idP: '',
-    ownersIds: []
-  });
+  const [selectPetModal, setSelectPetModal] = useState(false)
+  const isFocused = useIsFocused();
 
-  const addDiaryEntry = async () => {
+  const [selectedEntry, setSelectedEntry] = useState({});
+
+  const addDiaryEntry = async (pet) => {
     /* Todo: Add functionality */
 
     setSelectedEntry({ ...selectedEntry, idP: pet.idP, ownersIds: pet.ownersIds })
 
     try {
+
+      const idE = uuidv4();
       const newEntry = {
-        title: selectedEntry.title,
-        type: selectedEntry.type,
-        date: selectedEntry.date,
+        idE: idE,
+        title: 'Diary entry ',
+        type: EntryType.DIARY,
+        date: dateToString(new Date()),
         idP: pet.idP,
         ownersIds: pet.ownersIds
       }
 
       await petsApi.createEntry(pet.idP, newEntry)
+
+      setDiaryEntry([...diaryEntry, newEntry])
+      setSelectedEntry(newEntry)
     } catch (error) {
       console.log("Error Message: " + error.message)
     }
   };
 
-  const getData = () => {
-    var petIds = user.petIds;
+  const getData = async () => {
 
-    var pets = petIds.map((id) => PetsData[id]);
+    try {
 
-    // Set Entrys
-    const diaryEntrys = pets.flatMap((pet) =>
-      pet.diaryEntrysIds.map((id) => DiaryEntryData[id])
-    );
-    setDiaryEntry(diaryEntrys);
+      const entries = await usersApi.getUserEntries(user.idU)
 
-    if (diaryEntrys.length > 0) {
-      setSelectedEntry(diaryEntrys[diaryEntrys.length - 1]);
+      const diaryEntrys = entries.filter((entry) => entry.type === EntryType.DIARY)
+
+      setDiaryEntry(diaryEntrys);
+
+      if (diaryEntrys.length > 0) {
+        setSelectedEntry(diaryEntrys[diaryEntrys.length - 1]);
+      }
+
+    } catch (error) {
+      console.log("Error Message: " + error.message)
     }
+
   };
 
   const handlePetModal = (value) => {
@@ -65,17 +77,15 @@ export const Diary = () => {
 
   useEffect(() => {
     getData();
-  }, []);
-
-
-
+    if (isFocused) { getData(); }
+  }, [isFocused, user, navigation]);
 
   const selectDiaryEntry = (itemId) => {
-    if (selectedEntry && selectedEntry.id === itemId) {
+    if (selectedEntry && selectedEntry.idE === itemId) {
       return;
     }
 
-    const selectedDiaryEntry = diaryEntry.find((entry) => entry.id === itemId);
+    const selectedDiaryEntry = diaryEntry.find((entry) => entry.idE === itemId);
 
     // Update selectedEntry with the selected diary entry
     setSelectedEntry(selectedDiaryEntry);
@@ -87,8 +97,8 @@ export const Diary = () => {
         <Header title={"Diary"} showProfile />
         <ScrollView horizontal={true}>
           {
-            diaryEntry.slice().reverse().map(item => (
-              <MenuCard key={item.id} iconName={'paw'} title={item.title} subtitle={item.date} item={item} setFunction={selectDiaryEntry} selected={selectedEntry} />
+            diaryEntry.slice().reverse().map((item, index) => (
+              <MenuCard key={item.idE} iconName={'paw'} title={item.title + (diaryEntry.length - index)} subtitle={item.date} item={item} setFunction={() => selectDiaryEntry(item.idE)} selected={selectedEntry} />
             ))
           }
         </ScrollView>
@@ -97,11 +107,11 @@ export const Diary = () => {
           <CustomButton
             title={"New entry"}
             iconName={"plus"}
-            onPressFunction={addDiaryEntry}
+            onPressFunction={() => handlePetModal(true)}
           />
         </View>
 
-        <NoteTacker selectedEntry={selectedEntry} />
+        <NoteTacker selectedEntry={selectedEntry} setEntry={setSelectedEntry} />
       </ScrollView>
 
       <PickPetModal

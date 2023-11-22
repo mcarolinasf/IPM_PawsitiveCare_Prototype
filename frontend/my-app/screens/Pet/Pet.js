@@ -1,23 +1,13 @@
-import React, { useContext, useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  SafeAreaView,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  FlatList,
-} from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, SafeAreaView, ScrollView, Image } from "react-native";
 import { globalStyles } from "../../styles/globalStyles";
 import { PetStyles } from "./PetStyles";
 import MenuCard from "../../components/MenuCard/MenuCard.js";
 import Header from "../../components/Header/Header.js";
-import { FontAwesome5 } from "@expo/vector-icons";
-import colors from "../../styles/colors";
+
 import TaskItem from "../../components/TaskItem/TaskItem.js";
 import navigationPaths from "../../navigation/navigationPaths";
-import UserSessionContext from "../../services/UserSessionContext.js";
-import { TasksData } from "../../data/TasksData.js";
+
 import chart from "../../assets/Chart.png";
 import { petsApi } from "../../api";
 

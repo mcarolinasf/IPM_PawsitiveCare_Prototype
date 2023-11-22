@@ -66,5 +66,12 @@ export const getUserTasks = async (idU) => {
   return response.data;
 };
 
+export const getUserEntries = async (idU) => {
+
+  const response = await request("get", baseURL + "/" + idU + "/entries");
+
+  return response.data;
+};
+
 
 
