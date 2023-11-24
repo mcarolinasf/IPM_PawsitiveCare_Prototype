@@ -1,12 +1,34 @@
 {
   "expo": {
-    "extra": {
-      "eas": {
-        "projectId": "6876001d-c5b1-461d-a65e-2cf2765718d1"
-      }
+    
+    "name": "PawsitiveCare",
+    "slug": "frontend",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/logo.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
     },
     "android": {
-      "package": "com.a.gadelha.animaproject"
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a070f032-5473-4304-ad8c-cccf59f20d1f"
+      }
     }
   }
 }

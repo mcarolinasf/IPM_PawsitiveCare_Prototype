@@ -3,7 +3,7 @@
 
 Para instalar e começar a usar:
 	
-		- cd frontend/my-app
+		- cd frontend
 		- npm install
 		- npm start 
 		- instalar 'expo go' no telemóvel 
