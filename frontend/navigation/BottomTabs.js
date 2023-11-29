@@ -23,7 +23,7 @@ const Tab = createBottomTabNavigator();
 
 export const BottomTabs = () => {
 
-  
+
   const getTabBarIcon = (routeName, focused, size) => {
 
     if (routeName === navigationScreens.pet) {
@@ -75,7 +75,7 @@ export const BottomTabs = () => {
       })}>
       <Tab.Screen name={navigationScreens.home} component={Home} />
       <Tab.Screen name={navigationScreens.calendar} component={Calendar} />
-      <Tab.Screen name={navigationScreens.pet} component={Pet} initialParams={{pet:PetsData[0]}} />
+      <Tab.Screen name={navigationScreens.pet} component={Pet} initialParams={{ pet: PetsData[0] }} />
       <Tab.Screen name={navigationScreens.training} component={Training} />
       <Tab.Screen name={navigationScreens.diary} component={Diary} />
     </Tab.Navigator>
