@@ -6,7 +6,6 @@ export const CustomButtonStyles = StyleSheet.create({
     button: {
         borderRadius: 10,
         backgroundColor: colors.primary,
-        display: "flex",
         justifyContent: "center",
         alignItems: "center",
         padding: 2,

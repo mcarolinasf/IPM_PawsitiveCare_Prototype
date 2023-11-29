@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, Image } from "react-native";
 import { globalStyles } from "../../styles/globalStyles";
 import { NoteTackerStyles } from "./NoteTackerStyles";
 import { Entypo } from "@expo/vector-icons";
@@ -8,8 +8,9 @@ import colors from "../../styles/colors";
 import Divider from "../../components/Divider";
 import { ConfirmationModal } from "../Modal/ConfirmationModal";
 import { petsApi } from "../../api";
+import { TaskItemStyles } from "../TaskItem/TaskItemStyles";
 
-export default function NoteTacker({ selectedEntry, setEntry, text, setText }) {
+export default function NoteTacker({ selectedEntry, setEntry, text, setText, selectedPet }) {
   const [menuModalVisible, setMenuModalVisible] = useState(false);
 
   const handleMenuPopUp = () => {
@@ -80,6 +81,11 @@ export default function NoteTacker({ selectedEntry, setEntry, text, setText }) {
         title={"Warning"}
         text={"Are you sure you want to delete this?"}
         item={selectedEntry}
+      />
+
+      <Image
+        style={TaskItemStyles.image}{...globalStyles.shadow}{...NoteTackerStyles.image}
+        source={{ uri: selectedPet.photoUrl }}
       />
     </View>
   );

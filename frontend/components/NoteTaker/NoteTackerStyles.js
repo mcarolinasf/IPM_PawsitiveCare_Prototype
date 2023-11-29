@@ -20,5 +20,12 @@ export const NoteTackerStyles = StyleSheet.create({
     input: {
         //height: screenWidth * 0.65
 
+    },
+
+    image: {
+        position: 'absolute',
+        bottom: 15,
+        right: 15
+
     }
 })

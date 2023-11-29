@@ -4,11 +4,10 @@ import {
   Text,
   SafeAreaView,
   ScrollView,
-  Image,
-  Button,
 } from "react-native";
 import Card from "../../components/Card/Card";
 import Divider from "../../components/Divider";
+import { CustomButton } from "../../components/CustomButton/CustomButton";
 import TaskItem from "../../components/TaskItem/TaskItem.js";
 import { globalStyles } from "../../styles/globalStyles";
 import { HomeStyles } from "./HomeStyles";
@@ -87,16 +86,16 @@ export const Home = ({ navigation }) => {
           />
         ))}
         <View style={HomeStyles.button}>
-          <AntDesign
-            name="plussquare"
-            size={32}
-            color={colors.primary}
-            onPress={addPetButtonPressed}
+          <CustomButton
+            title={"Add Pet"}
+            iconName={"plus"}
+            onPressFunction={addPetButtonPressed}
           />
+
         </View>
       </ScrollView>
       <Divider />
-      <Text style={globalStyles.subtitleText}>Today</Text>
+      <Text style={globalStyles.subtitleText}>Today's Tasks</Text>
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={HomeStyles.tasksView}

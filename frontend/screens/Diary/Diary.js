@@ -111,7 +111,7 @@ export const Diary = ({ navigation }) => {
           />
         </View>
 
-        <NoteTacker selectedEntry={selectedEntry} setEntry={setSelectedEntry} />
+        <NoteTacker selectedEntry={selectedEntry} setEntry={setSelectedEntry} selectedPet={pet} />
       </ScrollView>
 
       <PickPetModal
