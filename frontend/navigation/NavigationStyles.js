@@ -3,7 +3,7 @@ import colors from "../styles/colors";
 
 export const NavigationStyle = StyleSheet.create({
 
-    container:{
+    container: {
         position: 'absolute',
         bottom: 25,
         left: 20,
@@ -19,10 +19,11 @@ export const NavigationStyle = StyleSheet.create({
         height: 60,
         borderRadius: 35,
         backgroundColor: colors.primary,
-        position:"absolute",
-        bottom:20,
-        justifyContent:"center",
-        alignItems:"center"
+        position: "absolute",
+        bottom: 20,
+        justifyContent: 'center',
+        alignItems: 'center'
+
     }
 
 })

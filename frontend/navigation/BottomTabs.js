@@ -1,5 +1,5 @@
 import React from 'react'
-import { createBottomTabNavigator, View } from '@react-navigation/bottom-tabs'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationStyle } from './NavigationStyles';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -16,6 +16,7 @@ import colors from '../styles/colors';
 import { Pet } from '../screens/Pet/Pet';
 import { globalStyles } from '../styles/globalStyles';
 import { PetsData } from '../data/PetsData';
+import { View } from 'react-native';
 
 
 const Tab = createBottomTabNavigator();
@@ -28,9 +29,11 @@ export const BottomTabs = () => {
 
     if (routeName === navigationScreens.pet) {
       return (
+
         <View style={{ ...NavigationStyle.pawIcon, ...globalStyles.shadow }}>
           <MaterialCommunityIcons name="paw" size={35} color={colors.white} />
         </View>
+
       );
     }
 
