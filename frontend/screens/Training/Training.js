@@ -108,7 +108,7 @@ export const Training = ({ navigation }) => {
           const updatedTricks = tricks.filter((trick) => trick.idT !== dTask.idT);
           setTricks(updatedTricks);
         } else {
-          const updatedCoaching = coaching.filter((trick) => trick.idT !== dTask.idT);
+          const updatedCoaching = coaching.filter((coaching) => coaching.idT !== dTask.idT);
           setCoaching(updatedCoaching);
         }   
     } catch {
