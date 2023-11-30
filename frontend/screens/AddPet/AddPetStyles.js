@@ -9,6 +9,8 @@ export const AddPetStyles = StyleSheet.create({
     alignItems: "center",
   },
 
+  mandatory: { right: -250, bottom: -20, color: colors.primary, fontSize: 20 },
+
   image: {
     borderColor: colors.primary,
     backgroundColor: colors.white,

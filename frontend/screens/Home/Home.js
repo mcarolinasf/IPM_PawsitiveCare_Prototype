@@ -75,11 +75,11 @@ export const Home = ({ navigation }) => {
 
   const deleteTask = async (idT) => {
     try {
-        var d = await tasksApi.deleteTask(idT)
-        const updatedTasks = tasks.filter((task) => task.idT !== idT);
-        setTasks(updatedTasks);        
+      var d = await tasksApi.deleteTask(idT)
+      const updatedTasks = tasks.filter((task) => task.idT !== idT);
+      setTasks(updatedTasks);
     } catch {
-        console.log("Error Message: " + error.message);
+      console.log("Error Message: " + error.message);
     }
   }
 
@@ -122,16 +122,18 @@ export const Home = ({ navigation }) => {
         style={HomeStyles.tasksView}
       >
         <View>
-          {tasks.map((task) => (
+          {tasks.length !== 0 ? tasks.map((task) => (
             <TaskItem
               key={task.idT}
               task={task}
               pressHandler={handleTaskPress}
               deleteHandler={deleteTask}
             />
-          ))}
+          )) : <View style={{ paddingVertical: 60, alignItems: 'center' }}>
+            <Text style={globalStyles.secondaryText}>No tasks for today!</Text>
+          </View>}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </SafeAreaView >
   );
 };

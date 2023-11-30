@@ -90,7 +90,7 @@ export const AddPet = ({ navigation }) => {
 
                     <View style={AddPetStyles.row}>
                         <View style={{ flex: 1, paddingRight: 10 }}>
-                            <TextInputDefault label={'Age'} setFunction={(value) => setNewPet({ ...newPet, age: value })} value={newPet.age} />
+                            <TextInputDefault label={'Age'} setFunction={(value) => setNewPet({ ...newPet, age: value })} value={newPet.age} keyboardType={'numeric'} />
                             <TextInputDefault label={'Breed'} setFunction={(value) => setNewPet({ ...newPet, breed: value })} value={newPet.breed} />
                             <TextInputDefault label={'Type of coat'} setFunction={(value) => setNewPet({ ...newPet, typeOfCoat: value })} value={newPet.typeOfCoat} />
                         </View>
@@ -104,10 +104,10 @@ export const AddPet = ({ navigation }) => {
                     <TextInputDefault label={'Distinguish Marks'} setFunction={(value) => setNewPet({ ...newPet, distinguishMarks: value })} value={newPet.distinguishMarks} />
                     <View style={AddPetStyles.row}>
                         <View style={{ flex: 1, paddingRight: 10 }}>
-                            <TextInputDefault label={'Weight'} setFunction={(value) => setNewPet({ ...newPet, weight: value })} value={newPet.weight} />
+                            <TextInputDefault label={'Weight'} setFunction={(value) => setNewPet({ ...newPet, weight: value })} value={newPet.weight} keyboardType={'numeric'} />
                         </View>
                         <View style={{ flex: 1 }}>
-                            <TextInputDefault label={'Height'} setFunction={(value) => setNewPet({ ...newPet, height: value })} value={newPet.height} />
+                            <TextInputDefault label={'Height'} setFunction={(value) => setNewPet({ ...newPet, height: value })} value={newPet.height} keyboardType={'numeric'} />
                         </View>
 
                     </View>

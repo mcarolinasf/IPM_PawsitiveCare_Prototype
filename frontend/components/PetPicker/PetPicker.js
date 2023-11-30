@@ -15,21 +15,23 @@ export const PetPicker = ({ url, handleModal }) => {
 
 
     return (
-        <TouchableOpacity onPress={handlePress}>
-            <View style={AddPetStyles.container}{...globalStyles.shadow} >
-                <Image
-                    style={AddPetStyles.image}
-                    source={{
-                        uri: url
-                    }}
-                />
-                { !url &&
-                    <View style={AddPetStyles.icon}>
-                        <FontAwesome5 name="plus" size={24} color={colors.primary} />
-                    </View>
-                }
-                
-            </View>
-        </TouchableOpacity>
+        <>
+            <Text style={AddPetStyles.mandatory}>*</Text>
+            <TouchableOpacity onPress={handlePress}>
+                <View style={AddPetStyles.container}{...globalStyles.shadow} >
+                    <Image
+                        style={AddPetStyles.image}
+                        source={{
+                            uri: url
+                        }}
+                    />
+                    {!url &&
+                        <View style={AddPetStyles.icon}>
+                            <FontAwesome5 name="plus" size={24} color={colors.primary} />
+                        </View>
+                    }
+                </View>
+            </TouchableOpacity>
+        </>
     );
 }
