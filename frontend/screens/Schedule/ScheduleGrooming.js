@@ -11,6 +11,8 @@ import { ScheduleMedicationStyles } from './ScheduleStyles.js';
 import { CustomButton } from '../../components/CustomButton/CustomButton.js';
 import { TaskType } from '../../data/TaskType.js';
 import { tasksApi } from '../../api';
+import { InfoModal } from '../../components/Modal/InfoModal';
+
 
 
 export const ScheduleGrooming = ({ navigation, route }) => {
@@ -19,10 +21,14 @@ export const ScheduleGrooming = ({ navigation, route }) => {
 
   const [selectPetModal, setSelectPetModal] = useState(false);
   const [pet, setPet] = useState(false);
+  const [menuModalVisible, setMenuModalVisible] = useState(false);
 
   const handlePetModal = (value) => {
     setSelectPetModal(value)
   }
+  const handleMenuPopUp = () => {
+    setMenuModalVisible(!menuModalVisible);
+  };
 
   const [newGrooming, setNewGrooming] = useState({
     grooming: '',
@@ -51,6 +57,7 @@ export const ScheduleGrooming = ({ navigation, route }) => {
 
     } catch (error) {
       console.log("Error Message: " + error.message)
+      setMenuModalVisible(true);
       useState({
         grooming: '',
         time: '14:30',
@@ -73,13 +80,13 @@ export const ScheduleGrooming = ({ navigation, route }) => {
         <PetPicker url={pet.photoUrl} handleModal={handlePetModal} />
 
         <View style={ScheduleMedicationStyles.inputsContainer}>
-          <TextInputDefault label={'Description'} setFunction={(value) => setNewGrooming({ ...newGrooming, grooming: value })} value={newGrooming.grooming} />
+          <TextInputDefault label={'Description   *'} setFunction={(value) => setNewGrooming({ ...newGrooming, grooming: value })} value={newGrooming.grooming} />
           <View style={[globalStyles.rowCenter]} >
             <View style={ScheduleMedicationStyles.multipleInputContainer} >
-              <DatePickerComponent label={'Date'} setFunction={(value) => setNewGrooming({ ...newGrooming, date: value })} value={newGrooming.date} />
+              <DatePickerComponent label={'Date   *'} setFunction={(value) => setNewGrooming({ ...newGrooming, date: value })} value={newGrooming.date} />
             </View>
             <View style={ScheduleMedicationStyles.multipleInputContainer} >
-              <DatePickerComponent label={'Time'} setFunction={(value) => setNewGrooming({ ...newGrooming, time: value })} value={newGrooming.time} time />
+              <DatePickerComponent label={'Time   *'} setFunction={(value) => setNewGrooming({ ...newGrooming, time: value })} value={newGrooming.time} time />
             </View>
           </View>
           <TextInputDefault label={'Periodicity'} setFunction={(value) => setNewGrooming({ ...newGrooming, periodicity: value })} value={newGrooming.periodicity} />
@@ -96,6 +103,12 @@ export const ScheduleGrooming = ({ navigation, route }) => {
         handleModal={handlePetModal}
         title={'Select your pet'}
         setPet={setPet}
+      />
+      <InfoModal
+        visible={menuModalVisible}
+        handleModal={handleMenuPopUp}
+        title={"Warning"}
+        text={"Please fill all mandatory parameters."}
       />
     </SafeAreaView>
   );
