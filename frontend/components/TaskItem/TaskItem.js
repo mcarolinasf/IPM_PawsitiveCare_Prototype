@@ -29,11 +29,11 @@ export default function TaskItem({ task, pressHandler }) {
     return (
         <TouchableOpacity
             onPress={() => pressHandler(task)} style={globalStyles.shadow} >
-            <View style={TaskItemStyles.container}>
+            <View style={!task.done ? TaskItemStyles.container : { ...TaskItemStyles.container, opacity: 0.5 }}>
                 <View style={{ flexDirection: 'row' }}>
                     <MaterialCommunityIcons name={task.done ? 'checkbox-marked' : 'checkbox-blank-outline'} size={24} color={colors.secondary} />
                     <View>
-                        <Text style={TaskItemStyles.text}>{task.text}</Text>
+                        <Text style={!task.done ? TaskItemStyles.text : { ...TaskItemStyles.text, textDecorationLine: 'line-through' }}>{task.text}</Text>
                         <View style={[TaskItemStyles.tags, { backgroundColor: getTypeColor(task.type) }]}>
                             <Text style={TaskItemStyles.tagType}>{task.type}</Text>
                         </View>

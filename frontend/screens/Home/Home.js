@@ -48,7 +48,7 @@ export const Home = ({ navigation }) => {
 
       const allTasks = await usersApi.getUserTasks(user.idU)
 
-      const tasks = allTasks.filter((task) => !task.done && dateToString(new Date()) === task.date)
+      const tasks = allTasks.filter((task) => dateToString(new Date()) === task.date)
       setTasks(tasks)
 
     } catch (error) {
