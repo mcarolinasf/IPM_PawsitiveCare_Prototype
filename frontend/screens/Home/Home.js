@@ -16,7 +16,7 @@ import colors from "../../styles/colors";
 import Header from "../../components/Header/Header";
 import UserSessionContext from "../../services/UserSessionContext.js";
 import navigationPaths from "../../navigation/navigationPaths";
-import { usersApi } from "../../api";
+import { usersApi, tasksApi } from "../../api";
 import { useIsFocused } from '@react-navigation/native';
 import { dateToString } from "../../services/utils";
 
@@ -57,10 +57,23 @@ export const Home = ({ navigation }) => {
 
   };
 
-  const handleTaskPress = (key) => {
+  async function handleTaskPress(taskToDone) {
+    try {
+      const taskDone = {
+        done: !taskToDone.done
+      };
 
-    setTasks((prevTasks) => prevTasks.filter((task) => task.idT != key));
-  };
+      // returns the updated task if 200
+      const t = await tasksApi.updateTask(taskToDone.idT, taskDone);
+
+      const updatedTasks = tasks.map((task) =>
+        task.idT === t.idT ? { ...t } : task
+      );
+      setTasks(updatedTasks);
+    } catch (error) {
+      console.log("Error Message: " + error.message);
+    }
+  }
 
   const addPetButtonPressed = () => {
     navigation.navigate(navigationPaths.addPet);

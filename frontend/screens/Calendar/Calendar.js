@@ -11,9 +11,9 @@ import { CustomButton } from "../../components/CustomButton/CustomButton";
 import { ModalComponent } from "../../components/Modal/ModalComponent";
 import { SchedulingActions as actions } from "../../data/SchedulingActions";
 import TaskItem from "../../components/TaskItem/TaskItem";
-import { getTypeColor } from "../../services/utils";
 import colors from "../../styles/colors";
-import { usersApi } from "../../api";
+import { usersApi, tasksApi } from "../../api";
+import { getTypeColor } from "../../services/utils";
 
 export const Calendar = ({ navigation }) => {
   const [selected, setSelected] = useState(getCurrentDate());
@@ -88,9 +88,23 @@ export const Calendar = ({ navigation }) => {
     setMarkedL(tmp);
   }
 
-  const handleTaskPress = (key) => {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.idT != key));
-  };
+  async function handleTaskPress(taskToDone) {
+    try {
+      const taskDone = {
+        done: !taskToDone.done
+      };
+
+      // returns the updated task if 200
+      const t = await tasksApi.updateTask(taskToDone.idT, taskDone);
+
+      const updatedTasks = tasks.map((task) =>
+        task.idT === t.idT ? { ...t } : task
+      );
+      setTasks(updatedTasks);
+    } catch (error) {
+      console.log("Error Message: " + error.message);
+    }
+  } 
 
   return (
     <SafeAreaView style={globalStyles.container}>
@@ -121,7 +135,7 @@ export const Calendar = ({ navigation }) => {
       >
         {tasksByDate?.length > 0 ? (
           tasksByDate.map((task) => {
-            return (
+            return (              
               <TaskItem
                 key={task.idT}
                 task={task}
