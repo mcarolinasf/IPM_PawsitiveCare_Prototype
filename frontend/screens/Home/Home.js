@@ -11,8 +11,6 @@ import { CustomButton } from "../../components/CustomButton/CustomButton";
 import TaskItem from "../../components/TaskItem/TaskItem.js";
 import { globalStyles } from "../../styles/globalStyles";
 import { HomeStyles } from "./HomeStyles";
-import { AntDesign } from "@expo/vector-icons";
-import colors from "../../styles/colors";
 import Header from "../../components/Header/Header";
 import UserSessionContext from "../../services/UserSessionContext.js";
 import navigationPaths from "../../navigation/navigationPaths";

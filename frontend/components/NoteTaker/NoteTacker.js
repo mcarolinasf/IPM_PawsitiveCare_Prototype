@@ -80,7 +80,7 @@ export default function NoteTacker({ selectedEntry, setEntry, text, setText, sel
         handleModal={handleMenuPopUp}
         title={"Warning"}
         text={"Are you sure you want to delete this?"}
-        item={selectedEntry}
+        selected={selectedEntry}
       />
 
       <Image

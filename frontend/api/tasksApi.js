@@ -22,3 +22,10 @@ export const updateTask = async (idT, task) => {
     return response.data;
 };
 
+export const deleteTask = async (idT) => {
+
+    const response = await request("delete", baseURL + "/" + idT);
+
+    return response.data;
+};
+

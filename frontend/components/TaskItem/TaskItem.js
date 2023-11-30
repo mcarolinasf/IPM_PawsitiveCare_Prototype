@@ -6,12 +6,14 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colors from '../../styles/colors';
 import { PetsData } from '../../data/PetsData';
 import { getTypeColor } from '../../services/utils';
-import { petsApi } from '../../api';
+import { petsApi, tasksApi } from '../../api';
+import { ConfirmationModal } from '../Modal/ConfirmationModal';
 
 
 export default function TaskItem({ task, pressHandler }) {
 
     const [pet, setPet] = useState({})
+    const [menuModalVisible, setMenuModalVisible] = useState(false);
 
     useEffect(() => {
         getPet();
@@ -25,10 +27,26 @@ export default function TaskItem({ task, pressHandler }) {
             console.log("Error Message: " + error.message)
         }
     }
+    const handleMenuPopUp = () => {
+        setMenuModalVisible(!menuModalVisible);
+    };
+
+    const deleteTask = async (idT) => {
+
+        try {
+
+            await tasksApi.deleteTask(idT)
+
+        } catch {
+            console.log("Error Message: " + error.message);
+        }
+
+
+    }
 
     return (
         <TouchableOpacity
-            onPress={() => pressHandler(task)} style={globalStyles.shadow} >
+            onPress={() => pressHandler(task)} style={globalStyles.shadow} onLongPress={() => setMenuModalVisible(true)}>
             <View style={!task.done ? TaskItemStyles.container : { ...TaskItemStyles.container, opacity: 0.5 }}>
                 <View style={{ flexDirection: 'row' }}>
                     <MaterialCommunityIcons name={task.done ? 'checkbox-marked' : 'checkbox-blank-outline'} size={24} color={colors.secondary} />
@@ -47,6 +65,16 @@ export default function TaskItem({ task, pressHandler }) {
                     />
                 </View>
             </View>
+
+            <ConfirmationModal
+                visible={menuModalVisible}
+                onClose={handleMenuPopUp}
+                handleModal={handleMenuPopUp}
+                title={"Warning"}
+                text={"Are you sure you want to delete this?"}
+                deleteFunction={deleteTask}
+                selected={task.idT}
+            />
 
         </TouchableOpacity >
     )

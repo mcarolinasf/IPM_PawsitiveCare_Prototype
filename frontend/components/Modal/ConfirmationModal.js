@@ -5,12 +5,12 @@ import { globalStyles } from '../../styles/globalStyles';
 import { CustomButton } from '../CustomButton/CustomButton';
 import { ModalComponentStyles } from './ModalComponentStyles';
 
-export const ConfirmationModal = ({ visible, handleModal, title, text, selected }) => {
+export const ConfirmationModal = ({ visible, handleModal, title, text, deleteFunction, selected }) => {
 
 
 
-    const handlePressYes = (selected) => {
-        // TODO: delete selected
+    const handlePressYes = () => {
+        deleteFunction(selected)
         handleModal(false)
     }
 
@@ -35,7 +35,7 @@ export const ConfirmationModal = ({ visible, handleModal, title, text, selected 
                         <View style={ModalComponentStyles.modalContent}>
                             <Text style={ModalComponentStyles.text}>{text}</Text>
                             <View style={ModalComponentStyles.confAction}>
-                                <CustomButton title={'Yes'} onPressFunction={() => { handlePressYes(selected) }} />
+                                <CustomButton title={'Yes'} onPressFunction={() => { handlePressYes() }} />
                                 <CustomButton title={'No'} onPressFunction={() => { handlePressNo() }} color={colors.secondary} />
 
                             </View>

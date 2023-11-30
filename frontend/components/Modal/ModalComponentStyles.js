@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, YellowBox } from "react-native";
 import colors from "../../styles/colors";
 
 export const ModalComponentStyles = StyleSheet.create({
@@ -40,7 +40,7 @@ export const ModalComponentStyles = StyleSheet.create({
 
   modalContent: {
     marginTop: 20,
-    justifyContent: "center",
+    justifyContent: 'space-evenly',
     alignItems: "center",
     width: "100%",
     paddingVertical: 20,
@@ -88,6 +88,8 @@ export const ModalComponentStyles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
+    width: "100%",
+
   },
 
   newTrainingModalImage: {
