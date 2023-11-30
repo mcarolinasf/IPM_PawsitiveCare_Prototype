@@ -9,7 +9,7 @@ import TaskItem from "../../components/TaskItem/TaskItem.js";
 import navigationPaths from "../../navigation/navigationPaths";
 
 import chart from "../../assets/Chart.png";
-import { petsApi } from "../../api";
+import { petsApi, tasksApi } from "../../api";
 import { BottomTabBar } from "@react-navigation/bottom-tabs";
 import { BottomTabs } from "../../navigation/BottomTabs";
 
@@ -32,11 +32,25 @@ export const Pet = ({ navigation, route }) => {
         }
     }
 
-    const handleTaskPress = (key) => {
-        setTasks((prevTasks) => (
-            prevTasks.filter(task => task.idT != key)
-        ));
-    }
+    
+
+    async function handleTaskPress(taskToDone) {
+        try {
+          const taskDone = {
+            done: !taskToDone.done
+          };
+    
+          // returns the updated task if 200
+          const t = await tasksApi.updateTask(taskToDone.idT, taskDone);
+    
+          const updatedTasks = tasks.map((task) =>
+            task.idT === t.idT ? { ...t } : task
+          );
+          setTasks(updatedTasks);
+        } catch (error) {
+          console.log("Error Message: " + error.message);
+        }
+      } 
 
 
     return (
