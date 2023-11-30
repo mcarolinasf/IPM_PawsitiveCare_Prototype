@@ -37,7 +37,6 @@ export const VetAppointments = ({ navigation }) => {
         try {
 
             const idE = uuidv4();
-
             const newEntry = {
                 idE: idE,
                 title: 'Vet App ',
@@ -128,7 +127,7 @@ export const VetAppointments = ({ navigation }) => {
                     <CustomButton title={'New entry'} iconName={'plus'} onPressFunction={() => handlePetModal(true)} />
                 </View>
                 {/* Todo: Add pop up and its functionality */}
-                <NoteTacker selectedEntry={selectedEntry} setEntry={setSelectedEntry} setVetApp={setVetApp} vetApp={vetApp} />
+                <NoteTacker selectedEntry={selectedEntry} setEntry={setSelectedEntry} setVetApp={setVetApp} vetApp={vetApp} selectedPet={pet} />
             </ScrollView>
 
             <PickPetModal
