@@ -26,7 +26,8 @@ export const Pet = ({ navigation, route }) => {
         try {
             console.log(pet.idP);
             const tasksRes = await petsApi.getPetTasks(pet.idP);
-            setTasks(tasksRes);
+            const tasksToday = tasksRes.filter((task) => dateToString(new Date()) === task.date)
+            setTasks(tasksToday);
         } catch (error) {
             console.log("Error Message: " + error.message);
         }
@@ -34,35 +35,35 @@ export const Pet = ({ navigation, route }) => {
 
     async function handleTaskPress(taskToDone) {
         try {
-          const taskDone = {
-            done: !taskToDone.done
-          };
-    
-          // returns the updated task if 200
-          const t = await tasksApi.updateTask(taskToDone.idT, taskDone);
-    
-          const updatedTasks = tasks.map((task) =>
-            task.idT === t.idT ? { ...t } : task
-          );
-          setTasks(updatedTasks);
+            const taskDone = {
+                done: !taskToDone.done
+            };
+
+            // returns the updated task if 200
+            const t = await tasksApi.updateTask(taskToDone.idT, taskDone);
+
+            const updatedTasks = tasks.map((task) =>
+                task.idT === t.idT ? { ...t } : task
+            );
+            setTasks(updatedTasks);
         } catch (error) {
-          console.log("Error Message: " + error.message);
+            console.log("Error Message: " + error.message);
         }
-      } 
+    }
 
     const deleteTask = async (idT) => {
         try {
             await tasksApi.deleteTask(idT)
             const updatedTasks = tasks.filter((task) => task.idT !== idT);
-            setTasks(updatedTasks);        
+            setTasks(updatedTasks);
         } catch {
             console.log("Error Message: " + error.message);
         }
-    }  
+    }
 
     return (
         <SafeAreaView style={globalStyles.swipe}>
-            <ScrollView showsVerticalScrollIndicator={false} style={{marginBottom:80}}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{ marginBottom: 80 }}>
                 <Header title={pet.name} showProfile />
                 <View style={PetStyles.container}{...globalStyles.shadow} >
                     <Image
@@ -80,10 +81,12 @@ export const Pet = ({ navigation, route }) => {
                 </ScrollView>
                 <Text style={globalStyles.subtitleText}>Today</Text>
                 <View>
-                    {
+                    {tasks.length !== 0 ?
                         tasks && tasks.filter(task => task.petId == pet.idP).map(task => (
-                            <TaskItem key={task.key} task={task} pressHandler={handleTaskPress} deleteHandler={deleteTask}/>
-                        ))
+                            <TaskItem key={task.key} task={task} pressHandler={handleTaskPress} deleteHandler={deleteTask} />
+                        )) : <View style={{ paddingVertical: 60, alignItems: 'center' }}>
+                            <Text style={globalStyles.secondaryText}>No tasks for today!</Text>
+                        </View>
                     }
                 </View>
                 <View style={{ ...PetStyles.container, ...globalStyles.shadow }}>
