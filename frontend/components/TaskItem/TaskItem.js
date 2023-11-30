@@ -10,7 +10,7 @@ import { petsApi, tasksApi } from '../../api';
 import { ConfirmationModal } from '../Modal/ConfirmationModal';
 
 
-export default function TaskItem({ task, pressHandler }) {
+export default function TaskItem({ task, pressHandler, deleteHandler }) {
 
     const [pet, setPet] = useState({})
     const [menuModalVisible, setMenuModalVisible] = useState(false);
@@ -31,18 +31,7 @@ export default function TaskItem({ task, pressHandler }) {
         setMenuModalVisible(!menuModalVisible);
     };
 
-    const deleteTask = async (idT) => {
-
-        try {
-
-            await tasksApi.deleteTask(idT)
-
-        } catch {
-            console.log("Error Message: " + error.message);
-        }
-
-
-    }
+    
 
     return (
         <TouchableOpacity
@@ -72,7 +61,7 @@ export default function TaskItem({ task, pressHandler }) {
                 handleModal={handleMenuPopUp}
                 title={"Warning"}
                 text={"Are you sure you want to delete this?"}
-                deleteFunction={deleteTask}
+                deleteFunction={deleteHandler}
                 selected={task.idT}
             />
 

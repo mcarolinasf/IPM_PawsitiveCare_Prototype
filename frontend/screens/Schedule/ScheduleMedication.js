@@ -82,7 +82,7 @@ export const ScheduleMedication = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={globalStyles.container}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
 
         <Header title={"Schedule Medication"} goBack showProfile />
 

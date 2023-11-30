@@ -68,7 +68,7 @@ export const AddPet = ({ navigation }) => {
 
     return (
         <SafeAreaView style={globalStyles.container}>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <Header title={'Add Pet'} goBack />
                 <TouchableOpacity onPress={pickImage}>
                     <View style={AddPetStyles.container}{...globalStyles.shadow} >

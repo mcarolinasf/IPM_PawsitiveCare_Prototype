@@ -73,6 +73,16 @@ export const Home = ({ navigation }) => {
     }
   }
 
+  const deleteTask = async (idT) => {
+    try {
+        var d = await tasksApi.deleteTask(idT)
+        const updatedTasks = tasks.filter((task) => task.idT !== idT);
+        setTasks(updatedTasks);        
+    } catch {
+        console.log("Error Message: " + error.message);
+    }
+  }
+
   const addPetButtonPressed = () => {
     navigation.navigate(navigationPaths.addPet);
   };
@@ -117,6 +127,7 @@ export const Home = ({ navigation }) => {
               key={task.idT}
               task={task}
               pressHandler={handleTaskPress}
+              deleteHandler={deleteTask}
             />
           ))}
         </View>

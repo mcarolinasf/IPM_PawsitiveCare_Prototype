@@ -106,6 +106,16 @@ export const Calendar = ({ navigation }) => {
     }
   } 
 
+  const deleteTask = async (idT) => {
+    try {
+        await tasksApi.deleteTask(idT)
+        const updatedTasks = tasks.filter((task) => task.idT !== idT);
+        setTasks(updatedTasks);        
+    } catch {
+        console.log("Error Message: " + error.message);
+    }
+  }
+
   return (
     <SafeAreaView style={globalStyles.container}>
       <Header title={"Calendar"} showProfile style={{ marginBottom: -20 }} />
@@ -140,6 +150,7 @@ export const Calendar = ({ navigation }) => {
                 key={task.idT}
                 task={task}
                 pressHandler={handleTaskPress}
+                deleteHandler ={deleteTask}
               />
             );
           })
