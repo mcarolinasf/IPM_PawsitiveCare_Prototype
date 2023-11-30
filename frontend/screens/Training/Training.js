@@ -13,7 +13,7 @@ import { useContext } from "react";
 import { ItemsByTag } from "../../components/ItemsByTag/ItemsByTag.js";
 import navigationPaths from "../../navigation/navigationPaths.js";
 import { TaskType } from "../../data/TaskType";
-import { usersApi } from "../../api";
+import { usersApi, tasksApi } from "../../api";
 import { dateToString } from "../../services/utils";
 
 const listFilters = [
@@ -58,20 +58,11 @@ export const Training = ({ navigation }) => {
 
       const allTasks = await usersApi.getUserTasks(user.idU)
 
-      const tasks = allTasks.filter((task) => !task.done)
-
-
-      console.log(tasks)
       var tricks = allTasks.filter((task) => (task.type === TaskType.TRICKS))
-      console.log('Tricks ->>' + tricks)
-
       setTricks(tricks);
-      console.log('Tricks ----->>' + tricks)
 
-
-      var coaching = tasks.filter(task => task.type === TaskType.COACHING)
+      var coaching = allTasks.filter((task) => (task.type === TaskType.COACHING))
       setCoaching(coaching);
-
 
     } catch (error) {
       console.log("Error Message: " + error.message);
@@ -83,15 +74,31 @@ export const Training = ({ navigation }) => {
     navigation.navigate(navigateTo);
   };
 
-  const handleTaskPress = (key) => {
+  async function handleTaskPress(taskToDone) {
+    try {
+      const taskDone = {
+        done: !taskToDone.done
+      };
 
-    if (tricks.findIndex(v => v === key))
-      setTricks((prevTasks) => prevTasks.filter((task) => task.idT != key));
-
-    if (coaching.findIndex(v => v === key))
-      setCoaching((prevTasks) => prevTasks.filter((task) => task.idT != key));
-
-  };
+      // returns the updated task if 200
+      const t = await tasksApi.updateTask(taskToDone.idT, taskDone);
+      
+      if(t.type === "Tricks") {
+        const updatedTricks = tricks.map((task) =>
+          task.idT === t.idT ? { ...t } : task
+        );
+        setTricks(updatedTricks);
+      } else {
+        const updatedCoaching = coaching.map((task) =>
+          task.idT === t.idT ? { ...t } : task
+        );
+        setCoaching(updatedCoaching);
+      }
+      
+    } catch (error) {
+      console.log("Error Message: " + error.message);
+    }
+  } 
 
 
 
