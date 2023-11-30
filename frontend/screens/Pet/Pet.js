@@ -32,8 +32,6 @@ export const Pet = ({ navigation, route }) => {
         }
     }
 
-    
-
     async function handleTaskPress(taskToDone) {
         try {
           const taskDone = {
@@ -52,10 +50,19 @@ export const Pet = ({ navigation, route }) => {
         }
       } 
 
+    const deleteTask = async (idT) => {
+        try {
+            await tasksApi.deleteTask(idT)
+            const updatedTasks = tasks.filter((task) => task.idT !== idT);
+            setTasks(updatedTasks);        
+        } catch {
+            console.log("Error Message: " + error.message);
+        }
+    }  
 
     return (
         <SafeAreaView style={globalStyles.swipe}>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false} style={{marginBottom:80}}>
                 <Header title={pet.name} showProfile />
                 <View style={PetStyles.container}{...globalStyles.shadow} >
                     <Image
@@ -75,7 +82,7 @@ export const Pet = ({ navigation, route }) => {
                 <View>
                     {
                         tasks && tasks.filter(task => task.petId == pet.idP).map(task => (
-                            <TaskItem key={task.key} task={task} pressHandler={handleTaskPress} />
+                            <TaskItem key={task.key} task={task} pressHandler={handleTaskPress} deleteHandler={deleteTask}/>
                         ))
                     }
                 </View>

@@ -100,7 +100,21 @@ export const Training = ({ navigation }) => {
     }
   } 
 
+  const deleteTask = async (idT) => {
+    try {
+        var dTask = await tasksApi.deleteTask(idT)
 
+        if(dTask.type === "Tricks") {
+          const updatedTricks = tricks.filter((trick) => trick.idT !== dTask.idT);
+          setTricks(updatedTricks);
+        } else {
+          const updatedCoaching = coaching.filter((coaching) => coaching.idT !== dTask.idT);
+          setCoaching(updatedCoaching);
+        }   
+    } catch {
+        console.log("Error Message: " + error.message);
+    }
+  } 
 
   return (
     <SafeAreaView style={globalStyles.container}>
@@ -141,12 +155,12 @@ export const Training = ({ navigation }) => {
             <>
               {tricks.length > 0 && (
                 <>
-                  <ItemsByTag handleTaskPress={handleTaskPress} tasks={tricks} type={listFilters[1].type} />
+                  <ItemsByTag handleTaskPress={handleTaskPress} handleDelete={deleteTask} tasks={tricks} type={listFilters[1].type} />
                   <View style={{ height: 10 }}></View>
                 </>
               )}
               {coaching.length > 0 && (
-                <ItemsByTag handleTaskPress={handleTaskPress} tasks={coaching} type={listFilters[2].type} />
+                <ItemsByTag handleTaskPress={handleTaskPress} handleDelete={deleteTask} tasks={coaching} type={listFilters[2].type} />
               )}
               {!tricks.length && !coaching.length && (
                 <Text
@@ -164,7 +178,7 @@ export const Training = ({ navigation }) => {
           {type === listFilters[1].type && (
             <>
               {tricks.length > 0 ? (
-                <ItemsByTag handleTaskPress={handleTaskPress} tasks={tricks} type={type} />
+                <ItemsByTag handleTaskPress={handleTaskPress} handleDelete={deleteTask} tasks={tricks} type={type} />
               ) : (
                 <Text
                   style={{
@@ -181,7 +195,7 @@ export const Training = ({ navigation }) => {
           {type === listFilters[2].type && (
             <>
               {coaching.length > 0 ? (
-                <ItemsByTag handleTaskPress={handleTaskPress} tasks={coaching} type={type} />
+                <ItemsByTag handleTaskPress={handleTaskPress} handleDelete={deleteTask} tasks={coaching} type={type} />
               ) : (
                 <Text
                   style={{

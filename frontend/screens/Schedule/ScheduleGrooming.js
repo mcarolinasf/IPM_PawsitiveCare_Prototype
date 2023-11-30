@@ -73,7 +73,7 @@ export const ScheduleGrooming = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={globalStyles.container}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
 
         <Header title={"Schedule\n Grooming"} goBack showProfile />
 
