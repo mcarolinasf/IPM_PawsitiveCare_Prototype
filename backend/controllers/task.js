@@ -100,11 +100,9 @@ const createTaskSchema = Joi.object({
   
   const updateTaskSchema = Joi.object({
     text: Joi.string(),
-    type: Joi.string(),
     time: Joi.string(),
     date: Joi.string(),
     done: Joi.boolean(),
-    trainingPlanId: Joi.string(),
     ownersIds: Joi.array().items(Joi.string()),
   });
   
