@@ -18,7 +18,7 @@ import { TaskType } from "../../data/TaskType";
 import { getPetsByOwner } from "../../services/utils";
 import UserSessionContext from "../../services/UserSessionContext.js";
 import Card from "../../components/Card/Card";
-import { PickPetModal } from "./PickPetModal.js";
+
 
 export const NewTrainingModal = ({ visible, handleModal, plan }) => {
   const { user } = useContext(UserSessionContext);

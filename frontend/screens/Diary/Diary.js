@@ -115,7 +115,6 @@ export const Diary = ({ navigation }) => {
       </ScrollView>
 
       <PickPetModal
-        navigation={navigation}
         visible={selectPetModal}
         handleModal={handlePetModal}
         title={'Select your pet'}

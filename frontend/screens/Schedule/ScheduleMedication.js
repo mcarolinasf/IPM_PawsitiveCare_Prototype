@@ -147,7 +147,6 @@ export const ScheduleMedication = ({ navigation, route }) => {
       </ScrollView>
 
       <PickPetModal
-        navigation={navigation}
         visible={selectPetModal}
         handleModal={handlePetModal}
         title={'Select your pet'}

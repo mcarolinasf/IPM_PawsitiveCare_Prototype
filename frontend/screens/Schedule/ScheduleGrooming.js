@@ -98,7 +98,6 @@ export const ScheduleGrooming = ({ navigation, route }) => {
       </ScrollView>
 
       <PickPetModal
-        navigation={navigation}
         visible={selectPetModal}
         handleModal={handlePetModal}
         title={'Select your pet'}
