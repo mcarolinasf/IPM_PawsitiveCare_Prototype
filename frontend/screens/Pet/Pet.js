@@ -12,6 +12,7 @@ import chart from "../../assets/Chart.png";
 import { petsApi, tasksApi } from "../../api";
 import { BottomTabBar } from "@react-navigation/bottom-tabs";
 import { BottomTabs } from "../../navigation/BottomTabs";
+import { dateToString } from "../../services/utils";
 
 export const Pet = ({ navigation, route }) => {
     const { pet } = route.params;
@@ -82,7 +83,7 @@ export const Pet = ({ navigation, route }) => {
                 <Text style={globalStyles.subtitleText}>Today</Text>
                 <View>
                     {tasks.length !== 0 ?
-                        tasks && tasks.filter(task => task.petId == pet.idP).map(task => (
+                        tasks.filter(task => task.petId == pet.idP).map(task => (
                             <TaskItem key={task.key} task={task} pressHandler={handleTaskPress} deleteHandler={deleteTask} />
                         )) : <View style={{ paddingVertical: 60, alignItems: 'center' }}>
                             <Text style={globalStyles.secondaryText}>No tasks for today!</Text>

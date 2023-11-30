@@ -4,7 +4,7 @@ import {
     SafeAreaView,
     ScrollView,
     Image,
-    TouchableOpacity,
+    TouchableOpacity, Text
 } from "react-native";
 import Header from "../../components/Header/Header";
 import { globalStyles } from "../../styles/globalStyles";
@@ -70,6 +70,7 @@ export const AddPet = ({ navigation }) => {
         <SafeAreaView style={globalStyles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Header title={'Add Pet'} goBack />
+                <Text style={AddPetStyles.mandatory}>*</Text>
                 <TouchableOpacity onPress={pickImage}>
                     <View style={AddPetStyles.container}{...globalStyles.shadow} >
                         <Image
@@ -79,9 +80,12 @@ export const AddPet = ({ navigation }) => {
                             }}
                         />
                         {!image &&
+
+
                             <View style={AddPetStyles.icon}>
                                 <FontAwesome5 name="plus" size={24} color={colors.primary} />
                             </View>
+
                         }
                     </View>
                 </TouchableOpacity>
