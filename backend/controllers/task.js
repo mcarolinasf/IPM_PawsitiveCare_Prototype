@@ -53,7 +53,7 @@ const createTaskSchema = Joi.object({
         return res.status(404).json({ message: "Task not found" });
       }
   
-      res.status(204).send();
+      res.status(204).json(deletedTask);
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Server Error" });
