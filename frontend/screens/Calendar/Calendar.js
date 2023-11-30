@@ -1,42 +1,37 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react'
-import { useFocusEffect } from '@react-navigation/native';
-import { View, Text, SafeAreaView, ScrollView } from 'react-native'
-import { globalStyles } from '../../styles/globalStyles'
-import Header from '../../components/Header/Header'
-import { Calendar as CustomCalendar } from 'react-native-calendars';
-import UserSessionContext from '../../services/UserSessionContext';
-import { getCurrentDate } from '../../services/utils';
-import { CalendarStyles } from './CalendarStyles';
-import { CustomButton } from '../../components/CustomButton/CustomButton';
-import { ModalComponent } from '../../components/Modal/ModalComponent';
-import { SchedulingActions as actions } from '../../data/SchedulingActions';
-import TaskItem from '../../components/TaskItem/TaskItem';
-import { getTypeColor } from '../../services/utils';
-import colors from '../../styles/colors';
-import { usersApi } from '../../api';
-
+import React, { useContext, useState, useEffect, useCallback } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import { View, Text, SafeAreaView, ScrollView } from "react-native";
+import { globalStyles } from "../../styles/globalStyles";
+import Header from "../../components/Header/Header";
+import { Calendar as CustomCalendar } from "react-native-calendars";
+import UserSessionContext from "../../services/UserSessionContext";
+import { getCurrentDate } from "../../services/utils";
+import { CalendarStyles } from "./CalendarStyles";
+import { CustomButton } from "../../components/CustomButton/CustomButton";
+import { ModalComponent } from "../../components/Modal/ModalComponent";
+import { SchedulingActions as actions } from "../../data/SchedulingActions";
+import TaskItem from "../../components/TaskItem/TaskItem";
+import { getTypeColor } from "../../services/utils";
+import colors from "../../styles/colors";
+import { usersApi } from "../../api";
 
 export const Calendar = ({ navigation }) => {
-
   const [selected, setSelected] = useState(getCurrentDate());
   const [markedL, setMarkedL] = useState({});
-  const [tasks, setTasks] = useState([])
-  const [tasksByDate, setTasksByDate] = useState([])
+  const [tasks, setTasks] = useState([]);
+  const [tasksByDate, setTasksByDate] = useState([]);
 
-  const [scheduleModalVisible, setScheduleModalVisible] = useState(false)
+  const [scheduleModalVisible, setScheduleModalVisible] = useState(false);
 
   const { user } = useContext(UserSessionContext);
 
-
-
   useEffect(() => {
-    setMarkedTasks()
+    setMarkedTasks();
   }, [selected, tasks]);
-
 
   useEffect(() => {
     fetchTasks();
-    setMarkedTasks()
+    setMarkedTasks();
   }, []);
 
   useFocusEffect(
@@ -46,18 +41,17 @@ export const Calendar = ({ navigation }) => {
   );
 
   async function fetchTasks() {
-
     try {
-      const allTasks = await usersApi.getUserTasks(user.idU)
+      const allTasks = await usersApi.getUserTasks(user.idU);
       setTasks(allTasks);
     } catch (error) {
-      console.log("Error Message: " + error.message)
+      console.log("Error Message: " + error.message);
     }
   }
 
   const handleScheduleModal = (value) => {
     setScheduleModalVisible(value);
-  }
+  };
 
   function setMarkedTasks() {
     let tmp = {};
@@ -66,7 +60,7 @@ export const Calendar = ({ navigation }) => {
     tmp[selected] = {
       selected: true,
       disableTouchEvent: true,
-      selectedDotColor: 'orange'
+      selectedDotColor: "orange",
     };
 
     // Select events of the current selected date
@@ -87,60 +81,72 @@ export const Calendar = ({ navigation }) => {
       tmp[task.date].dots.push({
         key: task.id, // unique identifier for the dot
         color: getTypeColor(task.type), // color for the dot based on task type
-        selectedDotColor: colors.primary
+        selectedDotColor: colors.primary,
       });
     });
 
     setMarkedL(tmp);
   }
 
-
+  const handleTaskPress = (key) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.idT != key));
+  };
 
   return (
     <SafeAreaView style={globalStyles.container}>
-
       <Header title={"Calendar"} showProfile style={{ marginBottom: -20 }} />
 
       <CustomCalendar
-        markingType={'multi-dot'}
-        onDayPress={day => {
+        markingType={"multi-dot"}
+        onDayPress={(day) => {
           setSelected(day.dateString);
         }}
         markedDates={markedL}
         theme={CalendarStyles.calendarTheme}
       />
 
-      <View style={CalendarStyles.buttonContainer} >
-
-        <CustomButton title={"Add a task"} onPressFunction={() => { handleScheduleModal(true) }} />
+      <View style={CalendarStyles.buttonContainer}>
+        <CustomButton
+          title={"Add a task"}
+          onPressFunction={() => {
+            handleScheduleModal(true);
+          }}
+        />
         {/* <NewButton title={"Add a task"} onPressFunction={handleSchedulePopup}/> */}
       </View>
 
-      <ScrollView showsVerticalScrollIndicator={false} style={CalendarStyles.tasksContainer}>
-
-        {tasksByDate?.length > 0 ?
-          tasksByDate.map(task => {
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={CalendarStyles.tasksContainer}
+      >
+        {tasksByDate?.length > 0 ? (
+          tasksByDate.map((task) => {
             return (
-              <TaskItem key={task.idT} task={task} />
-            )
+              <TaskItem
+                key={task.idT}
+                task={task}
+                pressHandler={handleTaskPress}
+              />
+            );
           })
-          :
+        ) : (
           <View style={CalendarStyles.infoContainer}>
-            <Text style={[globalStyles.text, CalendarStyles.infoText]}> You have nothing scheduled for this day </Text>
+            <Text style={[globalStyles.text, CalendarStyles.infoText]}>
+              {" "}
+              You have nothing scheduled for this day{" "}
+            </Text>
           </View>
-        }
-
+        )}
       </ScrollView>
 
       <ModalComponent
         navigation={navigation}
         visible={scheduleModalVisible}
         handleModal={handleScheduleModal}
-        title={'Scheduling'}
+        title={"Scheduling"}
         actions={actions}
         day={selected}
       />
-
     </SafeAreaView>
-  )
-}
+  );
+};
