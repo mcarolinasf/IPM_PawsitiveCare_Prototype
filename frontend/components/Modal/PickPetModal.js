@@ -6,6 +6,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import Card from '../../components/Card/Card'
 import UserSessionContext from '../../services/UserSessionContext.js'
 import { usersApi } from '../../api';
+import navigationPaths from '../../navigation/navigationPaths';
 
 
 export const PickPetModal = ({ navigation, visible, handleModal, title, setPet, createEntry }) => {
@@ -14,10 +15,12 @@ export const PickPetModal = ({ navigation, visible, handleModal, title, setPet, 
     const [pets, setPets] = useState([]);
 
 
-    const cardPressHandler = (pet) => {
-        console.log(pet)
-        setPet(pet)
-        if (createEntry) { createEntry(pet) }
+    const cardPressHandler = (selectedPet) => {
+        console.log(selectedPet)
+        setPet(selectedPet)
+        console.log(navigation)
+        navigation && navigation.navigate(navigationPaths.pet, { pet: selectedPet });
+        if (createEntry) { createEntry(selectedPet) }
         handleModal(false)
 
     }

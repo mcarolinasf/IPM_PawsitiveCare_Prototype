@@ -24,6 +24,17 @@ export const NavigationStyle = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
 
+    },
+    petIcon: {
+        width: 60,
+        height: 60,
+        borderRadius: 35,
+        backgroundColor: colors.primary,
+        position: "absolute",
+        bottom: 20,
+        right: 50,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 
 })

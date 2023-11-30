@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useState, useEffect } from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationStyle } from './NavigationStyles';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -9,30 +9,54 @@ import { Home } from "../screens/Home/Home"
 import { Calendar } from '../screens/Calendar/Calendar';
 import { Training } from '../screens/Training/Training';
 import { Diary } from '../screens/Diary/Diary';
+import { Pet } from '../screens/Pet/Pet';
 
 //Screen names
 import navigationScreens from './navigationPaths';
 import colors from '../styles/colors';
-import { Pet } from '../screens/Pet/Pet';
 import { globalStyles } from '../styles/globalStyles';
-import { PetsData } from '../data/PetsData';
-import { View } from 'react-native';
+import { TouchableOpacity, View, Text } from 'react-native';
+import { PickPetModal } from "../components/Modal/PickPetModal";
+import { useNavigation } from "@react-navigation/native";
+
 
 
 const Tab = createBottomTabNavigator();
 
 
-export const BottomTabs = () => {
+export const BottomTabs = ({ navigation }) => {
+
+  const [pet, setPet] = useState(false)
+  const [selectPetModal, setSelectPetModal] = useState(false)
+
+  const handlePetModal = (value) => {
+    setSelectPetModal(value)
+  }
+
 
 
   const getTabBarIcon = (routeName, focused, size) => {
+    const navigation = useNavigation();
 
-    if (routeName === navigationScreens.pet) {
+
+    if (routeName === navigationScreens.pickPet) {
       return (
+        <>
+          <TouchableOpacity onPress={() => handlePetModal(true)} style={{ ...NavigationStyle.pawIcon, ...globalStyles.shadow }}>
+            <View>
+              <MaterialCommunityIcons name="paw" size={35} color={colors.white} />
+            </View>
 
-        <View style={{ ...NavigationStyle.pawIcon, ...globalStyles.shadow }}>
-          <MaterialCommunityIcons name="paw" size={35} color={colors.white} />
-        </View>
+          </TouchableOpacity>
+          <PickPetModal
+            navigation={navigation}
+            visible={selectPetModal}
+            handleModal={handlePetModal}
+            title={'Select your pet'}
+            setPet={setPet}
+
+          />
+        </>
 
       );
     }
@@ -46,7 +70,7 @@ export const BottomTabs = () => {
       case navigationScreens.calendar:
         iconName = 'calendar-month-outline';
         break;
-      case navigationScreens.pet:
+      case navigationScreens.pickPet:
         iconName = 'paw';
         break;
       case navigationScreens.training:
@@ -58,6 +82,7 @@ export const BottomTabs = () => {
       default:
         iconName = focused ? 'placeholder-icon-for-undefined' : 'placeholder-icon-for-undefined-outline';
         break;
+
     }
 
     return <MaterialCommunityIcons name={iconName} size={size} color={focused ? colors.primary : colors.grey} />;
@@ -78,7 +103,9 @@ export const BottomTabs = () => {
       })}>
       <Tab.Screen name={navigationScreens.home} component={Home} />
       <Tab.Screen name={navigationScreens.calendar} component={Calendar} />
-      <Tab.Screen name={navigationScreens.pet} component={Pet} initialParams={{ pet: PetsData[0] }} />
+      <Tab.Screen name={navigationScreens.pickPet} component={PickPetModal} />
+      <Tab.Screen name={navigationScreens.pet} component={Pet} options={{ tabBarButton: () => null }}
+      />
       <Tab.Screen name={navigationScreens.training} component={Training} />
       <Tab.Screen name={navigationScreens.diary} component={Diary} />
     </Tab.Navigator>

@@ -10,6 +10,8 @@ import navigationPaths from "../../navigation/navigationPaths";
 
 import chart from "../../assets/Chart.png";
 import { petsApi } from "../../api";
+import { BottomTabBar } from "@react-navigation/bottom-tabs";
+import { BottomTabs } from "../../navigation/BottomTabs";
 
 export const Pet = ({ navigation, route }) => {
     const { pet } = route.params;
@@ -40,7 +42,7 @@ export const Pet = ({ navigation, route }) => {
     return (
         <SafeAreaView style={globalStyles.swipe}>
             <ScrollView>
-                <Header title={pet.name} goBack showProfile />
+                <Header title={pet.name} showProfile />
                 <View style={PetStyles.container}{...globalStyles.shadow} >
                     <Image
                         style={PetStyles.image}
@@ -73,6 +75,7 @@ export const Pet = ({ navigation, route }) => {
                 </View>
 
             </ScrollView>
+
         </SafeAreaView >
     );
 

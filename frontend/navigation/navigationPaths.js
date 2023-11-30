@@ -17,4 +17,5 @@ export default {
   scheduleFed: "ScheduleFeeding",
   scheduleGroom: "ScheduleGrooming",
   newTraining: "NewTraining",
+  pickPet: "Pick Pet"
 };
