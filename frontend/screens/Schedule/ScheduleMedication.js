@@ -6,6 +6,7 @@ import TextInputDefault from '../../components/TextInputDefault/TextInputDefault
 import Header from '../../components/Header/Header.js'
 import { DatePickerComponent } from '../../components/DatePicker/DatePickerComponent.js';
 import { PickPetModal } from '../../components/Modal/PickPetModal';
+import { InfoModal } from '../../components/Modal/InfoModal';
 import { PetPicker } from '../../components/PetPicker/PetPicker.js';
 import { ScheduleMedicationStyles } from './ScheduleStyles.js';
 import { CustomButton } from '../../components/CustomButton/CustomButton.js';
@@ -19,10 +20,15 @@ export const ScheduleMedication = ({ navigation, route }) => {
 
   const [selectPetModal, setSelectPetModal] = useState(false);
   const [pet, setPet] = useState(false);
+  const [menuModalVisible, setMenuModalVisible] = useState(false);
+
 
   const handlePetModal = (value) => {
     setSelectPetModal(value)
   }
+  const handleMenuPopUp = () => {
+    setMenuModalVisible(!menuModalVisible);
+  };
 
   const [newMedication, setNewMedication] = useState({
     medicine: "",
@@ -57,6 +63,7 @@ export const ScheduleMedication = ({ navigation, route }) => {
 
     } catch (error) {
       console.log("Error Message: " + error.message)
+      setMenuModalVisible(true);
       useState({
         medicine: '',
         time: '14:30',
@@ -145,6 +152,13 @@ export const ScheduleMedication = ({ navigation, route }) => {
         handleModal={handlePetModal}
         title={'Select your pet'}
         setPet={setPet}
+      />
+
+      <InfoModal
+        visible={menuModalVisible}
+        handleModal={handleMenuPopUp}
+        title={"Warning"}
+        text={"Please fill all mandatory parameters."}
       />
     </SafeAreaView>
   );

@@ -8,7 +8,7 @@ export const TrainingStyles = StyleSheet.create({
   },
 
   listView: {
-    paddingTop: 20,
-    marginBottom: 300,
+    marginTop: 20,
+    marginBottom: 280,
   },
 });

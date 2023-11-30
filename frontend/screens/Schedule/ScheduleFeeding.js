@@ -5,6 +5,7 @@ import { globalStyles } from '../../styles/globalStyles';
 import TextInputDefault from '../../components/TextInputDefault/TextInputDefault';
 import Header from '../../components/Header/Header.js'
 import { DatePickerComponent } from '../../components/DatePicker/DatePickerComponent.js';
+import { InfoModal } from '../../components/Modal/InfoModal';
 import { PickPetModal } from '../../components/Modal/PickPetModal';
 import { PetPicker } from '../../components/PetPicker/PetPicker.js';
 import { ScheduleMedicationStyles } from './ScheduleStyles.js';
@@ -19,10 +20,14 @@ export const ScheduleFeeding = ({ navigation, route }) => {
 
   const [selectPetModal, setSelectPetModal] = useState(false);
   const [pet, setPet] = useState(false);
+  const [menuModalVisible, setMenuModalVisible] = useState(false);
 
   const handlePetModal = (value) => {
     setSelectPetModal(value)
   }
+  const handleMenuPopUp = () => {
+    setMenuModalVisible(!menuModalVisible);
+  };
 
   const [newFeeding, setNewFeeding] = useState({
     food: '',
@@ -52,6 +57,7 @@ export const ScheduleFeeding = ({ navigation, route }) => {
 
     } catch (error) {
       console.log("Error Message: " + error.message)
+      setMenuModalVisible(true);
       useState({
         food: '',
         time: '10:30',
@@ -77,13 +83,13 @@ export const ScheduleFeeding = ({ navigation, route }) => {
           <TextInputDefault label={'Food  *'} setFunction={(value) => setNewFeeding({ ...newFeeding, food: value })} value={newFeeding.food} />
           <View style={[globalStyles.rowCenter]} >
             <View style={ScheduleMedicationStyles.multipleInputContainer} >
-              <DatePickerComponent label={'Start Date'} setFunction={(value) => setNewFeeding({ ...newFeeding, startDate: value })} value={newFeeding.startDate} />
+              <DatePickerComponent label={'Start Date   *'} setFunction={(value) => setNewFeeding({ ...newFeeding, startDate: value })} value={newFeeding.startDate} />
             </View>
             <View style={ScheduleMedicationStyles.multipleInputContainer} >
               <DatePickerComponent label={'End Date'} setFunction={(value) => setNewFeeding({ ...newFeeding, endDate: value })} value={newFeeding.endDate} />
             </View>
           </View>
-          <DatePickerComponent label={'Time'} setFunction={(value) => setNewFeeding({ ...newFeeding, time: value })} value={newFeeding.time} time />
+          <DatePickerComponent label={'Time   *'} setFunction={(value) => setNewFeeding({ ...newFeeding, time: value })} value={newFeeding.time} time />
           <TextInputDefault label={'Periodicity'} setFunction={(value) => setNewFeeding({ ...newFeeding, periodicity: value })} value={newFeeding.periodicity} />
           <TextInputDefault label={'Dosage (mg)'} setFunction={(value) => setNewFeeding({ ...newFeeding, dosage: value })} value={newFeeding.dosage} keyboardType={'numeric'} />
         </View>
@@ -99,6 +105,12 @@ export const ScheduleFeeding = ({ navigation, route }) => {
         handleModal={handlePetModal}
         title={'Select your pet'}
         setPet={setPet}
+      />
+      <InfoModal
+        visible={menuModalVisible}
+        handleModal={handleMenuPopUp}
+        title={"Warning"}
+        text={"Please fill all mandatory parameters."}
       />
     </SafeAreaView>
   );

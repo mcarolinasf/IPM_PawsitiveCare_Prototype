@@ -40,6 +40,8 @@ export const ModalComponentStyles = StyleSheet.create({
 
   modalContent: {
     marginTop: 20,
+    justifyContent: "center",
+    alignItems: "center",
     width: "100%",
     paddingVertical: 20,
     paddingHorizontal: 10,

@@ -15,4 +15,10 @@ export const createTask = async (task) => {
 
     return response.data;
 };
+export const updateTask = async (idT, task) => {
+
+    const response = await request("put", baseURL + "/" + idT, task);
+
+    return response.data;
+};
 

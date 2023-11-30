@@ -23,7 +23,6 @@ export const PickPetModal = ({ navigation, visible, handleModal, title, setPet, 
     }
 
 
-
     const getPetsByOwner = async () => {
         try {
             const petsResponse = await usersApi.getUserPets(user.idU);
@@ -73,14 +72,18 @@ export const PickPetModal = ({ navigation, visible, handleModal, title, setPet, 
                             showsVerticalScrollIndicator={false}
                             style={{ height: 450 }}
                         >
-                            <View
-                                style={[
-                                    ModalComponentStyles.modalContent,
-                                    ModalComponentStyles.rowContainer,
-                                ]}
-                            >
-                                {pets &&
-                                    pets.map((pet) => (
+                            {pets.length === 0 ? (
+                                <View style={{ justifyContent: 'center', alignItems: 'center', paddingVertical: 100 }}>
+                                    <Text style={globalStyles.secondaryText}>No pets added!</Text>
+                                </View>
+                            ) : (
+                                <View
+                                    style={[
+                                        ModalComponentStyles.modalContent,
+                                        ModalComponentStyles.rowContainer,
+                                    ]}
+                                >
+                                    {pets.map((pet) => (
                                         <Card
                                             key={pet.idP}
                                             item={pet}
@@ -89,11 +92,12 @@ export const PickPetModal = ({ navigation, visible, handleModal, title, setPet, 
                                             styleImage={{ width: 90, height: 100 }}
                                         />
                                     ))}
-                            </View>
+                                </View>
+                            )}
                         </ScrollView>
                     </TouchableOpacity>
                 </View>
             </TouchableWithoutFeedback>
-        </Modal>
+        </Modal >
     );
 };
